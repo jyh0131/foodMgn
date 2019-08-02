@@ -44,6 +44,7 @@
 	.sns {
 		border: 1px solid #eee;
 		display: inline-block;
+		height: 30px;
 	}
 	#head1_2 {
 		float: right;
