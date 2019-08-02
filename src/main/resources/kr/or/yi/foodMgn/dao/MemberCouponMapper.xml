@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.yi.foodMgn.dao.MemberCouponMapper">
+	<resultMap type="MemberCoupon" id="resultCoupon">
+		<result column="mb_no" property="mbNo.mbNo"/>
+		<result column="cp_no" property="cpNo.cpNo"/>
+		<result column="cp_use" property="cpUse"/>
+	</resultMap>
+	
+	<insert id="insertMemberCoupon" parameterType="MemberCoupon">
+		insert into member_coupon(mb_no, cp_no) values(#{mbNo.mbNo}, #{cpNo.cpNo})
+	</insert>
+</mapper>

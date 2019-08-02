@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.yi.foodMgn.dao.MemberMapper">
+	
+	<resultMap type="Member" id="resultMember">
+		<id column="mb_no" property="mbNo"/>
+		<result column="mb_name" property="mbName"/>
+		<result column="mb_birth" property="mbBirth"/>
+		<result column="mb_tel" property="mbTel"/>
+		<result column="mb_mileage" property="mbMileage"/>
+		<result column="mb_address" property="mbAddress"/>
+		<result column="mb_withdrawal" property="mbWithdrawal"/>
+		<result column="mb_join" property="mbJoin"/>
+		<result column="mb_count" property="mbCount"/>
+	</resultMap>
+	
+	<resultMap type="Member" id="resultMemberBJY" extends="resultMember">
+		<association property="mbGrade" resultMap="kr.or.yi.foodMgn.dao.GradeMapper.resultGrade"/>
+		<collection property="coupon" resultMap="kr.or.yi.foodMgn.dao.CouponMapper.resultCouponBJY"/>
+	</resultMap>
+	
+	<select id="selectMemberByAll" resultMap="resultMemberBJY">
+		<!-- select mb_no, mb_name, mb_birth, mb_tel, mb_mileage, mb_grade, mb_address from member -->
+		select m.mb_no, m.mb_name, mb_birth, mb_tel, mb_mileage, mb_grade, mb_address, group_concat(cp_name) coupon, mb_withdrawal, mb_join
+		from member m left join member_coupon mc on m.mb_no = mc.mb_no left join coupon c on mc.cp_no = c.cp_no
+		group by mb_no having mb_withdrawal = true
+	</select>
+	
+	<select id="selectMemberByAllNM" resultMap="resultMemberBJY">
+		<!-- select mb_no, mb_name, mb_birth, mb_tel, mb_mileage, mb_grade, mb_address from member -->
+		select m.mb_no, m.mb_name, mb_birth, mb_tel, mb_mileage, mb_grade, mb_address, group_concat(cp_name) coupon, mb_withdrawal, mb_join
+		from member m left join member_coupon mc on m.mb_no = mc.mb_no left join coupon c on mc.cp_no = c.cp_no
+		group by mb_no
+	</select>
+	
+	<!-- <select id="selectMemberByAllC" resultMap="resultMemberBJY">
+		select m.mb_no, m.mb_name, mb_birth, mb_tel, mb_mileage, mb_grade, mb_address, c.cp_no, c.cp_name, cp_discount
+		from member m left join member_coupon mc on m.mb_no = mc.mb_no left join coupon c on mc.cp_no = c.cp_no
+	</select> -->
+	
+	<insert id="insertMember" parameterType="Member" useGeneratedKeys="true" keyProperty="mb_no">
+		insert into member(mb_no, mb_name, mb_birth, mb_tel, mb_mileage, mb_grade, mb_address, mb_withdrawal, mb_join) 
+		values (#{mbNo},#{mbName},#{mbBirth},#{mbTel},#{mbMileage},#{mbGrade.grade},#{mbAddress},#{mbWithdrawal},#{mbJoin})
+	</insert>
+	
+	<select id="selectMemberByTel" resultType="Member" parameterType="Member">
+		select * from member where right(mb_tel,8) like concat('%',#{mbTel},'%')
+	</select>
+	
+	<update id="updateMember" parameterType="Member">
+		update member set mb_name = #{mbName}, mb_tel = #{mbTel}, mb_address = #{mbAddress}, mb_mileage = #{mbMileage} where mb_no = #{mbNo};		
+	</update>
+	
+	<update id="updateTrnasMember" parameterType="Member">
+		update member set mb_name = #{mbName}, mb_tel = #{mbTel}, mb_birth = #{mbBirth}, mb_address = #{mbAddress}, mb_mileage = #{mbMileage}, mb_withdrawal = #{mbWithdrawal}, mb_grade = #{mbGrade.grade}, mb_join = #{mbJoin} 
+		where mb_no = #{mbNo};		
+	</update>
+	
+	<delete id="deleteMember" parameterType="Member">
+		update member set mb_withdrawal = #{mbWithdrawal} where mb_no = #{mbNo};
+	</delete>
+
+	<!-- <select id="selectMemberByNo" resultType="Member" parameterType="Member">
+		select m.mb_no, m.mb_name, g.grade, g.g_discount as g_discount2, m.mb_mileage, c.cp_name, c.cp_discount
+		from member m join grade g on m.mb_grade = g.grade join member_coupon mc on m.mb_no = mc.mb_no join coupon c on mc.cp_no = c.cp_no
+		where m.mb_no = #{mbNo};
+	</select> -->
+	
+	<select id="selectByTel" parameterType="int" resultMap="resultMemberBJY">
+		select m.mb_no, m.mb_name, mb_birth, mb_tel, mb_mileage, mb_grade, g_discount, mb_address, c.cp_no, c.cp_name as coupon, c.cp_discount
+		from member m left join member_coupon mc on m.mb_no = mc.mb_no left join coupon c on mc.cp_no = c.cp_no left join grade g on m.mb_grade = g.grade
+		where right(mb_tel,8) = #{mbTel} and mb_withdrawal=1
+	</select>
+	
+	<update id="mileageUpdate" parameterType="Member">
+		update member set mb_mileage = #{mbMileage},mb_count = mb_count+1 where mb_no = #{mbNo}
+	</update>
+	
+	<update id="mileageUpdateKCM" parameterType="Member">
+		update member set mb_mileage = mb_mileage+#{mbMileage} where mb_no = #{mbNo}
+	</update>
+	
+	<update id="CountUpdateKCM" parameterType="Member">
+		update member set mb_count = mb_count+1  where mb_no = #{mbNo}
+	</update>
+	
+	<update id="CountUpdateKCM2" parameterType="Member">
+		update member set mb_count = mb_count-1  where mb_no = #{mbNo}
+	</update>
+	
+	<delete id="couponDelete" parameterType="map">
+		update member m left join member_coupon mc on m.mb_no = mc.mb_no 
+		left join coupon c on mc.cp_no = c.cp_no set mc.cp_use = #{whether} where m.mb_no = #{no} and c.cp_name = #{cpname}
+	</delete>
+	
+	<select id="selectByNameTel" parameterType="Member" resultMap="resultMemberBJY">
+		select * from member where mb_name=#{mbName} and mb_tel=#{mbTel}
+	</select>
+	
+	<update id="updateGrade" parameterType="Member">
+		update member set mb_grade = #{mbGrade.grade} where mb_no = #{mbNo}
+	</update>
+	
+	<select id="selectCouponByTel" resultType="Member" resultMap="resultMemberBJY">
+		select m.mb_no, m.mb_name, mb_birth, mb_tel, mb_mileage, mb_grade, g_discount, mb_address, c.cp_no, c.cp_name as coupon, c.cp_discount
+		from member m left join member_coupon mc on m.mb_no = mc.mb_no left join coupon c on mc.cp_no = c.cp_no left join grade g on m.mb_grade = g.grade
+		where right(mb_tel,8) = #{mbTel} and mc.cp_use = 0 ;
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

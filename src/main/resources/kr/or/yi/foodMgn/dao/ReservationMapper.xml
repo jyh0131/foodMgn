@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.yi.foodMgn.dao.ReservationMapper">
+	
+	<resultMap type="Reservation" id="resultRsvLJH">
+		<result column="rsv_no" property="rsvNo"/>
+		<result column="rsv_number" property="rsvNumber"/>
+		<result column="rsv_time" property="rsvTime"/>
+		<result column="rsv_tableNo" property="rsvTableNo"/>
+		<result column="rsv_input_time" property="rsvInputTime"/>
+		<result column="rsv_update_time" property="rsvUpdateTime"/>
+		<result column="rsv_cancel" property="rsvCancel"/> 
+	</resultMap>
+	
+	<resultMap type="Reservation" id="resultRsvLJH2" extends="resultRsvLJH">
+		<association property="mbNo" resultMap="kr.or.yi.foodMgn.dao.MemberMapper.resultMemberBJY"></association>
+	</resultMap>
+	
+	
+	<insert id="insertRsv" parameterType="Reservation">
+		insert into reservation(mb_no, rsv_number, rsv_time, rsv_tableNo, rsv_input_time, rsv_update_time, rsv_cancel) 
+		values(#{mbNo.mbNo},#{rsvNumber},#{rsvTime},#{rsvTableNo},#{rsvInputTime},#{rsvUpdateTime},#{rsvCancel}) 
+	</insert>
+	
+	<select id="selectByTime" resultMap="resultRsvLJH2">
+		select * from member_reservation3 where timediff(rsv_time, now())>0;
+	</select>
+	
+	<update id="deleteRsv">
+		update reservation
+		set rsv_cancel = #{rsvCancel}, rsv_update_time = #{rsvUpdateTime}
+		where rsv_time=#{rsvTime} and rsv_tableNo=#{rsvTableNo}
+	</update>
+	
+	<update id="updateRsv" parameterType="map">
+		update reservation
+		set    rsv_number=#{update.rsvNumber}, rsv_time=#{update.rsvTime}, rsv_tableNo=#{update.rsvTableNo}, rsv_input_time=#{update.rsvInputTime},rsv_update_time=#{update.rsvUpdateTime}
+		where rsv_time=#{search.rsvTime} and rsv_tableNo=#{search.rsvTableNo}
+	</update>
+	
+	<select id="selectByTel" parameterType="Member" resultMap="resultRsvLJH2">
+		select * from member_reservation where mb_tel like concat('%',#{mbTel},'%')
+	</select>
+	
+	<select id="selectByDate" parameterType="String" resultMap="resultRsvLJH2">
+		select * from member_reservation where rsv_time like concat(#{date},'%')
+	</select>
+	
+	<select id="selectByTimeTable" parameterType="Reservation" resultMap="resultRsvLJH2">
+		select * from member_reservation where rsv_time=#{rsvTime} and rsv_tableNo=#{rsvTableNo}
+	</select>
+	
+	<select id="selectByRangeTime" parameterType="Reservation" resultMap="resultRsvLJH2">
+		select * from member_reservation3 where rsv_time between subtime(#{rsvTime},'0:30:0') and addtime(#{rsvTime},'0:30:0')
+	</select>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

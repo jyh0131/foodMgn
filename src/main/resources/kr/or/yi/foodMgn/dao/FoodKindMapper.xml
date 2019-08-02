@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.yi.foodMgn.dao.FoodKindMapper">
+	
+	
+	<resultMap type="FoodKind" id="resultFoodKind">
+		<id column="fk_no" property="fkNo"/>
+		<result column="fk_name" property="fkName"/>
+	</resultMap>
+	
+	<resultMap type="FoodKind" id="resultFoodKindKCM" extends="resultFoodKind">
+		<association property="menuNo" resultMap="kr.or.yi.foodMgn.dao.MenuMapper.resultMenu" />
+	</resultMap>
+
+	<select id="selectByNo" parameterType="FoodKind" resultMap="resultFoodKind">
+	 	select * from foodkind where menu_no = #{menuNo.menuNo}
+	</select>
+	
+	<select id="selectFoodKindByAll" resultMap="resultFoodKind">
+		select fk_name, fk_no from foodkind
+	</select>
+</mapper>

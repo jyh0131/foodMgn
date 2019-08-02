@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.or.yi.foodMgn.dao.FoodMapper">
+
+	<resultMap type="Food" id="resultFood">
+		<id column="fd_no" property="fdNo"/>
+		<result column="fd_price" property="fdPrice"/>
+		<result column="fd_name" property="fdName"/>
+		<result column="fd_withdrawal" property="fdWithdrawal"/>
+	</resultMap>
+	
+	<resultMap type="Food" id="resultFoodBJY" extends="resultFood">
+		<association property="fkNo" resultMap="kr.or.yi.foodMgn.dao.FoodKindMapper.resultFoodKind"/>
+	</resultMap>
+	
+	<select id="selectFoodByAll" resultMap="resultFoodBJY">
+		select f.fd_no, f.fd_name, f.fd_price, fk.fk_name from food f join foodkind fk on f.fk_no = fk.fk_no where fd_withdrawal = false order by fk.fk_no
+	</select>
+	
+	<select id="selectFoodByAllF" resultMap="resultFoodBJY">
+		select f.fd_no, f.fd_name, f.fd_price, fk.fk_name from food f join foodkind fk on f.fk_no = fk.fk_no
+	</select>
+	
+	<select id="selectByName" resultMap="resultFoodBJY">
+		select f.fd_no, f.fd_name, f.fd_price, fk.fk_name from food f join foodkind fk on f.fk_no = fk.fk_no where fd_name like concat('%',#{fdName},'%')
+	</select>
+	
+	<select id="selectByNames" resultMap="resultFoodBJY">
+		select * from food where fd_name = #{fdName}
+	</select>
+	
+	<insert id="insertFood" parameterType="Food" useGeneratedKeys="true" keyProperty="fd_no">
+		insert into food(fd_no, fd_price, fd_name, fk_no) values (#{fdNo},#{fdPrice},#{fdName},#{fkNo.fkNo})
+	</insert>
+	
+	<select id="selectByNo" resultType="Food" resultMap="resultFoodBJY">
+		select f.fd_no, f.fd_price, f.fd_name, f.fk_no, fk.fk_name, fk.menu_no from food f left join foodkind fk on f.fk_no = fk.fk_no where f.fk_no = #{fkNo.fkNo}
+	</select>
+	
+	<update id="updateFood" parameterType="Food">
+		update food set fd_price = #{fdPrice}, fd_name = #{fdName} where fd_no = #{fdNo}
+	</update>
+	
+	<delete id="deletFood" parameterType="Food">
+		update food set fd_withdrawal = #{fdWithdrawal} where fd_no = #{fdNo};
+	</delete>
+</mapper>
+

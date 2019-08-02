@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.yi.foodMgn.dao.SalesStatusMapper">
+	
+	
+	<resultMap type="SalesStatus" id="resultSalesStatus">
+		<id column="ssNo" property="ssNo" />
+		<result column="ssName" property="ssName" />
+		<result column="ssCount" property="ssCount" />
+		<result column="ssTotalPrice" property="ssTotalPrice" />
+		<result column="ssShare" property="ssShare"/>
+	</resultMap>
+
+	
+	<select id="selectSalesStatusByAll" resultMap="resultSalesStatus">
+		select ssName, ssCount, ssTotalPrice, ssShare from stateFood
+	</select>
+	
+	<select id="selectSalesStatusByDate" resultMap="resultSalesStatus">
+	select sub1.name as ssName, sub1.count as ssCount, sub1.ssTotalPrice
+	ssTotalPrice , round(sub1.ssTotalPrice/sub2.sum1*100,1) as ssShare
+	from(
+	select f.fd_name as name, sum(sale_order_cnt) as count, f.fd_price as price,
+	sum(sale_order_cnt*f.fd_price) as ssTotalPrice
+	from sale s left join food f on s.fd_no = f.fd_no where s.sale_cancel = 0 AND s.sale_time like CONCAT( #{date}, '%')
+	group by s.fd_no
+	order by ssTotalPrice desc) sub1 join (
+	select sum(sale_order_cnt*f.fd_price) as sum1
+	from sale s left join food f on s.fd_no = f.fd_no where s.sale_cancel = 0 AND s.sale_time like CONCAT( #{date}, '%')
+	)sub2;
+	</select>
+</mapper>
+
+

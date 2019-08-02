@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.yi.foodMgn.dao.SaleMapper">
+	<resultMap type="Sale" id="resultSale">
+		<id column="no" property="no" />
+		<result column="sale_no" property="saleNo" />
+		<result column="sale_time" property="saletime" />
+		<result column="sale_order_cnt" property="saleOrderCnt" />
+		<result column="sale_order_kind" property="saleOrderKind" />
+		<result column="sale_type" property="saleType" />
+		<result column="sale_discount_info" property="saleDiscountInfo"/>
+		<result column="sale_discount_price" property="saleDiscountPrice"/>
+		<result column="sale_cancel" property="saleCancel"/>
+	</resultMap>
+
+	<resultMap type="Sale" id="resultSaleKCM" extends="resultSale">
+		<association property="fdNo" resultMap="kr.or.yi.foodMgn.dao.FoodMapper.resultFoodBJY" />
+		<association property="mbNo" resultMap="kr.or.yi.foodMgn.dao.MemberMapper.resultMemberBJY" />
+	</resultMap>
+
+	<insert id="insertSale" parameterType="map">
+		insert into sale(sale_no, sale_time, sale_order_cnt, sale_order_kind, sale_type, mb_no, fd_no, sale_discount_info, sale_discount_price,sale_cancel) values
+		<foreach collection="list" item="item" separator=" , ">
+			(#{item.saleNo}, #{item.saletime}, #{item.saleOrderCnt},
+			#{item.saleOrderKind}, #{item.saleType}, #{item.mbNo.mbNo},
+			#{item.fdNo.fdNo},#{item.saleDiscountInfo},#{item.saleDiscountPrice},#{item.saleCancel})
+		</foreach>
+	</insert>
+	
+
+	<select id="selectSaleByAll" resultMap="resultSaleKCM">
+		select no,sale_no,sale_time,sale_order_cnt,sale_order_kind,sale_type,f.fd_name,m.mb_name,sale_discount_info,sale_discount_price,sale_cancel
+		from sale s left join food as f on s.fd_no = f.fd_no join member as m on s.mb_no = m.mb_no;
+	</select>
+
+	<select id="selectSaleByDate" resultMap="resultSaleKCM">
+		select no,sale_no,sale_time,sale_order_cnt,sale_order_kind,sale_type,f.fd_name,m.mb_name,sale_discount_info,sale_discount_price,sale_cancel
+		from sale s left join food as f on s.fd_no = f.fd_no join member as m on s.mb_no = m.mb_no where sale_time like CONCAT(#{date},'%');
+	</select>
+	
+	<select id="selectLastNo" resultMap="resultSaleKCM" >
+		select * from sale order by no desc limit 1;
+	</select>
+	
+	<update id="updateSaleByCancel" parameterType="map">
+		update sale set sale_cancel = #{cancel} where sale_no=#{no}
+	</update>
+	
+	<select id="totalPrice" resultType="java.lang.Integer">
+		select sum(payPrice) as totalPrice from payment where payMemberNo = #{number};
+	</select>
+</mapper>
+
+
