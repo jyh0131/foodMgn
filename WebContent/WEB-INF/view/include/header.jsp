@@ -48,7 +48,7 @@
 				<div id="head2">
 					<div id="head2_1">
 						<ul>
-							<li><a href="">INTRODUCE</a></li>
+							<li><a href="${pageContext.request.contextPath}/introduce.do">INTRODUCE</a></li>
 							<li class="center">
 								<a href="">MENU</a>
 								<ul class="submenu">

@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 
 
 
-public class NullHandler implements ConmmandHandler { //없는 커맨드가 들어오면 이클래스가 실행됨
+public class NullHandler implements CommandHandler { //없는 커맨드가 들어오면 이클래스가 실행됨
 
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
