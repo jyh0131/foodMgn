@@ -39,8 +39,8 @@
 					</div>
 					<div id="head1_2">
 						<ul>
-							<li><a href="">HOME</a></li>
-							<li><a href="">로그인</a></li>
+							<li><a href="${pageContext.request.contextPath}">HOME</a></li>
+							<li><a href="${pageContext.request.contextPath}/login.do">로그인</a></li>
 							<li><a href="">회원가입</a></li>
 						</ul>
 					</div>
@@ -50,16 +50,16 @@
 						<ul>
 							<li><a href="${pageContext.request.contextPath}/introduce.do">INTRODUCE</a></li>
 							<li class="center">
-								<a href="">MENU</a>
+								<a href="${pageContext.request.contextPath}/menu.do">MENU</a>
 								<ul class="submenu">
-									<li><a href="">STEAK & CUTLET</a></li>
-									<li><a href="">PASTA</a></li>
-									<li><a href="">PILAF & RISOTTO</a></li>
-									<li><a href="">SALAD</a></li>
-									<li><a href="">SIGNATURE PIZZA</a></li>
-									<li><a href="">PIZZA</a></li>
-									<li><a href="">SIDE MENU</a></li>
-									<li><a href="">BEVERAGE & BEER</a></li>
+									<li><a href="${pageContext.request.contextPath}/menu.do">PASTA</a></li>
+									<li><a href="${pageContext.request.contextPath}/menu.do">STEAK & CUTLET</a></li>
+									<li><a href="${pageContext.request.contextPath}/menu.do">PILAF & RISOTTO</a></li>
+									<li><a href="${pageContext.request.contextPath}/menu.do">SALAD</a></li>
+									<li><a href="${pageContext.request.contextPath}/menu.do">SIGNATURE PIZZA</a></li>
+									<li><a href="${pageContext.request.contextPath}/menu.do">PIZZA</a></li>
+									<li><a href="${pageContext.request.contextPath}/menu.do">SIDE MENU</a></li>
+									<li><a href="${pageContext.request.contextPath}/menu.do">BEVERAGE & BEER</a></li>
 								</ul>
 							</li>
 							<li class="right">
@@ -71,7 +71,7 @@
 						</ul>
 					</div>
 					<div id="head2_2">
-						<a href="">
+						<a href="${pageContext.request.contextPath}">
 							<img src="${pageContext.request.contextPath}/images/include/logo.png">
 						</a>
 					</div>
