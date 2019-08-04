@@ -1,4 +1,4 @@
-package kr.or.yi.foodMgn.handler;
+package kr.or.yi.foodMgn.handler.login;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

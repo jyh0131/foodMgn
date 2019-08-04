@@ -82,18 +82,19 @@
 	}
 	
 	
-	#login_content h1 {
+	#login_content > p {
 		padding-top: 20px;
 		text-align: center;
 		font-size: 32px;
 		color: #55423b;
 		line-height: 32px;
-		font-weight: bold;
+		font-weight: bolder;
+		letter-spacing: -0.1em;
 		font-family: "굴림";
 	}
 	#login_center {
 		text-align: center;
-		margin: 50px 0;
+		margin: 50px 0 30px;
 	}
 	.title {
 		font-size: 2.2em;
@@ -104,17 +105,17 @@
 	}
 	.txt {
 		color: #777;
-		margin: 15px 0;
+		margin: 15px 0 10px;
 	}
 	#loginBox {
 		border: 1px solid #e7e7e7;
-		padding: 30px 0 40px;
+		padding: 30px 0 30px;
 		width: 750px;
 		margin: 0 auto;
 	}
 	#loginBox form {
-		width: 580px;
-		margin: 0 auto;
+		width: 550px;
+		margin: 20px auto;
 	}
 	#loginBox input {
 		padding: 5px;
@@ -127,16 +128,15 @@
 		border-radius: 5px;
 		font-weight: bold;
 		cursor: pointer;
+		margin-left: 15px;
 	}
-	/* #loginBox td {
-		padding: 10px 10px 5px 10px;
-	} */
 	.loginimg {
-		padding-right: 20px;
+		padding-right: 25px;
 	}
 	.under {
 		border-bottom: 1px solid #c7a593;
 		width: 70px;
+		padding-right: 5px;
 	}
 	.under2 {
 		border-bottom: 1px solid #c7a593;
@@ -191,7 +191,7 @@
 				<span class="li_img"></span>
 				<ul id="menulist">
 					<li><a href="${pageContext.request.contextPath}/login.do">로그인</a></li>
-					<li><a href="">회원가입</a></li>
+					<li><a href="${pageContext.request.contextPath}/join.do">회원가입</a></li>
 					<li><a href="">정보수정</a></li>
 				</ul>
 			</div>
@@ -206,7 +206,7 @@
 			</div>
 			<div class="clear"></div>
 			<div id="login_content">
-				<h1>로그인</h1>
+				<p>로그인</p>
 				<div id="login_center">
 					<p class="title">라라코스트에 오신 것을 환영합니다.</p>
 					<p class="txt">라라코스트에서는 고객님께 보다 나은 서비스를 제공하기 위하여 회원제로 운영하고 있습니다.</p>
@@ -216,13 +216,13 @@
 						<table>
 							<tr>
 								<td rowspan="2" class="loginimg"><img src="${pageContext.request.contextPath}/images/login/ico_lock.png"></td>
-								<td class="under">아이디</td>
+								<td class="under">이름</td>
 								<td class="under2"><input type="text" size="30"></td>
 								<td rowspan="2"><input type="submit" value="로그인"></td>
 							</tr>
 							<tr>
-								<td class="under">비밀번호</td>
-								<td class="under2"><input type="password" size="30"></td>
+								<td class="under">전화번호</td>
+								<td class="under2"><input type="text" size="30"></td>
 							</tr>
 						</table>
 					</form>
@@ -239,7 +239,7 @@
 						</li>
 						<li>
 							<p class="txt2">라라코스트의<br>회원이 아니십니까?</p>
-							<p><a href=""><button>회원가입</button></a></p>
+							<p><a href="${pageContext.request.contextPath}/join.do"><button>회원가입</button></a></p>
 						</li>
 					</ul>
 				</div>
