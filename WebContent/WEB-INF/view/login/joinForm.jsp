@@ -125,6 +125,11 @@
 	input[type="text"], input[type="date"] {
 		padding: 5px;
 	}
+	.reg {
+		color: red;
+		font-size: 0.9em;
+		display: none;
+	}
 </style>
 <script>
 	$(function() {
@@ -133,12 +138,27 @@
 		})
 		
 		$("form").submit(function() {
-			if($(".agree1 input[type='radio']:checked").val() != "agree") {
-				alert("회원가입약관의 내용에 동의하셔야 회원가입 하실 수 있습니다.");
+			$(".reg").css("display", "none");
+			
+			var reg_name = /^[가-힣]{2,5}$/;
+			var reg_phone = /^(010|011|016|017|018)?[0-9]{3,4}?[0-9]{4}$/;
+			var reg_birth = /^(19[0-9][0-9]|20\d{2})-(0[0-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/;
+			
+			if($("input[name='name']").val() == "" || reg_name.test($("input[name='name']").val()) == false) {
+				$("input[name='name']").nextAll(".reg").css("display", "inline");
+				$("input[name='name']").nextAll(".span_color").css("display", "none");
 				return false;
 			}
-			if($(".agree2 input[type='radio']:checked").val() != "agree") {
-				alert("개인정보취급방침의 내용에 동의하셔야 회원가입 하실 수 있습니다.");
+			
+			if($("input[name='tel']").val() == "" || reg_phone.test($("input[name='tel']").val()) == false) {
+				alert("DFdfsf");
+				$("input[name='tel']").nextAll(".reg").css("display", "inline");
+				return false;
+			}
+			
+			if($("input[name='birth']").val() == "" || reg_birth.test($("input[name='birth']").val()) == false) {
+				alert("ijoimn");
+				$("input[name='birth']").nextAll(".reg").css("display", "inline");
 				return false;
 			}
 		})
@@ -162,26 +182,33 @@
 			<div class="clear"></div>
 			<div id="joinForm_content">
 				<p>회원가입</p>
-				<form>
+				<form action="joinForm.do" method="post">
 					<div class="jf_div1"><b>개인 정보</b></div>
 					<div class="jf_div2">
 						<span class="span1">이름</span>
 						<span>
-							<input type="text" size="30">
+							<input type="text" size="30" name="name">
 							<span class="span_color">※ 공백없이 한글만 입력가능.</span>
+							<span class="reg">※ 한글만 입력하세요</span>
 						</span>
 					</div>
 					<div class="jf_div2">
 						<span class="span1">전화번호</span>
-						<span><input type="text" size="30"></span>
+						<span>
+							<input type="text" size="30" name="tel">
+							<span class="reg">※ 숫자만 입력하세요</span>
+						</span>
 					</div>
 					<div class="jf_div2">
 						<span class="span1">생년월일</span>
-						<span><input type="date"></span>
+						<span>
+							<input type="date" name="birth">
+							<span class="reg">※ 생년월일을 입력하세요</span>
+						</span>
 					</div>
 					<div class="jf_div2">
 						<span class="span1">주소</span>
-						<span><input type="text" size="80"></span>
+						<span><input type="text" size="80" name="addr"></span>
 					</div>
 					<div class="jf_div3">
 						<input type="submit" value="확 인">
