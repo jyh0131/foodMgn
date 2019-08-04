@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @SuppressWarnings("serial")
 public class ControllerUsingURI extends HttpServlet {
-	private HashMap<String, ConmmandHandler> commandHandlerMap = new HashMap<>();
+	private HashMap<String, CommandHandler> commandHandlerMap = new HashMap<>();
 
 	@Override
 	public void init() throws ServletException { //서버가 알아서 호출해줌
@@ -35,7 +35,7 @@ public class ControllerUsingURI extends HttpServlet {
 			Class<?> handlerClass; //클래스이름이 무슨클래슨지 모를때
 			try {
 				handlerClass = Class.forName(handlerClassName); //String으로 되어있는 이름를 class화 시킴
-				ConmmandHandler handlerInstance = (ConmmandHandler) handlerClass.newInstance(); //new : 메모리에 올림
+				CommandHandler handlerInstance = (CommandHandler) handlerClass.newInstance(); //new : 메모리에 올림
 				commandHandlerMap.put(command, handlerInstance); //해해쉬맵에 집어넣음 / 키(simple.do):값(new 한 클래스) 
 			} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
 				e.printStackTrace();
@@ -60,7 +60,7 @@ public class ControllerUsingURI extends HttpServlet {
 			command = command.substring(req.getContextPath().length()); // /simple.do 
 		}
 
-		ConmmandHandler handler = commandHandlerMap.get(command); 
+		CommandHandler handler = commandHandlerMap.get(command); 
 		if (handler == null) { //커맨드가 없으면
 			handler = new NullHandler(); //널핸들러
 		}
