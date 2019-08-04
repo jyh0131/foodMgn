@@ -74,14 +74,14 @@
 <body>
 	<div id="footerWrap">
 		<div class="footer">
-		<div class="toTop"><a href="#"><img src="images/top.png" alt="위로"></a></div>
+		<div class="toTop"><a href="#"><img src="${pageContext.request.contextPath}/images/include/top.png" alt="위로"></a></div>
 			<ul class="f_gnb">
-				<li><img src="images/footer_img_1.png" alt=""></li>
-				<li><img src="images/footer_img_2.png" alt=""></li>
-				<li><img src="images/footer_img_3.png" alt=""></li>
+				<li><img src="${pageContext.request.contextPath}/images/include/footer_img_1.png" alt=""></li>
+				<li><img src="${pageContext.request.contextPath}/images/include/footer_img_2.png" alt=""></li>
+				<li><img src="${pageContext.request.contextPath}/images/include/footer_img_3.png" alt=""></li>
 			</ul>
 			<h1 class="f_logo">
-				<img src="images/f_logo.gif" alt="라라코스트">
+				<img src="${pageContext.request.contextPath}/images/include/f_logo.gif" alt="라라코스트">
 			</h1>
 			<div class="copy_clear">
 				<a href="#">개인정보처리방침</a>&nbsp;&nbsp;│&nbsp;&nbsp;<a href="#">이메일무단수집거부</a><br>
@@ -93,8 +93,8 @@
 				rights Reserved.
 			</div>
 			<div id="f_sns">
-				<a href="#"><img src="images/footer_sns_1.png"></a>
-				<a href="#"><img src="images/footer_sns_2.png"></a>
+				<a href="#"><img src="${pageContext.request.contextPath}/images/include/footer_sns_1.png"></a>
+				<a href="#"><img src="${pageContext.request.contextPath}/images/include/footer_sns_2.png"></a>
 			</div>
 		</div>
 	</div>
