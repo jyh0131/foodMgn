@@ -21,21 +21,20 @@
 </script>
 </head>
 <body>
-	<div id="container">
 		<header>
 			<div id="header">
 				<div id="head1">
 					<div id="head1_1">
-						<a href="">
-							<div class="sns">
+						<div class="sns">
+							<a href="">
 								<img src="${pageContext.request.contextPath}/images/include/sns_face.png">
-							</div>
-						</a>
-						<a href="">
-							<div class="sns">
+							</a>	
+						</div>
+						<div class="sns">
+							<a href="">
 								<img src="${pageContext.request.contextPath}/images/include/sns_insta.png">
-							</div>
-						</a>
+							</a>
+						</div>
 					</div>
 					<div id="head1_2">
 						<ul>
@@ -77,7 +76,7 @@
 					</div>
 					<div id="head2_3">
 						<ul>
-							<li><a href="">RESERVATION</a></li>
+							<li><a href="${pageContext.request.contextPath}/reservation.do">RESERVATION</a></li>
 							<li class="center2"><a href="">DELIVERY</a></li>
 							<li class="right2"><a href="${pageContext.request.contextPath}/derection.do">DERECTION</a></li>
 						</ul>
