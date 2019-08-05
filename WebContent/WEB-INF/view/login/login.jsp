@@ -212,17 +212,24 @@
 					<p class="txt">라라코스트에서는 고객님께 보다 나은 서비스를 제공하기 위하여 회원제로 운영하고 있습니다.</p>
 				</div>
 				<div id="loginBox">
-					<form>
+					<form action="${pageContext.request.contextPath}/login.do" method="post">
 						<table>
 							<tr>
 								<td rowspan="2" class="loginimg"><img src="${pageContext.request.contextPath}/images/login/ico_lock.png"></td>
 								<td class="under">이름</td>
-								<td class="under2"><input type="text" size="30"></td>
+								<td class="under2"><input type="text" size="30" name="name"></td>
 								<td rowspan="2"><input type="submit" value="로그인"></td>
 							</tr>
 							<tr>
 								<td class="under">전화번호</td>
-								<td class="under2"><input type="text" size="30"></td>
+								<td class="under2"><input type="text" size="30" name="tel"></td>
+								<c:if test="${noJoin == true}">
+									<script>
+										$(function() {
+											alert("이름과 전화번호를 다시 입력하세요.");
+										})
+									</script>
+								</c:if>
 							</tr>
 						</table>
 					</form>

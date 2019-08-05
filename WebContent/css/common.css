@@ -79,7 +79,7 @@ header a {
 	left: 410px;
 }
 #head2_2 img {
-	width: 230px;
+	width: 220px;
 	height: 75px;
 }
 #head2_3 {
@@ -96,8 +96,8 @@ header a {
 }
 .submenu {
 	display: none;
-	margin-top: 32px;
-	background-color: rgba(0,0,0,0.6);
+	margin-top: 35px;
+	background-color: rgba(0,0,0,0.7);
 	width: 140%;
 	margin-left: -20px;
 	text-align: center;

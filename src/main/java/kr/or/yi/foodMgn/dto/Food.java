@@ -10,6 +10,7 @@ public class Food {
 	private String fdName;
 	private FoodKind fkNo;
 	private boolean fdWithdrawal;
+	private String fdImg;
 	
 	private int count = 1;
 	
@@ -95,6 +96,14 @@ public class Food {
 
 	public void setFdWithdrawal(boolean fdWithdrawal) {
 		this.fdWithdrawal = fdWithdrawal;
+	}
+	
+	public String getFdImg() {
+		return fdImg;
+	}
+
+	public void setFdImg(String fdImg) {
+		this.fdImg = fdImg;
 	}
 
 	@Override

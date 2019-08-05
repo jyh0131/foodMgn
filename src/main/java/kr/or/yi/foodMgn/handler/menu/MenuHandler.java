@@ -1,4 +1,4 @@
-package kr.or.yi.foodMgn.handler;
+package kr.or.yi.foodMgn.handler.menu;
 
 import java.util.List;
 
@@ -18,12 +18,19 @@ public class MenuHandler implements CommandHandler {
 
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
+		int fkno = Integer.parseInt(req.getParameter("fkno"));
+		
+		FoodKind fk = new FoodKind(fkno);
+		Food food = new Food(fk);
+		
 		FoodKindDao fkDao = new FoodKindDaoImpl();
 		FoodDao fDao = new FoodDaoImpl();
 		
-		
 		List<FoodKind> fkList = fkDao.selectFoodKindByAll();
+		List<Food> fList = fDao.selectByNo(food);
+		
 		req.setAttribute("fkList", fkList);
+		req.setAttribute("fList", fList);
 		
 		return "/WEB-INF/view/menu/menu.jsp";
 	}

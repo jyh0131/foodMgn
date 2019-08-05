@@ -94,14 +94,16 @@
 	}
 	.jf_div1 {
 		padding: 10px 0;
-		border-bottom: 3px solid black;
+		border-bottom: 3px solid #555555;
 	}
 	.jf_div2 {
+		border-top: 1px solid #c7a593;
 		border-bottom: 1px solid #c7a593;
 	}
 	.jf_div3 {
 		text-align: center;
-		margin: 20px 0 60px;
+		padding: 20px 0 60px;
+		border-top: 2px solid #555555;
 	}
 	.span1 {
 		background-color: #F7F7F7;
@@ -151,13 +153,11 @@
 			}
 			
 			if($("input[name='tel']").val() == "" || reg_phone.test($("input[name='tel']").val()) == false) {
-				alert("DFdfsf");
 				$("input[name='tel']").nextAll(".reg").css("display", "inline");
 				return false;
 			}
 			
 			if($("input[name='birth']").val() == "" || reg_birth.test($("input[name='birth']").val()) == false) {
-				alert("ijoimn");
 				$("input[name='birth']").nextAll(".reg").css("display", "inline");
 				return false;
 			}
@@ -209,6 +209,7 @@
 					<div class="jf_div2">
 						<span class="span1">주소</span>
 						<span><input type="text" size="80" name="addr"></span>
+						<button>주소찾기</button>
 					</div>
 					<div class="jf_div3">
 						<input type="submit" value="확 인">

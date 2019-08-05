@@ -91,7 +91,7 @@
 		padding: 30px 0;
 	}
 	#menu_name {
-		padding: 20px;
+		padding: 20px 0;
 		text-align: center;
 	}
 	#menu_name h1 {
@@ -103,6 +103,10 @@
 		color: #766f6c;
 		font-size: 15px;
 		padding: 10px;
+	}
+	#menu_name li {
+		list-style: none;
+		width: 100%;
 	}
 </style>
 
@@ -121,20 +125,12 @@
 		</div>
 		<div class="content">
 			<div id="menu_li">
-				PASTA
+				
 				<span class="li_img"></span>
 				<ul id="menulist">
-					<c:forEach var="list" items="${fkList}" begin="0">
-						<li class="menu${list.fkNo}"><a href="${pageContext.request.contextPath}/menu.do">${list}</a></li>
+					<c:forEach var="fklist" items="${fkList}">
+						<li><a href="${pageContext.request.contextPath}/menu.do?fkno=${fklist.fkNo}">${fklist}</a></li>
 					</c:forEach>
-					<!-- <li><a href="">STEAK & CUTLET</a></li>
-					<li><a href="">PASTA</a></li>
-					<li><a href="">PILAF & RISOTTO</a></li>
-					<li><a href="">SALAD</a></li>
-					<li><a href="">SIGNATURE PIZZA</a></li>
-					<li><a href="">PIZZA</a></li>
-					<li><a href="">SIDE MENU</a></li>
-					<li><a href="">BEVERAGE & BEER</a></li> -->
 				</ul>
 			</div>
 			<div id="menu_li2">
@@ -152,8 +148,13 @@
 					<img src="${pageContext.request.contextPath}/images/menu/pasta_top1.jpg">
 				</div>
 				<div id="menu_name">
-					<h1>Pasta</h1>
-					<p>[파스타]</p>
+					<h1>fffff</h1>
+					<!-- <p>[파스타]</p> -->
+					<div>
+						<c:forEach var="flist" items="${fList}">
+							<li><img src="${pageContext.request.contextPath}/images/food/${flist.fdNo}.JPG"></li>							
+						</c:forEach>
+					</div>
 				</div>
 			</div>
 		</div>

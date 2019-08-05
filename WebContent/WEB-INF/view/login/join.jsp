@@ -110,6 +110,7 @@
 	.agree1, .agree2 {
 		background-color: #F7F7F7;
 		padding: 10px 0 10px 30px;
+		font-size: 0.9em;
 	}
 	.submit {
 		text-align: center;
@@ -305,8 +306,8 @@ raracost.com 이용자 약관(이하“약관”)은 라라코스트 raracost.co
  본 약관은 2015. 08. 01. 부터 적용합니다. 
 						</textarea>
 						<div class="agree1">
-							<input type="radio" name="ag" value="agree" id="ag1"><label for="ag1">동의합니다.</label>&nbsp;
-							<input type="radio" name="ag" value="disagree" id="ag2"><label for="ag2">동의하지 않습니다.</label>
+							<input type="radio" name="ag" value="agree" id="ag1"><label for="ag1"> 동의합니다.</label>&nbsp;
+							<input type="radio" name="ag" value="disagree" id="ag2"><label for="ag2"> 동의하지 않습니다.</label>
 						</div>
 					</div>
 					<div class="join">
@@ -354,8 +355,8 @@ raracost.com 이용자 약관(이하“약관”)은 라라코스트 raracost.co
 - 방문에 관한 기록 : 3개월 (통신비밀보호법)
 						</textarea>
 						<div class="agree2">
-							<input type="radio" name="ag2" value="agree" id="ag3"><label for="ag3">동의합니다.</label>&nbsp;
-							<input type="radio" name="ag2" value="disagree" id="ag4"><label for="ag4">동의하지 않습니다.</label>
+							<input type="radio" name="ag2" value="agree" id="ag3"><label for="ag3"> 동의합니다.</label>&nbsp;
+							<input type="radio" name="ag2" value="disagree" id="ag4"><label for="ag4"> 동의하지 않습니다.</label>
 						</div>
 					</div>
 					<div class="submit">

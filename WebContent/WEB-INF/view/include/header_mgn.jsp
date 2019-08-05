@@ -11,15 +11,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
-<script>
-	$(function() {
-		$("#head2 li").hover(function() {
-			$(this).find(".submenu").stop().slideDown(100)
-		}, function() {
-			$(this).find(".submenu").stop().slideUp(100)
-		})
-	})
-</script>
 </head>
 <body>
 	<div id="container">
@@ -55,26 +46,12 @@
 				<div id="head2">
 					<div id="head2_1">
 						<ul>
-							<li><a href="${pageContext.request.contextPath}/introduce.do">INTRODUCE</a></li>
+							<li><a href="">결제관리</a></li>
 							<li class="center">
-								<a href="${pageContext.request.contextPath}/menu.do?fkno=1">MENU</a>
-								<ul class="submenu">
-									<li><a href="${pageContext.request.contextPath}/menu.do?fkno=1">PASTA</a></li>
-									<li><a href="${pageContext.request.contextPath}/menu.do?fkno=2">STEAK & CUTLET</a></li>
-									<li><a href="${pageContext.request.contextPath}/menu.do?fkno=3">PILAF & RISOTTO</a></li>
-									<li><a href="${pageContext.request.contextPath}/menu.do?fkno=4">SALAD</a></li>
-									<li><a href="${pageContext.request.contextPath}/menu.do?fkno=5">SIGNATURE PIZZA</a></li>
-									<li><a href="${pageContext.request.contextPath}/menu.do?fkno=6">PIZZA</a></li>
-									<li><a href="${pageContext.request.contextPath}/menu.do?fkno=7">SIDE MENU</a></li>
-									<li><a href="${pageContext.request.contextPath}/menu.do?fkno=8">BEVERAGE</a></li>
-									<li><a href="${pageContext.request.contextPath}/menu.do?fkno=9">BEER</a></li>
-								</ul>
+								<a href="">판매관리</a>
 							</li>
 							<li class="right">
-								<a href="">COMMUNITY</a>
-								<ul class="submenu">
-									<li><a href="">공지사항</a></li>
-								</ul>
+								<a href="">음식관리</a>
 							</li>
 						</ul>
 					</div>
@@ -85,9 +62,9 @@
 					</div>
 					<div id="head2_3">
 						<ul>
-							<li><a href="">RESERVATION</a></li>
-							<li class="center2"><a href="">DELIVERY</a></li>
-							<li class="right2"><a href="">DERECTION</a></li>
+							<li><a href=""></a>     </li>
+							<li class="center2"><a href="">회원관리</a></li>
+							<li class="right2"><a href="">예약관리</a></li>
 						</ul>
 					</div>
 					<div class="clear"></div>
