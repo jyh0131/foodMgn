@@ -178,6 +178,17 @@
 		$("#menu_li").click(function() {
 			$("#menulist").toggle();
 		})
+		
+		/* $.ajax({
+			url:"${pageContext.request.contextPath}/login.do",
+			type:"post",
+			data:{"id":$("#id").val(), "pw":$("#pw").val()},
+			dataType:"json",
+			success: function(res) {
+				console.log(res);
+				
+			}
+		}) */
 	})
 </script>
 	<div class="sub">
@@ -219,17 +230,17 @@
 								<td class="under2"><input type="text" size="30" name="id" id="id"></td>
 								<c:if test="${noMember == true}">
 									<script>
-										alert("없는 회원입니다.");
+										alert("일치하는 아이디가 없습니다.");
 									</script>
 								</c:if>
 								<td rowspan="2"><input type="submit" value="로그인"></td>
 							</tr>
 							<tr>
 								<td class="under">비밀번호</td>
-								<td class="under2"><input type="text" size="30" name="pw" id="pw"></td>
+								<td class="under2"><input type="password" size="30" name="pw" id="pw"></td>
 								<c:if test="${noPassWord == true}">
 									<script>
-										alert("비밀번호가 틀렸습니다.");
+										alert("아이디와 비밀번호를 확인하세요.");
 									</script>
 								</c:if>
 							</tr>

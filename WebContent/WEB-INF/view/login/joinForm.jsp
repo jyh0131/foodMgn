@@ -191,7 +191,7 @@
 			<div class="clear"></div>
 			<div id="joinForm_content">
 				<p>회원가입</p>
-				<form action="joinForm.do" method="post">
+				<form action="${pageContext.request.contextPath}/joinForm.do" method="post">
 					<div class="jf_div1"><b>로그인 정보</b></div>
 					<div class="jf_div2">
 						<span class="span1">아이디</span>

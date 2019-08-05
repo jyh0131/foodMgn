@@ -1,14 +1,8 @@
 package kr.or.yi.foodMgn.handler.login;
 
-import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import org.codehaus.jackson.map.ObjectMapper;
 
 import kr.or.yi.foodMgn.controller.CommandHandler;
 import kr.or.yi.foodMgn.dao.NoManagerDao;
@@ -24,6 +18,8 @@ public class LoginHandler implements CommandHandler {
 		}else if(req.getMethod().equalsIgnoreCase("post")) {
 			String id = req.getParameter("id");
 			String pw = req.getParameter("pw");
+			
+			System.out.println(id + "," + pw);
 			
 			NoManagerDao nmDao = new NoManagerDaoImpl();
 			NoManager nm = new NoManager(id);

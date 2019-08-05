@@ -83,6 +83,14 @@ public class Member {
 		this.mbMileage = mbMileage;
 		coupon = couponlist;
 	}
+	
+	public Member(String mbName, Date mbBirth, String mbTel, String mbAddress) {
+		super();
+		this.mbName = mbName;
+		this.mbBirth = mbBirth;
+		this.mbTel = mbTel;
+		this.mbAddress = mbAddress;
+	}
 
 	public int getMbNo() {
 		return mbNo;
