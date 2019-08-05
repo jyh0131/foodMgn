@@ -62,7 +62,7 @@ h2{
 <body>
 		<h2>결제 현황</h2>
 	
-	<table id="saleList">
+	<table id="saleList" class="display">
 		<thead>
 		<tr>
 			<th>결제 번호</th>
