@@ -45,5 +45,6 @@
 	<delete id="deletFood" parameterType="Food">
 		update food set fd_withdrawal = #{fdWithdrawal} where fd_no = #{fdNo};
 	</delete>
+	
 </mapper>
 

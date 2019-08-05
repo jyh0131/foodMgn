@@ -3,6 +3,9 @@
 	margin: 0;
 	padding: 0;
 }
+body {
+	font-family: Nanum Gothic,'돋움',Dotum,AppleGothic,sans-serif;
+}
 ul li {
 	list-style: none;
 }
