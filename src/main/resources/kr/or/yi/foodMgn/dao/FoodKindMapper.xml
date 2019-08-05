@@ -19,4 +19,8 @@
 	<select id="selectFoodKindByAll" resultMap="resultFoodKind">
 		select fk_name, fk_no from foodkind
 	</select>
+	
+	<select id="selectByFkNo" resultType="FoodKind" parameterType="FoodKind">
+		select * from foodkind where fk_no = #{fkNo}
+	</select>
 </mapper>

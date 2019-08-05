@@ -216,12 +216,12 @@
 						<table>
 							<tr>
 								<td rowspan="2" class="loginimg"><img src="${pageContext.request.contextPath}/images/login/ico_lock.png"></td>
-								<td class="under">이름</td>
+								<td class="under">아이디</td>
 								<td class="under2"><input type="text" size="30" name="name"></td>
 								<td rowspan="2"><input type="submit" value="로그인"></td>
 							</tr>
 							<tr>
-								<td class="under">전화번호</td>
+								<td class="under">비밀번호</td>
 								<td class="under2"><input type="text" size="30" name="tel"></td>
 								<c:if test="${noJoin == true}">
 									<script>

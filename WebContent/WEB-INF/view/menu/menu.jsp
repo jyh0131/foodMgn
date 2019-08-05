@@ -98,6 +98,7 @@
 		color: #814b34;
 		font-weight: bold;
 		font-size: 34px;
+		margin-bottom: 10px; 
 	}
 	#menu_name p {
 		color: #766f6c;
@@ -125,7 +126,7 @@
 		</div>
 		<div class="content">
 			<div id="menu_li">
-				
+				${fkName}
 				<span class="li_img"></span>
 				<ul id="menulist">
 					<c:forEach var="fklist" items="${fkList}">
@@ -139,17 +140,16 @@
 					<li>></li>
 					<li>메뉴소개</li>
 					<li>></li>
-					<li><b>PASTA</b></li>
+					<li><b>${fkName}</b></li>
 				</ul>
 			</div>
 			<div class="clear"></div>
 			<div id="menu_content">
 				<div id="title_img">
-					<img src="${pageContext.request.contextPath}/images/menu/pasta_top1.jpg">
+					<img src="${pageContext.request.contextPath}/images/menu/${fkName}.jpg">
 				</div>
 				<div id="menu_name">
-					<h1>fffff</h1>
-					<!-- <p>[파스타]</p> -->
+					<h1>${fkName}</h1>
 					<div>
 						<c:forEach var="flist" items="${fList}">
 							<li><img src="${pageContext.request.contextPath}/images/food/${flist.fdNo}.JPG"></li>							
