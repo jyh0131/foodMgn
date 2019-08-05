@@ -1,5 +1,7 @@
 package kr.or.yi.foodMgn.daoImpl;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 
 import kr.or.yi.foodMgn.dao.NoManagerDao;
@@ -14,6 +16,27 @@ public class NoManagerDaoImpl implements NoManagerDao {
 	public NoManager selectByPass(NoManager noManager) {
 		try(SqlSession sqlSession = MybatisSqlSessionFactory.openSession()){
 			return sqlSession.selectOne(namespace+".selectByPass", noManager);
+		}
+	}
+
+	@Override
+	public int insertNoManger(NoManager noManager) {
+		try(SqlSession sqlSession = MybatisSqlSessionFactory.openSession()) {
+			return sqlSession.insert(namespace+".insertNoManger", noManager);
+		}
+	}
+
+	@Override
+	public List<NoManager> selectByAll() {
+		try(SqlSession sqlSession = MybatisSqlSessionFactory.openSession()){
+			return sqlSession.selectList(namespace+".selectByAll");
+		}
+	}
+
+	@Override
+	public NoManager selectById(NoManager noManager) {
+		try(SqlSession sqlSession = MybatisSqlSessionFactory.openSession()){
+			return sqlSession.selectOne(namespace+".selectById", noManager);
 		}
 	}
 }

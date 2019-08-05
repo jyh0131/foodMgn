@@ -110,6 +110,7 @@
 		display: inline-block;
 		padding: 10px 15px;
 		width: 145px;
+		margin-right: 10px;
 	}
 	.span_color {
 		color: #66A2C8;
@@ -133,6 +134,7 @@
 		border: 1px solid #555555;
 		color: white;
 		border-radius: 3px;
+		margin-top: 3px;
 	}
 	.reg {
 		color: red;
