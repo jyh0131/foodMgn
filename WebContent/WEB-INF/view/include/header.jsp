@@ -79,7 +79,7 @@
 						<ul>
 							<li><a href="">RESERVATION</a></li>
 							<li class="center2"><a href="">DELIVERY</a></li>
-							<li class="right2"><a href="">DERECTION</a></li>
+							<li class="right2"><a href="${pageContext.request.contextPath}/derection.do">DERECTION</a></li>
 						</ul>
 					</div>
 					<div class="clear"></div>
