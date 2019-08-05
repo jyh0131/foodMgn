@@ -22,7 +22,16 @@
   <filter-mapping>
   	<filter-name>CharacterEncodingFilter</filter-name>
   	<url-pattern>/*</url-pattern> <!-- 모두 -->
-  </filter-mapping>  
+  </filter-mapping> 
+  
+  <filter>
+  	<filter-name>CorsFilter</filter-name> <!-- 아무거나와도됨 -->
+  	<filter-class>kr.or.yi.foodMgn.jdbc.CorsFilter</filter-class> <!-- 패키지명.ㅍ클래스명 -->
+  </filter>
+  <filter-mapping>
+  	<filter-name>CorsFilter</filter-name>
+  	<url-pattern>/*</url-pattern> <!-- 모두 -->
+  </filter-mapping>   
   
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>

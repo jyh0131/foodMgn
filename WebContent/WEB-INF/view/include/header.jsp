@@ -76,7 +76,7 @@
 					</div>
 					<div id="head2_3">
 						<ul>
-							<li><a href="">RESERVATION</a></li>
+							<li><a href="${pageContext.request.contextPath}/reservation.do">RESERVATION</a></li>
 							<li class="center2"><a href="">DELIVERY</a></li>
 							<li class="right2"><a href="">DERECTION</a></li>
 						</ul>
