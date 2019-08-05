@@ -7,4 +7,5 @@ import kr.or.yi.foodMgn.dto.FoodKind;
 public interface FoodKindDao {
 	public List<FoodKind> selectByNo(FoodKind foodkind);
 	public List<FoodKind> selectFoodKindByAll();
+	public FoodKind selectByFkNo(FoodKind foodkind);
 }

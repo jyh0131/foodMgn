@@ -29,8 +29,12 @@ public class MenuHandler implements CommandHandler {
 		List<FoodKind> fkList = fkDao.selectFoodKindByAll();
 		List<Food> fList = fDao.selectByNo(food);
 		
+		String fkName = fkDao.selectByFkNo(fk).getFkName();
+		
+		
 		req.setAttribute("fkList", fkList);
 		req.setAttribute("fList", fList);
+		req.setAttribute("fkName", fkName);
 		
 		return "/WEB-INF/view/menu/menu.jsp";
 	}
