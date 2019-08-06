@@ -30,19 +30,27 @@ public class JoinFormHandler implements CommandHandler {
 			List<Member> list = dao.selectMemberByAllNM();
 			int no = list.size();
 			
-			SimpleDateFormat sdfm = new SimpleDateFormat("yyyy-mm-dd");
-			Date birthDate = sdfm.parse(birth);
+			Member mem = new Member();
+			mem.setMbTel(tel);
+			Member mem2 = dao.selectByNameTel(mem);
 			
-			Member member = new Member(name, birthDate, tel, addr);
-			member.setMbNo(no);
-			member.setMbMileage(1000);
-			member.setMbGrade(new Grade("bronze"));
-			member.setMbJoin(new Date());
-			member.setMbWithdrawal(true);
-			dao.insertMember(member);
-			
-			res.sendRedirect(req.getContextPath()+"/login.do");
-			return null;
+			if(mem2 == null) {
+				SimpleDateFormat sdfm = new SimpleDateFormat("yyyy-mm-dd");
+				Date birthDate = sdfm.parse(birth);
+				
+				Member member = new Member(name, birthDate, tel, addr);
+				member.setMbNo(no);
+				member.setMbMileage(1000);
+				member.setMbGrade(new Grade("bronze"));
+				member.setMbJoin(new Date());
+				member.setMbWithdrawal(true);
+				
+				dao.insertMember(member);
+				res.sendRedirect(req.getContextPath()+"/login.do");
+				return null;
+			}else {
+				return "/WEB-INF/view/login/login.jsp";
+			}
 		}
 		return null;
 	}

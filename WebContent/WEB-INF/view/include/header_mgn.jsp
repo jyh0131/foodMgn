@@ -51,7 +51,7 @@
 						<ul>
 							<li><a href="">결제관리</a></li>
 							<li class="center"><a href="">판매관리</a></li>
-							<li class="right"><a href="${pageContext.request.contextPath}/menuMgn.do">음식관리</a></li>
+							<li class="right"><a href="${pageContext.request.contextPath}/menuMgnlist.do">음식관리</a></li>
 						</ul>
 					</div>
 					<div id="head2_2">

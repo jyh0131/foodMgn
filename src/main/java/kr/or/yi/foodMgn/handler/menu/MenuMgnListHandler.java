@@ -10,7 +10,7 @@ import kr.or.yi.foodMgn.dao.FoodDao;
 import kr.or.yi.foodMgn.daoImpl.FoodDaoImpl;
 import kr.or.yi.foodMgn.dto.Food;
 
-public class MenuMgnHandler implements CommandHandler {
+public class MenuMgnListHandler implements CommandHandler {
 
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {

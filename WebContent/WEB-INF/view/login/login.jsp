@@ -208,12 +208,13 @@
 	 				
 	 				if(res.success == false) { //실패-alert
 	 					alert("아이디와 비밀번호를 다시 확인하세요.");
+	 				}else if(res.success == "noMem") {
+	 					alert("회원이 아닙니다.");
 	 				}else { //성공 -홈으로이동
 	 					location.href = "${pageContext.request.contextPath}/";
 	 				}
 	 			}
 	 		})
-	 		
 	 		return false;
 		})
 	})

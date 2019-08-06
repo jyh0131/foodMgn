@@ -33,4 +33,11 @@ public class FoodKindDaoImpl implements FoodKindDao {
 		}
 	}
 
+	@Override
+	public FoodKind selectByName(FoodKind foodkind) {
+		try(SqlSession sqlSession = MybatisSqlSessionFactory.openSession()){
+			return sqlSession.selectOne(namespace+".selectByName", foodkind);
+		}
+	}
+
 }

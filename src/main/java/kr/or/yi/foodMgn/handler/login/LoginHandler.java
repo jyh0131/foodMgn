@@ -30,10 +30,12 @@ public class LoginHandler implements CommandHandler {
 			Member member = new Member(name, tel);
 			Member member2 = dao.selectByNameTel(member);
 			
-			Map<String, Boolean> map = new HashMap<String, Boolean>();
+			Map<String, Object> map = new HashMap<String, Object>();
 			
 			if(member2 == null) {
 				map.put("success", false);
+			}else if(member2.isMbWithdrawal()==false) {
+				map.put("success", "noMem");
 			}else {
 				HttpSession session = req.getSession();
 				session.setAttribute("Auth", member2.getMbNo());
