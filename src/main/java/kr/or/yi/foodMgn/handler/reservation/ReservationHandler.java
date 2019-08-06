@@ -7,7 +7,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.swing.JOptionPane;
 
 import kr.or.yi.foodMgn.controller.CommandHandler;
 import kr.or.yi.foodMgn.dao.MemberDao;
@@ -16,7 +15,6 @@ import kr.or.yi.foodMgn.daoImpl.MemberDaoImpl;
 import kr.or.yi.foodMgn.daoImpl.ReservationDaoImpl;
 import kr.or.yi.foodMgn.dto.Member;
 import kr.or.yi.foodMgn.dto.Reservation;
-import kr.or.yi.foodMgn.dto.User;
 
 public class ReservationHandler implements CommandHandler {
 
@@ -47,7 +45,23 @@ public class ReservationHandler implements CommandHandler {
 			String first = req.getParameter("first"); // 전화번호
 			String second = req.getParameter("second");
 			String third = req.getParameter("third");
-			String tableNo = req.getParameter("tableNo"); // 테이블번호
+			String tableNo2 = req.getParameter("tableNo"); // 테이블번호
+			String tableNo = null;
+			if(tableNo2.equals("1번 (2~3인석)")) {
+				tableNo = "no.1";
+			}else if(tableNo2.equals("2번 (2~3인석)")) {
+				tableNo = "no.2";
+			}else if(tableNo2.equals("3번 (2~3인석)")) {
+				tableNo = "no.3";
+			}else if(tableNo2.equals("4번 (2~3인석)")) {
+				tableNo = "no.4";
+			}else if(tableNo2.equals("5번 (4~5인석)")) {
+				tableNo = "no.5";
+			}else if(tableNo2.equals("6번 (4~5인석)")) {
+				tableNo = "no.6";
+			}else if(tableNo2.equals("7번 (9인이하단체)")) {
+				tableNo = "no.7";
+			}
 			int number = Integer.parseInt(req.getParameter("number")); // 예약인원
 			String date = req.getParameter("date"); // 날짜
 			String hour = req.getParameter("hour"); // 시간
@@ -80,7 +94,7 @@ public class ReservationHandler implements CommandHandler {
 				req.setAttribute("rsv", rsv);
 				return "/WEB-INF/view/reservation/SuccessReservation.jsp";
 			}else { // 비회원인 경우
-					int a = mDao.selectMemberByAll().size();
+					int a = mDao.selectMemberByAllNM().size();
 					member.setMbNo(a);
 					mDao.insertMember(member); // 비회원으로 회원테이블에 저장.
 					rsv = new Reservation(number, inputTime, new Date(), null, member, tableNo, false);

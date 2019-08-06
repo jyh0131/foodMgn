@@ -21,7 +21,7 @@
 		
 		$("#reservation").click(function(){
 			if(${Auth==null}){
-				var a = confirm("로그인 하시겠습니까?");
+				var a = confirm("회원일 경우 로그인하셔야 합니다. 비회원일 경우 취소를 누르세요.");
 				if(a==true){
 					location.href = "${pageContext.request.contextPath}/login.do";	
 				}else{
@@ -31,6 +31,7 @@
 				location.href = "${pageContext.request.contextPath}/reservation.do?isLogin=1"; // 회원
 			}
 		})
+		
 	})
 </script>
 </head>
@@ -99,10 +100,10 @@
 					<div id="head2_3">
 						<ul>
 							<li>
-								<a href="${pageContext.request.contextPath}/reservation.do">RESERVATION</a>
+								<a href="javascript:void(0);">RESERVATION</a>
 								<ul class="submenu">
-									<li><a href="">예약하기</a></li>
-									<li><a href="">예약조회</a></li>
+									<li><a href="javascript:void(0);" id="reservation">예약하기</a></li>
+									<li><a href="${pageContext.request.contextPath}/search.do" id="searchRsv">예약조회</a></li>
 								</ul>
 							</li>
 

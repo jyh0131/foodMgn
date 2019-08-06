@@ -54,6 +54,10 @@
 		select * from member_reservation4 where rsv_time between subtime(#{rsvTime},'0:29:0') and addtime(#{rsvTime},'0:29:0')
 	</select>
 	
+	<select id="selectByNo" parameterType="Member" resultMap="resultRsvLJH2">
+		select * from reservation where mb_no=#{mbNo}
+	</select>
+	
 </mapper>
 
 

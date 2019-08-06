@@ -61,6 +61,7 @@
 		width:130px;
 		background:#f7f7f7;
 		padding: 5px 30px;
+		font-weight: bold;
 	}
 	input{
 		margin:0 10px;
@@ -71,6 +72,9 @@
 		margin:0 10px;
 		height:30px;
 		width:80px;
+	}
+	select[name='tableNo']{
+		width:150px;
 	}
 	input[type="submit"],input[type="reset"]{
 		width: 100px;
@@ -128,14 +132,14 @@
 					<td class="gray">테이블 번호</td>
 					<td>
 						<select name="tableNo">
-							<option>no.1</option>
-							<option>no.2</option>
-							<option>no.3</option>
-							<option>no.4</option>
-							<option>no.5</option>
-							<option>no.6</option>
-							<option>no.7</option>
-						</select>번 테이블
+							<option>1번 (2~3인석)</option>
+							<option>2번 (2~3인석)</option>
+							<option>3번 (2~3인석)</option>
+							<option>4번 (2~3인석)</option>
+							<option>5번 (4~5인석)</option>
+							<option>6번 (4~5인석)</option>
+							<option>7번 (9인이하단체)</option>
+						</select>
 					</td>
 				</tr>
 				<tr>

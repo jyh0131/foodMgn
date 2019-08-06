@@ -66,6 +66,12 @@ public class ReservationDaoImpl implements ReservationDao {
 			return sqlSession.selectList(namespace + ".selectByRangeTime",rsv);
 		}
 	}
+	@Override
+	public List<Reservation> selectByNo(Member member) {
+		try(SqlSession sqlSession = MybatisSqlSessionFactory.openSession()) {
+			return sqlSession.selectList(namespace + ".selectByNo",member);
+		}
+	}
 }
 
 
