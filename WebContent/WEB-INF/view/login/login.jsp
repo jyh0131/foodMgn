@@ -179,6 +179,16 @@
 			$("#menulist").toggle();
 		})
 		
+		/* $.ajax({
+			url:"${pageContext.request.contextPath}/login.do",
+			type:"post",
+			data:{"id":$("#id").val(), "pw":$("#pw").val()},
+			dataType:"json",
+			success: function(res) {
+				console.log(res);
+				
+			}
+		}) */
 	})
 </script>
 	<div class="sub">
@@ -216,18 +226,21 @@
 						<table>
 							<tr>
 								<td rowspan="2" class="loginimg"><img src="${pageContext.request.contextPath}/images/login/ico_lock.png"></td>
-								<td class="under">이름</td>
-								<td class="under2"><input type="text" size="30" name="name"></td>
+								<td class="under">아이디</td>
+								<td class="under2"><input type="text" size="30" name="id" id="id"></td>
+								<c:if test="${noMember == true}">
+									<script>
+										alert("일치하는 아이디가 없습니다.");
+									</script>
+								</c:if>
 								<td rowspan="2"><input type="submit" value="로그인"></td>
 							</tr>
 							<tr>
-								<td class="under">전화번호</td>
-								<td class="under2"><input type="text" size="30" name="tel"></td>
-								<c:if test="${noJoin == true}">
+								<td class="under">비밀번호</td>
+								<td class="under2"><input type="password" size="30" name="pw" id="pw"></td>
+								<c:if test="${noPassWord == true}">
 									<script>
-										$(function() {
-											alert("이름과 전화번호를 다시 입력하세요.");
-										})
+										alert("아이디와 비밀번호를 확인하세요.");
 									</script>
 								</c:if>
 							</tr>

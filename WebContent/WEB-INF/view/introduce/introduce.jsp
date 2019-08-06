@@ -37,12 +37,13 @@
 
 .content .depth {
 	position: absolute;
-	top: 10px;
+	top: 20px;
 	right: 0
 }
 
 .content .depth li {
 	float: left;
+	padding: 5px; 
 }
 
 .content .depth .bold {
@@ -51,6 +52,7 @@
 
 .content .clear {
 	clear: both;
+	margin-top: 40px;
 }
 
 .content div.sub0101 {

@@ -36,12 +36,13 @@
 
 .content .depth {
 	position: absolute;
-	top: 10px;
+	top: 20px;
 	right: 0
 }
 
 .content .depth li {
 	float: left;
+	padding: 5px; 
 }
 
 .content .depth .bold {
@@ -50,6 +51,7 @@
 
 .content .clear {
 	clear: both;
+	margin-top: 40px;
 }
 .sub0102{
 	width: 100%;
@@ -75,7 +77,7 @@
 
 .transport {
 	overflow: hidden;
-	padding-left: 30px;
+	padding-left: 20px;
 }
 
 .transport img {
@@ -84,7 +86,9 @@
 }
 
 .transport .sub_tp {
-	float: feft;
+	float: left;
+	height: 55px;
+	padding-top: 13px;
 }
 
 .brown_fs_01 {
@@ -99,8 +103,12 @@
 	font-size: 14px;
 	margin-bottom: 20px;
 	padding-left: 30px;
+	line-height: 20px;
 }
-
+.info_font2 {
+	font-size: 14px;
+	margin-bottom: 20px;
+}
 .tp {
 	margin-top: 5px;
 	margin-bottom: 5px; color : #d6673b;
@@ -111,6 +119,7 @@
 /* 지도 */
 #map_wrap {
 	width: 100%;
+	margin-bottom: 30px;
 }
 #map{
 	width: 100%;
@@ -163,19 +172,17 @@
 					</p>
 					<p class="brown_fs_01">대중교통 이용시</p>
 					<div class="transport">
-						<img
-							src="${pageContext.request.contextPath}/images/introduce/subway.png">
+						<img src="${pageContext.request.contextPath}/images/introduce/subway.png">
 						<div class="sub_tp">
 							<span class="tp">지하철</span>
-							<p class="info_font">두류역</p>
+							<p class="info_font2">두류역</p>
 						</div>
 					</div>
 					<div class="transport">
-						<img
-							src="${pageContext.request.contextPath}/images/introduce/bus.png">
+						<img src="${pageContext.request.contextPath}/images/introduce/bus.png">
 						<div class="sub_tp">
 							<span class="tp">버스</span>
-							<p class="info_font">356번, 425번, 623번, 순환 3번</p>
+							<p class="info_font2">356번, 425번, 623번, 순환 3번</p>
 						</div>
 					</div>
 				</div>

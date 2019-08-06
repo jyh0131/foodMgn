@@ -56,32 +56,62 @@ table, td, th {
 }
 </style>
 
-<link rel="stylesheet"
-	href="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"
-	type="text/css">
-<link rel="stylesheet"
-	href="https://cdn.datatables.net/1.10.19/js/dataTables.jqueryui.min.js"
-	type="text/css">
 <script src="https://code.jquery.com/jquery-3.3.1.js">
 	
 </script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet"
+	href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+
 <script
 	src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js">
-	
 </script>
 <script type="text/javascript">
 	$(function() {
-		$('#saleList').DataTable({
+		$('#saleTable').DataTable({
 			"scrollY" : "200px",
 			"scrollCollapse" : true,
 			"paging" : false
 		});
 
 		$("#datepicker").datepicker({
-			dateFormat : 'yy-mm-dd'
+			dateFormat : 'yy-mm-dd',
+			 onSelect: function(dateText, inst) {
+		          var date = $(this).val();
+		          $.ajax({
+						url:"${pageContext.request.contextPath }/salesList.do",
+						type:"get",
+						data : {"date":date},
+						dataType:"json",
+						success:function(json){
+							console.log(json);
+							$("#tbody").empty();
+							for(var i=0; i<json.list.length; i++){
+								var list=json.list[i];
+								if(i%2==0){
+									$("#tbody").append("<tr  role='row' class='odd'>");
+									$("#tbody tr").eq(i).append("<td class='sorting_1'>"+(i+1)+"</td>");
+									$("#tbody tr").eq(i).append("<td>"+list.ssName+"</td>");
+									$("#tbody tr").eq(i).append("<td>"+list.ssCount+"개</td>");
+									$("#tbody tr").eq(i).append("<td>"+list.ssTotalPrice+"원</td>");
+									$("#tbody tr").eq(i).append("<td>"+list.ssShare+"%</td>");
+								}else{
+									$("#tbody").append("<tr  role='row' class='even'>");
+									$("#tbody tr").eq(i).append("<td class='sorting_1'>"+(i+1)+"</td>");
+									$("#tbody tr").eq(i).append("<td>"+list.ssName+"</td>");
+									$("#tbody tr").eq(i).append("<td>"+list.ssCount+"개</td>");
+									$("#tbody tr").eq(i).append("<td>"+list.ssTotalPrice+"원</td>");
+									$("#tbody tr").eq(i).append("<td>"+list.ssShare+"%</td>");
+								}
+								
+							}
+						}
+						
+					})
+		     }
+			
 		});
 	})
 </script>
@@ -95,7 +125,7 @@ table, td, th {
 				<label>날짜 선택: </label><input type="text" id="datepicker">
 			</p>
 		</div>
-		<table id="saleList">
+		<table id="saleTable" class="display">
 			<thead>
 				<tr>
 					<th>순위</th>
@@ -105,7 +135,7 @@ table, td, th {
 					<th>점유율</th>
 				</tr>
 			</thead>
-			<tbody>
+			<tbody id="tbody">
 				<c:set var="num" value="0"></c:set>
 				<c:forEach var="item" items="${list}">
 					<c:set var="num" value="${num+1 }"></c:set>

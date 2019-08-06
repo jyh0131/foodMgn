@@ -83,7 +83,7 @@
 	
 	
 	#joinForm_content > p {
-		padding: 20px 0 50px;
+		padding: 20px 0 30px;
 		text-align: center;
 		font-size: 32px;
 		line-height: 32px;
@@ -95,10 +95,10 @@
 	.jf_div1 {
 		padding: 10px 0;
 		border-bottom: 3px solid #555555;
+		margin-top: 20px;
 	}
 	.jf_div2 {
-		border-top: 1px solid #c7a593;
-		border-bottom: 1px solid #c7a593;
+		border-bottom: 2px solid #c7a593;
 	}
 	.jf_div3 {
 		text-align: center;
@@ -108,12 +108,13 @@
 	.span1 {
 		background-color: #F7F7F7;
 		display: inline-block;
-		padding: 20px 10px;
-		width: 150px;
+		padding: 10px 15px;
+		width: 145px;
+		margin-right: 10px;
 	}
 	.span_color {
 		color: #66A2C8;
-		font-size: 0.9em;
+		font-size: 0.8em;
 	}
 	input[type="submit"] {
 		background-color: #3f87dc;
@@ -124,12 +125,20 @@
 		cursor: pointer;
 		font-size: 17px;
 	}
-	input[type="text"], input[type="date"] {
-		padding: 5px;
+	input[type="text"], input[type="date"], input[type="password"] {
+		padding: 3px;
+	}
+	button {
+		padding: 2px 10px;
+		background-color: #555555;
+		border: 1px solid #555555;
+		color: white;
+		border-radius: 3px;
+		margin-top: 3px;
 	}
 	.reg {
 		color: red;
-		font-size: 0.9em;
+		font-size: 0.8em;
 		display: none;
 	}
 </style>
@@ -182,7 +191,28 @@
 			<div class="clear"></div>
 			<div id="joinForm_content">
 				<p>회원가입</p>
-				<form action="joinForm.do" method="post">
+				<form action="${pageContext.request.contextPath}/joinForm.do" method="post">
+					<div class="jf_div1"><b>로그인 정보</b></div>
+					<div class="jf_div2">
+						<span class="span1">아이디</span>
+						<span>
+							<input type="text" size="30" name="id" autofocus>
+							<span class="span_color">※ 영문자,숫자,_만 입력가능. 최소 3자이상 입력하세요.</span>
+							<span class="reg">※ ㅇ 입력하세요</span>
+						</span>
+					</div>
+					<div class="jf_div2">
+						<span class="span1">비밀번호</span>
+						<span>
+							<input type="password" size="30" name="pw">
+							<span class="reg">※ ㅇ요</span>
+						</span>
+					</div>
+					<div class="jf_div2">
+						<span class="span1">비밀번호확인</span>
+						<span><input type="password" size="30" name="pw2"></span>
+					</div>
+					
 					<div class="jf_div1"><b>개인 정보</b></div>
 					<div class="jf_div2">
 						<span class="span1">이름</span>
@@ -210,6 +240,14 @@
 						<span class="span1">주소</span>
 						<span><input type="text" size="80" name="addr"></span>
 						<button>주소찾기</button>
+					</div>
+					<div class="jf_div2">
+						<span class="span1">문자서비스</span>
+						<span><input type="checkbox" checked> 문자서비스를 받겠습니다.</span>
+					</div>
+					<div class="jf_div2">
+						<span class="span1">정보공개</span>
+						<span><input type="checkbox" checked> 나의 정보를 볼 수 있도록 합니다.</span>
 					</div>
 					<div class="jf_div3">
 						<input type="submit" value="확 인">
