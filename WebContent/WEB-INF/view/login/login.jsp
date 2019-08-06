@@ -172,11 +172,49 @@
 		margin: 10px 0 15px;
 		font-size: 0.9em;
 	}
+	.reg {
+      color: red;
+      font-size: 0.8em;
+      display: none;
+      margin: 5px;
+   }
 </style>
 <script>
 	$(function() {
 		$("#menu_li").click(function() {
 			$("#menulist").toggle();
+		})
+		
+		$("form").submit(function() {
+			$(".reg").css("display", "none");
+			
+			if($("input[name='name']").val() == "") {
+	            $("input[name='name']").nextAll(".reg").css("display", "inline");
+	            return false;
+	         }
+	         
+	         if($("input[name='tel']").val() == "") {
+	            $("input[name='tel']").nextAll(".reg").css("display", "inline");
+	            return false;
+	         }
+	         
+	         $.ajax({
+	 			url:"${pageContext.request.contextPath}/login.do",
+	 			type:"post",
+	 			data:{"name":$("input[name='name']").val(), "tel":$("input[name='tel']").val()},
+	 			dataType:"json",
+	 			success: function(res) {
+	 				console.log(res);
+	 				
+	 				if(res.success == false) { //실패-alert
+	 					alert("아이디와 비밀번호를 다시 확인하세요.");
+	 				}else { //성공 -홈으로이동
+	 					location.href = "${pageContext.request.contextPath}/";
+	 				}
+	 			}
+	 		})
+	 		
+	 		return false;
 		})
 	})
 </script>
@@ -215,23 +253,24 @@
 						<table>
 							<tr>
 								<td rowspan="2" class="loginimg"><img src="${pageContext.request.contextPath}/images/login/ico_lock.png"></td>
-								<td class="under">아이디</td>
-								<td class="under2"><input type="text" size="30" name="id" id="id"></td>
-								<c:if test="${noMember == true}">
+								<td class="under">이  름</td>
+								<td class="under2">
+									<input type="text" size="30" name="name" placeholder="">
+									<span class="reg">※ 이름을 입력하세요</span>
+								</td>
+								<%-- <c:if test="${noMem == true}">
 									<script>
-										alert("없는 회원입니다.");
+										alert("이름과 전화번호를 다시 확인하세요.");
 									</script>
-								</c:if>
+								</c:if> --%>
 								<td rowspan="2"><input type="submit" value="로그인"></td>
 							</tr>
 							<tr>
-								<td class="under">비밀번호</td>
-								<td class="under2"><input type="text" size="30" name="pw" id="pw"></td>
-								<c:if test="${noPassWord == true}">
-									<script>
-										alert("비밀번호가 틀렸습니다.");
-									</script>
-								</c:if>
+								<td class="under">전화번호</td>
+								<td class="under2">
+									<input type="text" size="30" name="tel">
+									<span class="reg">※ 전화번호를 입력하세요</span>
+								</td>
 							</tr>
 						</table>
 					</form>

@@ -31,7 +31,6 @@ public class MenuHandler implements CommandHandler {
 		
 		String fkName = fkDao.selectByFkNo(fk).getFkName();
 		
-		
 		req.setAttribute("fkList", fkList);
 		req.setAttribute("fList", fList);
 		req.setAttribute("fkName", fkName);

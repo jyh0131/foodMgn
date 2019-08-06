@@ -11,9 +11,9 @@ import javax.servlet.http.HttpSession;
 import org.codehaus.jackson.map.ObjectMapper;
 
 import kr.or.yi.foodMgn.controller.CommandHandler;
-import kr.or.yi.foodMgn.dao.NoManagerDao;
-import kr.or.yi.foodMgn.daoImpl.NoManagerDaoImpl;
-import kr.or.yi.foodMgn.dto.NoManager;
+import kr.or.yi.foodMgn.dao.MemberDao;
+import kr.or.yi.foodMgn.daoImpl.MemberDaoImpl;
+import kr.or.yi.foodMgn.dto.Member;
 
 public class LoginHandler implements CommandHandler {
 
@@ -22,25 +22,31 @@ public class LoginHandler implements CommandHandler {
 		if(req.getMethod().equalsIgnoreCase("get")) {
 			return "/WEB-INF/view/login/login.jsp";
 		}else if(req.getMethod().equalsIgnoreCase("post")) {
-			String id = req.getParameter("id");
-			String pw = req.getParameter("pw");
+			String name = req.getParameter("name");
+			String tel = req.getParameter("tel");
 			
-			NoManagerDao nmDao = new NoManagerDaoImpl();
-			NoManager nm = new NoManager(id);
-			NoManager noManager = nmDao.selectById(nm);
+			MemberDao dao = new MemberDaoImpl();
 			
-			if(noManager == null) { //비회원
-				req.setAttribute("noMember", true);
-				return "/WEB-INF/view/login/login.jsp";
-			}else if(noManager.getNmgPwd().equals(pw) == false) { //비밀번호 틀렸을 때
-				req.setAttribute("noPassWord", true);
-				return "/WEB-INF/view/login/login.jsp";
+			Member member = new Member(name, tel);
+			Member member2 = dao.selectByNameTel(member);
+			
+			Map<String, Boolean> map = new HashMap<String, Boolean>();
+			
+			if(member2 == null) {
+				map.put("success", false);
+			}else {
+				HttpSession session = req.getSession();
+				session.setAttribute("Auth", true);
+				map.put("success", true);
 			}
 			
-			HttpSession session = req.getSession();
-			session.setAttribute("Auth", true);
+			ObjectMapper om = new ObjectMapper();
+			String json = om.writeValueAsString(map); //=>{success:true} 식으로 json형태로 변환해줌
 			
-			res.sendRedirect(req.getContextPath() + "/");
+			PrintWriter out = res.getWriter(); //json을 넘겨줘야지
+			out.print(json);
+			out.flush();
+			
 			return null;
 		}
 		return null;
