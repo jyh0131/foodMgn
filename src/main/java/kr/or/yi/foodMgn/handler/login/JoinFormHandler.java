@@ -28,7 +28,7 @@ public class JoinFormHandler implements CommandHandler {
 			String addr = req.getParameter("addr");
 			
 			List<Member> list = dao.selectMemberByAllNM();
-			int no = list.size();
+			int no = list.size()+1;
 			
 			Member mem = new Member();
 			mem.setMbTel(tel);
