@@ -152,7 +152,7 @@
 					<h1>${fkName}</h1>
 					<div>
 						<c:forEach var="flist" items="${fList}">
-							<li><img src="${pageContext.request.contextPath}/images/food/${flist.fdNo}.JPG"></li>							
+							<li><img src="${pageContext.request.contextPath}/images/menu_food/${flist.fdNo}.JPG"></li>							
 						</c:forEach>
 					</div>
 				</div>

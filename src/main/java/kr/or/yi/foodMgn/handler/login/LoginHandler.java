@@ -1,13 +1,19 @@
 package kr.or.yi.foodMgn.handler.login;
 
+import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.codehaus.jackson.map.ObjectMapper;
+
 import kr.or.yi.foodMgn.controller.CommandHandler;
-import kr.or.yi.foodMgn.dao.NoManagerDao;
-import kr.or.yi.foodMgn.daoImpl.NoManagerDaoImpl;
-import kr.or.yi.foodMgn.dto.NoManager;
+import kr.or.yi.foodMgn.dao.MemberDao;
+import kr.or.yi.foodMgn.daoImpl.MemberDaoImpl;
+import kr.or.yi.foodMgn.dto.Member;
 
 public class LoginHandler implements CommandHandler {
 
@@ -16,31 +22,29 @@ public class LoginHandler implements CommandHandler {
 		if(req.getMethod().equalsIgnoreCase("get")) {
 			return "/WEB-INF/view/login/login.jsp";
 		}else if(req.getMethod().equalsIgnoreCase("post")) {
-			String id = req.getParameter("id");
-			String pw = req.getParameter("pw");
+			String name = req.getParameter("name");
+			String tel = req.getParameter("tel");
 			
-			System.out.println(id + "," + pw);
+			MemberDao dao = new MemberDaoImpl();
 			
-			NoManagerDao nmDao = new NoManagerDaoImpl();
-			NoManager nm = new NoManager(id);
-			NoManager noManager = nmDao.selectById(nm);
+			Member member = new Member(name, tel);
+			Member member2 = dao.selectByNameTel(member);
 			
-			if(noManager == null) { //비회원
-				req.setAttribute("noMember", true);
-				return "/WEB-INF/view/login/login.jsp";
-			}else if(noManager.getNmgPwd().equals(pw) == false) { //비밀번호 틀렸을 때
-				req.setAttribute("noPassWord", true);
-				return "/WEB-INF/view/login/login.jsp";
+			Map<String, Boolean> map = new HashMap<String, Boolean>();
+			
+			if(member2 == null) {
+				map.put("success", false);
+			}else {
+				HttpSession session = req.getSession();
+				session.setAttribute("Auth", member2.getMbNo());
+				map.put("success", true);
 			}
+			ObjectMapper om = new ObjectMapper();
+			String json = om.writeValueAsString(map);
+			PrintWriter out = res.getWriter();
+			out.print(json);
+			out.flush();
 			
-			HttpSession session = req.getSession();
-
-		
-
-			session.setAttribute("Auth", true);
-
-			
-			res.sendRedirect(req.getContextPath() + "/");
 			return null;
 		}
 		return null;

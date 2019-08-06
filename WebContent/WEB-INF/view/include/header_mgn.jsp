@@ -6,19 +6,13 @@
 <head>
 <meta charset="UTF-8">
 <title>음식점 관리 프로그램</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/common.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/common_mgn.css" type="text/css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
 <script>
-	$(function() {
-		$("#head2 li").hover(function() {
-			$(this).find(".submenu").stop().slideDown(100)
-		}, function() {
-			$(this).find(".submenu").stop().slideUp(100)
-		})
-	})
+	
 </script>
 </head>
 <body>
@@ -57,7 +51,7 @@
 						<ul>
 							<li><a href="">결제관리</a></li>
 							<li class="center"><a href="">판매관리</a></li>
-							<li class="right"><a href="">음식관리</a></li>
+							<li class="right"><a href="${pageContext.request.contextPath}/menuMgn.do">음식관리</a></li>
 						</ul>
 					</div>
 					<div id="head2_2">
