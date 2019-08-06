@@ -258,11 +258,6 @@
 									<input type="text" size="30" name="name" placeholder="">
 									<span class="reg">※ 이름을 입력하세요</span>
 								</td>
-								<%-- <c:if test="${noMem == true}">
-									<script>
-										alert("이름과 전화번호를 다시 확인하세요.");
-									</script>
-								</c:if> --%>
 								<td rowspan="2"><input type="submit" value="로그인"></td>
 							</tr>
 							<tr>

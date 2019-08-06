@@ -22,7 +22,9 @@ public class NoManagerDaoImpl implements NoManagerDao {
 	@Override
 	public int insertNoManger(NoManager noManager) {
 		try(SqlSession sqlSession = MybatisSqlSessionFactory.openSession()) {
-			return sqlSession.insert(namespace+".insertNoManger", noManager);
+			int res = sqlSession.insert(namespace+".insertNoManger", noManager);
+			sqlSession.commit();
+			return res;
 		}
 	}
 

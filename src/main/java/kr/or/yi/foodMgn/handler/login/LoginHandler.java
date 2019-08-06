@@ -36,14 +36,14 @@ public class LoginHandler implements CommandHandler {
 				map.put("success", false);
 			}else {
 				HttpSession session = req.getSession();
-				session.setAttribute("Auth", true);
+				session.setAttribute("Auth", member2.getMbNo());
 				map.put("success", true);
 			}
 			
 			ObjectMapper om = new ObjectMapper();
-			String json = om.writeValueAsString(map); //=>{success:true} 식으로 json형태로 변환해줌
+			String json = om.writeValueAsString(map);
 			
-			PrintWriter out = res.getWriter(); //json을 넘겨줘야지
+			PrintWriter out = res.getWriter();
 			out.print(json);
 			out.flush();
 			
