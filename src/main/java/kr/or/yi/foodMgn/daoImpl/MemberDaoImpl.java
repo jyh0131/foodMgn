@@ -123,5 +123,12 @@ public class MemberDaoImpl implements MemberDao {
 			return sqlSession.selectOne(namespace + ".selectCouponByTel",tel);
 		}
 	}
+	
+	@Override
+	public Member selectByMbNo(Member member) {
+		try(SqlSession sqlSession = MybatisSqlSessionFactory.openSession()) {
+			return sqlSession.selectOne(namespace + ".selectByMbNo",member);
+		}
+	}
 
 }

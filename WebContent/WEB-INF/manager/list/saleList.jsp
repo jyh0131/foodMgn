@@ -2,17 +2,24 @@
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<!DOCTYPE html> 
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<%@ include file="../../view/include/header_mgn.jsp" %>
+
 <style>
+.s_visu1 {
+	width: 100%;
+	height: 350px;
+	margin-bottom: 50px;
+}
+
+.s_visu1 img {
+	width: 100%;
+	height: 350px;
+}
 h2{
 	text-align: center;
 }
 #saleList_wrapper{
-		width: 1000px !important;
+		width: 1300px !important;
 		margin: 0 auto !important ;
 	}
 	table{
@@ -21,9 +28,10 @@ h2{
 	
 	table,td,th{
 		border: 1px solid black;
+		font-size: 14px;
 	}
 	.dataTables_scroll{
-		width: 1000px !important;
+		width: 1300px !important;
 	}
 	
 	
@@ -57,9 +65,11 @@ h2{
 		
 	})
 </script>
+<div class="s_visu1">
+			<img
+				src="${pageContext.request.contextPath}/images/introduce/sub01_visu.jpg">
+		</div>
 
-</head>
-<body>
 		<h2>결제 현황</h2>
 	
 	<table id="saleList" class="display">
@@ -110,6 +120,4 @@ h2{
 		 </c:forEach>
 		 </tbody>
 	</table>   
-	
-</body>
-</html>
+<%@ include file="../../view/include/footer.jsp" %>

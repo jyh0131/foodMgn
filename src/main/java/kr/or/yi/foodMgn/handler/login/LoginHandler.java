@@ -41,10 +41,8 @@ public class LoginHandler implements CommandHandler {
 				session.setAttribute("Auth", member2.getMbNo());
 				map.put("success", true);
 			}
-			
 			ObjectMapper om = new ObjectMapper();
 			String json = om.writeValueAsString(map);
-			
 			PrintWriter out = res.getWriter();
 			out.print(json);
 			out.flush();

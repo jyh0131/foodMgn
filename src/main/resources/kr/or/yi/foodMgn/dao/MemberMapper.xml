@@ -101,13 +101,14 @@
 		update member set mb_grade = #{mbGrade.grade} where mb_no = #{mbNo}
 	</update>
 	
-	<select id="selectCouponByTel" resultType="Member" resultMap="resultMemberBJY">
+	<select id="selectCouponByTel" parameterType="Member" resultMap="resultMemberBJY">
 		select m.mb_no, m.mb_name, mb_birth, mb_tel, mb_mileage, mb_grade, g_discount, mb_address, c.cp_no, c.cp_name as coupon, c.cp_discount
 		from member m left join member_coupon mc on m.mb_no = mc.mb_no left join coupon c on mc.cp_no = c.cp_no left join grade g on m.mb_grade = g.grade
 		where right(mb_tel,8) = #{mbTel} and mc.cp_use = 0 ;
 	</select>
-	
-	
+	<select id="selectByMbNo" parameterType="Member" resultMap="resultMemberBJY">
+		select * from member where mb_no=#{mbNo}
+	</select>
 </mapper>
 
 
