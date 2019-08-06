@@ -149,11 +149,30 @@
 		})
 		
 		$("form").submit(function() {
+			$(".span_color").css("display", "inline");
 			$(".reg").css("display", "none");
 			
+			var reg_id = /^[a-z][a-z0-9]{3,15}$/i;
+			var reg_pw = /^[a-z][a-z0-9!@#$%]{7,14}$/i; 
 			var reg_name = /^[가-힣]{2,5}$/;
 			var reg_phone = /^(010|011|016|017|018)?[0-9]{3,4}?[0-9]{4}$/;
 			var reg_birth = /^(19[0-9][0-9]|20\d{2})-(0[0-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/;
+			
+			if($("input[name='id']").val() == "" || reg_id.test($("input[name='id']").val()) == false) {
+				$("input[name='id']").nextAll(".reg").css("display", "inline");
+				$("input[name='id']").nextAll(".span_color").css("display", "none");
+				return false;
+			}
+			
+			if($("input[name='pw']").val() == "" || reg_pw.test($("input[name='pw']").val()) == false) {
+				$("input[name='pw']").nextAll(".reg").css("display", "inline");
+				return false;
+			}
+			
+			if($("input[name='pw']").val() != $("input[name='pw2']").val()) {
+				$("input[name='pw2']").nextAll(".reg").css("display", "inline");
+				return false;
+			}
 			
 			if($("input[name='name']").val() == "" || reg_name.test($("input[name='name']").val()) == false) {
 				$("input[name='name']").nextAll(".reg").css("display", "inline");
@@ -170,11 +189,18 @@
 				$("input[name='birth']").nextAll(".reg").css("display", "inline");
 				return false;
 			}
+			
+			if($("input[name='addr']").val() == "") {
+				$("input[name='addr']").nextAll(".reg").css("display", "inline");
+				return false;
+			}
+		})
+		
+		$("#addrBtn").click(function() {
+			
 		})
 	})
-</script>
-
-	<div class="sub">
+</script>	<div class="sub">
 		<div class="s_visu1">
 			<img src="${pageContext.request.contextPath}/images/login/sub03_visu.jpg">
 		</div>
@@ -198,19 +224,22 @@
 						<span>
 							<input type="text" size="30" name="id" autofocus>
 							<span class="span_color">※ 영문자,숫자,_만 입력가능. 최소 3자이상 입력하세요.</span>
-							<span class="reg">※ ㅇ 입력하세요</span>
+							<span class="reg">※ 영문자,숫자,_를 포함하여 3~15자로 적어주세요.</span>
 						</span>
 					</div>
 					<div class="jf_div2">
 						<span class="span1">비밀번호</span>
 						<span>
 							<input type="password" size="30" name="pw">
-							<span class="reg">※ ㅇ요</span>
+							<span class="reg">※ 특수문자(!,@,#,$,%)포함 7~14자로 적어주세요.</span>
 						</span>
 					</div>
 					<div class="jf_div2">
 						<span class="span1">비밀번호확인</span>
-						<span><input type="password" size="30" name="pw2"></span>
+						<span>
+							<input type="password" size="30" name="pw2">
+							<span class="reg">비밀번호가 일치하지 않습니다.</span>
+						</span>
 					</div>
 					
 					<div class="jf_div1"><b>개인 정보</b></div>
@@ -238,8 +267,11 @@
 					</div>
 					<div class="jf_div2">
 						<span class="span1">주소</span>
-						<span><input type="text" size="80" name="addr"></span>
-						<button>주소찾기</button>
+						<span>
+							<input type="text" size="60" name="addr">
+							<span class="reg">※ 주소를 입력하세요</span>
+						</span>
+						<button id="addrBtn">주소찾기</button>
 					</div>
 					<div class="jf_div2">
 						<span class="span1">문자서비스</span>
