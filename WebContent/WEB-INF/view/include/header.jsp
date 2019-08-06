@@ -85,7 +85,13 @@
 					</div>
 					<div id="head2_3">
 						<ul>
-							<li><a href="${pageContext.request.contextPath}/reservation.do">RESERVATION</a></li>
+							<li>
+								<a href="${pageContext.request.contextPath}/reservation.do">RESERVATION</a>
+								<ul class="submenu">
+									<li><a href="">예약하기</a></li>
+									<li><a href="">예약조회</a></li>
+								</ul>
+							</li>
 							<li class="center2"><a href="">DELIVERY</a></li>
 							<li class="right2"><a href="${pageContext.request.contextPath}/derection.do">DERECTION</a></li>
 						</ul>

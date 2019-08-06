@@ -103,6 +103,7 @@
 	font-size: 14px;
 	margin-bottom: 20px;
 	padding-left: 30px;
+	line-height: 20px;
 }
 .info_font2 {
 	font-size: 14px;

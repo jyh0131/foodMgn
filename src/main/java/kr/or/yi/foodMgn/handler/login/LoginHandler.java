@@ -1,14 +1,19 @@
 package kr.or.yi.foodMgn.handler.login;
 
+import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.codehaus.jackson.map.ObjectMapper;
 
 import kr.or.yi.foodMgn.controller.CommandHandler;
 import kr.or.yi.foodMgn.dao.MemberDao;
 import kr.or.yi.foodMgn.daoImpl.MemberDaoImpl;
 import kr.or.yi.foodMgn.dto.Member;
-import kr.or.yi.foodMgn.dto.User;
 
 public class LoginHandler implements CommandHandler {
 
@@ -22,22 +27,26 @@ public class LoginHandler implements CommandHandler {
 			
 			MemberDao dao = new MemberDaoImpl();
 			
-			Member member = new Member();
-			member.setMbName(name);
-			member.setMbTel(tel);
+			Member member = new Member(name, tel);
+			Member member2 = dao.selectByNameTel(member);
 			
-			Member mem = dao.selectByNameTel(member);
+			Map<String, Boolean> map = new HashMap<String, Boolean>();
 			
-			if(mem == null) {
-				req.setAttribute("noJoin", true);
-				return "/WEB-INF/view/login/login.jsp";
+			if(member2 == null) {
+				map.put("success", false);
+			}else {
+				HttpSession session = req.getSession();
+				session.setAttribute("Auth", member2.getMbNo());
+				map.put("success", true);
 			}
 			
-			HttpSession session = req.getSession();
-			User user = new User(mem.getMbName(), mem.getMbTel());
-			session.setAttribute("Auth", user);
+			ObjectMapper om = new ObjectMapper();
+			String json = om.writeValueAsString(map);
 			
-			res.sendRedirect(req.getContextPath() + "/");
+			PrintWriter out = res.getWriter();
+			out.print(json);
+			out.flush();
+			
 			return null;
 		}
 		return null;
