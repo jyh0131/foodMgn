@@ -8,4 +8,5 @@ public interface FoodKindDao {
 	public List<FoodKind> selectByNo(FoodKind foodkind);
 	public List<FoodKind> selectFoodKindByAll();
 	public FoodKind selectByFkNo(FoodKind foodkind);
+	public FoodKind selectByName(FoodKind foodkind);
 }

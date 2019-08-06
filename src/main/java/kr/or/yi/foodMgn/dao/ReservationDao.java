@@ -16,4 +16,5 @@ public interface ReservationDao {
 	public int updateRsv(Map<String, Object> map);
 	
 	public List<Reservation> selectByRangeTime(Reservation rsv);
+	public List<Reservation> selectByNo(Member member);
 }

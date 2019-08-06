@@ -2,12 +2,18 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<%@ include file="../../view/include/header_mgn.jsp" %>
 <style>
+.s_visu1 {
+	width: 100%;
+	height: 350px;
+	margin-bottom: 50px;
+}
+
+.s_visu1 img {
+	width: 100%;
+	height: 350px;
+}
 #wrap {
 	width: 1000px;
 	margin: 0 auto;
@@ -20,7 +26,7 @@
 
 #sub #selDate {
 	position: absolute;
-	bottom: -57px;
+	bottom: -20px;
 	left: 0;
 	z-index: 10;
 }
@@ -115,10 +121,13 @@ table, td, th {
 		});
 	})
 </script>
+<div class="s_visu1">
+			<img
+				src="${pageContext.request.contextPath}/images/introduce/sub01_visu.jpg">
+		</div>
 
-</head>
-<body>
 	<div id="wrap">
+	
 		<div id="sub">
 			<h2>판매 현황</h2>
 			<p id="selDate">
@@ -143,6 +152,7 @@ table, td, th {
 						<td>${num}</td>
 						<td>${item.ssName }</td>
 						<td>${item.ssCount }개</td>
+						
 						<td><fmt:formatNumber value="${item.ssTotalPrice }" />원</td>
 						<td>${item.ssShare }%</td>
 					</tr>
@@ -150,5 +160,4 @@ table, td, th {
 			</tbody>
 		</table>
 	</div>
-</body>
-</html>
+<%@ include file="../../view/include/footer.jsp" %>
