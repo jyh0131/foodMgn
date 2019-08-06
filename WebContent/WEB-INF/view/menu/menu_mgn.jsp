@@ -33,7 +33,7 @@
 		border-right: none;
 	}
 	tr:nth-child(2n) {
-		background-color: #fff;
+		background-color: #eee;
 	}
 	th {
 		padding: 10px 10px;
@@ -59,16 +59,43 @@
 	select, input[type="text"] {
 		padding: 3px;
 	}
+	.underline {
+		text-decoration: line-through;
+		color: red;
+		font-size: 0.9em;
+	}
 </style>
 <script>
 	$(function() {
 		$(".delete").click(function() {
 			var result = confirm("삭제하시겠습니까?");
 			var $btn = $(this);
-			
+
 			if(result == true) {
+				var fNo = $(this).attr("data-no");
 				
+				$.ajax({
+					url:"${pageContext.request.contextPath}/menuMgndelete.do",
+					type:"get",
+					data:{"fNo":fNo},
+					dataType:"json",
+					success: function(json) {
+						console.log(json);
+						
+						if(json.success == true) {
+							$btn.closest("tr").addClass("underline");
+						}
+					}
+				})
 			}
+			return false;
+		})
+		
+		$(".nodelete").click(function() {
+			alert("이미 삭제한 음식입니다.");
+		})
+		$(".noupdate").click(function() {
+			alert("수정할 수 없습니다.");
 		})
 	})
 </script>
@@ -102,16 +129,30 @@
 					<th id="update"></th>
 				</tr>
 				<c:forEach var="flist" items="${fList}">
-					<tr>
-						<td>${flist.fkNo}</td>
-						<td>${flist.fdNo}</td>
-						<td>${flist.fdName}</td>
-						<td><fmt:formatNumber groupingUsed="true" value="${flist.fdPrice}"/></td>
-						<td>
-							<button class="update">수정</button>
-							<button class="delete">삭제</button>
-						</td>
-					</tr>
+					<c:if test="${flist.fdWithdrawal == true}">
+						<tr class="underline">
+							<td>${flist.fkNo}</td>
+							<td>${flist.fdNo}</td>
+							<td>${flist.fdName}</td>
+							<td><fmt:formatNumber groupingUsed="true" value="${flist.fdPrice}"/></td>
+							<td>
+								<button class="noupdate" data-no="${flist.fdNo}">수정</button>
+								<button class="nodelete" data-no="${flist.fdNo}">삭제</button>
+							</td>
+						</tr>
+					</c:if>
+					<c:if test="${flist.fdWithdrawal != true}">
+						<tr>
+							<td>${flist.fkNo}</td>
+							<td>${flist.fdNo}</td>
+							<td>${flist.fdName}</td>
+							<td><fmt:formatNumber groupingUsed="true" value="${flist.fdPrice}"/></td>
+							<td>
+								<button class="update" data-no="${flist.fdNo}">수정</button>
+								<button class="delete" data-no="${flist.fdNo}">삭제</button>
+							</td>
+						</tr>
+					</c:if>
 				</c:forEach>
 			</table>
 		</div>

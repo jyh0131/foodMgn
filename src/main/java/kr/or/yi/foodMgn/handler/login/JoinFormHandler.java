@@ -32,7 +32,7 @@ public class JoinFormHandler implements CommandHandler {
 			
 			Member mem = new Member();
 			mem.setMbTel(tel);
-			Member mem2 = dao.selectByNameTel(mem);
+			Member mem2 = dao.selectByTelForJoin(mem);
 			
 			if(mem2 == null) {
 				SimpleDateFormat sdfm = new SimpleDateFormat("yyyy-mm-dd");

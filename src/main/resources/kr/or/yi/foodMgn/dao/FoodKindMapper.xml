@@ -25,6 +25,6 @@
 	</select>
 	
 	<select id="selectByName" resultType="FoodKind" parameterType="FoodKind">
-		select * from foodkind where fk_name like concat('%',#{fkName},'%')
+		select * from foodkind where fk_name like concat(#{fkName},'%')
 	</select>
 </mapper>

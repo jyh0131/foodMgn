@@ -19,7 +19,7 @@
 	</select>
 	
 	<select id="selectFoodByAllF" resultMap="resultFoodBJY">
-		select f.fd_no, f.fd_name, f.fd_price, fk.fk_name from food f join foodkind fk on f.fk_no = fk.fk_no
+		select f.fd_no, f.fd_name, f.fd_price, fk.fk_name, f.fd_withdrawal from food f join foodkind fk on f.fk_no = fk.fk_no
 	</select>
 	
 	<select id="selectByName" resultMap="resultFoodBJY">
