@@ -34,8 +34,7 @@ public class LoginHandler implements CommandHandler {
 			}
 			
 			HttpSession session = req.getSession();
-			User user = new User(mem.getMbName(), mem.getMbTel());
-			session.setAttribute("Auth", user);
+			session.setAttribute("Auth", mem.getMbNo());
 			
 			res.sendRedirect(req.getContextPath() + "/");
 			return null;

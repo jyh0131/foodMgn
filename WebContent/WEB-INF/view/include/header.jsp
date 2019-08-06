@@ -18,6 +18,19 @@
 		}, function() {
 			$(this).find(".submenu").stop().slideUp(100)
 		})
+		
+		$("#reservation").click(function(){
+			if(${Auth==null}){
+				var a = confirm("로그인 하시겠습니까?");
+				if(a==true){
+					location.href = "${pageContext.request.contextPath}/login.do";	
+				}else{
+					location.href = "${pageContext.request.contextPath}/reservation.do?isLogin=0"; // 비회원
+				}
+			}else{
+				location.href = "${pageContext.request.contextPath}/reservation.do?isLogin=1"; // 회원
+			}
+		})
 	})
 </script>
 </head>
@@ -84,7 +97,7 @@
 					</div>
 					<div id="head2_3">
 						<ul>
-							<li><a href="${pageContext.request.contextPath}/reservation.do">RESERVATION</a></li>
+							<li><a href="#" id="reservation">RESERVATION</a></li>
 							<li class="center2"><a href="">DELIVERY</a></li>
 							<li class="right2"><a href="${pageContext.request.contextPath}/derection.do">DERECTION</a></li>
 						</ul>

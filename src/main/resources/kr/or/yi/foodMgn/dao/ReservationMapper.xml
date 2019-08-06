@@ -51,7 +51,7 @@
 	</select>
 	
 	<select id="selectByRangeTime" parameterType="Reservation" resultMap="resultRsvLJH2">
-		select * from member_reservation3 where rsv_time between subtime(#{rsvTime},'0:30:0') and addtime(#{rsvTime},'0:30:0')
+		select * from member_reservation4 where rsv_time between subtime(#{rsvTime},'0:29:0') and addtime(#{rsvTime},'0:29:0')
 	</select>
 	
 </mapper>
