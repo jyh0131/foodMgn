@@ -6,7 +6,7 @@
 		background: #f7f7f7;
 	}
 	#deliveryContainer{
-		width:1000px;
+		width:1400px;
 		margin: 40px auto;
 		
 	}
@@ -33,7 +33,6 @@
 	}
 	#select, #result{
 		float:left;
-		border:1px solid black;
 		margin:10px 20px;
 	}
 
@@ -41,7 +40,7 @@
 		width:350px;
 	}
 	 #result{
-		 width:500px;
+		 width:910px;
 	 }
 	 #selectFK, #selectF{
 		margin:20px 0;
@@ -49,13 +48,19 @@
 	#foodkind, #food{
 		width: 300px;
 		height:50px;
+		text-align: center;
 	}
 	 #saleList{
-	 	width:500px;
+	 	width:900px;
 	 	border-collapse: collapse;
+	 	font-size: 20px;
+	 	font-family: Arial;
+	 	margin-bottom:20px;
 	 }
-	 #saleList tr, #saleList td{
-	 	border:1px solid #dedede;
+	 #saleList tr{
+	 	background: #f5f5f5;
+	 	border:1px solid #bbb;
+	 	height:70px;
 	 }
 	 #totalPrice{
 	 	text-align: right;
@@ -65,6 +70,65 @@
 	 }
 	 .foodNo{
 	 	display: none;
+	 }
+	 .foodName{
+	 	width:400px;
+	 	text-align: center;
+	 }
+	 .count{
+	 	width:150px;
+	 	text-align: center;
+	 }
+	 .foodPrice{
+	 	width:130px;
+	 	text-align: center;
+	 }
+	 .delete{
+	 	width:100px;
+	 	text-align: center;
+	 }
+	 .delete button{
+	 	width:60px;
+	 	height:30px;
+	 	font-size: 18px;
+	 	
+	 }
+	  .fImg{
+	 	overflow: hidden;
+	 	width:115px;
+	  }
+	  .foodImg{ /*이미지*/
+	 	display: block;
+	 	float: left;
+	 	width:90px;
+	 	height:70px;
+	 	margin-left:25px;
+	 }
+	
+	 #btn{
+	 	width:200px;
+	 	height:80px;
+	 	font-size: 25px;
+	 	line-height: 80px;
+	 	font-weight: bold;
+	 	color:white;
+	 	background: #c10a28;
+	 	margin-left:350px;
+	 }
+	 #totalPrice{
+	 	font-weight: bold;
+	 	margin:10px;
+	 	font-size: 20px;
+	 }
+	 .plus, .minus{
+	 	width:25px;
+	 	height:25px;
+	 }
+	 .plus{
+	 	margin-left:10px;
+	 }
+	 .minus{
+	 	margin-right:10px;
 	 }
 </style>
 <script>
@@ -114,45 +178,51 @@
 		
 		$(document).on("change","#food",function(){
 			var foodName = $("#selectF :selected").html(); //음식이름
-			var foodPrice = $("#selectF :selected").attr("data-price"); //음식가격
+			var foodPrice = Number($("#selectF :selected").attr("data-price")); //음식가격
 			var foodNo = $("#selectF :selected").attr("value"); // 음식번호
 			var totalPrice = 0;
 			
 			for(var i=0; i<$(".foodName").length; i++){
 				if(foodName==$(".foodName").eq(i).html()){
-					var count = Number($(".count").eq(i).html());
+					var count = Number($(".count").eq(i).find("span").html());
 					var price =  Number($(".foodPrice").eq(i).html());
 					var countP = count+1;
-					$(".count").eq(i).html(countP);
-					$(".foodPrice").eq(i).html(foodPrice*countP);
+					$(".count").eq(i).find("span").html(countP);
+					$(".foodPrice").eq(i).find("span").html(comma(foodPrice*countP));
 					
 					for(var j=0; j<$(".foodName").length; j++){
-						var price =  Number($(".foodPrice").eq(j).html());
-						totalPrice += price;
+						var price2 =  $(".foodPrice").eq(j).find("span").html();
+						var price = uncomma(price2);
+						totalPrice += Number(price);
 					}
-					$("#red").html(totalPrice);
+					$("#red").html(comma(totalPrice));
 					return;
 				}
 			}
 			
 			
 			var $tr = $("<tr>");
+			var $foodImg = $("<td class='fImg'><img src='images/food/"+foodName+".png' class='foodImg'></td>");
 			var $foodName = $("<td class='foodName'>"+foodName+"</td>");
-			var $foodPrice = $("<td class='foodPrice'>"+foodPrice+"</td>");
-			var $count = $("<td class='count'>"+1+"</td>");
+			var $foodPrice = $("<td class='foodPrice' data-price='"+foodPrice+"'><span>"+comma(foodPrice)+"</span>원</td>");
+			var $count = $("<td class='count'><button class='minus'>－</button><span>"+1+"</span><button class='plus'>+</button></td>");
 			var $foodNo = $("<td class='foodNo'>"+foodNo+"</td>");
+			var $delete = $("<td class='delete'><button class='btnDel'>삭제</button></td>")
+			$($tr).append($foodImg);
 			$($tr).append($foodName);
 			$($tr).append($count);
 			$($tr).append($foodPrice);
-			$($tr).append( $foodNo);
+			$($tr).append($foodNo);
+			$($tr).append($delete);
 			$("#saleList").append($tr);
 			
 			for(var i=0; i<$(".foodName").length; i++){
-				var price =  Number($(".foodPrice").eq(i).html());
-				totalPrice += price;
+				var price2 = $(".foodPrice").eq(i).find("span").html();
+				var price = uncomma(price2);
+				totalPrice += Number(price);
 			}
 			
-			$("#red").html(totalPrice);
+			$("#red").html(comma(totalPrice));
 		})
 		
 		$(document).on("click","#btn",function(){
@@ -164,7 +234,7 @@
 			
 			if(${Auth==null}){
 				var a = confirm("배달주문은 회원만 가능합니다. 로그인하시겠습니까?");
-				if(a==0){
+				if(a==1){
 					location.href = "${pageContext.request.contextPath}/login.do";
 				}else{
 					return;
@@ -172,16 +242,69 @@
 			}else{
 				var foodNo = "";
 				var foodCount = "";
-				var totalPrice = $("#red").html();
+				var totalPrice = uncomma($("#red").html());
 				for(var j=0; j<$(".foodName").length; j++){
 					
 					foodNo += $(".foodNo").eq(j).html()+"-";
-					foodCount += $(".count").eq(j).html()+"-";
+					foodCount += $(".count").eq(j).find("span").html()+"-";
 				}
 				location.href= "${pageContext.request.contextPath}/payment.do?foodNo="+foodNo+"&foodCount="+foodCount+"&total="+totalPrice;
 			}
 		})
+		
+		function comma(str) {
+   			 str = String(str);
+    		 return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+			}
+		function uncomma(str) {
+		    str = String(str);
+		    return str.replace(/[^\d]+/g, '');
+		}
+		
+		$(document).on("click",".minus",function(){
+			var count = Number($(this).next("span").html())-1;
+			if(count==0){
+				var a = confirm("삭제하시겠습니까?");
+				if(a==1){
+					$(this).closest("tr").remove();
+				}else{
+					return;
+				}
+			}
 			
+			$(this).next($("span")).html(count);
+			var price = Number(uncomma($(this).closest("td").next().find("span").html()));
+			var orinPrice = Number($(this).closest("td").next().attr("data-price"));
+			var newPrice = price - orinPrice;
+			$(this).closest("td").next().find("span").html(comma(newPrice));
+			var newTotal = Number(uncomma($("#red").html()))- orinPrice;
+			$("#red").html(comma(newTotal));
+		})
+		
+		$(document).on("click",".plus",function(){
+			var count = Number($(this).prev("span").html())+1;
+				
+			$(this).prev($("span")).html(count);
+			var price = Number(uncomma($(this).closest("td").next().find("span").html()));
+			var orinPrice = Number($(this).closest("td").next().attr("data-price"));
+			var newPrice = price + orinPrice;
+			$(this).closest("td").next().find("span").html(comma(newPrice));
+			var newTotal = Number(uncomma($("#red").html()))+orinPrice;
+			$("#red").html(comma(newTotal));
+		})
+		
+		$(document).on("click",".btnDel",function(){
+			var a = confirm("삭제하시겠습니까?");
+			if(a==1){
+				var deletePrice = Number(uncomma($(this).parent().prev().prev().find("span").html()));
+				var newTotal = Number(uncomma($("#red").html())) - deletePrice;
+				$("#red").html(comma(newTotal));
+				$(this).closest("tr").remove();
+			}else{
+				return;
+			}
+		})
+		
 	})
 </script>
 
@@ -206,12 +329,14 @@
 			<div id="result">
 				<table id="saleList">
 					<tr>
-						<td>음식 이름</td>
-						<td>수량</td>
-						<td>가격</td>
+						<th width="115px">&nbsp;</th>
+						<th width="400px">음식명</th>
+						<th width="150px">수량</th>
+						<th width="130px">가격</th>
+						<th width="100px">&nbsp;</th>
 					</tr>
 				</table>
-			<p id="totalPrice">총가격 : <span id="red"></span></p>	
+			<p id="totalPrice">총가격 : <span id="red">0</span>원</p>	
 			<button id="btn">결제</button>
 			</div>
 		</div>
