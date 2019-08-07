@@ -23,5 +23,6 @@ public interface MemberDao {
 	public Member selectCouponByTel(int tel);
 	
 	public Member selectByMbNo(Member member);
+	public Member selectByMbNo2(Member member);
 	public Member selectByTelForJoin(Member member);
 }

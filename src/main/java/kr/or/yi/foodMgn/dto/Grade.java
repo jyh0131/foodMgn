@@ -20,12 +20,14 @@ public class Grade {
 		this.grade = grade;
 	}
 
-	public int getG_discount() {
+	
+
+	public int getgDiscount() {
 		return gDiscount;
 	}
 
-	public void setG_discount(int g_discount) {
-		this.gDiscount = g_discount;
+	public void setgDiscount(int gDiscount) {
+		this.gDiscount = gDiscount;
 	}
 
 	@Override

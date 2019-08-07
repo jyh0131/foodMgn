@@ -19,7 +19,9 @@ public class PaymentResultHandler implements CommandHandler {
 
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
+		res.setContentType("text/html;charset=utf-8");
 		String saleInfo= req.getParameter("sale_info"); //할인정보
+		System.out.println(saleInfo);
 		String salePrice = req.getParameter("sale_price"); //sale_discount_price 할인된금액
 		String saleType= req.getParameter("sale_type"); //1이면 현금 0이면 카드
 		int iSaleType= Integer.parseInt(saleType);
@@ -28,7 +30,7 @@ public class PaymentResultHandler implements CommandHandler {
 		@SuppressWarnings("unchecked")
 		List<Sale> saleList = (List<Sale>) req.getSession().getAttribute("list");
 		
-		Member mem = (Member) req.getSession().getAttribute("mem"); //멤버 받아오기해야함~
+		Member mem = (Member) req.getSession().getAttribute("mem"); 
 		
 		
 		for(Sale s : saleList) {

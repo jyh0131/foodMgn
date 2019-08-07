@@ -15,8 +15,8 @@ import kr.or.yi.foodMgn.jdbc.MybatisSqlSessionFactory;
 
 public class PaymentService {
 	private static PaymentService service = new PaymentService();
-	private String namespace = "kr.or.yi.food_mgm_program.dao.SaleMapper.";
-	private String namespace2 = "kr.or.yi.food_mgm_program.dao.MemberMapper.";
+	private String namespace = "kr.or.yi.foodMgn.dao.SaleMapper.";
+	private String namespace2 = "kr.or.yi.foodMgn.dao.MemberMapper.";
 	
 	private SaleDao sDao;
 	private MemberDao mDao;
