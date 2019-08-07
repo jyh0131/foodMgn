@@ -6,17 +6,16 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.mysql.fabric.xmlrpc.base.Array;
-
 import kr.or.yi.foodMgn.controller.CommandHandler;
+import kr.or.yi.foodMgn.dao.FoodDao;
 import kr.or.yi.foodMgn.dao.MemberDao;
 import kr.or.yi.foodMgn.dao.SaleDao;
+import kr.or.yi.foodMgn.daoImpl.FoodDaoImpl;
 import kr.or.yi.foodMgn.daoImpl.MemberDaoImpl;
 import kr.or.yi.foodMgn.daoImpl.SaleDaoImpl;
 import kr.or.yi.foodMgn.dto.Food;
 import kr.or.yi.foodMgn.dto.Member;
 import kr.or.yi.foodMgn.dto.Sale;
-import kr.or.yi.foodMgn.service.SaleListService;
 
 public class PaymentHandler implements CommandHandler {
 
@@ -43,6 +42,7 @@ public class PaymentHandler implements CommandHandler {
 			int Number = 0;
 			SaleDao sDao = new SaleDaoImpl();
 			Sale sale = sDao.selectLastNo();
+			FoodDao fDao = new FoodDaoImpl();
 			if(sale==null) {
 				Number = 1;
 			}else {
@@ -55,6 +55,8 @@ public class PaymentHandler implements CommandHandler {
 				Food food1 = new Food();
 				food1.setCount(Integer.parseInt(foodCList.get(i)));
 				food1.setFdNo(Integer.parseInt(foodList.get(i))); // food객체에 food번호랑 갯수만.
+				Food food2 = fDao.selectByFdNo(food1);
+				food1.setFdPrice(food2.getFdPrice()); // food의 개별 가격
 				foodList1.add(food1); 
 			}
 			List<Sale> saleList = new ArrayList<Sale>();
