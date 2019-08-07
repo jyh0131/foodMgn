@@ -248,6 +248,28 @@
             $("input[name='addr']").nextAll(".reg").css("display", "inline");
             return false;
          }
+         
+         $.ajax({
+				url:"${pageContext.request.contextPath}/joinForm.do",
+				type:"post",
+				data:{"name":$("input[name='name']").val(), "tel":$("input[name='tel']").val(), "birth":$("input[name='birth']").val(), "addr":$("input[name='addr']").val()},
+				dataType:"json",
+				success: function(json) {
+					console.log(json);
+					
+					if(json.joinSuccess == true) {
+						alert("회원가입에 성공하였습니다. 로그인하세요.");
+						location.href = "${pageContext.request.contextPath}/login.do";
+					}else if (json.joinSuccess == false){
+						alert("회원가입에 실패하였습니다. 다시 회원가입하세요.");
+						location.href = "${pageContext.request.contextPath}/joinForm.do";
+					}else if (json.transMem == true) {
+						alert("회원전환에 성공하였습니다. 로그인하세요.");
+						location.href = "${pageContext.request.contextPath}/login.do";
+					}
+				}
+			})
+         return false;
       })
 		
    })

@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <%@ include file="../include/header_mgn.jsp" %>
 <style>
@@ -42,12 +40,26 @@
 	th {
 		padding: 10px 10px;
 	}
+	#foodKind {
+		width: 180px;
+	}
+	#foodNo {
+		width: 80px;
+	}
 	#foodName {
-		width: 450px;
+		width: 440px;
+	}
+	#foodPrice {
+		width: 85px;
 	}
 	#update {
-		width: 85px;
 		border-right: none;
+	}
+	td:nth-child(1), td:nth-child(2) {
+		text-align: center;
+	}
+	td:nth-child(4) {
+		text-align: right;
 	}
 	button, input[type="submit"] {
 		padding: 3px 5px;
@@ -56,6 +68,9 @@
 		color: white;
 		border-radius: 3px;
 		outline: none;
+	}
+	.delete, .nodelete {
+		margin-left: 3px;
 	}
 	form {
 		padding: 10px;
@@ -106,6 +121,10 @@
 			return false;
 		})
 		
+		$(".update").click(function() {
+				
+		})
+		
 		$(".nodelete").click(function() {
 			alert("이미 삭제한 음식입니다.");
 		})
@@ -113,20 +132,55 @@
 			alert("수정할 수 없습니다.");
 		})
 		
+		$("#f1").submit(function() {
+			if($("select[name='fk']").val() == "FOOD KIND") {
+				alert("음식 종류를 선택하세요.");       
+				return false;
+			}
+			if($("input[name='name']").val() == "") {
+				alert("음식명을 입력하세요.");
+	            return false;
+	        }
+	         
+	        if($("input[name='price']").val() == "") {
+	        	alert("음식가격을 입력하세요.");
+	        	return false;
+	        }
+		})
+		
 		$("#f2").submit(function() {
-			/* $.ajax({
+			if($("input[name='fdname']").val() == "") {
+				alert("검색할 음식명을 입력하세요.");
+	            return false;
+	        }
+			
+			$.ajax({
 				url:"${pageContext.request.contextPath}/menuMgnsearch.do",
 				type:"post",
 				data:{"fdname":$("input[name='fdname']").val()},
 				dataType:"json",
-				success: function(json) {
-					console.log(json);
+				success: function(res) {
+					console.log(res);
 					
-					if(json.islist == true) {
-						$("table").append("<tr><td>${flist}</td><tr>");
-					}
+					$("table").empty();
+					$("table").append("<tr><th id='foodKind'>음식종류</th><th id='foodNo'>음식번호</th><th id='foodName'>음식명</th><th id='foodPrice'>가격</th><th id='update'></th></tr>");
+					
+					$(res).each(function(i, obj) {
+						var $tr = $("<tr>");
+						var $fkname = $("<td>").text(obj.fkNo.fkName);
+						var $fdno = $("<td>").text(obj.fdNo);
+						var $fdname = $("<td>").text(obj.fdName);
+						var $fdprice = $("<td>").text(obj.fdPrice.toLocaleString()+"원");
+						var $lasttd = $("<td>");
+						var $button = $("<button class='update' data-no='${obj.fdNo}'>수정</button> <button class='delete' data-no='${obj.fdNo}'>삭제</button>");
+						
+						$lasttd.append($button);
+						$tr.append($fkname).append($fdno).append($fdname).append($fdprice).append($lasttd);
+						$("table").append($tr);
+					})
 				}
-			}) */
+			})
+			return false;
 		})
 		
 		$("#allList").click(function() {
@@ -162,34 +216,19 @@
 			</form>
 			<table>
 				<tr>
-					<th>음식종류</th>
-					<th>음식번호</th>
+					<th id="foodKind">음식종류</th>
+					<th id="foodNo">음식번호</th>
 					<th id="foodName">음식명</th>
-					<th>가격</th>
+					<th id="foodPrice">가격</th>
 					<th id="update"></th>
 				</tr>
-				<c:if test="${search == true}">
-					<c:forEach var="serlist" items="${searchlist}">
-						<tr>
-							<td>${serlist.fkNo}</td>
-							<td>${serlist.fdNo}</td>
-							<td>${serlist.fdName}</td>
-							<td><fmt:formatNumber groupingUsed="true" value="${serlist.fdPrice}"/></td>
-							<td>
-								<button class="update" data-no="${serlist.fdNo}">수정</button>
-								<button class="delete" data-no="${serlist.fdNo}">삭제</button>
-							</td>
-						</tr>
-					</c:forEach>
-				</c:if>
-				<c:if test="${search != true}">
-					<c:forEach var="flist" items="${fList}">
+				<c:forEach var="flist" items="${fList}">
 					<c:if test="${flist.fdWithdrawal == true}">
 						<tr class="underline">
 							<td>${flist.fkNo}</td>
 							<td>${flist.fdNo}</td>
 							<td>${flist.fdName}</td>
-							<td><fmt:formatNumber groupingUsed="true" value="${flist.fdPrice}"/></td>
+							<td><fmt:formatNumber groupingUsed="true" value="${flist.fdPrice}"/>원</td>
 							<td>
 								<button class="noupdate" data-no="${flist.fdNo}">수정</button>
 								<button class="nodelete" data-no="${flist.fdNo}">삭제</button>
@@ -201,16 +240,14 @@
 							<td>${flist.fkNo}</td>
 							<td>${flist.fdNo}</td>
 							<td>${flist.fdName}</td>
-							<td><fmt:formatNumber groupingUsed="true" value="${flist.fdPrice}"/></td>
+							<td><fmt:formatNumber groupingUsed="true" value="${flist.fdPrice}"/>원</td>
 							<td>
 								<button class="update" data-no="${flist.fdNo}">수정</button>
 								<button class="delete" data-no="${flist.fdNo}">삭제</button>
 							</td>
 						</tr>
 					</c:if>
-					</c:forEach>
-				</c:if>
-				
+				</c:forEach>
 			</table>
 		</div>
 	</div>
