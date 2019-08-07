@@ -18,26 +18,26 @@
 		border: 1px solid #555;
 		margin: 30px 0;
 	}
-	table {
+	#foodtable {
 		border-collapse: collapse;
 		width: 100%;
 		overflow: hidden;
 	}
-	th, td {
+	#foodtable th, #foodtable td {
 		border-top: 1px solid #ccc;
 		border-right: 1px solid #ccc;
 		padding: 5px 10px;
 	}
-	td:last-child {
+	#foodtable td:last-child {
 		border-right: none;
 	}
-	tr:nth-child(2n) {
+	#foodtable tr:nth-child(2n) {
 		background-color: #F7F7F7;
 	}
-	tr:last-child {
+	#foodtable tr:last-child {
 		border-bottom: 1px solid #ccc;
 	}
-	th {
+	#foodtable th {
 		padding: 10px 10px;
 	}
 	#foodKind {
@@ -55,10 +55,10 @@
 	#update {
 		border-right: none;
 	}
-	td:nth-child(1), td:nth-child(2) {
+	#foodtable td:nth-child(1), td:nth-child(2) {
 		text-align: center;
 	}
-	td:nth-child(4) {
+	#foodtable td:nth-child(4) {
 		text-align: right;
 	}
 	button, input[type="submit"] {
@@ -94,6 +94,10 @@
 		float: right;
 		margin: 10px 10px 0 0;
 	}
+	
+	#uptable td, #uptable tr {
+		border: 1px solid black;
+	}
 </style>
 <script>
 	$(function() {
@@ -122,7 +126,7 @@
 		})
 		
 		$(".update").click(function() {
-				
+			
 		})
 		
 		$(".nodelete").click(function() {
@@ -146,6 +150,17 @@
 	        	alert("음식가격을 입력하세요.");
 	        	return false;
 	        }
+	        
+	        if(Number($("input[name='price']").val()) < 0) {
+	        	alert("가격을 잘못 입력하셨습니다.");
+	        	return false;
+	        }
+	        
+	        if(Number($("input[name='price']").val()) != $("input[name='price']").val()) {
+	        	alert("가격을 잘못 입력하셨습니다.");
+	        	return false;
+	        }
+	        
 		})
 		
 		$("#f2").submit(function() {
@@ -214,7 +229,7 @@
 				<input type="text" name="fdname" size="20" placeholder="검색할 음식명">
 				<input type="submit" value="검색">
 			</form>
-			<table>
+			<table id="foodtable">
 				<tr>
 					<th id="foodKind">음식종류</th>
 					<th id="foodNo">음식번호</th>
@@ -251,5 +266,5 @@
 			</table>
 		</div>
 	</div>
-
+	
 <%@ include file="../include/footer.jsp" %>
