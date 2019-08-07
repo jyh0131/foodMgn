@@ -36,10 +36,10 @@
 	<div id="rsvContainer">
 		<div id="rsvInnerContainer">
 		<c:if test="${isRsv==true }">
-			<h2><fmt:formatDate value="${rsv.rsvTime}" pattern="yyyy-MM-dd kk:mm"/>에 예약 되었습니다.</h2>
+			<h2><fmt:formatDate value="${rsv.rsvTime}" pattern="yyyy-MM-dd kk:mm"/>일에 예약 되었습니다.</h2>
 		</c:if>
 		<c:if test="${isRsv==false }">
-			<h2><fmt:formatDate value="${rsv.rsvTime}" pattern="yyyy-MM-dd kk:mm"/>에 해당 좌석에 예약이 있습니다. 다른 좌석을 선택하세요.</h2>
+			<h2><fmt:formatDate value="${rsv.rsvTime}" pattern="yyyy-MM-dd kk:mm"/>일 해당 좌석에 예약이 있습니다. 다른 좌석을 선택하세요.</h2>
 		</c:if>
 		</div>
 	</div>

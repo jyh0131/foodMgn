@@ -106,7 +106,7 @@
 								</ul>
 							</li>
 
-							<li class="center2"><a href="">DELIVERY</a></li>
+							<li class="center2"><a href="${pageContext.request.contextPath}/delivery.do">DELIVERY</a></li>
 							<li class="right2"><a href="${pageContext.request.contextPath}/derection.do">DERECTION</a></li>
 						</ul>
 					</div>
