@@ -69,13 +69,20 @@
 	<div id="pay_1">
 		<div id="order_info">	
 		<h3 class="brown_1">주문정보</h3>
-		<c:set var="list" value="${list }"></c:set>
 			<table>
 				<tr>
 					<th>제품명</th>
 					<th>수량</th>
 					<th>가격</th>
 				</tr>
+
+		<c:forEach var="list" items="${list }">
+			<tr>
+				<td>${list.fdNo.fdName }</td>
+				<td>${list.saleOrderCnt }</td>
+				<td>${list.fdNo.fdPrice }</td>
+			</tr>
+		</c:forEach>
 			</table>
 		</div>
 		
@@ -118,9 +125,9 @@
 	<div id="pay_2">
 		<div id="buyer_info">
 			<h3 class="brown_1">주문자 정보</h3>
-			<p class="font_1">이름 :</p><br>
-			<p class="font_1">전화번호 :</p><br>
-			<p class="font_1">주소 :</p><br>
+			<p class="font_1">이름 :${mem.mbName }</p><br>
+			<p class="font_1">전화번호 :${mem.mbTel }</p><br>
+			<p class="font_1">주소 :${mem.mbAddress }</p><br>
 		</div>
 		
 		<div id="pay_price">

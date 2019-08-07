@@ -9,9 +9,12 @@ import javax.servlet.http.HttpServletResponse;
 import com.mysql.fabric.xmlrpc.base.Array;
 
 import kr.or.yi.foodMgn.controller.CommandHandler;
+import kr.or.yi.foodMgn.dao.MemberDao;
 import kr.or.yi.foodMgn.dao.SaleDao;
+import kr.or.yi.foodMgn.daoImpl.MemberDaoImpl;
 import kr.or.yi.foodMgn.daoImpl.SaleDaoImpl;
 import kr.or.yi.foodMgn.dto.Food;
+import kr.or.yi.foodMgn.dto.Member;
 import kr.or.yi.foodMgn.dto.Sale;
 import kr.or.yi.foodMgn.service.SaleListService;
 
@@ -65,10 +68,15 @@ public class PaymentHandler implements CommandHandler {
 				saleList.add(sale2);
 			}
 			
-			req.setAttribute("salelist", saleList);
+			
 			req.setAttribute("totalPrice", totalPrice);
+			req.getSession().setAttribute("list", saleList);
+			int mbNo = (int) req.getSession().getAttribute("Auth");
+			MemberDao mDao = new MemberDaoImpl();
+			Member m = new Member(mbNo);
+			Member mem = mDao.selectByMbNo(m);
 			
-			
+			req.getSession().setAttribute("mem", mem);
 		}
 		return "/WEB-INF/view/payment/payment.jsp";
 	}

@@ -25,8 +25,10 @@ public class PaymentResultHandler implements CommandHandler {
 		int iSaleType= Integer.parseInt(saleType);
 		PaymentService service = PaymentService.getInstance();
 		
-		Member mem = new Member(); //멤버 받아오기해야함~
-		List<Sale> saleList = new ArrayList<Sale>(); //리스트도 받아야함~~~
+		@SuppressWarnings("unchecked")
+		List<Sale> saleList = (List<Sale>) req.getSession().getAttribute("list");
+		
+		Member mem = (Member) req.getSession().getAttribute("mem"); //멤버 받아오기해야함~
 		
 		
 		for(Sale s : saleList) {
