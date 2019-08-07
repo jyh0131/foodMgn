@@ -18,32 +18,60 @@
 h2{
 	text-align: center;
 }
-#saleList_wrapper{
-		width: 1300px !important;
-		margin: 0 auto !important ;
+#wrap {
+		min-height: 700px;
+		height:700px;
+		width: 1300px;
+		margin: 0 auto;
+		overflow: auto;
+		border: 1px solid #555;
 	}
-	table{
+
+	table {
 		border-collapse: collapse;
-	}
-	
-	table,td,th{
-		border: 1px solid black;
+		width: 100%;
+		overflow: hidden;
 		font-size: 14px;
 	}
-	.dataTables_scroll{
-		width: 1300px !important;
+	th, td {
+		border-top: 1px solid #ccc;
+		border-right: 1px solid #ccc;
+		padding: 5px 10px;
+	}
+	td:last-child {
+		border-right: none;
+	}
+	tr:nth-child(2n) {
+		background-color: #F7F7F7;
+	}
+	tr:last-child {
+		border-bottom: 1px solid #ccc;
+	}
+	th {
+		padding: 10px 10px;
+	}
+	th:nth-child(1) {
+		width: 50px;
 	}
 	
-	
-	
-	.dataTables_scrollHeadInner{
+	th:nth-child(2) {
+		width: 100px; 
 	}
-	.dataTables_scrollBody{
-		max-height: 500px !important;
+	th:nth-child(3) {  
+		width: 300px;
 	}
+	th:nth-child(4) {
+		width: 90px;
+	} 
 	
-	table th:nth-child(3) {
-	width: 350px !important;
+	button{
+		padding: 3px 5px;
+		background-color: #c7a593;
+		border: 1px solid #c7a593;
+		color: white;
+		border-radius: 3px;
+		outline: none;
+	}
 }
 </style>
 
@@ -55,15 +83,7 @@ h2{
 	src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js">
 </script>
 <script type="text/javascript">
-	$(function() {
-		 $('#saleList').DataTable( {
-		        "scrollY":        "200px",
-		        "scrollCollapse": true,
-		        "paging":         false
-		    } );
-		 
-		
-	})
+
 </script>
 <div class="s_visu1">
 			<img
@@ -71,11 +91,11 @@ h2{
 		</div>
 
 		<h2>결제 현황</h2>
-	
+	<div id="wrap">
 	<table id="saleList" class="display">
 		<thead>
 		<tr>
-			<th>결제 번호</th>
+			<th>결제<br>번호</th>
 			<th>결제 시간</th>
 			<th>결제 메뉴</th>
 			<th>결제 금액</th>
@@ -84,6 +104,7 @@ h2{
 			<th>결제 방식</th>
 			<th>회원</th>
 			<th>결제 상태</th>
+			<th>결제 취소</th>
 		</tr>
 		</thead>
 		<tbody>
@@ -98,7 +119,7 @@ h2{
 		 			<fmt:formatNumber value="${item.payPrice }"/>원
 		 		</td>
 		 		<td>${item.payDiscountInfo }</td>
-		 		<td>${item.payDiscountPrice }</td>
+		 		<td>${item.payDiscountPrice }원</td>
 		 		<td>
 		 			<c:if test="${item.payType==0 }" >
 		 				카드
@@ -116,8 +137,12 @@ h2{
 		 				취소
 		 			</c:if>
 		 		</td>
+		 		<td>
+		 			<button class="delete">결제취소</button>
+		 		</td>
 		 	</tr>
 		 </c:forEach>
 		 </tbody>
 	</table>   
+	</div>
 <%@ include file="../../view/include/footer.jsp" %>
