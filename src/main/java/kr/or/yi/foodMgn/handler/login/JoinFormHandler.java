@@ -1,11 +1,16 @@
 package kr.or.yi.foodMgn.handler.login;
 
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.codehaus.jackson.map.ObjectMapper;
 
 import kr.or.yi.foodMgn.controller.CommandHandler;
 import kr.or.yi.foodMgn.dao.MemberDao;
@@ -27,6 +32,9 @@ public class JoinFormHandler implements CommandHandler {
 			String birth = req.getParameter("birth");
 			String addr = req.getParameter("addr");
 			
+			SimpleDateFormat sdfm = new SimpleDateFormat("yyyy-MM-dd");
+			Date birthDate = sdfm.parse(birth);
+			
 			List<Member> list = dao.selectMemberByAllNM();
 			int no = list.size()+1;
 			
@@ -34,10 +42,9 @@ public class JoinFormHandler implements CommandHandler {
 			mem.setMbTel(tel);
 			Member mem2 = dao.selectByTelForJoin(mem);
 			
+			Map<String, Object> map = new HashMap<String, Object>();
+			
 			if(mem2 == null) {
-				SimpleDateFormat sdfm = new SimpleDateFormat("yyyy-mm-dd");
-				Date birthDate = sdfm.parse(birth);
-				
 				Member member = new Member(name, birthDate, tel, addr);
 				member.setMbNo(no);
 				member.setMbMileage(1000);
@@ -46,10 +53,50 @@ public class JoinFormHandler implements CommandHandler {
 				member.setMbWithdrawal(true);
 				
 				dao.insertMember(member);
-				res.sendRedirect(req.getContextPath()+"/login.do");
+				
+				map.put("joinSuccess", true);
+				res.setContentType("application/json;charset=utf-8");
+				ObjectMapper om = new ObjectMapper();
+				String json = om.writeValueAsString(map);
+				PrintWriter out = res.getWriter();
+				out.print(json);
+				out.flush();
+				//res.sendRedirect(req.getContextPath()+"/login.do");
 				return null;
 			}else {
-				return "/WEB-INF/view/login/login.jsp";
+				if(mem2.isMbWithdrawal() == false) {
+					mem2.setMbName(name);
+					mem2.setMbTel(tel);
+					mem2.setMbBirth(birthDate);
+					mem2.setMbAddress(addr);
+					mem2.setMbMileage(1000);
+					mem2.setMbGrade(new Grade("bronze"));
+					mem2.setMbJoin(new Date());
+					mem2.setMbWithdrawal(true);
+					
+					dao.updateTrnasMember(mem2);
+					
+					map.put("transMem", true);
+					res.setContentType("application/json;charset=utf-8");
+					ObjectMapper om = new ObjectMapper();
+					String json = om.writeValueAsString(map);
+					PrintWriter out = res.getWriter();
+					out.print(json);
+					out.flush();
+					
+					return null;
+				}else {
+					map.put("joinSuccess", false);
+					res.setContentType("application/json;charset=utf-8");
+					ObjectMapper om = new ObjectMapper();
+					String json = om.writeValueAsString(map);
+					PrintWriter out = res.getWriter();
+					out.print(json);
+					out.flush();
+					
+					//return "/WEB-INF/view/login/login.jsp";
+					return null;
+				}
 			}
 		}
 		return null;

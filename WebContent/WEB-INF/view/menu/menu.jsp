@@ -108,6 +108,14 @@
 	#menu_name li {
 		list-style: none;
 		width: 100%;
+		
+	}
+	#menu_name img {
+		/* width: 1000px; */          
+	}
+	.bevImg img {
+		float: left;
+		width: 250px;
 	}
 </style>
 

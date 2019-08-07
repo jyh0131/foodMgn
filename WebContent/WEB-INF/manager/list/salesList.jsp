@@ -20,8 +20,13 @@
 }
 
 #sub {
+	min-height: 500px;
 	width: 100%;
+	height:500px;
 	position: relative;
+	overflow: auto;
+	border: 1px solid #555;
+	
 }
 
 #sub #selDate {
@@ -35,30 +40,36 @@ h2 {
 	text-align: center;
 }
 
-#saleList_wrapper {
-	width: 1000px !important;
-	margin: 0 auto !important;
-}
-
 table {
-	border-collapse: collapse;
-}
-
-table, td, th {
-	border: 1px solid black;
-}
-
-.dataTables_scroll {
-	width: 1000px !important;
-}
-
-.dataTables_scrollHeadInner {
-	
-}
-
-.dataTables_scrollBody {
-	max-height: 500px !important;
-}
+		border-collapse: collapse;
+		width: 100%;
+		overflow: hidden;
+	}
+	th, td {
+		border-top: 1px solid #ccc;
+		border-right: 1px solid #ccc;
+		padding: 5px 10px;
+	}
+	td:last-child {
+		border-right: none;
+	}
+	tr:nth-child(2n) {
+		background-color: #F7F7F7;
+	}
+	tr:last-child {
+		border-bottom: 1px solid #ccc;
+	}
+	th {
+		padding: 10px 10px;
+	}
+	button{
+		padding: 3px 5px;
+		background-color: #c7a593;
+		border: 1px solid #c7a593;
+		color: white;
+		border-radius: 3px;
+		outline: none;
+	}
 }
 </style>
 
@@ -76,15 +87,11 @@ table, td, th {
 </script>
 <script type="text/javascript">
 	$(function() {
-		$('#saleTable').DataTable({
-			"scrollY" : "200px",
-			"scrollCollapse" : true,
-			"paging" : false
-		});
-
+		
+		
 		$("#datepicker").datepicker({
 			dateFormat : 'yy-mm-dd',
-			 onSelect: function(dateText, inst) {
+			  onSelect: function(dateText, inst) {
 		          var date = $(this).val();
 		          $.ajax({
 						url:"${pageContext.request.contextPath }/salesList.do",
@@ -93,23 +100,23 @@ table, td, th {
 						dataType:"json",
 						success:function(json){
 							console.log(json);
-							$("#tbody").empty();
+							$("tbody").empty();
 							for(var i=0; i<json.list.length; i++){
 								var list=json.list[i];
 								if(i%2==0){
-									$("#tbody").append("<tr  role='row' class='odd'>");
-									$("#tbody tr").eq(i).append("<td class='sorting_1'>"+(i+1)+"</td>");
-									$("#tbody tr").eq(i).append("<td>"+list.ssName+"</td>");
-									$("#tbody tr").eq(i).append("<td>"+list.ssCount+"개</td>");
-									$("#tbody tr").eq(i).append("<td>"+list.ssTotalPrice+"원</td>");
-									$("#tbody tr").eq(i).append("<td>"+list.ssShare+"%</td>");
+									$("tbody").append("<tr  role='row' class='odd'>");
+									$("tbody tr").eq(i).append("<td class='sorting_1'>"+(i+1)+"</td>");
+									$("tbody tr").eq(i).append("<td>"+list.ssName+"</td>");
+									$("tbody tr").eq(i).append("<td>"+list.ssCount+"개</td>");
+									$("tbody tr").eq(i).append("<td>"+list.ssTotalPrice+"원</td>");
+									$("tbody tr").eq(i).append("<td>"+list.ssShare+"%</td>");
 								}else{
-									$("#tbody").append("<tr  role='row' class='even'>");
-									$("#tbody tr").eq(i).append("<td class='sorting_1'>"+(i+1)+"</td>");
-									$("#tbody tr").eq(i).append("<td>"+list.ssName+"</td>");
-									$("#tbody tr").eq(i).append("<td>"+list.ssCount+"개</td>");
-									$("#tbody tr").eq(i).append("<td>"+list.ssTotalPrice+"원</td>");
-									$("#tbody tr").eq(i).append("<td>"+list.ssShare+"%</td>");
+									$("tbody").append("<tr  role='row' class='even'>");
+									$("tbody tr").eq(i).append("<td class='sorting_1'>"+(i+1)+"</td>");
+									$("tbody tr").eq(i).append("<td>"+list.ssName+"</td>");
+									$("tbody tr").eq(i).append("<td>"+list.ssCount+"개</td>");
+									$("tbody tr").eq(i).append("<td>"+list.ssTotalPrice+"원</td>");
+									$("tbody tr").eq(i).append("<td>"+list.ssShare+"%</td>");
 								}
 								
 							}
@@ -117,7 +124,7 @@ table, td, th {
 						
 					})
 		     }
-			
+			 
 		});
 	})
 </script>
@@ -133,7 +140,8 @@ table, td, th {
 			<p id="selDate">
 				<label>날짜 선택: </label><input type="text" id="datepicker">
 			</p>
-		</div>
+		
+		
 		<table id="saleTable" class="display">
 			<thead>
 				<tr>
@@ -157,7 +165,8 @@ table, td, th {
 						<td>${item.ssShare }%</td>
 					</tr>
 				</c:forEach>
-			</tbody>
+			</tbody> 
 		</table>
+		</div>
 	</div>
 <%@ include file="../../view/include/footer.jsp" %>
