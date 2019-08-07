@@ -95,6 +95,7 @@ public class ReservationHandler implements CommandHandler {
 				return "/WEB-INF/view/reservation/SuccessReservation.jsp";
 			}else { // 비회원인 경우
 					int a = mDao.selectMemberByAllNM().size();
+					System.out.println(a);
 					member.setMbNo(a);
 					mDao.insertMember(member); // 비회원으로 회원테이블에 저장.
 					rsv = new Reservation(number, inputTime, new Date(), null, member, tableNo, false);
