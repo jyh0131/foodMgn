@@ -49,8 +49,8 @@
 				<div id="head2">
 					<div id="head2_1">
 						<ul>
-							<li><a href="">결제관리</a></li>
-							<li><a href="">판매관리</a></li>
+							<li><a href="${pageContext.request.contextPath}/saleList.do">결제관리</a></li>
+							<li><a href="${pageContext.request.contextPath}/salesList.do">판매관리</a></li>
 							<li><a href="${pageContext.request.contextPath}/menuMgnlist.do">음식관리</a></li>
 							<li><a href="${pageContext.request.contextPath}/memberMgnlist.do">회원관리</a></li>
 							<li><a href="">예약관리</a></li>
