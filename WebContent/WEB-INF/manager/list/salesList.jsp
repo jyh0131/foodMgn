@@ -17,27 +17,28 @@
 #wrap {
 	width: 1000px;
 	margin: 0 auto;
+	height:500px;
+	overflow: auto;
+	border: 1px solid #555;
+	margin-bottom: 40px;
+	
 }
 
 #sub {
-	min-height: 500px;
-	width: 100%;
-	height:500px;
-	position: relative;
-	overflow: auto;
-	border: 1px solid #555;
+	width: 80%;
+	height:40px;
+	padding-left: 15px;
+	margin-bottom: 10px;
 	
 }
 
 #sub #selDate {
-	position: absolute;
-	bottom: -20px;
-	left: 0;
-	z-index: 10;
+	padding-top: 20px;
 }
 
 h2 {
 	text-align: center;
+	margin-bottom: 40px;
 }
 
 table {
@@ -132,15 +133,14 @@ table {
 			<img
 				src="${pageContext.request.contextPath}/images/introduce/sub01_visu.jpg">
 		</div>
-
+	<h2>판매 현황</h2>
 	<div id="wrap">
 	
 		<div id="sub">
-			<h2>판매 현황</h2>
 			<p id="selDate">
 				<label>날짜 선택: </label><input type="text" id="datepicker">
 			</p>
-		
+		</div>
 		
 		<table id="saleTable" class="display">
 			<thead>
@@ -167,6 +167,6 @@ table {
 				</c:forEach>
 			</tbody> 
 		</table>
-		</div>
+		
 	</div>
 <%@ include file="../../view/include/footer.jsp" %>

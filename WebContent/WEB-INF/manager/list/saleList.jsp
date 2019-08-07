@@ -17,6 +17,7 @@
 }
 h2{
 	text-align: center;
+	margin-bottom: 20px;
 }
 #wrap {
 		min-height: 700px;
@@ -25,6 +26,7 @@ h2{
 		margin: 0 auto;
 		overflow: auto;
 		border: 1px solid #555;
+		margin-bottom: 40px;
 	}
 
 	table {

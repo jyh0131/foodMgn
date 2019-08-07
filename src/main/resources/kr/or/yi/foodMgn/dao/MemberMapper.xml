@@ -91,7 +91,7 @@
 	
 	<delete id="couponDelete" parameterType="map">
 		update member m left join member_coupon mc on m.mb_no = mc.mb_no 
-		left join coupon c on mc.cp_no = c.cp_no set mc.cp_use = #{whether} where m.mb_no = #{no} and c.cp_name = #{cpname}
+		left join coupon c on mc.cp_name = c.cp_name set mc.cp_use = #{whether} where m.mb_no = #{no} and c.cp_name = #{cpname}
 	</delete>
 	
 	<select id="selectByNameTel" parameterType="Member" resultMap="resultMemberBJY">
@@ -104,7 +104,7 @@
 	
 	<select id="selectCouponByTel" resultType="Member" resultMap="resultMemberBJY">
 		select m.mb_no, m.mb_name, mb_birth, mb_tel, mb_mileage, mb_grade, g_discount, mb_address, c.cp_no, c.cp_name as coupon, c.cp_discount
-		from member m left join member_coupon mc on m.mb_no = mc.mb_no left join coupon c on mc.cp_no = c.cp_no left join grade g on m.mb_grade = g.grade
+		from member m left join member_coupon mc on m.mb_no = mc.mb_no left join coupon c on mc.cp_name = c.cp_name left join grade g on m.mb_grade = g.grade
 		where right(mb_tel,8) = #{mbTel} and mc.cp_use = 0 ;
 	</select>
 	<select id="selectByMbNo" parameterType="Member" resultMap="resultMemberBJY">

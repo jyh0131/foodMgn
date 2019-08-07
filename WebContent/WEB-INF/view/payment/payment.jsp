@@ -122,10 +122,9 @@
 				<p id="coupon_p" class="font_1">쿠폰 : 
 				<select id="sel" name="coupon">
 					<option value="">쿠폰을 선택하세요</option>
-					<c:if test="${couponList!=false }">
+					<c:if test="${couponList!=null }">
 						<c:forEach var="coupon" items="${couponList }">
-							<option value="생일쿠폰(15%)">생일쿠폰(15%)</option>
-							<option value="${coupon.cpName }+'('+${coupon.cpDiscount}+'%)'">${coupon.cpName }${coupon.cpDiscount}</option>
+							<option value="${coupon.cpName }">${coupon.cpName }</option>
 						</c:forEach>
 					</c:if>
 				</select>

@@ -72,23 +72,34 @@ public class PaymentHandler implements CommandHandler {
 				saleList.add(sale2);
 			}
 			
+			for(Sale s : saleList) {
+				System.out.println(s);
+			}
 			
 			req.setAttribute("totalPrice", totalPrice);
 			req.getSession().setAttribute("list", saleList);
 			int mbNo = (int) req.getSession().getAttribute("Auth");
 			MemberDao mDao = new MemberDaoImpl();
 			Member m = new Member(mbNo);
+			System.out.println(m+"1");
 			Member mem = mDao.selectByMbNo2(m);
+			System.out.println(mem+"2");
+			
 			String sTel = mem.getMbTel();
 			String sTel2 = sTel.substring(3);
 			int tel = Integer.parseInt(sTel2);
 			Member mCoupon = mDao.selectCouponByTel(tel);
+			List<Coupon> couponList = null;
 			try {
-				List<Coupon> couponList = mCoupon.getCoupon();
+				 couponList = mCoupon.getCoupon();
+				for(Coupon c : couponList) {
+					System.out.println(c);
+				}
 				req.setAttribute("couponList", couponList);
 			} catch (NullPointerException e) {
-				req.setAttribute("couponList", false);
+				req.setAttribute("couponList", couponList);
 			}
+			System.out.println(req.getAttribute("couponList"));
 			
 			req.getSession().setAttribute("mem", mem);
 		}

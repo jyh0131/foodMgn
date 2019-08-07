@@ -23,6 +23,7 @@ public class PaymentResultHandler implements CommandHandler {
 		String saleInfo= req.getParameter("sale_info"); //할인정보
 		System.out.println(saleInfo);
 		String salePrice = req.getParameter("sale_price"); //sale_discount_price 할인된금액
+		
 		String saleType= req.getParameter("sale_type"); //1이면 현금 0이면 카드
 		int iSaleType= Integer.parseInt(saleType);
 		PaymentService service = PaymentService.getInstance();
@@ -36,6 +37,10 @@ public class PaymentResultHandler implements CommandHandler {
 		for(Sale s : saleList) {
 			s.setSaleType(iSaleType);
 			s.setSaletime(new Date());
+			if( !(salePrice.equals("")) ) {
+				int salePrice2 = Integer.parseInt(salePrice);
+				s.setSaleDiscountPrice(salePrice2);
+			}
 			if(mem!=null) {
 				s.setMbNo(mem);
 				s.setSaleDiscountInfo(saleInfo);
@@ -51,7 +56,7 @@ public class PaymentResultHandler implements CommandHandler {
 		if (saleInfo.contains("마일리지") && mem != null) { //마일리지 사용한 회원 결제시
 			int info1 = saleInfo.indexOf(":");
 			int info2 = saleInfo.indexOf("원");
-			String sInfo = salePrice.substring(info1+1, info2) ;
+			String sInfo = saleInfo.substring(info1+1, info2) ;
 			int infoMileage = Integer.parseInt(sInfo);
 			int memMileage = mem.getMbMileage();
 			mem.setMbMileage(memMileage-infoMileage); 
