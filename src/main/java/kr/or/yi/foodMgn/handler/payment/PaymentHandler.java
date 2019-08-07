@@ -57,6 +57,7 @@ public class PaymentHandler implements CommandHandler {
 				food1.setFdNo(Integer.parseInt(foodList.get(i))); // food객체에 food번호랑 갯수만.
 				Food food2 = fDao.selectByFdNo(food1);
 				food1.setFdPrice(food2.getFdPrice()); // food의 개별 가격
+				food1.setFdName(food2.getFdName()); // food의 이름.
 				foodList1.add(food1); 
 			}
 			List<Sale> saleList = new ArrayList<Sale>();
