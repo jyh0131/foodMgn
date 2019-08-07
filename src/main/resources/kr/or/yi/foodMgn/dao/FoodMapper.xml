@@ -38,6 +38,10 @@
 		select f.fd_no, f.fd_price, f.fd_name, f.fk_no, fk.fk_name, fk.menu_no from food f left join foodkind fk on f.fk_no = fk.fk_no where f.fk_no = #{fkNo.fkNo}
 	</select>
 	
+	<select id="selectByFdNo" parameterType="Food" resultMap="resultFoodBJY">
+		select * from food where fd_no = #{fdNo}
+	</select>
+	
 	<update id="updateFood" parameterType="Food">
 		update food set fd_price = #{fdPrice}, fd_name = #{fdName} where fd_no = #{fdNo}
 	</update>
