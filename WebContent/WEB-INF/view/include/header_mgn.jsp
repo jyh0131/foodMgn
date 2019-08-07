@@ -19,7 +19,7 @@
 		<header>
 			<div id="header">
 				<div id="head1">
-					<div id="head1_1">
+					<%-- <div id="head1_1">
 						<div class="sns">
 							<a href="">
 								<img src="${pageContext.request.contextPath}/images/include/sns_face.png">
@@ -30,7 +30,7 @@
 								<img src="${pageContext.request.contextPath}/images/include/sns_insta.png">
 							</a>
 						</div>
-					</div>
+					</div> --%>
 					<div id="head1_2">
 						<ul>
 							<li><a href="${pageContext.request.contextPath}">HOME</a></li>
@@ -50,21 +50,16 @@
 					<div id="head2_1">
 						<ul>
 							<li><a href="">결제관리</a></li>
-							<li class="center"><a href="">판매관리</a></li>
-							<li class="right"><a href="${pageContext.request.contextPath}/menuMgnlist.do">음식관리</a></li>
+							<li><a href="">판매관리</a></li>
+							<li><a href="${pageContext.request.contextPath}/menuMgnlist.do">음식관리</a></li>
+							<li><a href="${pageContext.request.contextPath}/memberMgnlist.do">회원관리</a></li>
+							<li><a href="">예약관리</a></li>
 						</ul>
 					</div>
 					<div id="head2_2">
 						<a href="">
 							<img src="${pageContext.request.contextPath}/images/include/logo.png">
 						</a>
-					</div>
-					<div id="head2_3">
-						<ul>
-							<li><a href="">           </a></li>
-							<li class="center2"><a href="">회원관리</a></li>
-							<li class="right2"><a href="">예약관리</a></li>
-						</ul>
 					</div>
 					<div class="clear"></div>
 				</div>

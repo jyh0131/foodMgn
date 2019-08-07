@@ -28,11 +28,11 @@ public class JoinFormHandler implements CommandHandler {
 			String addr = req.getParameter("addr");
 			
 			List<Member> list = dao.selectMemberByAllNM();
-			int no = list.size();
+			int no = list.size()+1;
 			
 			Member mem = new Member();
 			mem.setMbTel(tel);
-			Member mem2 = dao.selectByNameTel(mem);
+			Member mem2 = dao.selectByTelForJoin(mem);
 			
 			if(mem2 == null) {
 				SimpleDateFormat sdfm = new SimpleDateFormat("yyyy-mm-dd");

@@ -29,7 +29,7 @@ header {
 header a {
 	color: white;
 }
-#head1 {
+/* #head1 {
 	overflow: hidden;
 }
 #head1_1 {
@@ -39,10 +39,11 @@ header a {
 	border: 1px solid #EAEAEA;
 	display: inline-block;
 	height: 29px;
-}
+} */
 #head1_2 {
 	float: right;
 	margin-bottom: 35px;
+	margin-right: 30px;
 }
 #head1_2 li {
 	margin-right: 15px;
@@ -55,56 +56,25 @@ header a {
 	font-size: 0.8em;
 }
 #head2_1 {
-	float: left;
-	width: 390px;
+	position: absolute;
+	bottom: -30px;
+	right: 0px;
 }
-#head2_1 > ul > li, #head2_3 > ul > li {
+#head2_1 > ul > li {
 	width: 120px;
 	float: left;
 }
-#head2_1 a, #head2_3 a {
+#head2_1 a {
 	font-weight: bold;     
-}
-.center {
-	text-align: center;
-	margin: 0 10px;
-}
-.right {
-	text-align: right;
-	margin-right: 10px;
 }
 #head2_2 {
 	position: absolute;
 	top: 5px;
-	left: 410px;
+	left: 20px;
 }
 #head2_2 img {
-	width: 220px;
-	height: 75px;
-}
-#head2_3 {
-	float: right;
-	width: 390px;
-}
-.center2 {
-	text-align: center;
-	margin: 0 5px 0 25px;
-}
-.right2 {
-	text-align: right;
-	margin-right: 0;
-}
-.submenu {
-	display: none;
-	margin-top: 35px;
-	background-color: rgba(0,0,0,0.7);
-	width: 140%;
-	margin-left: -20px;
-	text-align: center;
-}
-.submenu li {
-	height: 40px;
-	line-height: 40px;
+	width: 200px;
+	height: 70px;
 }
 .clear {
 	clear: both;
