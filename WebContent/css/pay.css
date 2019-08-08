@@ -13,6 +13,7 @@ div#wrap{
 	margin: 0 auto;
 	overflow: hidden;	
 	padding-left: 100px;
+	margin-top: 30px;
 }
 
 #wrap div#pay_1{
@@ -132,6 +133,9 @@ th{
 	font-weight: bold;
 	font-size: 25px;
 	color:#d6673b;	
+}
+.font_5{
+	font-weight: normal;  
 }
 
 /* 걸제버튼 */

@@ -1,5 +1,6 @@
 package kr.or.yi.foodMgn.handler.payment;
 
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -19,11 +20,11 @@ public class PaymentResultHandler implements CommandHandler {
 
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
-		res.setContentType("text/html;charset=utf-8");
 		String saleInfo= req.getParameter("sale_info"); //할인정보
-		System.out.println(saleInfo);
-		String salePrice = req.getParameter("sale_price"); //sale_discount_price 할인된금액
+		//saleInfo = URLDecoder.decode(saleInfo, "utf-8");
 		
+		String salePrice = req.getParameter("sale_price"); //sale_discount_price 할인된금액
+		salePrice = salePrice.replace(",", "");
 		String saleType= req.getParameter("sale_type"); //1이면 현금 0이면 카드
 		int iSaleType= Integer.parseInt(saleType);
 		PaymentService service = PaymentService.getInstance();

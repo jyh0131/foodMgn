@@ -68,6 +68,7 @@ public class SaleListService {
 			if (resUpdateCancel > 0 && resUpdateMileage >0 && resupdateCount>0 && resUpdateCoupon>0) {
 				sqlSession.commit();
 			} else {
+				
 				throw new Exception();
 			}
 
@@ -93,6 +94,31 @@ public class SaleListService {
 			
 			
 			if (resUpdateCancel > 0 && resUpdateMileage >0 && resupdateCount>0) {
+				sqlSession.commit();
+			} else {
+				throw new Exception();
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			sqlSession.rollback();
+			throw new RuntimeException(e.getCause());
+		} finally {
+			sqlSession.close();
+		}
+	}
+	
+	public void updateCancel(Map<String,Integer> map,Member member) {
+		int resUpdateCancel = 0;
+		int resupdateCount = 0;
+		
+		SqlSession sqlSession = MybatisSqlSessionFactory.openSession();
+		try {
+			resUpdateCancel +=  sqlSession.update(namespace + "updateSaleByCancel",map); //결제를 취소로 변경
+			resupdateCount += sqlSession.update(namespace2 + "CountUpdateKCM2", member); // 사용 횟수를 -1
+			
+			
+			if (resUpdateCancel > 0 && resupdateCount>0) {
 				sqlSession.commit();
 			} else {
 				throw new Exception();
