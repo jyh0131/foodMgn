@@ -6,14 +6,10 @@
 <style>
 .s_visu1 {
 	width: 100%;
-	height: 350px;
-	margin-bottom: 50px;
+	height: 140px;
 }
 
-.s_visu1 img {
-	width: 100%;
-	height: 350px;
-}
+
 #wrap {
 	width: 1000px;
 	margin: 0 auto;
@@ -102,6 +98,8 @@ table {
 						success:function(json){
 							console.log(json);
 							$("tbody").empty();
+							var totalCount=0;
+							var totalPrice=0;
 							for(var i=0; i<json.list.length; i++){
 								var list=json.list[i];
 								if(i%2==0){
@@ -109,18 +107,29 @@ table {
 									$("tbody tr").eq(i).append("<td class='sorting_1'>"+(i+1)+"</td>");
 									$("tbody tr").eq(i).append("<td>"+list.ssName+"</td>");
 									$("tbody tr").eq(i).append("<td>"+list.ssCount+"개</td>");
-									$("tbody tr").eq(i).append("<td>"+list.ssTotalPrice+"원</td>");
+									$("tbody tr").eq(i).append("<td>"+list.ssTotalPrice.toLocaleString()+"원</td>");
 									$("tbody tr").eq(i).append("<td>"+list.ssShare+"%</td>");
+									totalCount += list.ssCount;
+									totalPrice += list.ssTotalPrice;
 								}else{
 									$("tbody").append("<tr  role='row' class='even'>");
 									$("tbody tr").eq(i).append("<td class='sorting_1'>"+(i+1)+"</td>");
 									$("tbody tr").eq(i).append("<td>"+list.ssName+"</td>");
 									$("tbody tr").eq(i).append("<td>"+list.ssCount+"개</td>");
-									$("tbody tr").eq(i).append("<td>"+list.ssTotalPrice+"원</td>");
+									$("tbody tr").eq(i).append("<td>"+list.ssTotalPrice.toLocaleString()+"원</td>");
 									$("tbody tr").eq(i).append("<td>"+list.ssShare+"%</td>");
+									totalCount += list.ssCount;
+									totalPrice += list.ssTotalPrice;
 								}
 								
 							}
+							
+							$("tbody").append("<tr id='total'>");
+							$("tbody tr").eq(i).append("<td></td>");
+							$("tbody tr").eq(i).append("<td></td>");
+							$("tbody tr").eq(i).append("<td>"+totalCount.toLocaleString()+"개</td>");
+							$("tbody tr").eq(i).append("<td>"+totalPrice.toLocaleString()+"원</td>");
+							$("tbody tr").eq(i).append("<td>100.0%</td>");
 						}
 						
 					})
@@ -137,6 +146,9 @@ table {
 					success:function(json){
 						console.log(json);
 						$("tbody").empty();
+						var totalCount=0;
+						var totalPrice=0;
+						
 						for(var i=0; i<json.list.length; i++){
 							var list=json.list[i];
 							if(i%2==0){
@@ -144,18 +156,28 @@ table {
 								$("tbody tr").eq(i).append("<td class='sorting_1'>"+(i+1)+"</td>");
 								$("tbody tr").eq(i).append("<td>"+list.ssName+"</td>");
 								$("tbody tr").eq(i).append("<td>"+list.ssCount+"개</td>");
-								$("tbody tr").eq(i).append("<td>"+list.ssTotalPrice+"원</td>");
+								totalCount += list.ssCount;
+								$("tbody tr").eq(i).append("<td>"+list.ssTotalPrice.toLocaleString()+"원</td>");
+								totalPrice += list.ssTotalPrice;
 								$("tbody tr").eq(i).append("<td>"+list.ssShare+"%</td>");
 							}else{
 								$("tbody").append("<tr  role='row' class='even'>");
 								$("tbody tr").eq(i).append("<td class='sorting_1'>"+(i+1)+"</td>");
 								$("tbody tr").eq(i).append("<td>"+list.ssName+"</td>");
-								$("tbody tr").eq(i).append("<td>"+list.ssCount+"개</td>");
-								$("tbody tr").eq(i).append("<td>"+list.ssTotalPrice+"원</td>");
+								$("tbody tr").eq(i).append("<td>"+list.ssCount+"개</td>")
+								totalCount += list.ssCount;;
+								$("tbody tr").eq(i).append("<td>"+list.ssTotalPrice.toLocaleString()+"원</td>");
+								totalPrice += list.ssTotalPrice;
 								$("tbody tr").eq(i).append("<td>"+list.ssShare+"%</td>");
 							}
 							
 						}
+						$("tbody").append("<tr id='total'>");
+						$("tbody tr").eq(i).append("<td></td>");
+						$("tbody tr").eq(i).append("<td></td>");
+						$("tbody tr").eq(i).append("<td>"+totalCount.toLocaleString()+"개</td>");
+						$("tbody tr").eq(i).append("<td>"+totalPrice.toLocaleString()+"원</td>");
+						$("tbody tr").eq(i).append("<td>100.0%</td>");
 					}
 					
 				})
@@ -165,8 +187,7 @@ table {
 	})
 </script>
 <div class="s_visu1">
-			<img
-				src="${pageContext.request.contextPath}/images/introduce/sub01_visu.jpg">
+		
 		</div>
 	<h2>판매 현황</h2>
 	<div id="wrap">
@@ -190,18 +211,29 @@ table {
 				</tr>
 			</thead>
 			<tbody id="tbody">
+				<c:set var="sum1"></c:set>
+				<c:set var="sum2"></c:set>
 				<c:set var="num" value="0"></c:set>
 				<c:forEach var="item" items="${list}">
 					<c:set var="num" value="${num+1 }"></c:set>
+					
 					<tr>
 						<td>${num}</td>
 						<td>${item.ssName }</td>
 						<td>${item.ssCount }개</td>
-						
 						<td><fmt:formatNumber value="${item.ssTotalPrice }" />원</td>
 						<td>${item.ssShare }%</td>
+						<c:set var="sum1" value="${sum1+item.ssCount }"></c:set>
+						<c:set var="sum2" value="${sum2+item.ssTotalPrice }"></c:set>
 					</tr>
 				</c:forEach>
+				<tr>
+					<td></td>
+					<td></td>
+					<td>${sum1 }개</td>
+					<td><fmt:formatNumber value="${sum2 }" />원</td>
+					<td>100.0%</td>
+				</tr>
 			</tbody> 
 		</table>
 		

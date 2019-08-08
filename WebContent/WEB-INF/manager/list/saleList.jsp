@@ -7,18 +7,11 @@
 <style>
 .s_visu1 {
 	width: 100%;
-	height: 350px;
-	margin-bottom: 50px;
+	height:140px;
 }
 
-.s_visu1 img {
-	width: 100%;
-	height: 350px;
-}
-h2{
-	text-align: center;
-	margin-bottom: 20px;
-}
+
+
 #wrap {
 		min-height: 700px;
 		height:700px;
@@ -28,6 +21,11 @@ h2{
 		border: 1px solid #555;
 		margin-bottom: 40px;
 	}
+	
+	h2{
+	text-align: center;
+	margin-bottom: 20px;
+}
 
 	table {
 		border-collapse: collapse;
@@ -78,6 +76,11 @@ h2{
 	 .payMemberNo{
 		display: none;
 	} 
+	.bb{
+		text-decoration: line-through;
+		color: red;
+		font-size: 0.9em;
+	}
 }
 </style>
 
@@ -110,53 +113,105 @@ h2{
 						$("tbody").empty();
 						for(var i=0; i<json.list.length; i++){
 							var list=json.list[i];
-							$("tbody").append("<tr>");
-							$("tbody tr").eq(i).append("<td><span class='payNo'>"+list.payNo+"</span><span class='payMemberNo'>"+list.payMemberNo+"</span></td>");
-							var formattedDate = new Date(list.payTime);
-							var d = formattedDate.getDate();
-							if( d<10){
-								d= "0"+d;
-							}
-							var m =  formattedDate.getMonth()+1;
-							if( m<10){
-								m= "0"+m;
-							}
-							var y = formattedDate.getFullYear();
-							
-							var h = formattedDate.getHours();
-							if( h<10){
-								h= "0"+h;
-							}
-							var mi = formattedDate.getMinutes();
-							if( mi<10){
-								mi= "0"+mi;
-							}
-							
-							var s = formattedDate.getSeconds();
-							if( s<10){
-								s= "0"+s;
-							}
-							var payDate = y+"/"+m+"/"+d+"<br>"+h+":"+mi+":"+s;
-							
-							$("tbody tr").eq(i).append("<td><span class='payTime'>"+payDate+"</span></td>");
-							$("tbody tr").eq(i).append("<td><span class='payMenu'>"+list.payMenu+"</span></td>");
-							$("tbody tr").eq(i).append("<td><span class='payPrice'>"+list.payPrice.toLocaleString()+"</span>원</td>");
-							$("tbody tr").eq(i).append("<td><span class='payDiscountInfo'>"+list.payDiscountInfo+"</span></td>");
-							$("tbody tr").eq(i).append("<td><span class='payDiscountPrice'>"+list.payDiscountPrice+"</span>원</td>");
-							if(list.payType==1){
-								$("tbody tr").eq(i).append("<td><span class='payType'>현금</span></td>");
-							}else{
-								$("tbody tr").eq(i).append("<td><span class='payType'>카드</span></td>");
-							}
-							
-							$("tbody tr").eq(i).append("<td><span class='payMember'>"+list.payMember+"</span></td>");
 							if(list.payCancel==1){
-								$("tbody tr").eq(i).append("<td><span class='payCancel'>취소</span></td>");
+								$("tbody").append("<tr class='bb'>");
+								$("tbody tr").eq(i).append("<td><span class='payNo'>"+list.payNo+"</span><span class='payMemberNo'>"+list.payMemberNo+"</span></td>");
+								var formattedDate = new Date(list.payTime);
+								var d = formattedDate.getDate();
+								if( d<10){
+									d= "0"+d;
+								}
+								var m =  formattedDate.getMonth()+1;
+								if( m<10){
+									m= "0"+m;
+								}
+								var y = formattedDate.getFullYear();
+								
+								var h = formattedDate.getHours();
+								if( h<10){
+									h= "0"+h;
+								}
+								var mi = formattedDate.getMinutes();
+								if( mi<10){
+									mi= "0"+mi;
+								}
+								
+								var s = formattedDate.getSeconds();
+								if( s<10){
+									s= "0"+s;
+								}
+								var payDate = y+"/"+m+"/"+d+"<br>"+h+":"+mi+":"+s;
+								
+								$("tbody tr").eq(i).append("<td><span class='payTime'>"+payDate+"</span></td>");
+								$("tbody tr").eq(i).append("<td><span class='payMenu'>"+list.payMenu+"</span></td>");
+								$("tbody tr").eq(i).append("<td><span class='payPrice'>"+list.payPrice.toLocaleString()+"</span>원</td>");
+								$("tbody tr").eq(i).append("<td><span class='payDiscountInfo'>"+list.payDiscountInfo+"</span></td>");
+								$("tbody tr").eq(i).append("<td><span class='payDiscountPrice'>"+list.payDiscountPrice+"</span>원</td>");
+								if(list.payType==1){
+									$("tbody tr").eq(i).append("<td><span class='payType'>현금</span></td>");
+								}else{
+									$("tbody tr").eq(i).append("<td><span class='payType'>카드</span></td>");
+								}
+								
+								$("tbody tr").eq(i).append("<td><span class='payMember'>"+list.payMember+"</span></td>");
+								if(list.payCancel==1){
+									$("tbody tr").eq(i).append("<td><span class='payCancel'>취소</span></td>");
+								}else{
+									$("tbody tr").eq(i).append("<td><span class='payCancel'>결제완료</span></td>");
+								}
+								
+								$("tbody tr").eq(i).append("<td><button class='cancel'>결제취소</button></td>");
 							}else{
-								$("tbody tr").eq(i).append("<td><span class='payCancel'>결제완료</span></td>");
+								$("tbody").append("<tr class='aa'>");
+								$("tbody tr").eq(i).append("<td><span class='payNo'>"+list.payNo+"</span><span class='payMemberNo'>"+list.payMemberNo+"</span></td>");
+								var formattedDate = new Date(list.payTime);
+								var d = formattedDate.getDate();
+								if( d<10){
+									d= "0"+d;
+								}
+								var m =  formattedDate.getMonth()+1;
+								if( m<10){
+									m= "0"+m;
+								}
+								var y = formattedDate.getFullYear();
+								
+								var h = formattedDate.getHours();
+								if( h<10){
+									h= "0"+h;
+								}
+								var mi = formattedDate.getMinutes();
+								if( mi<10){
+									mi= "0"+mi;
+								}
+								
+								var s = formattedDate.getSeconds();
+								if( s<10){
+									s= "0"+s;
+								}
+								var payDate = y+"/"+m+"/"+d+"<br>"+h+":"+mi+":"+s;
+								
+								$("tbody tr").eq(i).append("<td><span class='payTime'>"+payDate+"</span></td>");
+								$("tbody tr").eq(i).append("<td><span class='payMenu'>"+list.payMenu+"</span></td>");
+								$("tbody tr").eq(i).append("<td><span class='payPrice'>"+list.payPrice.toLocaleString()+"</span>원</td>");
+								$("tbody tr").eq(i).append("<td><span class='payDiscountInfo'>"+list.payDiscountInfo+"</span></td>");
+								$("tbody tr").eq(i).append("<td><span class='payDiscountPrice'>"+list.payDiscountPrice+"</span>원</td>");
+								if(list.payType==1){
+									$("tbody tr").eq(i).append("<td><span class='payType'>현금</span></td>");
+								}else{
+									$("tbody tr").eq(i).append("<td><span class='payType'>카드</span></td>");
+								}
+								
+								$("tbody tr").eq(i).append("<td><span class='payMember'>"+list.payMember+"</span></td>");
+								if(list.payCancel==1){
+									$("tbody tr").eq(i).append("<td><span class='payCancel'>취소</span></td>");
+								}else{
+									$("tbody tr").eq(i).append("<td><span class='payCancel'>결제완료</span></td>");
+								}
+								
+								$("tbody tr").eq(i).append("<td><button class='cancel'>결제취소</button></td>");
+								
 							}
 							
-							$("tbody tr").eq(i).append("<td><button class='cancel'>결제취소</button></td>");
 							
 						}
 					}
@@ -168,12 +223,12 @@ h2{
 	})
 </script>
 <div class="s_visu1">
-			<img
-				src="${pageContext.request.contextPath}/images/introduce/sub01_visu.jpg">
+			
 		</div>
 
-		<h2>결제 현황</h2>
+	<h2>결제 현황</h2>
 	<div id="wrap">
+	
 	<table id="saleList" class="display">
 		<thead>
 		<tr>
@@ -191,8 +246,8 @@ h2{
 		</thead>
 		<tbody>
 		 <c:forEach var="item" items="${list}">
-			
-		 	<tr>
+			<c:if test="${item.payCancel==0 }">
+				<tr class="aa">
 		 		<td><span class="payNo">${item.payNo }</span><span class="payMemberNo">${item.payMemberNo }</span></td>
 		 		<td>
 		 			<span class="payTime"><fmt:formatDate value="${item.payTime}" pattern="yyyy/MM/dd hh:mm:ss" /></span>
@@ -219,6 +274,37 @@ h2{
 		 			<button class="cancel">결제취소</button>
 		 		</td>
 		 	</tr>
+			</c:if>
+			<c:if test="${item.payCancel==1 }">
+				<tr class="bb">
+		 		<td><span class="payNo">${item.payNo }</span><span class="payMemberNo">${item.payMemberNo }</span></td>
+		 		<td>
+		 			<span class="payTime"><fmt:formatDate value="${item.payTime}" pattern="yyyy/MM/dd hh:mm:ss" /></span>
+		 		</td>
+		 		<td><span class="payMenu">${item.payMenu }</span></td>
+		 		<td>
+		 			<span class="payPrice"><fmt:formatNumber value="${item.payPrice}"/></span>원
+		 		</td>
+		 		<td><span class="payDiscountInfo">${item.payDiscountInfo}</span></td>
+		 		<td><span class="payDiscountPrice">${item.payDiscountPrice}</span>원</td>
+		 		<td>
+		 			<span class="payType"><c:if test="${item.payType==0 }" >
+		 				카드
+		 			</c:if>
+		 			<c:if test="${item.payType==1 }" >
+		 				현금
+		 			</c:if></span>
+		 		</td>
+		 		<td><span class="payMember">${item.payMember }</span></td>
+		 		<td>
+		 		<span class="payCancel"><c:if test="${item.payCancel==0 }">결제완료</c:if><c:if test="${item.payCancel==1 }">취소</c:if></span>
+		 		</td>
+		 		<td>
+		 			<button class="cancel">결제취소</button>
+		 		</td>
+		 	</tr>
+			</c:if>
+		 	
 		 </c:forEach>
 		 </tbody>
 	</table>   

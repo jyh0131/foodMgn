@@ -13,25 +13,19 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
 <script>
-	
+	$(function() {
+		$("#head2 li").hover(function() {
+			$(this).find(".submenu").stop().slideDown(100)
+		}, function() {
+			$(this).find(".submenu").stop().slideUp(100)
+		})
+	})
 </script>
 </head>
 <body>
 		<header>
 			<div id="header">
 				<div id="head1">
-					<%-- <div id="head1_1">
-						<div class="sns">
-							<a href="">
-								<img src="${pageContext.request.contextPath}/images/include/sns_face.png">
-							</a>	
-						</div>
-						<div class="sns">
-							<a href="">
-								<img src="${pageContext.request.contextPath}/images/include/sns_insta.png">
-							</a>
-						</div>
-					</div> --%>
 					<div id="head1_2">
 						<ul>
 							<li><a href="${pageContext.request.contextPath}">HOME</a></li>
@@ -49,7 +43,9 @@
 				<div id="head2">
 					<div id="head2_1">
 						<ul>
-							<li><a href="${pageContext.request.contextPath}/saleList.do">결제관리</a></li>
+							<li>
+								<a href="${pageContext.request.contextPath}/saleList.do">결제관리</a>
+							</li>
 							<li><a href="${pageContext.request.contextPath}/salesList.do">판매관리</a></li>
 							<li><a href="${pageContext.request.contextPath}/menuMgnlist.do">음식관리</a></li>
 							<li><a href="${pageContext.request.contextPath}/memberMgnlist.do">회원관리</a></li>
