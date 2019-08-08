@@ -14,6 +14,12 @@ public class NoticeHandler implements CommandHandler {
 
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
+		String sPage = req.getParameter("page");
+		int page = 1;
+		if(sPage != null) {
+			page = Integer.parseInt(sPage);
+		}
+		
 		NoticeDao dao = new NoticeDaoImpl();
 		
 		List<Notice> nlist = dao.selectNoticeByAll();

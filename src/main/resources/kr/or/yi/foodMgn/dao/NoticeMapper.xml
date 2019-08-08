@@ -5,6 +5,10 @@
 		select * from notice order by no_no desc
 	</select>
 	
+	<select id="selectNoticeByAll2" resultType="Notice">
+		select * from notice
+	</select>
+	
 	<insert id="insertNotice" parameterType="Notice">
 		insert into notice(no_title, no_content, no_regdate, no_writer) values (#{noTitle},#{noContent},#{noRegdate},#{noWriter})	
 	</insert>

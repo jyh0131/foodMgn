@@ -3,7 +3,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
 <%@ include file="../include/mypage.jsp" %>
 <style>
-	#searchRsv{
+	#searchRsv2{
 		background: red;
 	}
 	#rsvContainer{

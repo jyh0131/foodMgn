@@ -34,4 +34,17 @@ public class NoticeDaoImpl implements NoticeDao {
 		}
 	}
 
+	@Override
+	public List<Notice> selectNoticeByAll2() {
+		try(SqlSession sqlSession = MybatisSqlSessionFactory.openSession()) {
+			return sqlSession.selectList(namespace + ".selectNoticeByAll2");
+		}
+	}
+
+	@Override
+	public List<Notice> selectListPage(int startrow, int size) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
