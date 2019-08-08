@@ -13,10 +13,25 @@ public class SaleListHandler implements CommandHandler {
 
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
-		SaleListService service = SaleListService.getInstance();
-		List<Payment> list = service.selectPaymentByAll();
-		req.setAttribute("list", list);
-		return "/WEB-INF/manager/list/saleList.jsp";
+		if(req.getMethod().equalsIgnoreCase("get")) {
+			SaleListService service = SaleListService.getInstance();
+			List<Payment> list = service.selectPaymentByAll();
+			req.setAttribute("list", list);
+			return "/WEB-INF/manager/list/saleList.jsp";
+		}else {
+			boolean a = (boolean) req.getSession().getAttribute("Mgn");
+			
+			if(a==false) {
+				return "/WEB-INF/view/manager/managerLogin.jsp";
+			}else {
+				SaleListService service = SaleListService.getInstance();
+				List<Payment> list = service.selectPaymentByAll();
+				req.setAttribute("list", list);
+				return "/WEB-INF/manager/list/saleList.jsp";
+			}
+		}
+			
+		
 	}
 
 }

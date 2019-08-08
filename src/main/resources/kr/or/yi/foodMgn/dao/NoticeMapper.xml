@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.yi.foodMgn.dao.NoticeMapper">
+	<select id="selectNoticeByAll" resultType="Notice">
+		select * from notice order by no_no desc
+	</select>
+	
+	<insert id="insertNotice" parameterType="Notice">
+		insert into notice(no_title, no_content, no_regdate, no_writer) values (#{noTitle},#{noContent},#{noRegdate},#{noWriter})	
+	</insert>
+	
+	<select id="selectNoticeByNo" parameterType="Notice" resultType="Notice">
+		select * from notice where no_no = #{noNo}
+	</select>
+</mapper>

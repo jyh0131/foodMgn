@@ -28,15 +28,7 @@
 				<div id="head1">
 					<div id="head1_2">
 						<ul>
-							<li><a href="${pageContext.request.contextPath}">HOME</a></li>
-							<c:if test="${Auth != null}">
-								<li><a href="${pageContext.request.contextPath}/logout.do">로그아웃</a></li>
-								<li><a href="${pageContext.request.contextPath}/mypage.do">마이페이지</a></li>
-							</c:if>
-							<c:if test="${Auth == null}">
-								<li><a href="${pageContext.request.contextPath}/login.do">로그인</a></li>
-								<li><a href="${pageContext.request.contextPath}/join.do">회원가입</a></li>
-							</c:if>
+							<li><a href="${pageContext.request.contextPath}/">HOME</a></li>
 						</ul>
 					</div>
 				</div>
@@ -49,7 +41,8 @@
 							<li><a href="${pageContext.request.contextPath}/salesList.do">판매관리</a></li>
 							<li><a href="${pageContext.request.contextPath}/menuMgnlist.do">음식관리</a></li>
 							<li><a href="${pageContext.request.contextPath}/memberMgnlist.do">회원관리</a></li>
-							<li><a href="">예약관리</a></li>
+							<li><a href="${pageContext.request.contextPath}/reservationMgn.do">예약관리</a></li>
+							<li><a href="${pageContext.request.contextPath}/noticeMgninsert.do">공지사항관리</a></li>
 						</ul>
 					</div>
 					<div id="head2_2">

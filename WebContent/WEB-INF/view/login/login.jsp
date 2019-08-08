@@ -264,7 +264,7 @@
 							<tr>
 								<td class="under">전화번호</td>
 								<td class="under2">
-									<input type="text" size="30" name="tel">
+									<input type="password" size="30" name="tel">
 									<span class="reg">※ 전화번호를 입력하세요</span>
 								</td>
 							</tr>

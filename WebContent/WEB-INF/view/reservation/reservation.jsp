@@ -85,7 +85,7 @@
 	}
 </style>
 <link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
-<script src="js/jquery-ui.js?2"></script>
+<script src="js/jquery-ui.js"></script>
 
 <script>
 	$(function(){
@@ -187,26 +187,5 @@
 </div>
 
 <%@ include file="../include/footer.jsp" %>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

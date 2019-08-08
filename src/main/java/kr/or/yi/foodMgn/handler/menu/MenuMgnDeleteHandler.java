@@ -23,18 +23,22 @@ public class MenuMgnDeleteHandler implements CommandHandler {
 		FoodDao dao = new FoodDaoImpl();
 		Food food = new Food(fNo);
 		food.setFdWithdrawal(true);
-		dao.deletFood(food);
+		int result = dao.deletFood(food);
 		
 		Map<String, Boolean> map = new HashMap<String, Boolean>();
-		map.put("success", true);
 		
-		ObjectMapper om = new ObjectMapper();
-		String json = om.writeValueAsString(map);
-		
-		PrintWriter out = res.getWriter();
-		out.print(json);
-		out.flush();
-		
+		if(result != 0) {
+			map.put("success", true);
+			
+			ObjectMapper om = new ObjectMapper();
+			String json = om.writeValueAsString(map);
+			
+			PrintWriter out = res.getWriter();
+			out.print(json);
+			out.flush();
+			
+			return null;
+		}
 		return null;
 	}
 
