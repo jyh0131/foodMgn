@@ -67,16 +67,11 @@
 		line-height: 20px;
 		padding: 10px 0;
 		background-color: #f2efec;
+		color: black;
 	}
 	#menulist li:hover {
 		background-color: #887c75;
-	}
-	#menulist li:hover a {
 		color: white;
-	}
-	#menulist li a {
-		color: black;
-		padding: 10px;
 	}
 	#menulist li:last-child {
 		border-bottom: 1px solid #887c75;
@@ -110,12 +105,21 @@
 		width: 100%;
 		
 	}
-	#menu_name img {
-		/* width: 1000px; */          
-	}
 	.bevImg img {
 		float: left;
 		width: 250px;
+		height: 620px;
+		border-bottom: 1px dotted #555;
+	}
+	.beerImg img {
+		float: left;
+		width: 250px;
+		height: 415px;
+		border-bottom: 1px dotted #555;
+	}
+	.beerImg:nth-child(1) img, .beerImg:nth-child(2) img {
+		width: 500px;
+		height: 400px;
 	}
 </style>
 
@@ -123,7 +127,6 @@
 	$(function() {
 		$("#menu_li").click(function() {
 			$("#menulist").toggle();
-			      
 		})
 		
 	})
@@ -138,7 +141,7 @@
 				<span class="li_img"></span>
 				<ul id="menulist">
 					<c:forEach var="fklist" items="${fkList}">
-						<li><a href="${pageContext.request.contextPath}/menu.do?fkno=${fklist.fkNo}">${fklist}</a></li>
+						<a href="${pageContext.request.contextPath}/menu.do?fkno=${fklist.fkNo}"><li>${fklist}</li></a>
 					</c:forEach>
 				</ul>
 			</div>
@@ -160,7 +163,15 @@
 					<h1>${fkName}</h1>
 					<div>
 						<c:forEach var="flist" items="${fList}">
-							<li><img src="${pageContext.request.contextPath}/images/menu_food/${flist.fdNo}.JPG"></li>							
+							<c:if test="${flist.fkNo.fkNo == 8}">
+								<li class="bevImg"><img src="${pageContext.request.contextPath}/images/menu_food/${flist.fdNo}.JPG"></li>
+							</c:if>
+							<c:if test="${flist.fkNo.fkNo == 9}">
+								<li class="beerImg"><img src="${pageContext.request.contextPath}/images/menu_food/${flist.fdNo}.JPG"></li>
+							</c:if>
+							<c:if test="${flist.fkNo.fkNo != 8 and flist.fkNo.fkNo != 9}">
+								<li><img src="${pageContext.request.contextPath}/images/menu_food/${flist.fdNo}.JPG"></li>
+							</c:if>
 						</c:forEach>
 					</div>
 				</div>
