@@ -33,6 +33,15 @@
 			}
 		})
 		
+		$("#manager").click(function(){
+			var a = confirm("권한이없습니다.\r\n\r\n로그인 후 이용하여 주세요.");
+			if(a==true){
+				location.href = "${pageContext.request.contextPath}/manager.do";
+			}else{
+				return;
+			}
+		})
+		
 	})
 </script>
 </head>
@@ -63,7 +72,7 @@
 								<li><a href="${pageContext.request.contextPath}/login.do">로그인</a></li>
 								<li><a href="${pageContext.request.contextPath}/join.do">회원가입</a></li>
 							</c:if>
-							<li><a href="${pageContext.request.contextPath}/join.do">관리자페이지</a></li>
+							<li><a href="#" id="manager">관리자페이지</a></li>
 						</ul>
 					</div>
 				</div>

@@ -12,9 +12,11 @@ public interface ReservationDao {
 	public int deleteRsv(Reservation rsv);
 	public List<Reservation> selectByTel(Member member);
 	public List<Reservation> selectByDate(String date);
+	public List<Reservation> selectByDateNo(Map<String, Object> map);
 	public Reservation selectByTimeTable(Reservation rsv);
 	public int updateRsv(Map<String, Object> map);
-	
 	public List<Reservation> selectByRangeTime(Reservation rsv);
 	public List<Reservation> selectByNo(Member member);
+	
+	public int deleteRsv2(Reservation rsv);
 }

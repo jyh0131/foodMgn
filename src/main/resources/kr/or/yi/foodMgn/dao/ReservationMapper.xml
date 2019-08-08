@@ -22,14 +22,16 @@
 		values(#{mbNo.mbNo},#{rsvNumber},#{rsvTime},#{rsvTableNo},#{rsvInputTime},#{rsvUpdateTime},#{rsvCancel}) 
 	</insert>
 	
-	<select id="selectByTime" resultMap="resultRsvLJH2">
-		select * from member_reservation3 where timediff(rsv_time, now())>0;
-	</select>
-	
 	<update id="deleteRsv">
 		update reservation
 		set rsv_cancel = #{rsvCancel}, rsv_update_time = #{rsvUpdateTime}
 		where rsv_time=#{rsvTime} and rsv_tableNo=#{rsvTableNo}
+	</update>
+	
+	<update id="deleteRsv2" parameterType="Reservation">
+		update reservation
+		set rsv_cancel = #{rsvCancel}, rsv_update_time = #{rsvUpdateTime}
+		where rsv_no=#{rsvNo}
 	</update>
 	
 	<update id="updateRsv" parameterType="map">
@@ -46,6 +48,10 @@
 		select * from member_reservation where rsv_time like concat(#{date},'%')
 	</select>
 	
+	<select id="selectByDateNo" parameterType="map" resultMap="resultRsvLJH2">
+		select * from member_reservation where rsv_time like concat(#{date},'%') and mb_no=#{mbNo}
+	</select>
+	
 	<select id="selectByTimeTable" parameterType="Reservation" resultMap="resultRsvLJH2">
 		select * from member_reservation where rsv_time=#{rsvTime} and rsv_tableNo=#{rsvTableNo}
 	</select>
@@ -55,9 +61,12 @@
 	</select>
 	
 	<select id="selectByNo" parameterType="Member" resultMap="resultRsvLJH2">
-		select * from reservation where mb_no=#{mbNo}
+		select * from member_reservation where mb_no=#{mbNo}
 	</select>
 	
+	<select id="selectByTime" resultMap="resultRsvLJH2">
+		select * from member_reservation3 where timediff(rsv_time, now())>0;
+	</select>
 </mapper>
 
 
