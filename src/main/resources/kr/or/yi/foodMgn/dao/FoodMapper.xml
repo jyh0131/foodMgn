@@ -43,7 +43,7 @@
 	</select>
 	
 	<update id="updateFood" parameterType="Food">
-		update food set fd_price = #{fdPrice}, fd_name = #{fdName} where fd_no = #{fdNo}
+		update food set fd_price = #{fdPrice} where fd_no = #{fdNo}
 	</update>
 	
 	<delete id="deletFood" parameterType="Food">
