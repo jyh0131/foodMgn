@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<%@ include file="../include/header_mgn.jsp" %>
+<%@ include file="../../view/include/header_mgn.jsp" %>
 <style>
 	#wrap {
 		min-height: 700px;
@@ -69,6 +69,9 @@
 		border-radius: 3px;
 		outline: none;
 	}
+	.update, .noupdate {
+		width: 39px;
+	}
 	.delete, .nodelete {
 		margin-left: 3px;
 	}
@@ -94,9 +97,10 @@
 		float: right;
 		margin: 10px 10px 0 0;
 	}
-	
-	#uptable td, #uptable tr {
-		border: 1px solid black;
+	.upSuc {
+		background-color: #555;
+		font-size: 0.7em;
+		border: 1px solid #555;    
 	}
 </style>
 <script>
@@ -109,7 +113,7 @@
 				var fNo = $(this).attr("data-no");
 				
 				$.ajax({
-					url:"${pageContext.request.contextPath}/menuMgndelete.do",
+					url:"${pageContext.request.contextPath}/menuMgnDelete.do",
 					type:"get",
 					data:{"fNo":fNo},
 					dataType:"json",
@@ -126,7 +130,34 @@
 		})
 		
 		$(".update").click(function() {
-			
+			 var fNo = $(this).attr("data-no");
+	         var $btn = $(this);
+	         var $input = $("<input type='text' name='uprice' size=5>");
+	         
+	         if($btn.text()=="수정") {
+	        	 $btn.text("수정완료");
+		         $btn.addClass("upSuc");
+		        	
+		         $btn.parent().prev().empty();
+		         $btn.parent().prev().append($input);
+	         } else {
+	        	 $btn.text("수정");
+	        	 $btn.removeClass("upSuc");
+		         
+		         $.ajax({
+		            url:"${pageContext.request.contextPath}/menuMgnupdate.do",
+		            type:"get",
+		            data:{"fNo":fNo, "uprice":$("input[name='uprice']").val()},
+		            dataType:"json",
+		            success: function(res) {
+		               console.log(res);
+		               
+		               if(res.success == true) {
+		            	   location.href="${pageContext.request.contextPath}/menuMgnlist.do";
+		               }
+		            }
+		         })
+	         }
 		})
 		
 		$(".nodelete").click(function() {
@@ -210,15 +241,15 @@
 			<form action="${pageContext.request.contextPath}/menuMgninsert.do" method="post" id="f1">
 				<select name="fk">
 					<option>FOOD KIND</option>
-					<option>PASTA</option>
-					<option>STEAK & CUTLET</option>
-					<option>PILAF & RISOTTO</option>
-					<option>SALAD</option>
-					<option>SIGNATURE PIZZA</option>
-					<option>PIZZA</option>
-					<option>SIDE MENU</option>
-					<option>BEVERAGE</option>
-					<option>BEER</option>
+					<option>파스타</option>
+					<option>스테이크&커틀렛</option>
+					<option>필라프&리조또</option>
+					<option>샐러드</option>
+					<option>시그니처 피자</option>
+					<option>피자</option>
+					<option>사이드 메뉴</option>
+					<option>음료</option>
+					<option>맥주</option>
 				</select>
 				<input type="text" name="name" size="20" placeholder="음식명">
 				<input type="text" name="price" size="5" placeholder="가격">
@@ -267,4 +298,4 @@
 		</div>
 	</div>
 	
-<%@ include file="../include/footer.jsp" %>
+<%@ include file="../../view/include/footer.jsp" %>

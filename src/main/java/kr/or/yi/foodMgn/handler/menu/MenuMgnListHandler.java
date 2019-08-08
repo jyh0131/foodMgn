@@ -20,7 +20,7 @@ public class MenuMgnListHandler implements CommandHandler {
 		
 		req.setAttribute("fList", fList);
 		
-		return "/WEB-INF/view/menu/menu_mgn.jsp";
+		return "/WEB-INF/manager/menu/menu_mgn.jsp";
 	}
 
 }

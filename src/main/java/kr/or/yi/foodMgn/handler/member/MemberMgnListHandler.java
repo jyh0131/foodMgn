@@ -19,7 +19,7 @@ public class MemberMgnListHandler implements CommandHandler {
 		List<Member> mlist = mDao.selectMemberByAllNM();
 		req.setAttribute("mList", mlist);
 		
-		return "/WEB-INF/view/member/member_mgn.jsp";
+		return "/WEB-INF/manager/member/member_mgn.jsp";
 	}
 
 }
