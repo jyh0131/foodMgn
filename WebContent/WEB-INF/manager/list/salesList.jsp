@@ -127,6 +127,41 @@ table {
 		     }
 			 
 		});
+		
+		$("#all").click(function() {
+			$("#datepicker").val("");
+			  $.ajax({
+					url:"${pageContext.request.contextPath }/salesListAll.do",
+					type:"get",
+					dataType:"json",
+					success:function(json){
+						console.log(json);
+						$("tbody").empty();
+						for(var i=0; i<json.list.length; i++){
+							var list=json.list[i];
+							if(i%2==0){
+								$("tbody").append("<tr  role='row' class='odd'>");
+								$("tbody tr").eq(i).append("<td class='sorting_1'>"+(i+1)+"</td>");
+								$("tbody tr").eq(i).append("<td>"+list.ssName+"</td>");
+								$("tbody tr").eq(i).append("<td>"+list.ssCount+"개</td>");
+								$("tbody tr").eq(i).append("<td>"+list.ssTotalPrice+"원</td>");
+								$("tbody tr").eq(i).append("<td>"+list.ssShare+"%</td>");
+							}else{
+								$("tbody").append("<tr  role='row' class='even'>");
+								$("tbody tr").eq(i).append("<td class='sorting_1'>"+(i+1)+"</td>");
+								$("tbody tr").eq(i).append("<td>"+list.ssName+"</td>");
+								$("tbody tr").eq(i).append("<td>"+list.ssCount+"개</td>");
+								$("tbody tr").eq(i).append("<td>"+list.ssTotalPrice+"원</td>");
+								$("tbody tr").eq(i).append("<td>"+list.ssShare+"%</td>");
+							}
+							
+						}
+					}
+					
+				})
+		})
+		
+		
 	})
 </script>
 <div class="s_visu1">
@@ -139,7 +174,9 @@ table {
 		<div id="sub">
 			<p id="selDate">
 				<label>날짜 선택: </label><input type="text" id="datepicker">
+				<button id="all">전체보기</button>
 			</p>
+			
 		</div>
 		
 		<table id="saleTable" class="display">
