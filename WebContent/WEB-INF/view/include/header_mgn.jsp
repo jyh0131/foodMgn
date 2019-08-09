@@ -41,15 +41,15 @@
 
 								<a href="${pageContext.request.contextPath}/mgn/saleList.do">결제관리</a>
 								<ul class="submenu">
-									<li><a href="${pageContext.request.contextPath}/saleList.do">결제현황</a></li>
-									<li><a href="${pageContext.request.contextPath}/saleListChart.do">결제차트</a></li>
+									<li><a href="${pageContext.request.contextPath}/mgn/saleList.do">결제현황</a></li>
+									<li><a href="${pageContext.request.contextPath}/mgn/saleListChart.do">결제차트</a></li>
 								</ul>
 
 							</li>
 						   <li><a href="${pageContext.request.contextPath}/mgn/salesList.do">판매관리</a>
 						   		<ul class="submenu">
-									<li><a href="${pageContext.request.contextPath}/salesList.do">판매현황</a></li>
-									<li><a href="${pageContext.request.contextPath}/salesListChart.do">판매차트</a></li>
+									<li><a href="${pageContext.request.contextPath}/mgn/salesList.do">판매현황</a></li>
+									<li><a href="${pageContext.request.contextPath}/mgn/salesListChart.do">판매차트</a></li>
 								</ul>
 						   </li>
 							<li><a href="${pageContext.request.contextPath}/mgn/menuMgnlist.do">음식관리</a></li>

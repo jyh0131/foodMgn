@@ -100,7 +100,8 @@ public class PaymentResultHandler implements CommandHandler {
 			}
 			service.updateGrade(mem2);
 		}
-		
+		req.getSession().removeAttribute("mem");
+		req.getSession().removeAttribute("list");
 		
 		res.sendRedirect(req.getContextPath()+"/");
 		return null; //프로젝트 루트로 이동 - index.jsp실행 //제일앞에있는 /(슬러시)를 갈아엎음

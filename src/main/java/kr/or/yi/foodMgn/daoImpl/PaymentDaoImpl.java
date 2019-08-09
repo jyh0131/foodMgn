@@ -1,6 +1,7 @@
 package kr.or.yi.foodMgn.daoImpl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -21,6 +22,22 @@ public class PaymentDaoImpl implements PaymentDao {
 	public List<Payment> selectPaymentByDate(String date) {
 		try(SqlSession sqlSession = MybatisSqlSessionFactory.openSession()) {
 			return sqlSession.selectList(namespace + "selectPaymentByDate",date);
+		}
+	}
+
+	
+
+	@Override
+	public List<Payment> selectPaymentByDate2(Map<String, Object> map) {
+		try(SqlSession sqlSession = MybatisSqlSessionFactory.openSession()) {
+			return sqlSession.selectList(namespace + "selectPaymentByDate2",map);
+		}
+	}
+
+	@Override
+	public List<Payment> selectPaymentByAll2(int no) {
+		try(SqlSession sqlSession = MybatisSqlSessionFactory.openSession()) {
+			return sqlSession.selectList(namespace + "selectPaymentByAll2",no);
 		}
 	}
 

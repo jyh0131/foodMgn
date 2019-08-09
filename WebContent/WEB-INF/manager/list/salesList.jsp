@@ -97,7 +97,12 @@ table {
 						dataType:"json",
 						success:function(json){
 							console.log(json);
+						
 							$("tbody").empty();
+							if(json.list.length==0){
+	    						alert("조회조건에 맞는 내역이 없습니다.");
+	    						return false;
+	    					}
 							var totalCount=0;
 							var totalPrice=0;
 							for(var i=0; i<json.list.length; i++){
@@ -145,7 +150,12 @@ table {
 					dataType:"json",
 					success:function(json){
 						console.log(json);
+					
 						$("tbody").empty();
+						if(json.list.length==0){
+    						alert("조회조건에 맞는 내역이 없습니다.");
+    						return false;
+    					}
 						var totalCount=0;
 						var totalPrice=0;
 						
@@ -184,6 +194,134 @@ table {
 		})
 		
 		
+		//년도,월별
+		 var now = new Date();
+	       var nyear = now.getFullYear();
+	       var nmon = (now.getMonth()+1) > 9 ? ''+(now.getMonth()+1) : '0'+(now.getMonth()+1);            
+	       
+	       //년도 selectbox만들기               
+	       $("#fd_year").append("<option value='100'>년도를 선택해주세요</option>");
+	       
+	       for(var sy = 2002 ; sy <= nyear ; sy++) {
+	           $('#fd_year').append('<option value="'+sy+'">' + sy + '년</option>');    
+	       }
+
+	       // 월별 selectbox 만들기            
+	        $("#fd_month").append("<option value='100'>월을 선택해주세요</option>");
+	       for(var i=1; i <= 12; i++) {
+	           var sm = i > 9 ? i : "0"+i ;            
+	           $('#fd_month').append('<option value="'+sm+'">' + sm + '월</option>');    
+	        }            
+	       
+	       $("#fd_year  > option[value='100'").attr("selected", "true");    
+	       $("#fd_month  > option[value='100'").attr("selected", "true");  
+		
+	       $("#search").click(function() { //조회 버튼 클릭시
+	       		var y =$("#fd_year").val();
+	       		var m =$("#fd_month").val();
+	       		if(y==100){
+	       			alert("년도를 선택해주세요.")
+	       		}else if(y!=100 && m==100){ //년도별 검색,월x
+	       		 $.ajax({
+						url:"${pageContext.request.contextPath }/mgn/salesList.do",
+						type:"get",
+						data : {"date":y},
+						dataType:"json",
+						success:function(json){
+							console.log(json);
+							
+							$("tbody").empty();
+							if(json.list.length==0){
+	    						alert("조회조건에 맞는 내역이 없습니다.");
+	    						return false;
+	    					}
+							var totalCount=0;
+							var totalPrice=0;
+							
+							for(var i=0; i<json.list.length; i++){
+								var list=json.list[i];
+								if(i%2==0){
+									$("tbody").append("<tr  role='row' class='odd'>");
+									$("tbody tr").eq(i).append("<td class='sorting_1'>"+(i+1)+"</td>");
+									$("tbody tr").eq(i).append("<td>"+list.ssName+"</td>");
+									$("tbody tr").eq(i).append("<td>"+list.ssCount+"개</td>");
+									totalCount += list.ssCount;
+									$("tbody tr").eq(i).append("<td>"+list.ssTotalPrice.toLocaleString()+"원</td>");
+									totalPrice += list.ssTotalPrice;
+									$("tbody tr").eq(i).append("<td>"+list.ssShare+"%</td>");
+								}else{
+									$("tbody").append("<tr  role='row' class='even'>");
+									$("tbody tr").eq(i).append("<td class='sorting_1'>"+(i+1)+"</td>");
+									$("tbody tr").eq(i).append("<td>"+list.ssName+"</td>");
+									$("tbody tr").eq(i).append("<td>"+list.ssCount+"개</td>")
+									totalCount += list.ssCount;;
+									$("tbody tr").eq(i).append("<td>"+list.ssTotalPrice.toLocaleString()+"원</td>");
+									totalPrice += list.ssTotalPrice;
+									$("tbody tr").eq(i).append("<td>"+list.ssShare+"%</td>");
+								}
+								
+							}
+							$("tbody").append("<tr id='total'>");
+							$("tbody tr").eq(i).append("<td></td>");
+							$("tbody tr").eq(i).append("<td></td>");
+							$("tbody tr").eq(i).append("<td>"+totalCount.toLocaleString()+"개</td>");
+							$("tbody tr").eq(i).append("<td>"+totalPrice.toLocaleString()+"원</td>");
+							$("tbody tr").eq(i).append("<td>100.0%</td>");
+						}
+						
+					})      			
+	       		}else if(y!=100 && m!=100){ //년도,월 같이
+	       			var ym = y+"-"+m;
+	       		 $.ajax({
+						url:"${pageContext.request.contextPath }/mgn/salesList.do",
+						type:"get",
+						data : {"date":ym},
+						dataType:"json",
+						success:function(json){
+							console.log(json);
+							
+							$("tbody").empty();
+							if(json.list.length==0){
+	    						alert("조회조건에 맞는 내역이 없습니다.");
+	    						return false;
+	    					}
+							var totalCount=0;
+							var totalPrice=0;
+							
+							for(var i=0; i<json.list.length; i++){
+								var list=json.list[i];
+								if(i%2==0){
+									$("tbody").append("<tr  role='row' class='odd'>");
+									$("tbody tr").eq(i).append("<td class='sorting_1'>"+(i+1)+"</td>");
+									$("tbody tr").eq(i).append("<td>"+list.ssName+"</td>");
+									$("tbody tr").eq(i).append("<td>"+list.ssCount+"개</td>");
+									totalCount += list.ssCount;
+									$("tbody tr").eq(i).append("<td>"+list.ssTotalPrice.toLocaleString()+"원</td>");
+									totalPrice += list.ssTotalPrice;
+									$("tbody tr").eq(i).append("<td>"+list.ssShare+"%</td>");
+								}else{
+									$("tbody").append("<tr  role='row' class='even'>");
+									$("tbody tr").eq(i).append("<td class='sorting_1'>"+(i+1)+"</td>");
+									$("tbody tr").eq(i).append("<td>"+list.ssName+"</td>");
+									$("tbody tr").eq(i).append("<td>"+list.ssCount+"개</td>")
+									totalCount += list.ssCount;;
+									$("tbody tr").eq(i).append("<td>"+list.ssTotalPrice.toLocaleString()+"원</td>");
+									totalPrice += list.ssTotalPrice;
+									$("tbody tr").eq(i).append("<td>"+list.ssShare+"%</td>");
+								}
+								
+							}
+							$("tbody").append("<tr id='total'>");
+							$("tbody tr").eq(i).append("<td></td>");
+							$("tbody tr").eq(i).append("<td></td>");
+							$("tbody tr").eq(i).append("<td>"+totalCount.toLocaleString()+"개</td>");
+							$("tbody tr").eq(i).append("<td>"+totalPrice.toLocaleString()+"원</td>");
+							$("tbody tr").eq(i).append("<td>100.0%</td>");
+						}
+						
+					})
+	       		}
+	       })
 	})
 </script>
 <div class="s_visu1">
@@ -195,6 +333,9 @@ table {
 		<div id="sub">
 			<p id="selDate">
 				<label>날짜 선택: </label><input type="text" id="datepicker">
+				<select id="fd_year" name="fd_year" style="width:130px;"></select>    
+          		 <select id="fd_month" name="fd_month" style="width:130px;"></select> 
+          		 <button id="search">조회</button>   
 				<button id="all">전체보기</button>
 			</p>
 			

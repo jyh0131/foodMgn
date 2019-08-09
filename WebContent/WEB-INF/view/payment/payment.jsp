@@ -109,7 +109,19 @@
 			
 		})
 		
-		
+		//마일리지 적용 버튼 클릭시
+		$("#btnM").click(function() {
+			var useMileage = $("#mileage_info_get").val();
+			if(useMileage > ${mem.mbMileage} ){
+				alert("사용가능한 마일리지는 ${mem.mbMileage}원 입니다");
+				$("#mileage_info_get").val("");
+			}else{
+				$("#sale_info_get").text("마일리지:"+useMileage.toLocaleString()+"원");
+				$("#sale_price_get").text(useMileage.toLocaleString());
+				var totalP3= ${ totalPrice }-useMileage;
+				$("#pay_price_get").text( totalP3.toLocaleString()  );
+			}
+		})
 		
 		
 	})
@@ -126,6 +138,7 @@
 		<h3 class="brown_1">주문정보</h3>
 			<table>
 				<tr>
+					<th>제품사진</th>
 					<th>제품명</th>
 					<th>수량</th>
 					<th>가격</th>
@@ -133,6 +146,7 @@
 	
 		<c:forEach var="list" items="${list }">
 			<tr>
+				<td><img class="foodImg" src="${pageContext.request.contextPath}/images/food/${list.fdNo.fdName }.png"></td>
 				<td>${list.fdNo.fdName }</td>
 				<td>${list.saleOrderCnt }</td>
 				<td><fmt:formatNumber value="${list.fdNo.fdPrice*list.saleOrderCnt }"/>  원</td>
@@ -169,7 +183,7 @@
 			<div id="sale_detail_3">
 				<p class="font_1">사용가능한 마일리지 : <span class="font_3" id="total_mileage"></span>원</p>
 				<br><br>
-				<p class="font_1">사용할 마일리지 : <input type="text" id="mileage_info_get">원 </p>
+				<p class="font_1">사용할 마일리지 : <input type="text" id="mileage_info_get">원 <button id="btnM">적용하기</button></p>
 			</div>
 		</div>
 		
