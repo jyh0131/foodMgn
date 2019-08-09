@@ -66,8 +66,6 @@
 		color:red;
 	}
 </style>
-<link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
-<script src="js/jquery-ui.js"></script>
 <script>
 $(function() {
 	$("#selectList").datepicker({
@@ -80,7 +78,7 @@ $(function() {
             return false;
         }
 		$.ajax({
-			url:"${pageContext.request.contextPath}/searchMyRsv.do",
+			url:"${pageContext.request.contextPath}/my/searchMyRsv.do",
 			type:"post",
 			data:{"date":$("input[name='date']").val()},
 			dataType:"json",
@@ -148,7 +146,7 @@ $(function() {
 			if(a==true){
 				var rsvNo = $(this).parent().parent().find(".date").attr("data-rsv");
 				$.ajax({
-					url:"${pageContext.request.contextPath}/deleteRsv.do",
+					url:"${pageContext.request.contextPath}/my/deleteRsv.do",
 					type:"get",
 					data:{"rsvNo":rsvNo},
 					dataType:"json",

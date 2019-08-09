@@ -121,7 +121,7 @@ button {
 		$("#all").click(function() {
 			$("#datepicker").val("");
 			$.ajax({
-				url:"${pageContext.request.contextPath }/saleListDate.do",
+				url:"${pageContext.request.contextPath }/mgn/saleListDate.do",
 				type:"get",
 				dataType:"json",
 				success:function(json){
@@ -246,7 +246,7 @@ button {
 			  onSelect: function(dateText, inst) {
 		          var date = $(this).val();
 			$.ajax({
-				url:"${pageContext.request.contextPath }/saleListDate.do",
+				url:"${pageContext.request.contextPath }/mgn/saleListDate.do",
 				type:"get",
 				data : {"date":date},
 				dataType:"json",
@@ -376,7 +376,7 @@ button {
 				var payCancel = $(this).parent().parent().find(".payCancel").text();
 				var payMemberNo = $(this).parent().parent().find(".payMemberNo").text();
 				$.ajax({
-					url:"${pageContext.request.contextPath }/saleCancel.do",
+					url:"${pageContext.request.contextPath }/mgn/saleCancel.do",
 					type:"get",
 					data : {"payNo":payNo,"payDiscountInfo":payDiscountInfo,"payDiscountPrice":payDiscountPrice,"payMember":payMember,"payCancel":payCancel,"payMemberNo":payMemberNo},
 					dataType:"json",

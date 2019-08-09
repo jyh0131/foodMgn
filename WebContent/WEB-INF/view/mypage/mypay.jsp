@@ -112,7 +112,7 @@ button {
 		$("#all").click(function() {
 			$("#datepicker").val("");
 			$.ajax({
-				url:"${pageContext.request.contextPath }/saleListDate.do",
+				url:"${pageContext.request.contextPath }/my/MypageSaleList.do",
 				type:"get",
 				dataType:"json",
 				success:function(json){

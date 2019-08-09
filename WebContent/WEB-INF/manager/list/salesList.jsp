@@ -91,7 +91,7 @@ table {
 			  onSelect: function(dateText, inst) {
 		          var date = $(this).val();
 		          $.ajax({
-						url:"${pageContext.request.contextPath }/salesList.do",
+						url:"${pageContext.request.contextPath }/mgn/salesList.do",
 						type:"get",
 						data : {"date":date},
 						dataType:"json",
@@ -140,7 +140,7 @@ table {
 		$("#all").click(function() {
 			$("#datepicker").val("");
 			  $.ajax({
-					url:"${pageContext.request.contextPath }/salesListAll.do",
+					url:"${pageContext.request.contextPath }/mgn/salesListAll.do",
 					type:"get",
 					dataType:"json",
 					success:function(json){
