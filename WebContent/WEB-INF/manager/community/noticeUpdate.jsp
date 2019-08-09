@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-<%@ include file="../../view/include/header_mgn.jsp" %>
 
+<%@ include file="../../view/include/header_mgn.jsp" %>
 <style>
 	#wrap {
 		min-height: 700px;
@@ -19,10 +18,11 @@
 		margin: 30px 0;
 	}
 </style>
+
 	<div id="wrap">
 		<div id="div"></div>
 		<div id="noticeForm">
-			<form action="${pageContext.request.contextPath}/noticeMgninsert.do" method="post" enctype="multipart/form-data">
+			<form action="${pageContext.request.contextPath}/noticeMgnupdate.do" method="post" enctype="multipart/form-data">
 				<p>
 					<label>제목</label>
 					<input type="text" name="title">
@@ -41,4 +41,5 @@
 			</form>
 		</div>
 	</div>
+
 <%@ include file="../../view/include/footer.jsp" %>

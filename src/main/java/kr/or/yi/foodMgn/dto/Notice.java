@@ -10,6 +10,7 @@ public class Notice {
 	private String noWriter;
 	private Date noRegdate;
 	private Date noModdate;
+	private boolean noDelete;
 	
 	public Notice() {
 		// TODO Auto-generated constructor stub
@@ -68,10 +69,18 @@ public class Notice {
 	public void setNoModdate(Date noModdate) {
 		this.noModdate = noModdate;
 	}
-	
+	public boolean isNoDelete() {
+		return noDelete;
+	}
+	public void setNoDelete(boolean noDelete) {
+		this.noDelete = noDelete;
+	}
+
 	@Override
 	public String toString() {
 		return "Notice [noNo=" + noNo + ", noTitle=" + noTitle + ", noContent=" + noContent + ", noReadNt=" + noReadNt
-				+ ", noWriter=" + noWriter + ", noRegdate=" + noRegdate + ", noModdate=" + noModdate + "]";
+				+ ", noWriter=" + noWriter + ", noRegdate=" + noRegdate + ", noModdate=" + noModdate + ", noDelete="
+				+ noDelete + "]";
 	}
+
 }

@@ -12,5 +12,7 @@ public interface NoticeDao {
 	public Notice selectNoticeByNo(Notice notice);
 	public List<Notice> selectListPage(Map<String, Integer> map);
 	public int selectTotalCount();
-	public int readNtAdd(Map<String, Integer> map);
+	public int updateReadNt(Notice notice);
+	public int deleteNotice(Notice notice);
+	public int updateNotice(Notice notice);
 }

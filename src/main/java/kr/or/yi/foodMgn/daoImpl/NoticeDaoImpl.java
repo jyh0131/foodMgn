@@ -58,9 +58,27 @@ public class NoticeDaoImpl implements NoticeDao {
 	}
 
 	@Override
-	public int readNtAdd(Map<String, Integer> map) {
+	public int updateReadNt(Notice notice) {
 		try(SqlSession sqlSession = MybatisSqlSessionFactory.openSession()) {
-			int res = sqlSession.update(namespace + ".selectTotalCount", map);
+			int res = sqlSession.update(namespace + ".updateReadNt", notice);
+			sqlSession.commit();
+			return res;
+		}
+	}
+
+	@Override
+	public int deleteNotice(Notice notice) {
+		try(SqlSession sqlSession = MybatisSqlSessionFactory.openSession()) {
+			int res = sqlSession.delete(namespace + ".deleteNotice", notice);
+			sqlSession.commit();
+			return res;
+		}
+	}
+
+	@Override
+	public int updateNotice(Notice notice) {
+		try(SqlSession sqlSession = MybatisSqlSessionFactory.openSession()) {
+			int res = sqlSession.update(namespace + ".updateNotice", notice);
 			sqlSession.commit();
 			return res;
 		}

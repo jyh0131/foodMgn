@@ -18,14 +18,22 @@
 	</select>
 	
 	<select id="selectListPage" resultType="Notice" parameterType="map">
-		select * from notice order by no_no desc limit #{startRow}, #{size}
+		select * from notice where no_delete = false order by no_no desc limit #{startRow}, #{size}
 	</select>
 	
 	<select id="selectTotalCount" resultType="java.lang.Integer">
 		select count(no_no) from notice
 	</select>
 	
-	<update id="readNtAdd" parameterType="map">
+	<update id="updateReadNt" parameterType="Notice">
 		update notice set no_read_nt = #{noReadNt} where no_no = #{noNo}
+	</update>
+	
+	<delete id="deleteNotice" parameterType="Notice">
+		update notice set no_delete = #{noDelete} where no_no = #{noNo}
+	</delete>
+	
+	<update id="updateNotice" parameterType="Notice">
+		update notice set no_content = #{noContent}, no_regdate = #{noRegdate} where no_no = #{noNo}
 	</update>
 </mapper>
