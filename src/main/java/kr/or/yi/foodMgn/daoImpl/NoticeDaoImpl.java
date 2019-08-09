@@ -1,6 +1,7 @@
 package kr.or.yi.foodMgn.daoImpl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -33,5 +34,38 @@ public class NoticeDaoImpl implements NoticeDao {
 			return sqlSession.selectOne(namespace + ".selectNoticeByNo", notice);
 		}
 	}
+
+	@Override
+	public List<Notice> selectNoticeByAll2() {
+		try(SqlSession sqlSession = MybatisSqlSessionFactory.openSession()) {
+			return sqlSession.selectList(namespace + ".selectNoticeByAll2");
+		}
+	}
+
+	@Override
+	public List<Notice> selectListPage(Map<String, Integer> map) {
+		try(SqlSession sqlSession = MybatisSqlSessionFactory.openSession()) {
+			return sqlSession.selectList(namespace + ".selectListPage", map);
+		}
+	}
+
+	@Override
+	public int selectTotalCount() {
+		try(SqlSession sqlSession = MybatisSqlSessionFactory.openSession()) {
+			int res = sqlSession.selectOne(namespace + ".selectTotalCount");
+			return res;
+		}
+	}
+
+	@Override
+	public int readNtAdd(Map<String, Integer> map) {
+		try(SqlSession sqlSession = MybatisSqlSessionFactory.openSession()) {
+			int res = sqlSession.update(namespace + ".selectTotalCount", map);
+			sqlSession.commit();
+			return res;
+		}
+	}
+
+	
 
 }

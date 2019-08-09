@@ -129,15 +129,34 @@
 						<th>날짜</th>
 						<th>조회</th>
 					</tr>
-					<c:forEach var="nlist" items="${nList}">
+					<%-- <c:forEach var="nlist" items="${nList}"> --%>
+					<c:forEach var="n" items="${noticePage.content}">
 						<tr>
-							<td>${nlist.noNo}</td>
-							<td><a href="${pageContext.request.contextPath}/noticeDetail.do?no=${nlist.noNo}">${nlist.noTitle}</a></td>
-							<td>${nlist.noWriter}</td>
-							<td class="small"><fmt:formatDate value="${nlist.noRegdate}" pattern="yyyy-MM-dd"/></td>
-							<td class="small">${nlist.noReadNt}</td>
+							<td>${n.noNo}</td>
+							<td><a href="${pageContext.request.contextPath}/noticeDetail.do?no=${n.noNo}&page=${noticePage.currentPage}">${n.noTitle}</a></td>
+							<td>${n.noWriter}</td>
+							<td class="small"><fmt:formatDate value="${n.noRegdate}" pattern="yyyy-MM-dd"/></td>
+							<td class="small">${n.noReadNt}</td>
 						</tr>
 					</c:forEach>
+					<tr>
+						<td colspan="4" class="page_wrap">
+							<c:if test="${noticePage.startPage > 10}">
+								<a href="notice.do?page=${noticePage.startPage - 1}" class="pn">[이전]</a>
+							</c:if>
+							<c:forEach var="pNo" begin="${noticePage.startPage}" end="${noticePage.endPage}">
+								<c:if test="${noticePage.currentPage == pNo}">
+									<a href="notice.do?page=${pNo}" class="current">${pNo}</a>
+								</c:if>
+								<c:if test="${noticePage.currentPage != pNo}">
+									<a href="notice.do?page=${pNo}">${pNo}</a>
+								</c:if>
+							</c:forEach>
+							<c:if test="${noticePage.endPage < noticePage.totalPages}">
+								<a href="notice.do?page=${noticePage.endPage + 1}" class="pn">[다음]</a>
+							</c:if>
+						</td>
+					</tr>
 				</table>
 			</div>
 			<div id="searchdiv">

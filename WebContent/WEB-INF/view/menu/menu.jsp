@@ -8,7 +8,6 @@
 		width: 100%;
 		height: 350px;
 	}
-	
 	.s_visu1 img{
 		width: 100%;
 		height: 350px;
@@ -127,7 +126,22 @@
 		$("#menu_li").click(function() {
 			$("#menulist").toggle();
 		})
+		/* $("#menu_li").click(function() {
+			$("#menulist").show();
+			$("#menulist li").show();
+		})
 		
+		$("#menu_li").mouseleave(function(e) {
+			var container = $("#menulist");
+			if(container.has(e.target).length === 0)
+				container.hide();
+		})
+		
+		$("#menulist").mouseleave(function(e) {
+			var container = $("#menulist li");
+			if(container.has(e.target).length === 0)
+				container.hide();
+		}) */
 	})
 </script>
 	<div class="sub">
