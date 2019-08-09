@@ -43,6 +43,6 @@
 	<ul>
 		<li id="updateMember"><a href="#">회원정보수정</a></li>
 		<li id="searchRsv2"><a href="${pageContext.request.contextPath}/searchMyRsv.do">예약내역</a></li>	
-		<li id="searchPay"><a href="#">결제내역</a></li>		
+		<li id="searchPay"><a href="${pageContext.request.contextPath}/MypageSaleList.do">결제내역</a></li>		
 	</ul>
 </div>

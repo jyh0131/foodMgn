@@ -55,6 +55,15 @@ th{
 	 height: 40px;
 }
 
+td{
+	
+	text-align: center;
+}
+
+td:last-child{
+	text-align: right;
+}
+
 
 
 
@@ -151,7 +160,7 @@ th{
 }
 
 .foodImg{
-	width: 100px;
-	height: 100px;
+	width: 70px;
+	height: 70px;
 }
 
