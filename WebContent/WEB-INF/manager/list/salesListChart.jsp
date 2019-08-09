@@ -31,7 +31,7 @@
 	$(function() {
 		$
 				.ajax({
-					url : "${pageContext.request.contextPath }/salesListChart.do",
+					url : "${pageContext.request.contextPath }/mgn/salesListChart.do",
 					type : "post",
 					dataType : "json",
 					success : function(json) {

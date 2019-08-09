@@ -19,9 +19,9 @@ public class SaleListHandler implements CommandHandler {
 			req.setAttribute("list", list);
 			return "/WEB-INF/manager/list/saleList.jsp";
 		}else {
-			boolean a = (boolean) req.getSession().getAttribute("Mgn");
+			String a =(String) req.getSession().getAttribute("Mgn");
 			
-			if(a==false) {
+			if(a.equals("0") || a==null) {
 				return "/WEB-INF/view/manager/managerLogin.jsp";
 			}else {
 				SaleListService service = SaleListService.getInstance();

@@ -112,7 +112,7 @@
 							<li><a href="${pageContext.request.contextPath}">HOME</a></li>
 							<c:if test="${Auth != null}">
 								<li><a href="${pageContext.request.contextPath}/logout.do">로그아웃</a></li>
-								<li><a href="${pageContext.request.contextPath}/mypage.do">마이페이지</a></li>
+								<li><a href="${pageContext.request.contextPath}/my/mypage.do">마이페이지</a></li>
 							</c:if>
 							<c:if test="${Auth == null}">
 								<li><a href="${pageContext.request.contextPath}/login.do">로그인</a></li>

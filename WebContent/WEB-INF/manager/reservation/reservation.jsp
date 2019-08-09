@@ -38,7 +38,7 @@
 	
 	#f2 {
 		float: right;
-		padding-right: 5px;
+		padding: 10px;
 	}
 	#btns {
 		float: left;
@@ -72,9 +72,12 @@
 		text-align: center;
 		margin-top:30px;
 	}
+	.cancel{
+		text-decoration: line-through;
+		color:red;
+	}
 </style>
-<link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
-<script src="js/jquery-ui.js"></script>
+
 <script>
 	$(function() {
 		$("#selectList").datepicker({
@@ -88,7 +91,7 @@
 	        }
 			
 			$.ajax({
-				url:"${pageContext.request.contextPath}/reservationMgn.do",
+				url:"${pageContext.request.contextPath}/mgn/reservationMgn.do",
 				type:"post",
 				data:{"date":$("input[name='date']").val(), "kind":"date"},
 				dataType:"json",
@@ -106,7 +109,9 @@
 						var $td4 = $("<td>");
 						var $td5 = $("<td>");
 						var $td6 = $("<td>");
-						
+						if(res[i].rsvCancel==true){
+							$tr.addClass("cancel");
+						}
 						var number = "";
 						if(res[i].mbNo.mbBirth==null){
 							number = "N"+res[i].mbNo.mbNo;
@@ -137,7 +142,7 @@
 	        }
 			
 			$.ajax({
-				url:"${pageContext.request.contextPath}/reservationMgn.do",
+				url:"${pageContext.request.contextPath}/mgn/reservationMgn.do",
 				type:"post",
 				data:{"tel":$("input[name='tel']").val(), "kind":"tel"},
 				dataType:"json",
@@ -155,6 +160,9 @@
 						var $td4 = $("<td>");
 						var $td5 = $("<td>");
 						var $td6 = $("<td>");
+						if(res[i].rsvCancel==true){
+							$tr.addClass("cancel");
+						}
 						var number = "";
 						if(res[i].mbNo.mbBirth==null){
 							number = "N"+res[i].mbNo.mbNo;
@@ -185,7 +193,7 @@
 		<h1>예약현황 조회</h1>
 		<div id="rsvList">
 			<div id="btns">
-				<input type="text" name="date" id="selectList"> <button id="btnDate">날짜로검색</button>
+				<input type="text" name="date" id="selectList" autocomplete="off"> <button id="btnDate">날짜로검색</button>
 			</div>
 			<div id="f2">
 				<input type="text" name="tel" size="30" placeholder="검색할 전화번호">
@@ -201,8 +209,18 @@
 					<th>테이블</th>
 				</tr>
 				<c:forEach var="mlist" items="${list}">
+					<c:if test="${mlist.rsvCancel==true }">
+						<tr class="rsvTr cancel">
+					</c:if>
+					<c:if test="${mlist.rsvCancel==false }">
 						<tr class="rsvTr">
-							<td>${mlist.mbNo.mbNo}</td>
+					</c:if>
+						<c:if test="${mlist.mbNo.mbBirth==null }">
+							<td>N${mlist.mbNo.mbNo}</td>
+						</c:if>
+						<c:if test="${mlist.mbNo.mbBirth!=null }">
+							<td>M${mlist.mbNo.mbNo}</td>
+						</c:if>
 							<td>${mlist.mbNo.mbName}</td>
 							<td>${fn:substring(mlist.mbNo.mbTel,0,3)}-${fn:substring(mlist.mbNo.mbTel,3,7)}-${fn:substring(mlist.mbNo.mbTel,7,11)}</td>
 							<td><fmt:formatDate value="${mlist.rsvTime}" pattern="yyyy년MM월dd일 kk시:mm분"/></td>
@@ -215,3 +233,9 @@
 	</div>
 
 <%@ include file="../../view/include/footer.jsp" %>
+
+
+
+
+
+

@@ -8,9 +8,11 @@
 <meta charset="UTF-8">
 <title>음식점 관리 프로그램</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/common_mgn.css" type="text/css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/jquery-ui.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery-ui.js"></script>
 <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
 <script>
 	$(function() {
@@ -36,23 +38,25 @@
 					<div id="head2_1">
 						<ul>
 							<li>
-								<a href="${pageContext.request.contextPath}/saleList.do">결제관리</a>
+
+								<a href="${pageContext.request.contextPath}/mgn/saleList.do">결제관리</a>
 								<ul class="submenu">
-									<li><a href="${pageContext.request.contextPath}/saleList.do">결제현황</a></li>
-									<li><a href="${pageContext.request.contextPath}/saleListChart.do">결제차트</a></li>
+									<li><a href="${pageContext.request.contextPath}/mgn/saleList.do">결제현황</a></li>
+									<li><a href="${pageContext.request.contextPath}/mgn/saleListChart.do">결제차트</a></li>
 								</ul>
+
 							</li>
-							<li>
-								<a href="${pageContext.request.contextPath}/salesList.do">판매관리</a>
-								<ul class="submenu">
-									<li><a href="${pageContext.request.contextPath}/salesList.do">판매현황</a></li>
-									<li><a href="${pageContext.request.contextPath}/salesListChart.do">판매차트</a></li>
+						   <li><a href="${pageContext.request.contextPath}/mgn/salesList.do">판매관리</a>
+						   		<ul class="submenu">
+									<li><a href="${pageContext.request.contextPath}/mgn/salesList.do">판매현황</a></li>
+									<li><a href="${pageContext.request.contextPath}/mgn/salesListChart.do">판매차트</a></li>
 								</ul>
-							</li>
-							<li><a href="${pageContext.request.contextPath}/menuMgnlist.do">음식관리</a></li>
-							<li><a href="${pageContext.request.contextPath}/memberMgnlist.do">회원관리</a></li>
-							<li><a href="${pageContext.request.contextPath}/reservationMgn.do">예약관리</a></li>
-							<li><a href="${pageContext.request.contextPath}/noticeMgnlist.do">공지사항관리</a></li>
+						   </li>
+							<li><a href="${pageContext.request.contextPath}/mgn/menuMgnlist.do">음식관리</a></li>
+							<li><a href="${pageContext.request.contextPath}/mgn/memberMgnlist.do">회원관리</a></li>
+							<li><a href="${pageContext.request.contextPath}/mgn/reservationMgn.do">예약관리</a></li>
+							<li><a href="${pageContext.request.contextPath}/mgn/noticeMgninsert.do">공지사항관리</a></li>
+
 						</ul>
 					</div>
 					<div id="head2_2">

@@ -33,6 +33,24 @@
   	<url-pattern>/*</url-pattern> <!-- 모두 -->
   </filter-mapping>   
   
+   <filter>
+  	<filter-name>MgnFilter</filter-name> <!-- 아무거나와도됨 -->
+  	<filter-class>kr.or.yi.foodMgn.jdbc.MgnFilter</filter-class> <!-- 패키지명.ㅍ클래스명 -->
+  </filter>
+  <filter-mapping>
+  	<filter-name>MgnFilter</filter-name>
+  	<url-pattern>/mgn/*</url-pattern> <!-- 모두 -->
+  </filter-mapping>  
+  
+  <filter>
+  	<filter-name>MyPageFilter</filter-name> <!-- 아무거나와도됨 -->
+  	<filter-class>kr.or.yi.foodMgn.jdbc.MyPageFilter</filter-class> <!-- 패키지명.ㅍ클래스명 -->
+  </filter>
+  <filter-mapping>
+  	<filter-name>MyPageFilter</filter-name>
+  	<url-pattern>/my/*</url-pattern> <!-- 모두 -->
+  </filter-mapping>  
+  
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>

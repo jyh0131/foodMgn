@@ -94,7 +94,7 @@
 	        }
 			
 			$.ajax({
-				url:"${pageContext.request.contextPath}/memberMgnsearch.do",
+				url:"${pageContext.request.contextPath}/mgn/memberMgnsearch.do",
 				type:"post",
 				data:{"tel":$("input[name='tel']").val()},
 				dataType:"json",
@@ -128,7 +128,7 @@
 		})
 		
 		$("#allList").click(function() {
-			location.href = "${pageContext.request.contextPath}/memberMgnlist.do";
+			location.href = "${pageContext.request.contextPath}/mgn/memberMgnlist.do";
 		})
 		
 	})
@@ -140,7 +140,7 @@
 			<div id="btns">
 				<button id="allList">전체보기</button>
 			</div>
-			<form action="${pageContext.request.contextPath}/memberMgnsearch.do" method="post" id="f2">
+			<form action="${pageContext.request.contextPath}/mgn/memberMgnsearch.do" method="post" id="f2">
 				<input type="text" name="tel" size="30" placeholder="검색할 전화번호">
 				<input type="submit" value="검색">
 			</form>

@@ -36,13 +36,17 @@
 		padding-left:30px;
 	}
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/jquery-ui.css">
+<script src="${pageContext.request.contextPath}/js/jquery-ui.js"></script>
 <div class="s_visu1">
 	<img src="${pageContext.request.contextPath}/images/main/f_visu4.jpg">
 </div>
 <div id="leftUi">
 	<ul>
 		<li id="updateMember"><a href="#">회원정보수정</a></li>
-		<li id="searchRsv2"><a href="${pageContext.request.contextPath}/searchMyRsv.do">예약내역</a></li>	
-		<li id="searchPay"><a href="#">결제내역</a></li>		
+		<li id="searchRsv2"><a href="${pageContext.request.contextPath}/my/searchMyRsv.do">예약내역</a></li>	
+		<li id="searchPay"><a href="${pageContext.request.contextPath}/my/MypageSaleList.do">결제내역</a></li>		
+
 	</ul>
 </div>

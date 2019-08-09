@@ -122,7 +122,7 @@
 	<div id="wrap">
 		<div id="div"></div>
 		<div id="noticeList">
-			<a href="${pageContext.request.contextPath}/noticeMgninsert.do"><button>공지사항 등록</button></a>
+			<a href="${pageContext.request.contextPath}/mgn/noticeMgninsert.do"><button>공지사항 등록</button></a>
 			<table>
 				<tr>
 					<th id="noticeNo">번호</th>

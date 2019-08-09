@@ -22,4 +22,14 @@
 		select payNo,payTime,payMenu,payPrice,payDiscountInfo,payDiscountPrice,payType,payMemeber,payCancel,payMemberNo from payment where payTime like CONCAT( #{date}, '%')
 	</select>
 	
+	
+	<select id="selectPaymentByAll2" resultMap="resultPayment">
+		select payNo,payTime,payMenu,payPrice,payDiscountInfo,payDiscountPrice,payType,payMemeber,payCancel,payMemberNo from payment where payMemberNo=#{no}
+	</select>
+	
+	<select id="selectPaymentByDate2" parameterType="map" resultMap="resultPayment">
+		select payNo,payTime,payMenu,payPrice,payDiscountInfo,payDiscountPrice,payType,payMemeber,payCancel,payMemberNo from payment where payMemberNo=#{no} and payTime like CONCAT( #{date}, '%')
+	</select>
+	
+	
 </mapper>

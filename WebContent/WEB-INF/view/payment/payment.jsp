@@ -126,6 +126,7 @@
 		<h3 class="brown_1">주문정보</h3>
 			<table>
 				<tr>
+					<th>제품사진</th>
 					<th>제품명</th>
 					<th>수량</th>
 					<th>가격</th>
@@ -133,6 +134,7 @@
 	
 		<c:forEach var="list" items="${list }">
 			<tr>
+				<td><img class="foodImg" src="${pageContext.request.contextPath}/images/food/${list.fdNo.fdName }.png"></td>
 				<td>${list.fdNo.fdName }</td>
 				<td>${list.saleOrderCnt }</td>
 				<td><fmt:formatNumber value="${list.fdNo.fdPrice*list.saleOrderCnt }"/>  원</td>
