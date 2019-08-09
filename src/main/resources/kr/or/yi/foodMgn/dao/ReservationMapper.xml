@@ -40,6 +40,12 @@
 		where rsv_time=#{search.rsvTime} and rsv_tableNo=#{search.rsvTableNo}
 	</update>
 	
+	<update id="updateRsv2" parameterType="map">
+		update reservation
+		set rsv_time=#{rsvTime}, rsv_number=#{rsvNumber}, rsv_tableNo=#{rsvTableNo}, rsv_update_time=#{rsvUpdateTime}   
+		where rsv_no=#{rsvNo}
+	</update>
+	
 	<select id="selectByTel" parameterType="Member" resultMap="resultRsvLJH2">
 		select * from member_reservation where mb_tel like concat('%',#{mbTel},'%')
 	</select>
@@ -66,6 +72,14 @@
 	
 	<select id="selectByTime" resultMap="resultRsvLJH2">
 		select * from member_reservation3 where timediff(rsv_time, now())>0;
+	</select>
+	
+	<select id="selectByRangeDate" parameterType="map" resultMap="resultRsvLJH2">
+		select * from member_reservation where rsv_time &gt; concat(#{date},'%') and rsv_time &lt; concat(adddate(#{date2},1),'%');
+	</select>
+	
+	<select id="selectByAll" resultMap="resultRsvLJH2">
+		select * from member_reservation
 	</select>
 </mapper>
 
