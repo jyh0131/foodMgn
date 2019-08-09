@@ -96,7 +96,7 @@ header a {
 }
 .submenu {
 	display: none;
-	margin-top: 35px;
+	margin-top: 36px;
 	background-color: rgba(0,0,0,0.7);
 	width: 140%;
 	margin-left: -20px;
@@ -105,6 +105,9 @@ header a {
 .submenu li {
 	height: 40px;
 	line-height: 40px;
+}
+.submenu li:hover a {
+	color: #ccc;
 }
 .clear {
 	clear: both;

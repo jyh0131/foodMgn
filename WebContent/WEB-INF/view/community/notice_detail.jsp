@@ -51,9 +51,6 @@
 		float: left;
 		line-height: 25px;
 	}
-	#div1 button {
-		float: right;
-	}
 	button {
 		padding: 2px 7px;
 		font-size: 11px;
@@ -108,7 +105,6 @@
 				<p>공지사항</p>
 				<div id="div1">
 					<span>작성일 : <fmt:formatDate pattern="yy-MM-dd kk:mm" value="${notice.noRegdate}"/></span>
-					<a href="${pageContext.request.contextPath}/notice.do"><button>목록</button></a>
 				</div>
 				<div id="div2">
 					${notice.noTitle}

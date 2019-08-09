@@ -5,6 +5,10 @@
 		select * from notice order by no_no desc
 	</select>
 	
+	<select id="selectNoticeByAll2" resultType="Notice">
+		select * from notice
+	</select>
+	
 	<insert id="insertNotice" parameterType="Notice">
 		insert into notice(no_title, no_content, no_regdate, no_writer) values (#{noTitle},#{noContent},#{noRegdate},#{noWriter})	
 	</insert>
@@ -12,4 +16,16 @@
 	<select id="selectNoticeByNo" parameterType="Notice" resultType="Notice">
 		select * from notice where no_no = #{noNo}
 	</select>
+	
+	<select id="selectListPage" resultType="Notice" parameterType="map">
+		select * from notice order by no_no desc limit #{startRow}, #{size}
+	</select>
+	
+	<select id="selectTotalCount" resultType="java.lang.Integer">
+		select count(no_no) from notice
+	</select>
+	
+	<update id="readNtAdd" parameterType="map">
+		update notice set no_read_nt = #{noReadNt} where no_no = #{noNo}
+	</update>
 </mapper>

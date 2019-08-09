@@ -16,7 +16,7 @@ public class NoticeMgnListHandler implements CommandHandler {
 	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		NoticeDao dao = new NoticeDaoImpl();
 		
-		List<Notice> nlist = dao.selectNoticeByAll();
+		List<Notice> nlist = dao.selectNoticeByAll2();
 		req.setAttribute("nList", nlist);
 		
 		return "/WEB-INF/manager/community/noticeList.jsp";
