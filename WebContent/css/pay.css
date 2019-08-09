@@ -41,12 +41,12 @@ div#wrap{
 } 
 
 table{
-	width: 500px;
+	width: 600px;
 	border-collapse: collapse;
 	border-top: 2px solid #55423b !important;
 }
 
-table,th,td{
+table,th,td{  
 	 border: 1px solid #dedede;
 }
 
@@ -150,5 +150,8 @@ th{
 	border: 0;
 }
 
-
+.foodImg{
+	width: 100px;
+	height: 100px;
+}
 
