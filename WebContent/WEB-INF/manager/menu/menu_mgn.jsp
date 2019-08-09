@@ -113,7 +113,7 @@
 				var fNo = $(this).attr("data-no");
 				
 				$.ajax({
-					url:"${pageContext.request.contextPath}/menuMgnDelete.do",
+					url:"${pageContext.request.contextPath}/mgn/menuMgnDelete.do",
 					type:"get",
 					data:{"fNo":fNo},
 					dataType:"json",
@@ -145,7 +145,7 @@
 	        	 $btn.removeClass("upSuc");
 		         
 		         $.ajax({
-		            url:"${pageContext.request.contextPath}/menuMgnupdate.do",
+		            url:"${pageContext.request.contextPath}/mgn/menuMgnupdate.do",
 		            type:"get",
 		            data:{"fNo":fNo, "uprice":$("input[name='uprice']").val()},
 		            dataType:"json",
@@ -153,7 +153,7 @@
 		               console.log(res);
 		               
 		               if(res.success == true) {
-		            	   location.href="${pageContext.request.contextPath}/menuMgnlist.do";
+		            	   location.href="${pageContext.request.contextPath}/mgn/menuMgnlist.do";
 		               }
 		            }
 		         })
@@ -201,7 +201,7 @@
 	        }
 			
 			$.ajax({
-				url:"${pageContext.request.contextPath}/menuMgnsearch.do",
+				url:"${pageContext.request.contextPath}/mgn/menuMgnsearch.do",
 				type:"post",
 				data:{"fdname":$("input[name='fdname']").val()},
 				dataType:"json",

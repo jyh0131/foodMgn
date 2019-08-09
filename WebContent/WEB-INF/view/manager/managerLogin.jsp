@@ -91,7 +91,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script>
 	$(function(){
-		if(${Mgn==false}){
+		if(${Mgn==0}){
 			alert("존재하지 않는 아이디이거나, 비밀번호가 틀립니다.");
 		}
 			
@@ -110,7 +110,7 @@
 				</div>
 				<div id="inputBox">
 					<label><img src="images/id.gif"></label>
-					<input type="text" name="id"><br><br>
+					<input type="text" name="id" autocomplete="off"><br><br>
 					<label><img src="images/pw.gif"></label>
 					<input type="password" name="password"><br><br><br>
 					<p>이페이지는 <span>관리자 전용 로그인 페이지</span> 입니다.</p>

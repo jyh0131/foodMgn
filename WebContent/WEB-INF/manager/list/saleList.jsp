@@ -104,7 +104,7 @@
 				var payCancel = $(this).parent().parent().find(".payCancel").text();
 				var payMemberNo = $(this).parent().parent().find(".payMemberNo").text();
 				$.ajax({
-					url:"${pageContext.request.contextPath }/saleCancel.do",
+					url:"${pageContext.request.contextPath }/mgn/saleCancel.do",
 					type:"get",
 					data : {"payNo":payNo,"payDiscountInfo":payDiscountInfo,"payDiscountPrice":payDiscountPrice,"payMember":payMember,"payCancel":payCancel,"payMemberNo":payMemberNo},
 					dataType:"json",

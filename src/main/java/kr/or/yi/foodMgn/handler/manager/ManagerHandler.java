@@ -26,12 +26,12 @@ public class ManagerHandler implements CommandHandler {
 			Manager manager1 = dao.selectByPass(manager);
 			
 			if(manager1==null) {
-				req.getSession().setAttribute("Mgn", false);
+				req.getSession().setAttribute("Mgn", "0");
 			}else {
-				req.getSession().setAttribute("Mgn", true);
+				req.getSession().setAttribute("Mgn", "1");
 				
 			}
-			return "saleList.do";
+			return "mgn/saleList.do";
 		}
 		
 	}

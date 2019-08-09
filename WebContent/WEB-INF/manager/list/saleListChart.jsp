@@ -30,7 +30,7 @@
 <script type="text/javascript">
 	$(function() {
 		$.ajax({
-					url : "${pageContext.request.contextPath }/saleListChart.do",
+					url : "${pageContext.request.contextPath }/mgn/saleListChart.do",
 					type : "post",
 					dataType : "json",
 					success : function(json) {

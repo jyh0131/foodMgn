@@ -59,18 +59,21 @@ public class ControllerUsingURI extends HttpServlet {
 		if (command.indexOf(req.getContextPath()) == 0) { //프로젝트 이름만 /MVC  
 			command = command.substring(req.getContextPath().length()); // /simple.do 
 		}
+		
+		
 
 		CommandHandler handler = commandHandlerMap.get(command); 
 		if (handler == null) { //커맨드가 없으면
 			handler = new NullHandler(); //널핸들러
 		}
 		String viewPage = null;
-
+		
 		try {
 			viewPage = handler.process(req, res); //simple.do
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
 
 		if (viewPage != null) { //이동함
 			RequestDispatcher dispathcer = req.getRequestDispatcher(viewPage); 
