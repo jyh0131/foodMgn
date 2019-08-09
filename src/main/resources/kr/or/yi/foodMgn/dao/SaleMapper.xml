@@ -47,7 +47,7 @@
 	</update>
 	
 	<select id="totalPrice" resultType="java.lang.Integer">
-		select sum(payPrice) as totalPrice from payment where payMemberNo = #{number};
+		select sum(payPrice) as totalPrice from payment where payMemberNo = #{number} and payCancel=0;
 	</select>
 </mapper>
 

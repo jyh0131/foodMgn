@@ -164,3 +164,9 @@ td:last-child{
 	height: 70px;
 }
 
+#btnM{
+	background: #dcd2c8;
+	color: #814b34;
+	font-weight: bold;
+	border: 0;
+}
