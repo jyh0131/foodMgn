@@ -24,7 +24,9 @@ public class NoticeMgnInsertHandler implements CommandHandler {
 		}else if(req.getMethod().equalsIgnoreCase("post")) {
 			String title = req.getParameter("title");
 			String content = req.getParameter("content");
-			/*String uploadPath = req.getRealPath("upload");
+			/*String file = req.getParameter("file");
+			
+			String uploadPath = req.getRealPath("upload");
 			
 			File dir = new File(uploadPath);
 			if(dir.exists() == false) {
@@ -32,7 +34,10 @@ public class NoticeMgnInsertHandler implements CommandHandler {
 			}
 			
 			int size = 1024*1024*100; 
-			MultipartRequest multi = new MultipartRequest(req, uploadPath, size, "utf-8", new DefaultFileRenamePolicy());*/
+			MultipartRequest multi = new MultipartRequest(req, uploadPath, size, "utf-8", new DefaultFileRenamePolicy());
+			
+			String fileRename = multi.getFilesystemName("file");
+			req.setAttribute("fileRename", fileRename);*/
 			
 			NoticeDao dao = new NoticeDaoImpl();
 			
@@ -45,7 +50,7 @@ public class NoticeMgnInsertHandler implements CommandHandler {
 			
 			dao.insertNotice(notice);
 			
-			res.sendRedirect(req.getContextPath()+"/noticeMgnlist.do");
+			res.sendRedirect(req.getContextPath()+"/mgn/noticeMgnlist.do");
 			return null;
 		}
 		return null;

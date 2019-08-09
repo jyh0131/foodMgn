@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import kr.or.yi.foodMgn.dao.FoodDao;
 import kr.or.yi.foodMgn.dto.Food;
+import kr.or.yi.foodMgn.dto.FoodKind;
 import kr.or.yi.foodMgn.jdbc.MybatisSqlSessionFactory;
 
 public class FoodDaoImpl implements FoodDao {
@@ -77,6 +78,13 @@ public class FoodDaoImpl implements FoodDao {
 	public Food selectByFdNo(Food food) {
 		try(SqlSession sqlSession = MybatisSqlSessionFactory.openSession()) {
 			return sqlSession.selectOne(namespace + ".selectByFdNo", food);
+		}
+	}
+
+	@Override
+	public List<Food> selectByFkNo(FoodKind fk) {
+		try(SqlSession sqlSession = MybatisSqlSessionFactory.openSession()) {
+			return sqlSession.selectList(namespace + ".selectFoodByAllF", fk);
 		}
 	}
 	

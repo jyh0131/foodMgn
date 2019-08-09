@@ -50,5 +50,8 @@
 		update food set fd_withdrawal = #{fdWithdrawal} where fd_no = #{fdNo};
 	</delete>
 	
+	<select id="selectByFkNo" resultMap="resultFoodBJY" parameterType="Food">
+		select * from food left join foodkind on food.fk_no = foodkind.fk_no where food.fk_no = #{fkNo.fkNo};
+	</select>
 </mapper>
 

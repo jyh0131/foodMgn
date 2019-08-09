@@ -36,7 +36,7 @@
 					<input type="file" name="file">
 				</p>
 				<p>
-					<input type="submit" value="등록">
+					<input type="submit" value="수정">
 				</p>
 			</form>
 		</div>

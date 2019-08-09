@@ -19,19 +19,26 @@ public class MenuMgnUpdateHandler implements CommandHandler {
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		int fNo = Integer.parseInt(req.getParameter("fNo"));
-		int price = Integer.parseInt(req.getParameter("uprice"));
+		String str_price = req.getParameter("uprice");
 		
-		FoodDao dao = new FoodDaoImpl();
 		Food food = new Food(fNo);
+		FoodDao dao = new FoodDaoImpl();
+		int price = food.getFdPrice();;
+		
+		if(str_price != "") {
+			price = Integer.parseInt(str_price);
+		}
+		
 		food.setFdPrice(price);
 		
 		int result = dao.updateFood(food);
-		req.setAttribute("price", price);
+		//req.setAttribute("price", price);
 		
-		Map<String, Boolean> map = new HashMap<String, Boolean>();
+		Map<String, Object> map = new HashMap<String, Object>();
 		
 		if(result != 0) {
 			map.put("success", true);
+			map.put("price", price);
 			
 			res.setContentType("application/json;charset=utf-8");
 			ObjectMapper om = new ObjectMapper();

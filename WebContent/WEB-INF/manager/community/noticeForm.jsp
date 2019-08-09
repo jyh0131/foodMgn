@@ -22,7 +22,7 @@
 	<div id="wrap">
 		<div id="div"></div>
 		<div id="noticeForm">
-			<form action="${pageContext.request.contextPath}/mgn/noticeMgninsert.do" method="post">
+			<form action="${pageContext.request.contextPath}/mgn/noticeMgninsert.do" method="post" enctype="multipart/form-data">
 				<p>
 					<label>제목</label>
 					<input type="text" name="title">

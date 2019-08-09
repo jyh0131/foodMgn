@@ -34,7 +34,7 @@ public class MenuMgnInsertHandler implements CommandHandler {
 			Food food = new Food(no, price, fdname, fkind2);
 			dao.insertFood(food);
 			
-			res.sendRedirect(req.getContextPath()+"/menuMgnlist.do");
+			res.sendRedirect(req.getContextPath()+"/mgn/menuMgnlist.do");
 			return null;
 		}
 		return null;
