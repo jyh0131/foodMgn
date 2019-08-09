@@ -86,6 +86,26 @@ public class ReservationDaoImpl implements ReservationDao {
 			return res;
 		}
 	}
+	@Override
+	public List<Reservation> selectByRangeDate(Map<String, Object> map) {
+		try(SqlSession sqlSession = MybatisSqlSessionFactory.openSession()) {
+			return sqlSession.selectList(namespace + ".selectByRangeDate",map);
+		}
+	}
+	@Override
+	public List<Reservation> selectByAll() {
+		try(SqlSession sqlSession = MybatisSqlSessionFactory.openSession()) {
+			return sqlSession.selectList(namespace + ".selectByAll");
+		}
+	}
+	@Override
+	public int updateRsv2(Map<String, Object> map) {
+		try(SqlSession sqlSession = MybatisSqlSessionFactory.openSession()){
+			int res = sqlSession.insert(namespace+".updateRsv2", map);
+			sqlSession.commit();
+			return res;
+		}
+	}
 }
 
 
