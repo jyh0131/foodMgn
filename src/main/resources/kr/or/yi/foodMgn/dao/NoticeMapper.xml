@@ -34,6 +34,6 @@
 	</delete>
 	
 	<update id="updateNotice" parameterType="Notice">
-		update notice set no_content = #{noContent}, no_regdate = #{noRegdate} where no_no = #{noNo}
+		update notice set no_title = #{noTitle}, no_content = #{noContent}, no_moddate = #{noModdate} where no_no = #{noNo}
 	</update>
 </mapper>

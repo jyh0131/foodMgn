@@ -39,7 +39,7 @@ public class MenuHandler implements CommandHandler {
 		req.setAttribute("fList", fList);
 		req.setAttribute("fkName", fkName);
 		
-		return null;
+		return "/WEB-INF/view/menu/menu.jsp";
 	}
 
 }

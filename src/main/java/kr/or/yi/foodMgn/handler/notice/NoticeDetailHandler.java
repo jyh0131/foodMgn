@@ -1,8 +1,5 @@
 package kr.or.yi.foodMgn.handler.notice;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -28,7 +25,6 @@ public class NoticeDetailHandler implements CommandHandler {
 		dao.updateReadNt(notice);
 		
 		req.setAttribute("notice", notice);
-		System.out.println(n);
 		
 		//req.setAttribute("page", req.getParameter("page"));
 		

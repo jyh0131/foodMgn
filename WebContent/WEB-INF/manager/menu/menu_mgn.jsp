@@ -41,7 +41,7 @@
 		border-right: 1px solid #ccc;
 		padding: 5px 10px;
 	}
-	#foodtable td:last-child {
+	#foodtable td:last-child, #foodtable th:last-child {
 		border-right: none;
 	}
 	#foodtable tr:nth-child(2n) {
@@ -171,37 +171,6 @@
 			return false;
 		})
 		
-		$(".update").click(function() {
-			 var fNo = $(this).attr("data-no");
-	         var $btn = $(this);
-	         var $input = $("<input type='text' name='uprice' size=5>");
-	         
-	         if($btn.text()=="수정") {
-	        	 $btn.text("수정완료");
-		         $btn.addClass("upSuc");
-		        	
-		         $btn.parent().prev().empty();
-		         $btn.parent().prev().append($input);
-	         } else {
-	        	 $btn.text("수정");
-	        	 $btn.removeClass("upSuc");
-	        	 
-		         $.ajax({
-		            url:"${pageContext.request.contextPath}/mgn/menuMgnupdate.do",
-		            type:"get",
-		            data:{"fNo":fNo, "uprice":$("input[name='uprice']").val()},
-		            dataType:"json",
-		            success: function(res) {
-		               console.log(res);
-		               
-		               if(res.success == true) {
-		            	   $btn.parent().prev().empty();
-		            	   $btn.parent().prev().text(res.price.toLocaleString()+"원");
-		               }
-		            }
-		         })
-	         }
-		})
 		
 		$(".noupdate").click(function() {
 			alert("수정할 수 없습니다.");
@@ -314,6 +283,38 @@
 			}
 				
 			return false;
+		});
+		
+		$(document).on("click", ".update", function() {
+			var fNo = $(this).attr("data-no");
+	         var $btn = $(this);
+	         var $input = $("<input type='text' name='uprice' size=5>");
+	         
+	         if($btn.text()=="수정") {
+	        	 $btn.text("수정완료");
+		         $btn.addClass("upSuc");
+		        	
+		         $btn.parent().prev().empty();
+		         $btn.parent().prev().append($input);
+	         } else {
+	        	 $btn.text("수정");
+	        	 $btn.removeClass("upSuc");
+	        	 
+		         $.ajax({
+		            url:"${pageContext.request.contextPath}/mgn/menuMgnupdate.do",
+		            type:"get",
+		            data:{"fNo":fNo, "uprice":$("input[name='uprice']").val()},
+		            dataType:"json",
+		            success: function(res) {
+		               console.log(res);
+		               
+		               if(res.success == true) {
+		            	   $btn.parent().prev().empty();
+		            	   $btn.parent().prev().text(res.price.toLocaleString()+"원");
+		               }
+		            }
+		         })
+	         }
 		});
 		
 		$("#allList").click(function() {
