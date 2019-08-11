@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-<%@ include file="../../view/include/header_mgn.jsp" %>
 
+<%@ include file="../../view/include/header_mgn.jsp" %>
 <style>
 	#wrap {
 		min-height: 700px;
@@ -19,26 +18,30 @@
 		margin: 30px 0;
 	}
 </style>
+
 	<div id="wrap">
 		<div id="div"></div>
 		<div id="noticeForm">
-			<form action="${pageContext.request.contextPath}/mgn/noticeMgninsert.do" method="post" enctype="multipart/form-data">
+			<form action="${pageContext.request.contextPath}/mgn/noticeMgnupdate.do" method="post" enctype="multipart/form-data">
+				${notice.noNo}
+				<input type="hidden" name="no" value="${notice.noNo}">
 				<p>
 					<label>제목</label>
-					<input type="text" name="title">
+					<input type="text" name="title" value="${notice.noTitle}">
 				</p>
 				<p>
 					<label>내용</label>
-					<textarea rows="10" cols="100" name="content"></textarea>
+					<textarea rows="10" cols="100" name="content">${notice.noContent}</textarea>
 				</p>
 				<p>
 					<label>파일</label>
 					<input type="file" name="file">
 				</p>
 				<p>
-					<input type="submit" value="등록">
+					<input type="submit" value="수정">
 				</p>
 			</form>
 		</div>
 	</div>
+
 <%@ include file="../../view/include/footer.jsp" %>

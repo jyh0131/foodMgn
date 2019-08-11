@@ -1,8 +1,7 @@
-package kr.or.yi.foodMgn.handler.menu;
+package kr.or.yi.foodMgn.handler.notice;
 
 import java.io.PrintWriter;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,25 +10,24 @@ import javax.servlet.http.HttpServletResponse;
 import org.codehaus.jackson.map.ObjectMapper;
 
 import kr.or.yi.foodMgn.controller.CommandHandler;
-import kr.or.yi.foodMgn.dao.FoodDao;
-import kr.or.yi.foodMgn.daoImpl.FoodDaoImpl;
-import kr.or.yi.foodMgn.dto.Food;
+import kr.or.yi.foodMgn.dao.NoticeDao;
+import kr.or.yi.foodMgn.daoImpl.NoticeDaoImpl;
+import kr.or.yi.foodMgn.dto.Notice;
 
-public class MenuMgnListHandler implements CommandHandler {
+public class NoticeMgnDeleteHandler implements CommandHandler {
 
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
-		FoodDao fDao = new FoodDaoImpl();
-		List<Food> fList = fDao.selectFoodByAllF();
-
-		String allList = req.getParameter("allList");
+		int nNo = Integer.parseInt(req.getParameter("nNo"));
 		
-		if(allList == null) {
-			req.setAttribute("fList", fList);
-			
-			return "/WEB-INF/manager/menu/menu_mgn.jsp";
-		}else if(allList.equals("yes")) {
-			Map<String, Boolean> map = new HashMap<String, Boolean>();
+		NoticeDao dao = new NoticeDaoImpl();
+		Notice notice = new Notice(nNo);
+		notice.setNoDelete(true);
+		int result = dao.deleteNotice(notice);
+		
+		Map<String, Boolean> map = new HashMap<String, Boolean>();
+		
+		if(result != 0) {
 			map.put("success", true);
 			
 			ObjectMapper om = new ObjectMapper();
@@ -41,7 +39,6 @@ public class MenuMgnListHandler implements CommandHandler {
 			
 			return null;
 		}
-		
 		return null;
 	}
 

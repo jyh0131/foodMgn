@@ -3,6 +3,7 @@ package kr.or.yi.foodMgn.dao;
 import java.util.List;
 
 import kr.or.yi.foodMgn.dto.Food;
+import kr.or.yi.foodMgn.dto.FoodKind;
 
 public interface FoodDao {
 	public List<Food> selectFoodByAll();
@@ -14,4 +15,5 @@ public interface FoodDao {
 	public Food selectByNames(Food food);
 	public List<Food> selectFoodByAllF();
 	public Food selectByFdNo(Food food);
+	public List<Food> selectByFkNo(FoodKind fk);
 }

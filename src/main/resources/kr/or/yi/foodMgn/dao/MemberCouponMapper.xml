@@ -8,6 +8,6 @@
 	</resultMap>
 	
 	<insert id="insertMemberCoupon" parameterType="MemberCoupon">
-		insert into member_coupon(mb_no, cp_no) values(#{mbNo.mbNo}, #{cpNo.cpNo})
+		insert into member_coupon(mb_no, cp_name) values(#{mbNo.mbNo}, #{cpNo.cpName})
 	</insert>
 </mapper>

@@ -19,26 +19,50 @@ public class MenuMgnDeleteHandler implements CommandHandler {
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		int fNo = Integer.parseInt(req.getParameter("fNo"));
+		int cancel = Integer.parseInt(req.getParameter("cancel"));
 		
-		FoodDao dao = new FoodDaoImpl();
-		Food food = new Food(fNo);
-		food.setFdWithdrawal(true);
-		int result = dao.deletFood(food);
-		
-		Map<String, Boolean> map = new HashMap<String, Boolean>();
-		
-		if(result != 0) {
-			map.put("success", true);
+		if(cancel == 1) {
+			FoodDao dao = new FoodDaoImpl();
+			Food food = new Food(fNo);
+			food.setFdWithdrawal(true);
+			int result = dao.deletFood(food);
 			
-			ObjectMapper om = new ObjectMapper();
-			String json = om.writeValueAsString(map);
+			Map<String, Boolean> map = new HashMap<String, Boolean>();
 			
-			PrintWriter out = res.getWriter();
-			out.print(json);
-			out.flush();
+			if(result != 0) {
+				map.put("success", true);
+				
+				ObjectMapper om = new ObjectMapper();
+				String json = om.writeValueAsString(map);
+				
+				PrintWriter out = res.getWriter();
+				out.print(json);
+				out.flush();
+				
+				return null;
+			}
+		}else if(cancel == 0) {
+			FoodDao dao = new FoodDaoImpl();
+			Food food = new Food(fNo);
+			food.setFdWithdrawal(false);
+			int result = dao.deletFood(food);
 			
-			return null;
+			Map<String, Boolean> map = new HashMap<String, Boolean>();
+			
+			if(result != 0) {
+				map.put("success", true);
+				
+				ObjectMapper om = new ObjectMapper();
+				String json = om.writeValueAsString(map);
+				
+				PrintWriter out = res.getWriter();
+				out.print(json);
+				out.flush();
+				
+				return null;
+			}
 		}
+		
 		return null;
 	}
 

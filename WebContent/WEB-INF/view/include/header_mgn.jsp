@@ -55,7 +55,7 @@
 							<li><a href="${pageContext.request.contextPath}/mgn/menuMgnlist.do">음식관리</a></li>
 							<li><a href="${pageContext.request.contextPath}/mgn/memberMgnlist.do">회원관리</a></li>
 							<li><a href="${pageContext.request.contextPath}/mgn/reservationMgn.do">예약관리</a></li>
-							<li><a href="${pageContext.request.contextPath}/mgn/noticeMgninsert.do">공지사항관리</a></li>
+							<li><a href="${pageContext.request.contextPath}/mgn/noticeMgnlist.do">공지사항관리</a></li>
 
 						</ul>
 					</div>

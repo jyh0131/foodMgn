@@ -2,6 +2,7 @@ package kr.or.yi.foodMgn.handler.login;
 
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -13,10 +14,14 @@ import javax.servlet.http.HttpServletResponse;
 import org.codehaus.jackson.map.ObjectMapper;
 
 import kr.or.yi.foodMgn.controller.CommandHandler;
+import kr.or.yi.foodMgn.dao.MemberCouponDao;
 import kr.or.yi.foodMgn.dao.MemberDao;
+import kr.or.yi.foodMgn.daoImpl.MemberCouponDaoImpl;
 import kr.or.yi.foodMgn.daoImpl.MemberDaoImpl;
+import kr.or.yi.foodMgn.dto.Coupon;
 import kr.or.yi.foodMgn.dto.Grade;
 import kr.or.yi.foodMgn.dto.Member;
+import kr.or.yi.foodMgn.dto.MemberCoupon;
 
 public class JoinFormHandler implements CommandHandler {
 
@@ -26,6 +31,7 @@ public class JoinFormHandler implements CommandHandler {
 			return "/WEB-INF/view/login/joinForm.jsp";
 		}else if(req.getMethod().equalsIgnoreCase("post")) {
 			MemberDao dao = new MemberDaoImpl();
+			MemberCouponDao mcDao = new MemberCouponDaoImpl();
 			
 			String name = req.getParameter("name");
 			String tel = req.getParameter("tel");
@@ -43,7 +49,6 @@ public class JoinFormHandler implements CommandHandler {
 			Member mem2 = dao.selectByTelForJoin(mem);
 			
 			Map<String, Object> map = new HashMap<String, Object>();
-			
 			if(mem2 == null) {
 				Member member = new Member(name, birthDate, tel, addr);
 				member.setMbNo(no);
@@ -51,8 +56,14 @@ public class JoinFormHandler implements CommandHandler {
 				member.setMbGrade(new Grade("bronze"));
 				member.setMbJoin(new Date());
 				member.setMbWithdrawal(true);
-				
 				dao.insertMember(member);
+				
+				Coupon coupon = new Coupon("회원가입쿠폰");
+				
+				MemberCoupon mc = new MemberCoupon(coupon, member);
+				mcDao.insertMemberCoupon(mc);
+				
+				System.out.println(mc);
 				
 				map.put("joinSuccess", true);
 				res.setContentType("application/json;charset=utf-8");

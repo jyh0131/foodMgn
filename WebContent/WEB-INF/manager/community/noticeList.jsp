@@ -17,7 +17,7 @@
 		overflow: auto;
 		width: 100%;
 		border: 1px solid #555;
-		margin: 30px 0;
+		margin: 30px auto;
 	}
 	table {
 		border-collapse: collapse;
@@ -27,7 +27,6 @@
 	th, td {
 		border-top: 1px solid #ccc;
 		border-right: 1px solid #ccc;
-		padding: 5px 10px;
 	}
 	td:last-child {
 		border-right: none;
@@ -39,29 +38,29 @@
 		border-bottom: 1px solid #ccc;
 	}
 	th {
-		padding: 10px 10px;
+		padding: 10px;
 	}
-	/* #foodKind {
-		width: 180px;
+	td {
+		padding: 5px 10px;
 	}
-	#foodNo {
-		width: 80px;
+	#noticeNo {
+		width: 50px;
 	}
-	#foodName {
-		width: 440px;
+	#noticeName {
+		width: 320px;
 	}
-	#foodPrice {
-		width: 85px;
-	} */
+	#noticeWriter {
+		width: 70px;
+	}
+	#noticeDate, #noticeUpdate {
+		width: 160px;
+	}
 	#update {
 		border-right: none;
 	}
-	/* #foodtable td:nth-child(1), td:nth-child(2) {
+	td:nth-child(1), td:nth-child(3), td:nth-child(4), td:nth-child(5) {
 		text-align: center;
 	}
-	#foodtable td:nth-child(4) {
-		text-align: right;
-	} */
 	button {
 		padding: 3px 5px;
 		background-color: #c7a593;
@@ -69,6 +68,8 @@
 		color: white;
 		border-radius: 3px;
 		outline: none;
+	}
+	#btn1 {
 		margin: 10px;
 	}
 	/* .update, .noupdate {
@@ -82,35 +83,92 @@
 		color: red;
 		font-size: 0.9em;
 	}
+	a {
+		color: black;
+	}
 </style>
 <script>
-	
+	$(function() {
+		$(".delete").click(function() {
+			var result = confirm("삭제하시겠습니까?");
+			var $btn = $(this);
+
+			if(result == true) {
+				var nNo = $(this).attr("data-no");
+				
+				$.ajax({
+					url:"${pageContext.request.contextPath}/noticeMgnDelete.do",
+					type:"get",
+					data:{"nNo":nNo},
+					dataType:"json",
+					success: function(json) {
+						console.log(json);
+						
+						if(json.success == true) {
+							$btn.closest("tr").addClass("underline");
+						}
+					}
+				})
+			}
+			return false;
+		})
+		
+		$(".nodelete").click(function() {
+			alert("이미 삭제된 글입니다.");
+		})
+		$(".noupdate").click(function() {
+			alert("수정할 수 없습니다.");
+		})
+		
+		$(".update").click(function() {
+			var nNo = $(this).attr("data-no");
+			location.href = "${pageContext.request.contextPath}/mgn/noticeMgnupdate.do?no="+nNo;
+		})
+		
+	})
 </script>
 	<div id="wrap">
 		<div id="div"></div>
 		<div id="noticeList">
-			<a href="${pageContext.request.contextPath}/mgn/noticeMgninsert.do"><button>공지사항 등록</button></a>
+			<a href="${pageContext.request.contextPath}/mgn/noticeMgninsert.do"><button id="btn1">공지사항 등록</button></a>
 			<table>
 				<tr>
-					<th>번호</th>
-					<th>제 목</th>
-					<th>글쓴이</th>
-					<th>날짜</th>
-					<th></th>
+					<th id="noticeNo">번호</th>
+					<th id="noticeName">제 목</th>
+					<th id="noticeWriter">글쓴이</th>
+					<th id="noticeDate">등록일</th>
+					<th id="noticeUpdate">수정일</th>
+					<th id="update"></th>
 				</tr>
 				<c:forEach var="nlist" items="${nList}">
-					<tr>
-						<td>${nlist.noNo}</td>
-						<td>${nlist.noTitle}</td>
-						<td>${nlist.noWriter}</td>
-						<td><fmt:formatDate pattern="yyyy-MM-dd" value="${nlist.noRegdate}" /></td>
-						<td>
-							<button class="update" data-no="${nlist.noNo}">수정</button>
-							<button class="delete" data-no="${nlist.noNo}">삭제</button>
-						</td>
-					</tr>
+					<c:if test="${nlist.noDelete != true}">
+						<tr>
+							<td>${nlist.noNo}</td>
+							<td><a href="${pageContext.request.contextPath}/mgn/noticeMgnupdate.do?no=${nlist.noNo}">${nlist.noTitle}</a></td>
+							<td>${nlist.noWriter}</td>
+							<td><fmt:formatDate pattern="yyyy-MM-dd kk:mm" value="${nlist.noRegdate}" /></td>
+							<td><fmt:formatDate pattern="yyyy-MM-dd kk:mm" value="${nlist.noModdate}" /></td>
+							<td>
+								<button class="update" data-no="${nlist.noNo}">수정</button>
+								<button class="delete" data-no="${nlist.noNo}">삭제</button>
+							</td>
+						</tr>
+					</c:if>
+					<c:if test="${nlist.noDelete == true}">
+						<tr class="underline">
+							<td>${nlist.noNo}</td>
+							<td>${nlist.noTitle}</td>
+							<td>${nlist.noWriter}</td>
+							<td><fmt:formatDate pattern="yyyy-MM-dd" value="${nlist.noRegdate}" /></td>
+							<td>
+								<button class="noupdate" data-no="${nlist.noNo}">수정</button>
+								<button class="nodelete" data-no="${nlist.noNo}">삭제</button>
+							</td>
+						</tr>
+					</c:if>
 				</c:forEach>
 			</table>
 		</div>
 	</div>
+	
 <%@ include file="../../view/include/footer.jsp" %>

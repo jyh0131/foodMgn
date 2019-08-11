@@ -14,6 +14,7 @@ import kr.or.yi.foodMgn.controller.CommandHandler;
 import kr.or.yi.foodMgn.dao.FoodDao;
 import kr.or.yi.foodMgn.daoImpl.FoodDaoImpl;
 import kr.or.yi.foodMgn.dto.Food;
+import kr.or.yi.foodMgn.dto.FoodKind;
 
 public class MenuMgnSearchHandler implements CommandHandler {
 
@@ -26,8 +27,8 @@ public class MenuMgnSearchHandler implements CommandHandler {
 			
 			Food food = new Food();
 			food.setFdName(fdname);
-			
 			List<Food> list = dao.selectByName(food);
+			
 			
 //			Map<String, Boolean> map = new HashMap<String, Boolean>();
 
@@ -35,6 +36,7 @@ public class MenuMgnSearchHandler implements CommandHandler {
 //				map.put("islist", list);
 				
 				res.setContentType("application/json;charset=utf-8");
+				
 				ObjectMapper om = new ObjectMapper();
 				String json = om.writeValueAsString(list);
 				PrintWriter out = res.getWriter();
