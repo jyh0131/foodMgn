@@ -47,15 +47,15 @@
 	</update>
 	
 	<select id="selectByTel" parameterType="Member" resultMap="resultRsvLJH2">
-		select * from member_reservation where mb_tel like concat('%',#{mbTel},'%')
+		select * from member_reservation where mb_tel like concat('%',#{mbTel},'%') order by rsv_time
 	</select>
 	
 	<select id="selectByDate" parameterType="String" resultMap="resultRsvLJH2">
-		select * from member_reservation where rsv_time like concat(#{date},'%')
+		select * from member_reservation where rsv_time like concat(#{date},'%') order by rsv_time
 	</select>
 	
 	<select id="selectByDateNo" parameterType="map" resultMap="resultRsvLJH2">
-		select * from member_reservation where rsv_time like concat(#{date},'%') and mb_no=#{mbNo}
+		select * from member_reservation where rsv_time like concat(#{date},'%') and mb_no=#{mbNo} order by rsv_time
 	</select>
 	
 	<select id="selectByTimeTable" parameterType="Reservation" resultMap="resultRsvLJH2">
@@ -63,23 +63,23 @@
 	</select>
 	
 	<select id="selectByRangeTime" parameterType="Reservation" resultMap="resultRsvLJH2">
-		select * from member_reservation4 where rsv_time between subtime(#{rsvTime},'0:29:0') and addtime(#{rsvTime},'0:29:0')
+		select * from member_reservation4 where rsv_time between subtime(#{rsvTime},'0:29:0') and addtime(#{rsvTime},'0:29:0') 
 	</select>
 	
 	<select id="selectByNo" parameterType="Member" resultMap="resultRsvLJH2">
-		select * from member_reservation where mb_no=#{mbNo}
+		select * from member_reservation where mb_no=#{mbNo} order by rsv_time
 	</select>
 	
 	<select id="selectByTime" resultMap="resultRsvLJH2">
-		select * from member_reservation3 where timediff(rsv_time, now())>0;
+		select * from member_reservation3 where timediff(rsv_time, now())>0 order by rsv_time;
 	</select>
 	
 	<select id="selectByRangeDate" parameterType="map" resultMap="resultRsvLJH2">
-		select * from member_reservation where rsv_time &gt; concat(#{date},'%') and rsv_time &lt; concat(adddate(#{date2},1),'%');
+		select * from member_reservation where rsv_time &gt; concat(#{date},'%') and rsv_time &lt; concat(adddate(#{date2},1),'%') order by rsv_time;
 	</select>
 	
 	<select id="selectByAll" resultMap="resultRsvLJH2">
-		select * from member_reservation
+		select * from member_reservation order by rsv_time
 	</select>
 </mapper>
 
