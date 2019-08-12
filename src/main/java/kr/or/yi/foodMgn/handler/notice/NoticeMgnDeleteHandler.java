@@ -19,26 +19,51 @@ public class NoticeMgnDeleteHandler implements CommandHandler {
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		int nNo = Integer.parseInt(req.getParameter("nNo"));
+		int cancel = Integer.parseInt(req.getParameter("cancel"));
 		
-		NoticeDao dao = new NoticeDaoImpl();
-		Notice notice = new Notice(nNo);
-		notice.setNoDelete(true);
-		int result = dao.deleteNotice(notice);
-		
-		Map<String, Boolean> map = new HashMap<String, Boolean>();
-		
-		if(result != 0) {
-			map.put("success", true);
+		if(cancel == 1) {
+			NoticeDao dao = new NoticeDaoImpl();
+			Notice notice = new Notice(nNo);
+			notice.setNoDelete(true);
+			int result = dao.deleteNotice(notice);
 			
-			ObjectMapper om = new ObjectMapper();
-			String json = om.writeValueAsString(map);
+			Map<String, Boolean> map = new HashMap<String, Boolean>();
 			
-			PrintWriter out = res.getWriter();
-			out.print(json);
-			out.flush();
+			if(result != 0) {
+				map.put("success", true);
+				
+				ObjectMapper om = new ObjectMapper();
+				String json = om.writeValueAsString(map);
+				
+				PrintWriter out = res.getWriter();
+				out.print(json);
+				out.flush();
+				
+				return null;
+			}
+		} else if(cancel == 0) {
+			NoticeDao dao = new NoticeDaoImpl();
+			Notice notice = new Notice(nNo);
+			notice.setNoDelete(false);
+			int result = dao.deleteNotice(notice);
 			
-			return null;
+			Map<String, Boolean> map = new HashMap<String, Boolean>();
+			
+			if(result != 0) {
+				map.put("success", true);
+				
+				ObjectMapper om = new ObjectMapper();
+				String json = om.writeValueAsString(map);
+				
+				PrintWriter out = res.getWriter();
+				out.print(json);
+				out.flush();
+				
+				return null;
+			}
 		}
+		
+		
 		return null;
 	}
 

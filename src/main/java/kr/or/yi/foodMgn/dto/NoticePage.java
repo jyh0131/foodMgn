@@ -9,7 +9,7 @@ public class NoticePage {
 	private int totalPages; //전체 페이지 수
 	private int startPage; //시작번호
 	private int endPage; //끝번호
-	private int pageSize = 10; //한 화면에 표시될 페이지 번호의 개수(=> [1],[2],...,[10])
+	private int pageSize = 5; //한 화면에 표시될 페이지 번호의 개수(=> [1],[2],...,[10])
 	
 	public NoticePage(int total, int currentPage, int size, List<Notice> content) {
 													//size: 한페이지에 display될 게시글의 갯수

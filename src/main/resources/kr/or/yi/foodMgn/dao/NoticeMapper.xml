@@ -36,4 +36,16 @@
 	<update id="updateNotice" parameterType="Notice">
 		update notice set no_title = #{noTitle}, no_content = #{noContent}, no_moddate = #{noModdate} where no_no = #{noNo}
 	</update>
+	
+	<select id="selectNoticeByTitle" resultType="Notice" parameterType="Notice">
+		select * from notice where no_title like concat('%',#{noTitle},'%') order by no_no desc
+	</select>
+	
+	<select id="selectNoticeByContent" resultType="Notice" parameterType="Notice">
+		select * from notice where no_content like concat('%',#{noContent},'%') order by no_no desc
+	</select>
+	
+	<select id="selectNoticeByTitleandContent" resultType="Notice" parameterType="Notice">
+		select * from notice where no_content like concat('%',#{noContent},'%') or no_title like concat('%',#{noTitle},'%')  order by no_no desc
+	</select>
 </mapper>

@@ -84,6 +84,27 @@ public class NoticeDaoImpl implements NoticeDao {
 		}
 	}
 
+	@Override
+	public List<Notice> selectNoticeByTitle(Notice notice) {
+		try(SqlSession sqlSession = MybatisSqlSessionFactory.openSession()) {
+			return sqlSession.selectList(namespace + ".selectNoticeByTitle", notice);
+		}
+	}
+
+	@Override
+	public List<Notice> selectNoticeByContent(Notice notice) {
+		try(SqlSession sqlSession = MybatisSqlSessionFactory.openSession()) {
+			return sqlSession.selectList(namespace + ".selectNoticeByContent", notice);
+		}
+	}
+
+	@Override
+	public List<Notice> selectNoticeByTitleandContent(Notice notice) {
+		try(SqlSession sqlSession = MybatisSqlSessionFactory.openSession()) {
+			return sqlSession.selectList(namespace + ".selectNoticeByTitleandContent", notice);
+		}
+	}
+
 	
 
 }

@@ -122,8 +122,39 @@
 </style>
 
 <script>
-	$(function() {
-		$("#menu_li").click(function() {
+	$(function() {		
+		$("#menu_li li").click(function() {
+			var $li = $(this);
+			var fNo = $(this).attr("data-no");
+			
+			alert(fNo);
+
+			$.ajax({
+				url:"${pageContext.request.contextPath}/menu.do",
+				type:"post",
+				data:{"fNo":fNo},
+				dataType:"json",
+				success: function(res) {
+					console.log(res);
+					
+					$(res).each(function(i, obj) {
+						var $span = $("<span class='li_img'>");
+						$("#menu_li").text(obj.fkNo.fkName).append($span);
+						
+						$("#menu_name").empty();
+						
+						var $ul = $("<ul>");
+						var $img = $("<img>").attr("src", "/images/menu_food/"+obj.fdNo+".JPG");						
+						var $li = $("<li>").append($img);
+						
+						$ul.append($li);
+						$("#menu_name").append($ul);
+					})
+				}
+			})
+		})
+		
+		$(document).on("click", "#menu_li", function() {
 			$("#menulist").toggle();
 		})
 		/* $("#menu_li").click(function() {
@@ -154,7 +185,8 @@
 				<span class="li_img"></span>
 				<ul id="menulist">
 					<c:forEach var="fklist" items="${fkList}">
-						<a href="${pageContext.request.contextPath}/menu.do?fkno=${fklist.fkNo}"><li>${fklist}</li></a>
+						<%-- <a href="${pageContext.request.contextPath}/menu.do?fkno=${fklist.fkNo}"><li>${fklist}</li></a> --%>
+						<li data-no="${fklist.fkNo}">${fklist}</li>
 					</c:forEach>
 				</ul>
 			</div>
@@ -174,7 +206,7 @@
 				</div>
 				<div id="menu_name">
 					<h1>${fkName}</h1>
-					<div>
+					<ul>
 						<c:forEach var="flist" items="${fList}">
 							<c:if test="${flist.fkNo.fkNo == 8}">
 								<li class="bevImg"><img src="${pageContext.request.contextPath}/images/menu_food/${flist.fdNo}.JPG"></li>
@@ -186,7 +218,7 @@
 								<li><img src="${pageContext.request.contextPath}/images/menu_food/${flist.fdNo}.JPG"></li>
 							</c:if>
 						</c:forEach>
-					</div>
+					</ul>
 				</div>
 			</div>
 		</div>
