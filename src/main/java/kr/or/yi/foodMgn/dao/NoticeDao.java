@@ -15,4 +15,7 @@ public interface NoticeDao {
 	public int updateReadNt(Notice notice);
 	public int deleteNotice(Notice notice);
 	public int updateNotice(Notice notice);
+	public List<Notice> selectNoticeByTitle(Notice notice);
+	public List<Notice> selectNoticeByContent(Notice notice);
+	public List<Notice> selectNoticeByTitleandContent(Notice notice);
 }

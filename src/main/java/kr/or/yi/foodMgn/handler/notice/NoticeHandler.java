@@ -29,7 +29,7 @@ public class NoticeHandler implements CommandHandler {
 //		req.setAttribute("nList", nlist);
 		
 		Map<String , Integer> map = new HashMap<>();
-		map.put("startRow", (page-1)*10);
+		map.put("startRow", (page-1)*20);
 		map.put("size", 20);
 		
 		List<Notice> nlist = dao.selectListPage(map);

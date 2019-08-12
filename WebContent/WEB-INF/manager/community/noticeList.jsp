@@ -86,30 +86,57 @@
 	a {
 		color: black;
 	}
+	.underline a {
+		color: red;
+	}
 </style>
 <script>
 	$(function() {
 		$(".delete").click(function() {
-			var result = confirm("삭제하시겠습니까?");
+			var nNo = $(this).attr("data-no");
 			var $btn = $(this);
-
-			if(result == true) {
-				var nNo = $(this).attr("data-no");
+			
+			if($btn.text() == "삭제") {
+				var result = confirm("삭제하시겠습니까?");
 				
-				$.ajax({
-					url:"${pageContext.request.contextPath}/noticeMgnDelete.do",
-					type:"get",
-					data:{"nNo":nNo},
-					dataType:"json",
-					success: function(json) {
-						console.log(json);
-						
-						if(json.success == true) {
-							$btn.closest("tr").addClass("underline");
+				if(result == true) {
+					$.ajax({
+						url:"${pageContext.request.contextPath}/mgn/noticeMgnDelete.do?cancel=1",
+						type:"get",
+						data:{"nNo":nNo},
+						dataType:"json",
+						success: function(json) {
+							console.log(json);
+							
+							if(json.success == true) {
+								$btn.closest("tr").addClass("underline");
+								$btn.text("취소");
+							}
 						}
-					}
-				})
+					})
+				}
+			} else {
+				var result = confirm("삭제를 취소하시겠습니까?");
+				
+				if(result == true) {
+					$.ajax({
+						url:"${pageContext.request.contextPath}/mgn/noticeMgnDelete.do?cancel=0",
+						type:"get",
+						data:{"nNo":nNo},
+						dataType:"json",
+						success: function(json) {
+							console.log(json);
+							
+							if(json.success == true) {
+								$btn.closest("tr").removeClass("underline");
+								$btn.text("삭제");
+							}
+						}
+					})
+				}
+				
 			}
+			
 			return false;
 		})
 		
@@ -159,10 +186,11 @@
 							<td>${nlist.noNo}</td>
 							<td>${nlist.noTitle}</td>
 							<td>${nlist.noWriter}</td>
-							<td><fmt:formatDate pattern="yyyy-MM-dd" value="${nlist.noRegdate}" /></td>
+							<td><fmt:formatDate pattern="yyyy-MM-dd kk:mm" value="${nlist.noRegdate}" /></td>
+							<td><fmt:formatDate pattern="yyyy-MM-dd kk:mm" value="${nlist.noModdate}" /></td>
 							<td>
 								<button class="noupdate" data-no="${nlist.noNo}">수정</button>
-								<button class="nodelete" data-no="${nlist.noNo}">삭제</button>
+								<button class="delete" data-no="${nlist.noNo}">취소</button>
 							</td>
 						</tr>
 					</c:if>

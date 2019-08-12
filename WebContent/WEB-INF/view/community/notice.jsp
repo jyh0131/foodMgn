@@ -103,7 +103,60 @@
 		float: left;
 		margin-right: 5px;
 	}
+	#pagediv {
+		text-align: center;
+		padding-top: 20px;
+	}
+	.current {
+		font-weight: bold;
+		text-decoration: underline;
+	}
 </style>
+<script>
+	$(function() {
+		$("#searchForm").submit(function() {
+			var opt = $("select[name='searchoption']").val();
+			var search = $("input[name='search']").val();
+
+			if(search == "") {
+				alert("검색어를 입력하세요.");
+				return false;
+			}
+			
+			$.ajax({
+				url:"${pageContext.request.contextPath}/noticeSearch.do",
+				type:"post",
+				data:{"opt":opt, "search":search},
+				dataType:"json",
+				success: function(res) {
+					console.log(res);
+					
+					$("table").empty();
+					$("table").append("<tr><th>번호</th><th>제 목</th><th>글쓴이</th><th>날짜</th><th>조회</th></tr>");
+					
+					$(res.content).each(function(i, obj) {
+						var date = new Date(obj.noRegdate);
+						
+						var $tr = $("<tr>");
+						var $nno = $("<td>").text(obj.noNo);
+						var $a = $("<a>").attr("href", "${pageContext.request.contextPath}/noticeDetail.do?no="+obj.noNo+"&page=${noticePage.currentPage}").text(obj.noTitle);
+						var $ntitle = $("<td>").append($a);
+						var $nwriter = $("<td>").text(obj.noWriter);
+						var $ndate = $("<td class='small'>").text(date.getFullYear()+"-"+("00" + (date.getMonth() + 1)).slice(-2)+"-"+date.getDate());
+						var $nread = $("<td class='small'>").text(obj.noReadNt);
+						
+						$tr.append($nno).append($ntitle).append($nwriter).append($ndate).append($nread);
+						$("table").append($tr);
+					})
+					
+				}
+				
+			})
+			
+			return false;
+		})
+	})
+</script>
 	<div class="sub">
 		<div class="s_visu1">
 			<img src="${pageContext.request.contextPath}/images/community/sub05_visu.jpg">
@@ -139,33 +192,30 @@
 							<td class="small">${n.noReadNt}</td>
 						</tr>
 					</c:forEach>
-					<tr>
-						<td colspan="4" class="page_wrap">
-							<c:if test="${noticePage.startPage > 10}">
-								<a href="notice.do?page=${noticePage.startPage - 1}" class="pn">[이전]</a>
-							</c:if>
-							<c:forEach var="pNo" begin="${noticePage.startPage}" end="${noticePage.endPage}">
-								<c:if test="${noticePage.currentPage == pNo}">
-									<a href="notice.do?page=${pNo}" class="current">${pNo}</a>
-								</c:if>
-								<c:if test="${noticePage.currentPage != pNo}">
-									<a href="notice.do?page=${pNo}">${pNo}</a>
-								</c:if>
-							</c:forEach>
-							<c:if test="${noticePage.endPage < noticePage.totalPages}">
-								<a href="notice.do?page=${noticePage.endPage + 1}" class="pn">[다음]</a>
-							</c:if>
-						</td>
-					</tr>
 				</table>
+				<div id="pagediv">
+					<c:if test="${noticePage.startPage > 5}">
+						<a href="notice.do?page=${noticePage.startPage - 1}" class="pn">[이전]</a>
+					</c:if>
+					<c:forEach var="pNo" begin="${noticePage.startPage}" end="${noticePage.endPage}">
+						<c:if test="${noticePage.currentPage == pNo}">
+							<a href="notice.do?page=${pNo}" class="current">${pNo}</a>
+						</c:if>
+						<c:if test="${noticePage.currentPage != pNo}">
+							<a href="notice.do?page=${pNo}">${pNo}</a>
+						</c:if>
+					</c:forEach>
+					<c:if test="${noticePage.endPage < noticePage.totalPages}">
+						<a href="notice.do?page=${noticePage.endPage + 1}" class="pn">[다음]</a>
+					</c:if>
+				</div>
 			</div>
 			<div id="searchdiv">
-				<form>
-					<select>
+				<form id="searchForm">
+					<select name="searchoption">
 						<option>제목</option>
 						<option>내용</option>
 						<option>제목+내용</option>
-						<option>글쓴이</option>
 					</select>
 					<input type="text" name="search">
 					<input type="submit" value="검색">
