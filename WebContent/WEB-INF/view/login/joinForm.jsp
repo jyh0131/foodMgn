@@ -153,13 +153,16 @@
 	input[name="addr"] {
 		margin-top: 5px;
 	}
-	.reg {
+	.reg, .reg2 {
 	   color: red;
 	   font-size: 0.8em;
 	   display: none;
 	}
 </style>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script>
     //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
     function sample4_execDaumPostcode() {
@@ -249,6 +252,14 @@
             return false;
          }
          
+         var birth = new Date($("input[name='birth']").val()).getTime();
+      	 var today = new Date().getTime();
+      	 
+      	 if(birth > today) {
+      	 	 $("input[name='birth']").nextAll(".reg2").css("display", "inline");
+				 return false;
+       	 } 
+      	
          $.ajax({
 				url:"${pageContext.request.contextPath}/joinForm.do",
 				type:"post",
@@ -271,7 +282,9 @@
 			})
          return false;
       })
-		
+      	$(".date").datepicker({
+			dateFormat: 'yy-mm-dd'
+		});
    })
 </script>
    <div class="sub">
@@ -310,8 +323,9 @@
                <div class="jf_div2">
                   <span class="span1">생년월일</span>
                   <span>
-                     <input type="date" name="birth">
+                     <input type="text" name="birth" class="date" autocomplete="off">
                      <span class="reg">※ 생년월일을 입력하세요</span>
+                     <span class="reg2">※ 생년월일을 다시 입력하세요</span>
                   </span>
                </div>
                <div class="jf_div2">

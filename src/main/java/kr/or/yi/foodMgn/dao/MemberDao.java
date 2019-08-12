@@ -3,6 +3,7 @@ package kr.or.yi.foodMgn.dao;
 import java.util.List;
 import java.util.Map;
 
+import kr.or.yi.foodMgn.dto.Food;
 import kr.or.yi.foodMgn.dto.Member;
 
 public interface MemberDao {
@@ -25,4 +26,7 @@ public interface MemberDao {
 	public Member selectByMbNo(Member member);
 	public Member selectByMbNo2(Member member);
 	public Member selectByTelForJoin(Member member);
+	
+	public List<Member> selectListPage(Map<String, Integer> map);
+	public int selectTotalCount();
 }

@@ -8,6 +8,7 @@
 		<result column="fd_price" property="fdPrice"/>
 		<result column="fd_name" property="fdName"/>
 		<result column="fd_withdrawal" property="fdWithdrawal"/>
+		<result column="fd_img" property="fdImg"/>
 	</resultMap>
 	
 	<resultMap type="Food" id="resultFoodBJY" extends="resultFood">
@@ -19,11 +20,11 @@
 	</select>
 	
 	<select id="selectFoodByAllF" resultMap="resultFoodBJY">
-		select f.fd_no, f.fd_name, f.fd_price, fk.fk_name, f.fd_withdrawal from food f join foodkind fk on f.fk_no = fk.fk_no
+		select f.fd_no, f.fd_name, f.fd_price, fk.fk_name, f.fd_withdrawal, f.fd_img from food f join foodkind fk on f.fk_no = fk.fk_no
 	</select>
 	
-	<select id="selectByName" resultMap="resultFoodBJY">
-		select f.fd_no, f.fd_name, f.fd_price, fk.fk_name from food f join foodkind fk on f.fk_no = fk.fk_no where fd_name like concat('%',#{fdName},'%')
+	<select id="selectByName" resultMap="resultFoodBJY" parameterType="map">
+		select f.fd_no, f.fd_name, f.fd_price, f.fk_no, fk.fk_name, f.fd_withdrawal, f.fd_img from food f join foodkind fk on f.fk_no = fk.fk_no where fd_name like concat('%',#{fdName},'%') limit #{startRow}, #{size}
 	</select>
 	
 	<select id="selectByNames" resultMap="resultFoodBJY">
@@ -35,7 +36,7 @@
 	</insert>
 	
 	<select id="selectByNo" resultType="Food" resultMap="resultFoodBJY">
-		select f.fd_no, f.fd_price, f.fd_name, f.fk_no, fk.fk_name, fk.menu_no from food f left join foodkind fk on f.fk_no = fk.fk_no where f.fk_no = #{fkNo.fkNo}
+		select f.fd_no, f.fd_price, f.fd_name, f.fk_no, fk.fk_name, fk.menu_no, f.fd_img from food f left join foodkind fk on f.fk_no = fk.fk_no where f.fk_no = #{fkNo.fkNo}
 	</select>
 	
 	<select id="selectByFdNo" parameterType="Food" resultMap="resultFoodBJY">
@@ -52,6 +53,14 @@
 	
 	<select id="selectByFkNo" resultMap="resultFoodBJY" parameterType="Food">
 		select * from food left join foodkind on food.fk_no = foodkind.fk_no where food.fk_no = #{fkNo.fkNo};
+	</select>
+	
+	<select id="selectListPage" resultMap="resultFoodBJY" parameterType="map">
+		select f.fd_no, f.fd_name, f.fd_price, fk.fk_name, f.fd_withdrawal, f.fd_img from food f join foodkind fk on f.fk_no = fk.fk_no limit #{startRow}, #{size}
+	</select>
+	
+	<select id="selectTotalCount" resultType="java.lang.Integer">
+		select count(fd_no) from food
 	</select>
 </mapper>
 

@@ -5,14 +5,14 @@
 <style>
 	#wrap {
 		min-height: 700px;
-		width: 1000px;
+		width: 1200px;
 		margin: 0 auto;
 	}
 	#div {
 		height: 140px;
 	}
 	#menuList {
-		height: 600px;
+		height: 750px;
 		overflow: auto;
 		width: 100%;
 		border: 1px solid #555;
@@ -54,24 +54,28 @@
 		padding: 10px 10px;
 	}
 	#foodKind {
-		width: 180px;
+		width: 150px;
 	}
 	#foodNo {
 		width: 80px;
 	}
 	#foodName {
-		width: 440px;
+		width: 430px;
 	}
 	#foodPrice {
-		width: 85px;
+		width: 90px;
 	}
 	#update {
 		border-right: none;
 	}
-	#foodtable td:nth-child(1), td:nth-child(2) {
+	#foodtable td:nth-child(1), td:nth-child(2), td:nth-child(3) {
 		text-align: center;
 	}
-	#foodtable td:nth-child(4) {
+	#foodtable td:nth-child(2) img {
+		width: 170px;
+		height: 80px;
+	}
+	#foodtable td:nth-child(5) {
 		text-align: right;
 	}
 	button, input[type="submit"] {
@@ -120,6 +124,20 @@
 		background-color: #555;
 		font-size: 0.7em;
 		border: 1px solid #555;    
+	}
+	a {
+		color: black;
+	}
+	#pagediv {
+		text-align: center;
+		padding-top: 20px;
+		padding-bottom: 20px;
+	}
+	.current {
+		font-weight: bold;
+	}
+	.pn {
+		margin: 0 5px;
 	}
 </style>
 <script>
@@ -217,10 +235,12 @@
 					console.log(res);
 					
 					$("table").empty();
-					$("table").append("<tr><th id='foodKind'>음식종류</th><th id='foodNo'>음식번호</th><th id='foodName'>음식명</th><th id='foodPrice'>가격</th><th id='update'></th></tr>");
+					$("table").append("<tr><th id='foodKind'>음식종류</th><th>사진</th><th id='foodNo'>음식번호</th><th id='foodName'>음식명</th><th id='foodPrice'>가격</th><th id='update'></th></tr>");
 					
-					$(res).each(function(i, obj) {
+					$(res.content).each(function(i, obj) {
 						var $tr = $("<tr>");
+						var $img = $("<img>").attr("src", "${pageContext.request.contextPath}/images/food/"+obj.fdName+".png");
+						var $fdImg = $("<td>").append($img);
 						var $fkname = $("<td>").text(obj.fkNo.fkName);
 						var $fdno = $("<td>").text(obj.fdNo);
 						var $fdname = $("<td>").text(obj.fdName);
@@ -229,7 +249,7 @@
 						var $button = $("<button class='update' data-no='"+obj.fdNo+"'>수정</button> <button class='delete' data-no='"+obj.fdNo+"'>삭제</button>");
 						
 						$lasttd.append($button);
-						$tr.append($fkname).append($fdno).append($fdname).append($fdprice).append($lasttd);
+						$tr.append($fkname).append($fdImg).append($fdno).append($fdname).append($fdprice).append($lasttd);
 						$("table").append($tr);
 					})
 				}
@@ -318,25 +338,41 @@
 		});
 		
 		$("#allList").click(function() {
-			/* $.ajax({
-	            url:"${pageContext.request.contextPath}/mgn/menuMgnlist.do?allList=yes",
-	            type:"get",
+			$.ajax({
+	            url:"${pageContext.request.contextPath}/mgn/menuMgnlist.do",
+	            type:"post",
 	            dataType:"json",
 	            success: function(res) {
 	               console.log(res);
 	               
-	               if(res.success == true) {
-	            	   
-	               }
+	               $("table").empty();
+				   $("table").append("<tr><th id='foodKind'>음식종류</th><th>사진</th><th id='foodNo'>음식번호</th><th id='foodName'>음식명</th><th id='foodPrice'>가격</th><th id='update'></th></tr>");
+				   $("input[name='fdname']").val("");
+				   
+	               $(res.content).each(function(i, obj) {
+	            	   var $tr = $("<tr>");
+						var $img = $("<img>").attr("src", "${pageContext.request.contextPath}/images/food/"+obj.fdName+".png");
+						var $fdImg = $("<td>").append($img);
+						var $fkname = $("<td>").text(obj.fkNo.fkName);
+						var $fdno = $("<td>").text(obj.fdNo);
+						var $fdname = $("<td>").text(obj.fdName);
+						var $fdprice = $("<td>").text(obj.fdPrice.toLocaleString()+"원");
+						var $lasttd = $("<td>");
+						var $button = $("<button class='update' data-no='"+obj.fdNo+"'>수정</button> <button class='delete' data-no='"+obj.fdNo+"'>삭제</button>");
+						
+						$lasttd.append($button);
+						$tr.append($fkname).append($fdImg).append($fdno).append($fdname).append($fdprice).append($lasttd);
+						$("table").append($tr);
+	               })
 	            }
-	         }) */
+	         })
 		})
 	})
 </script>
 
 	<div id="wrap">
 		<div id="div"></div>
-		<fieldset>
+		<%-- <fieldset>
 			<legend> 음식추가 </legend>
 			<form action="${pageContext.request.contextPath}/mgn/menuMgninsert.do" method="post" id="f1">
 			<select name="fk">
@@ -355,7 +391,7 @@
 			<input type="text" name="price" size="5" placeholder="가격">
 			<input type="submit" value="추가">
 		</form>
-		</fieldset>
+		</fieldset> --%>
 		<div id="menuList">
 			<button id="allList">전체보기</button>
 			<form action="${pageContext.request.contextPath}/mgn/menuMgnsearch.do" method="post" id="f2">
@@ -365,15 +401,17 @@
 			<table id="foodtable">
 				<tr>
 					<th id="foodKind">음식종류</th>
+					<th id="foodImg">사진</th>
 					<th id="foodNo">음식번호</th>
 					<th id="foodName">음식명</th>
 					<th id="foodPrice">가격</th>
 					<th id="update"></th>
 				</tr>
-				<c:forEach var="flist" items="${fList}">
+				<c:forEach var="flist" items="${foodPage.content}">
 					<c:if test="${flist.fdWithdrawal == true}">
 						<tr class="underline">
 							<td>${flist.fkNo}</td>
+							<td><img src="${pageContext.request.contextPath}/images/food/${flist.fdName}.png"></td>
 							<td>${flist.fdNo}</td>
 							<td>${flist.fdName}</td>
 							<td><fmt:formatNumber groupingUsed="true" value="${flist.fdPrice}"/>원</td>
@@ -386,6 +424,7 @@
 					<c:if test="${flist.fdWithdrawal != true}">
 						<tr>
 							<td>${flist.fkNo}</td>
+							<td><img src="${pageContext.request.contextPath}/images/food/${flist.fdName}.png"></td>
 							<td>${flist.fdNo}</td>
 							<td>${flist.fdName}</td>
 							<td><fmt:formatNumber groupingUsed="true" value="${flist.fdPrice}"/>원</td>
@@ -397,6 +436,22 @@
 					</c:if>
 				</c:forEach>
 			</table>
+			<div id="pagediv">
+				<c:if test="${foodPage.startPage > 5}">
+					<a href="${pageContext.request.contextPath}/mgn/menuMgnlist.do?page=${foodPage.startPage - 1}" class="pn">&lt;&lt;</a>
+				</c:if>
+				<c:forEach var="pNo" begin="${foodPage.startPage}" end="${foodPage.endPage}">
+					<c:if test="${foodPage.currentPage == pNo}">
+						<a href="${pageContext.request.contextPath}/mgn/menuMgnlist.do?page=${pNo}" class="current">${pNo}</a>
+					</c:if>
+					<c:if test="${foodPage.currentPage != pNo}">
+						<a href="${pageContext.request.contextPath}/mgn/menuMgnlist.do?page=${pNo}">${pNo}</a>
+					</c:if>
+				</c:forEach>
+				<c:if test="${foodPage.endPage < foodPage.totalPages}">
+					<a href="${pageContext.request.contextPath}/mgn/menuMgnlist.do?page=${foodPage.endPage + 1}" class="pn">&gt;&gt;</a>
+				</c:if>
+			</div>
 		</div>
 	</div>
 	

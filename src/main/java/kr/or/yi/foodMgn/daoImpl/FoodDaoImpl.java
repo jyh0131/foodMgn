@@ -1,12 +1,14 @@
 package kr.or.yi.foodMgn.daoImpl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
 import kr.or.yi.foodMgn.dao.FoodDao;
 import kr.or.yi.foodMgn.dto.Food;
 import kr.or.yi.foodMgn.dto.FoodKind;
+import kr.or.yi.foodMgn.dto.Notice;
 import kr.or.yi.foodMgn.jdbc.MybatisSqlSessionFactory;
 
 public class FoodDaoImpl implements FoodDao {
@@ -54,9 +56,9 @@ public class FoodDaoImpl implements FoodDao {
 	}
 
 	@Override
-	public List<Food> selectByName(Food food) {
+	public List<Food> selectByName(Map<String, Object> map) {
 		try(SqlSession sqlSession = MybatisSqlSessionFactory.openSession()) {
-			return sqlSession.selectList(namespace + ".selectByName", food);
+			return sqlSession.selectList(namespace + ".selectByName", map);
 		}
 	}
 
@@ -85,6 +87,21 @@ public class FoodDaoImpl implements FoodDao {
 	public List<Food> selectByFkNo(FoodKind fk) {
 		try(SqlSession sqlSession = MybatisSqlSessionFactory.openSession()) {
 			return sqlSession.selectList(namespace + ".selectFoodByAllF", fk);
+		}
+	}
+
+	@Override
+	public List<Food> selectListPage(Map<String, Integer> map) {
+		try(SqlSession sqlSession = MybatisSqlSessionFactory.openSession()) {
+			return sqlSession.selectList(namespace + ".selectListPage", map);
+		}
+	}
+
+	@Override
+	public int selectTotalCount() {
+		try(SqlSession sqlSession = MybatisSqlSessionFactory.openSession()) {
+			int res = sqlSession.selectOne(namespace + ".selectTotalCount");
+			return res;
 		}
 	}
 	

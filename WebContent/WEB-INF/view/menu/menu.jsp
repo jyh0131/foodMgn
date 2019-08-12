@@ -109,6 +109,9 @@
 		height: 620px;
 		border-bottom: 1px dotted #555;
 	}
+	.bevImg:last-child img {
+		margin-bottom: 70px;
+	}
 	.beerImg img {
 		float: left;
 		width: 250px;
@@ -119,42 +122,14 @@
 		width: 500px;
 		height: 400px;
 	}
+	.beerImg:last-child img {
+		margin-bottom: 70px;
+	}
 </style>
 
 <script>
-	$(function() {		
-		$("#menu_li li").click(function() {
-			var $li = $(this);
-			var fNo = $(this).attr("data-no");
-			
-			alert(fNo);
-
-			$.ajax({
-				url:"${pageContext.request.contextPath}/menu.do",
-				type:"post",
-				data:{"fNo":fNo},
-				dataType:"json",
-				success: function(res) {
-					console.log(res);
-					
-					$(res).each(function(i, obj) {
-						var $span = $("<span class='li_img'>");
-						$("#menu_li").text(obj.fkNo.fkName).append($span);
-						
-						$("#menu_name").empty();
-						
-						var $ul = $("<ul>");
-						var $img = $("<img>").attr("src", "/images/menu_food/"+obj.fdNo+".JPG");						
-						var $li = $("<li>").append($img);
-						
-						$ul.append($li);
-						$("#menu_name").append($ul);
-					})
-				}
-			})
-		})
-		
-		$(document).on("click", "#menu_li", function() {
+	$(function() {
+		$("#menu_li").click(function() {
 			$("#menulist").toggle();
 		})
 		/* $("#menu_li").click(function() {
@@ -173,6 +148,58 @@
 			if(container.has(e.target).length === 0)
 				container.hide();
 		}) */
+		
+		$("#menu_li li").click(function() {
+			var $li = $(this);
+			var fNo = $(this).attr("data-no");
+			var fkName = ["파스타","스테이크&커틀렛","필라프&리조또","샐러드","시그니처 피자","피자","사이드 메뉴","음료","맥주"];
+			
+			$.ajax({
+				url:"${pageContext.request.contextPath}/menu.do",
+				type:"post",
+				data:{"fNo":fNo},
+				dataType:"json",
+				success: function(res) {
+					console.log(res);
+					
+					$("#menu_name ul").empty();
+					$("#title_img").empty();
+					$("#fkN").empty();
+					$(".li_name").empty();
+					$("#menu_name h1").empty();
+					
+					var $t_img = $("<img>").attr("src", "${pageContext.request.contextPath}/images/menu/"+fkName[fNo-1]+".jpg");
+					$("#title_img").append($t_img);		
+					
+					var $b = $("<b>").text(fkName[fNo-1]);
+					$("#fkN").append($b);
+					
+					$(".li_name").text(fkName[fNo-1]);
+					
+					var $h1 = $("<h1>").text(fkName[fNo-1]);
+					$("#menu_name h1").append($h1);
+					
+					$(res).each(function(i, obj) {
+						if(fNo == 8) {
+							var $img = $("<img>").attr("src", "${pageContext.request.contextPath}/food/"+obj.fdImg);						
+							var $li = $("<li class='bevImg'>").append($img);
+							
+							$("#menu_name ul").append($li);
+						}else if(fNo == 9) {
+							var $img = $("<img>").attr("src", "${pageContext.request.contextPath}/food/"+obj.fdImg);						
+							var $li = $("<li class='beerImg'>").append($img);
+							
+							$("#menu_name ul").append($li);
+						}else if(fNo != 8 || fNo != 9) {
+							var $img = $("<img>").attr("src", "${pageContext.request.contextPath}/food/"+obj.fdImg);						
+							var $li = $("<li>").append($img);
+							
+							$("#menu_name ul").append($li);
+						}
+					})
+				}
+			})
+		})
 	})
 </script>
 	<div class="sub">
@@ -181,7 +208,7 @@
 		</div>
 		<div class="content">
 			<div id="menu_li">
-				${fkName}
+				<span class="li_name">${fkName}</span>
 				<span class="li_img"></span>
 				<ul id="menulist">
 					<c:forEach var="fklist" items="${fkList}">
@@ -196,7 +223,7 @@
 					<li>></li>
 					<li>메뉴소개</li>
 					<li>></li>
-					<li><b>${fkName}</b></li>
+					<li id="fkN"><b>${fkName}</b></li>
 				</ul>
 			</div>
 			<div class="clear"></div>
@@ -209,13 +236,13 @@
 					<ul>
 						<c:forEach var="flist" items="${fList}">
 							<c:if test="${flist.fkNo.fkNo == 8}">
-								<li class="bevImg"><img src="${pageContext.request.contextPath}/images/menu_food/${flist.fdNo}.JPG"></li>
+								<li class="bevImg"><img src="${pageContext.request.contextPath}/food/${flist.fdImg}"></li>
 							</c:if>
 							<c:if test="${flist.fkNo.fkNo == 9}">
-								<li class="beerImg"><img src="${pageContext.request.contextPath}/images/menu_food/${flist.fdNo}.JPG"></li>
+								<li class="beerImg"><img src="${pageContext.request.contextPath}/food/${flist.fdImg}"></li>
 							</c:if>
 							<c:if test="${flist.fkNo.fkNo != 8 and flist.fkNo.fkNo != 9}">
-								<li><img src="${pageContext.request.contextPath}/images/menu_food/${flist.fdNo}.JPG"></li>
+								<li><img src="${pageContext.request.contextPath}/food/${flist.fdImg}"></li>
 							</c:if>
 						</c:forEach>
 					</ul>

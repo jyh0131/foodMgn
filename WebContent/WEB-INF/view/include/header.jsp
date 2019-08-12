@@ -92,7 +92,10 @@
 			$("#li6 a").text("DERECTION");
 			$("#li6 a").css("margin-right","0");
 		})
-
+		
+		/* #("#li2 .submenu li").click(function() {
+			
+		}) */
 	})
 </script>
 </head>
@@ -134,15 +137,15 @@
 							<li class="center" id="li2">
 								<a href="${pageContext.request.contextPath}/menu.do?fkno=1">MENU</a>
 								<ul class="submenu">
-									<li><a href="${pageContext.request.contextPath}/menu.do?fkno=1">PASTA</a></li>
-									<li><a href="${pageContext.request.contextPath}/menu.do?fkno=2">STEAK & CUTLET</a></li>
-									<li><a href="${pageContext.request.contextPath}/menu.do?fkno=3">PILAF & RISOTTO</a></li>
-									<li><a href="${pageContext.request.contextPath}/menu.do?fkno=4">SALAD</a></li>
-									<li><a href="${pageContext.request.contextPath}/menu.do?fkno=5">SIGNATURE PIZZA</a></li>
-									<li><a href="${pageContext.request.contextPath}/menu.do?fkno=6">PIZZA</a></li>
-									<li><a href="${pageContext.request.contextPath}/menu.do?fkno=7">SIDE MENU</a></li>
-									<li><a href="${pageContext.request.contextPath}/menu.do?fkno=8">BEVERAGE</a></li>
-									<li><a href="${pageContext.request.contextPath}/menu.do?fkno=9">BEER</a></li>
+									<li><a href="${pageContext.request.contextPath}/menu.do?fkno=1">파스타</a></li>
+									<li><a href="${pageContext.request.contextPath}/menu.do?fkno=2">스테이크&커틀렛</a></li>
+									<li><a href="${pageContext.request.contextPath}/menu.do?fkno=3">필라프&리조또</a></li>
+									<li><a href="${pageContext.request.contextPath}/menu.do?fkno=4">샐러드</a></li>
+									<li><a href="${pageContext.request.contextPath}/menu.do?fkno=5">시그니처 피자</a></li>
+									<li><a href="${pageContext.request.contextPath}/menu.do?fkno=6">피자</a></li>
+									<li><a href="${pageContext.request.contextPath}/menu.do?fkno=7">사이드 메뉴</a></li>
+									<li><a href="${pageContext.request.contextPath}/menu.do?fkno=8">음료</a></li>
+									<li><a href="${pageContext.request.contextPath}/menu.do?fkno=9">맥주</a></li>
 								</ul>
 							</li>
 							<li class="right" id="li3">
