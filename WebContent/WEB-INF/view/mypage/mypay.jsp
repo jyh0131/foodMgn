@@ -713,4 +713,5 @@ button {
 		</tbody>
 	</table>
 </div>
+</div>
 <%@ include file="../include/footer.jsp" %>
