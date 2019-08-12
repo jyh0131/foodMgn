@@ -18,10 +18,10 @@
 				
 				$("#sale_info_get").text("등급할인:"+$("#grade_info_get").text());
 				var totalP= ${totalPrice }*(${mem.mbGrade.gDiscount}/100);
-				$("#sale_price_get").text( totalP );
+				$("#sale_price_get").text( totalP.toLocaleString() );
 				$("#pay_price_get").text(  (t-totalP).toLocaleString()  );
 			}else if($(this).val()=="쿠폰"){
-				$("#sel").eq(0).prop("selected", true);
+				$("#sel option").eq(0).prop("selected", true);
 				$("#sale_detail_1").css("display","none");
 				$("#sale_detail_2").css("display","block");
 				$("#sale_detail_3").css("display","none");
@@ -77,13 +77,13 @@
 		//마일리지 엔터시
 		$("#mileage_info_get").keydown(function(key) {
 			if (key.keyCode == 13) {
-				var useMileage = $("#mileage_info_get").val();
+				var useMileage = Number($("#mileage_info_get").val());
 				if(useMileage > ${mem.mbMileage} ){
 					alert("사용가능한 마일리지는 ${mem.mbMileage}원 입니다");
 					$("#mileage_info_get").val("");
 				}else{
 					$("#sale_info_get").text("마일리지:"+useMileage.toLocaleString()+"원");
-					$("#sale_price_get").text(useMileage.toLocaleString());
+					$("#sale_price_get").text( useMileage.toLocaleString() );
 					var totalP3= ${ totalPrice }-useMileage;
 					$("#pay_price_get").text( totalP3.toLocaleString()  );
 				}

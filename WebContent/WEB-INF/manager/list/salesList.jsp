@@ -89,6 +89,8 @@ table {
 		$("#datepicker").datepicker({
 			dateFormat : 'yy-mm-dd',
 			  onSelect: function(dateText, inst) {
+					$("#fd_year option").eq(0).prop("selected", "true");    
+				    $("#fd_month  option").eq(0).prop("selected", "true");   
 		          var date = $(this).val();
 		          $.ajax({
 						url:"${pageContext.request.contextPath }/mgn/salesList.do",
@@ -143,6 +145,8 @@ table {
 		});
 		
 		$("#all").click(function() {
+			$("#fd_year option").eq(0).prop("selected", "true");    
+		    $("#fd_month  option").eq(0).prop("selected", "true");   
 			$("#datepicker").val("");
 			  $.ajax({
 					url:"${pageContext.request.contextPath }/mgn/salesListAll.do",
@@ -191,6 +195,8 @@ table {
 					}
 					
 				})
+				
+			
 		})
 		
 		
@@ -217,6 +223,7 @@ table {
 	       $("#fd_month  > option[value='100'").attr("selected", "true");  
 		
 	       $("#search").click(function() { //조회 버튼 클릭시
+	    	   $("#datepicker").val("");
 	       		var y =$("#fd_year").val();
 	       		var m =$("#fd_month").val();
 	       		if(y==100){
