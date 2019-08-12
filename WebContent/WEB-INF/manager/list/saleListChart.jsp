@@ -24,6 +24,14 @@
 #chart_div {
 	float: left;
 }
+button {
+	padding: 3px 5px;
+	background-color: #c7a593;
+	border: 1px solid #c7a593;
+	color: white;
+	border-radius: 3px;
+	outline: none;
+}
 </style>
 <script type="text/javascript"
 	src="https://www.gstatic.com/charts/loader.js"></script>
@@ -159,6 +167,7 @@
 		       $("#search2").click(function() { //조회 버튼 클릭시  
 		       		var y =$("#fd_year").val();
 		       		var m =$("#fd_month").val();
+		       		$("#datepicker").val("");
 		       		if(y==100){
 		       			alert("년도를 선택해주세요.")
 		       		}else if(y!=100 && m==100){ //년도별 검색,월x
@@ -353,6 +362,8 @@
 				$("#datepicker").datepicker({
 					dateFormat : 'yy-mm-dd',
 					  onSelect: function(dateText, inst) {
+							$("#fd_year option").eq(0).prop("selected", "true");    
+						    $("#fd_month  option").eq(0).prop("selected", "true");   
 				          var date = $(this).val();
 				          $.ajax({
 								url : "${pageContext.request.contextPath }/mgn/saleListDate.do",
@@ -450,6 +461,8 @@
 				
 		       $("#all").click(function() {
 					$("#datepicker").val("");
+					$("#fd_year option").eq(0).prop("selected", "true");    
+				    $("#fd_month  option").eq(0).prop("selected", "true");   
 					$.ajax({
 						url : "${pageContext.request.contextPath }/mgn/saleListChart.do",
 						type : "post",

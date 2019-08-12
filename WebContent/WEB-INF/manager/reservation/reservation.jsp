@@ -494,7 +494,7 @@
 		<h1>예약현황 조회</h1>
 		<div id="rsvList">
 			<div id="btns">
-				<input type="text" name="date" class="selectList" autocomplete="off"> - <input type="text" name="date2" class="selectList" autocomplete="off"> <button id="btnDate">날짜로검색</button>
+				<input type="text" name="date" class="selectList" autocomplete="off"> ~ <input type="text" name="date2" class="selectList" autocomplete="off"> <button id="btnDate">날짜로검색</button>
 			</div>
 			<div id="f2">
 				<input type="text" name="tel" size="30" placeholder="검색할 전화번호">

@@ -55,12 +55,9 @@ public class PaymentResultHandler implements CommandHandler {
 		
 		
 		if (saleInfo.contains("마일리지") && mem != null) { //마일리지 사용한 회원 결제시
-			int info1 = saleInfo.indexOf(":");
-			int info2 = saleInfo.indexOf("원");
-			String sInfo = saleInfo.substring(info1+1, info2) ;
-			int infoMileage = Integer.parseInt(sInfo);
+			int salePrice2 = Integer.parseInt(salePrice);
 			int memMileage = mem.getMbMileage();
-			mem.setMbMileage(memMileage-infoMileage); 
+			mem.setMbMileage(memMileage-salePrice2); 
 			
 			service.insertSaleUpdateMileageTransaciton(map, mem);//마일리지 수정이랑  count 1증가
 		}else if(mem != null && saleInfo.contains("쿠폰")) { //쿠폰 사용시
