@@ -22,14 +22,16 @@
 	<div id="wrap">
 		<div id="div"></div>
 		<div id="noticeForm">
-			<form action="${pageContext.request.contextPath}/noticeMgnupdate.do" method="post" enctype="multipart/form-data">
+			<form action="${pageContext.request.contextPath}/mgn/noticeMgnupdate.do" method="post" enctype="multipart/form-data">
+				${notice.noNo}
+				<input type="hidden" name="no" value="${notice.noNo}">
 				<p>
 					<label>제목</label>
-					<input type="text" name="title">
+					<input type="text" name="title" value="${notice.noTitle}">
 				</p>
 				<p>
 					<label>내용</label>
-					<textarea rows="10" cols="100" name="content"></textarea>
+					<textarea rows="10" cols="100" name="content">${notice.noContent}</textarea>
 				</p>
 				<p>
 					<label>파일</label>

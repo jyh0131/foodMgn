@@ -22,9 +22,7 @@ public class NoticeMgnInsertHandler implements CommandHandler {
 		if(req.getMethod().equalsIgnoreCase("get")) {
 			return "/WEB-INF/manager/community/noticeForm.jsp";
 		}else if(req.getMethod().equalsIgnoreCase("post")) {
-			String title = req.getParameter("title");
-			String content = req.getParameter("content");
-			/*String file = req.getParameter("file");
+			String file = req.getParameter("file");
 			
 			String uploadPath = req.getRealPath("upload");
 			
@@ -37,7 +35,11 @@ public class NoticeMgnInsertHandler implements CommandHandler {
 			MultipartRequest multi = new MultipartRequest(req, uploadPath, size, "utf-8", new DefaultFileRenamePolicy());
 			
 			String fileRename = multi.getFilesystemName("file");
-			req.setAttribute("fileRename", fileRename);*/
+			String title = multi.getParameter("title");
+			String content = multi.getParameter("content");
+			
+			
+			req.setAttribute("fileRename", fileRename);
 			
 			NoticeDao dao = new NoticeDaoImpl();
 			

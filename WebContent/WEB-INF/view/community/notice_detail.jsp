@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%
+	pageContext.setAttribute("br", "<br/>");
+	pageContext.setAttribute("cn", "\n");
+%>
 
 <%@ include file="../include/header.jsp" %>
 <style>
@@ -114,7 +119,8 @@
 					<span class="right">조회 : ${notice.noReadNt}</span>
 				</div>
 				<div id="div4">
-					${notice.noContent}
+					${fn:replace(notice.noContent,cn,br)}
+					
 				</div>
 				<div id="div5">
 					<div class="left">

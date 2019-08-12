@@ -15,7 +15,7 @@
 	#noticeList {
 		height: 600px;
 		overflow: auto;
-		width: 900px;
+		width: 100%;
 		border: 1px solid #555;
 		margin: 30px auto;
 	}
@@ -27,7 +27,6 @@
 	th, td {
 		border-top: 1px solid #ccc;
 		border-right: 1px solid #ccc;
-		padding: 5px 10px;
 	}
 	td:last-child {
 		border-right: none;
@@ -39,24 +38,27 @@
 		border-bottom: 1px solid #ccc;
 	}
 	th {
-		padding: 10px 10px;
+		padding: 10px;
+	}
+	td {
+		padding: 5px 10px;
 	}
 	#noticeNo {
-		width: 70px;
+		width: 50px;
 	}
 	#noticeName {
-		width: 380px;
+		width: 320px;
 	}
 	#noticeWriter {
-		width: 90px;
+		width: 70px;
 	}
-	#noticeDate {
-		width: 120px;
+	#noticeDate, #noticeUpdate {
+		width: 160px;
 	}
 	#update {
 		border-right: none;
 	}
-	td:nth-child(1), td:nth-child(3), td:nth-child(4) {
+	td:nth-child(1), td:nth-child(3), td:nth-child(4), td:nth-child(5) {
 		text-align: center;
 	}
 	button {
@@ -66,6 +68,8 @@
 		color: white;
 		border-radius: 3px;
 		outline: none;
+	}
+	#btn1 {
 		margin: 10px;
 	}
 	/* .update, .noupdate {
@@ -78,6 +82,9 @@
 		text-decoration: line-through;
 		color: red;
 		font-size: 0.9em;
+	}
+	a {
+		color: black;
 	}
 </style>
 <script>
@@ -114,7 +121,8 @@
 		})
 		
 		$(".update").click(function() {
-			location.href = "${pageContext.request.contextPath}/noticeMgnupdate.do";
+			var nNo = $(this).attr("data-no");
+			location.href = "${pageContext.request.contextPath}/mgn/noticeMgnupdate.do?no="+nNo;
 		})
 		
 	})
@@ -122,22 +130,24 @@
 	<div id="wrap">
 		<div id="div"></div>
 		<div id="noticeList">
-			<a href="${pageContext.request.contextPath}/mgn/noticeMgninsert.do"><button>공지사항 등록</button></a>
+			<a href="${pageContext.request.contextPath}/mgn/noticeMgninsert.do"><button id="btn1">공지사항 등록</button></a>
 			<table>
 				<tr>
 					<th id="noticeNo">번호</th>
 					<th id="noticeName">제 목</th>
 					<th id="noticeWriter">글쓴이</th>
-					<th id="noticeDate">날짜</th>
+					<th id="noticeDate">등록일</th>
+					<th id="noticeUpdate">수정일</th>
 					<th id="update"></th>
 				</tr>
 				<c:forEach var="nlist" items="${nList}">
 					<c:if test="${nlist.noDelete != true}">
 						<tr>
 							<td>${nlist.noNo}</td>
-							<td>${nlist.noTitle}</td>
+							<td><a href="${pageContext.request.contextPath}/mgn/noticeMgnupdate.do?no=${nlist.noNo}">${nlist.noTitle}</a></td>
 							<td>${nlist.noWriter}</td>
-							<td><fmt:formatDate pattern="yyyy-MM-dd" value="${nlist.noRegdate}" /></td>
+							<td><fmt:formatDate pattern="yyyy-MM-dd kk:mm" value="${nlist.noRegdate}" /></td>
+							<td><fmt:formatDate pattern="yyyy-MM-dd kk:mm" value="${nlist.noModdate}" /></td>
 							<td>
 								<button class="update" data-no="${nlist.noNo}">수정</button>
 								<button class="delete" data-no="${nlist.noNo}">삭제</button>
