@@ -122,8 +122,8 @@ button {
 		
 		$(document).on("click","#all",function(){
 			$("#datepicker").val("");
-			$("#fd_year  > option[value='100'").attr("selected", "true");    
-		    $("#fd_month  > option[value='100'").attr("selected", "true"); 
+			$("#fd_year option").eq(0).prop("selected", "true");    
+		    $("#fd_month  option").eq(0).prop("selected", "true");   
 			$.ajax({
 				url:"${pageContext.request.contextPath }/mgn/saleListDate.do",
 				type:"get",
@@ -255,6 +255,8 @@ button {
 			dateFormat : 'yy-mm-dd',
 			  onSelect: function(dateText, inst) {
 		          var date = $(this).val();
+					$("#fd_year option").eq(0).prop("selected", "true");    
+				    $("#fd_month  option").eq(0).prop("selected", "true");   
 			$.ajax({
 				url:"${pageContext.request.contextPath }/mgn/saleListDate.do",
 				type:"get",
@@ -533,6 +535,7 @@ button {
        $("#fd_month  > option[value='100'").attr("selected", "true");   
 		
        $("#search").click(function() { //조회 버튼 클릭시
+    	   $("#datepicker").val("");
        		var y =$("#fd_year").val();
        		var m =$("#fd_month").val();
        		if(y==100){
