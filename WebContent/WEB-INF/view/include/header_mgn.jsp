@@ -31,6 +31,7 @@
 					<div id="head1_2">
 						<ul>
 							<li><a href="${pageContext.request.contextPath}/">HOME</a></li>
+							<li><a href="${pageContext.request.contextPath}/mgn/logout.do">로그아웃</a></li>
 						</ul>
 					</div>
 				</div>
