@@ -10,13 +10,15 @@
 		width: 100%;
 		height: 350px;
 	}
-	
+	#mainContainer{
+		min-width: 1400px;
+	}
 	#leftUi{
 		border:1px solid black;
 		float:left;
 		width:200px;
 		height:600px;
-		margin-right:50px;
+		margin-right:30px;
 	}
 	#leftUi ul{
 		width:200px;
@@ -42,6 +44,7 @@
 <div class="s_visu1">
 	<img src="${pageContext.request.contextPath}/images/main/f_visu4.jpg">
 </div>
+<div id="mainContainer">
 <div id="leftUi">
 	<ul>
 		<li id="updateMember"><a href="#">회원정보수정</a></li>

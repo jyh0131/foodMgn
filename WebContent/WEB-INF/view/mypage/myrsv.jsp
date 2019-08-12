@@ -7,11 +7,11 @@
 		background: red;
 	}
 	#rsvContainer{
-		width:1200px;
+		width:1100px;
 		float:left;
 	}
 	#rsvList {
-		width:1200px;
+		width:1100px;
 		height:600px;
 		overflow: auto;
 		width: 100%;
@@ -210,7 +210,7 @@ $(function() {
 					<th>예약시간</th>
 					<th>인원</th>
 					<th>테이블</th>
-					<th><th>
+					<th></th>
 				</tr>
 				<c:forEach var="mlist" items="${list}">
 					<c:if test="${mlist.rsvCancel==true }">
@@ -235,5 +235,6 @@ $(function() {
 				</c:forEach>
 			</table>
 		</div>
+</div>
 </div>
 <%@ include file="../include/footer.jsp" %>
