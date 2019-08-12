@@ -22,24 +22,47 @@ public class MenuHandler implements CommandHandler {
 
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
-		int fkno = Integer.parseInt(req.getParameter("fkno"));
-		
-		FoodKind fk = new FoodKind(fkno);
-		Food food = new Food(fk);
-		
-		FoodKindDao fkDao = new FoodKindDaoImpl();
-		FoodDao fDao = new FoodDaoImpl();
-		
-		List<FoodKind> fkList = fkDao.selectFoodKindByAll();
-		List<Food> fList = fDao.selectByNo(food);
-		
-		String fkName = fkDao.selectByFkNo(fk).getFkName();
-		
-		req.setAttribute("fkList", fkList);
-		req.setAttribute("fList", fList);
-		req.setAttribute("fkName", fkName);
-		
-		return "/WEB-INF/view/menu/menu.jsp";
+		if(req.getMethod().equalsIgnoreCase("get")) {
+			int fkno = Integer.parseInt(req.getParameter("fkno"));
+			
+			FoodKind fk = new FoodKind(fkno);
+			Food food = new Food(fk);
+			
+			FoodKindDao fkDao = new FoodKindDaoImpl();
+			FoodDao fDao = new FoodDaoImpl();
+			
+			List<FoodKind> fkList = fkDao.selectFoodKindByAll();
+			List<Food> fList = fDao.selectByNo(food);
+			
+			String fkName = fkDao.selectByFkNo(fk).getFkName();
+			
+			req.setAttribute("fkList", fkList);
+			req.setAttribute("fList", fList);
+			req.setAttribute("fkName", fkName);
+			
+			return "/WEB-INF/view/menu/menu.jsp";
+		}else if(req.getMethod().equalsIgnoreCase("post")) {
+			int fNo = Integer.parseInt(req.getParameter("fNo"));
+			
+			FoodDao fDao = new FoodDaoImpl();
+			
+			FoodKind fk = new FoodKind(fNo);
+			Food food = new Food(fk);
+			
+			List<Food> fList = fDao.selectByNo(food);
+			
+			if(fList != null) {
+				res.setContentType("application/json;charset=utf-8");
+				ObjectMapper om = new ObjectMapper();
+				String json = om.writeValueAsString(fList);
+				PrintWriter out = res.getWriter();
+				out.print(json);
+				out.flush();
+				
+				return null;
+			}
+		}
+		return null;
 	}
 
 }
