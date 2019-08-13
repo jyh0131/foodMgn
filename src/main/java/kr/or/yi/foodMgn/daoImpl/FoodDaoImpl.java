@@ -104,5 +104,19 @@ public class FoodDaoImpl implements FoodDao {
 			return res;
 		}
 	}
+
+	@Override
+	public List<Food> selectByFkNo2(Map<String, Object> map) {
+		try(SqlSession sqlSession = MybatisSqlSessionFactory.openSession()) {
+			return sqlSession.selectList(namespace + ".selectByFkNo", map);
+		}
+	}
+
+	@Override
+	public List<Food> selectByNameAndFkNo(Map<String, Object> map) {
+		try(SqlSession sqlSession = MybatisSqlSessionFactory.openSession()) {
+			return sqlSession.selectList(namespace + ".selectByNameAndFkNo", map);
+		}
+	}
 	
 }

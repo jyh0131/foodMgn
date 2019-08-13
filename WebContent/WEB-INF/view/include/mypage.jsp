@@ -16,26 +16,27 @@
 	#leftUi{
 		border:1px solid black;
 		float:left;
-		width:200px;
+		width:250px;
 		height:600px;
 		margin-right:30px;
 	}
 	#leftUi ul{
-		width:200px;
+		width:250px;
 		height:600px;
 	}
 	#leftUi ul li{
-		width:200px;
+		width:250px;
 		height:50px;
 		line-height:50px;
 		border-bottom:1px solid black;
 	}
 	#leftUi ul li a{
 		display: block;
-		width:200px;
+		width:220px;
 		height:50px;
 		line-height:50px;
 		padding-left:30px;
+		font-weight: bold;
 	}
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

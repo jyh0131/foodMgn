@@ -147,7 +147,7 @@
 		border-radius: 3px;
 	 	margin-top: 3px;
 	}
-	input[type="text"], input[type="date"], input[type="password"] {
+	input[type="text"], input[type="password"] {
 	   padding: 3px;
 	}
 	input[name="addr"] {
@@ -263,7 +263,8 @@
          $.ajax({
 				url:"${pageContext.request.contextPath}/joinForm.do",
 				type:"post",
-				data:{"name":$("input[name='name']").val(), "tel":$("input[name='tel']").val(), "birth":$("input[name='birth']").val(), "addr":$("input[name='addr']").val()},
+				data:{"name":$("input[name='name']").val(), "tel":$("input[name='tel']").val(), "birth":$("input[name='birth']").val(), 
+					"addr":$("input[name='addr']").val(), "addr2":$("input[name='addr2']").val(), "addr3":$("input[name='addr3']").val(), "addr4":$("input[name='addr4']").val()},
 				dataType:"json",
 				success: function(json) {
 					console.log(json);
@@ -283,7 +284,10 @@
          return false;
       })
       	$(".date").datepicker({
-			dateFormat: 'yy-mm-dd'
+      		dateFormat: 'yy-mm-dd',
+			changeYear: true,
+			changeMonth: true,
+			yearRange: "-100:+0"
 		});
    })
 </script>
@@ -334,13 +338,14 @@
 	                  	<input type="text" id="sample4_postcode" placeholder="우편번호">
 						<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
 						<input type="text" id="sample4_roadAddress" placeholder="도로명주소" name="addr">
-						<input type="text" id="sample4_jibunAddress" placeholder="지번주소">
+						<input type="text" id="sample4_jibunAddress" placeholder="지번주소" name="addr2">
 						<span id="guide" style="color:#999;display:none"></span>
-						<input type="text" id="sample4_detailAddress" placeholder="상세주소">
-						<input type="text" id="sample4_extraAddress" placeholder="참고항목">
+						<input type="text" id="sample4_detailAddress" placeholder="상세주소" name="addr3">
+						<input type="text" id="sample4_extraAddress" placeholder="참고항목" name="addr4">
 						<!-- <br>
 						<input type="text" name="addr" size="80"> -->
 					</span>
+					<span class="reg">주소를 입력하세요</span>
                </div>
                <div class="jf_div2">
                   <span class="span1">문자서비스</span>

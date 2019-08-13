@@ -19,4 +19,6 @@ public interface FoodDao {
 	public List<Food> selectByFkNo(FoodKind fk);
 	public List<Food> selectListPage(Map<String, Integer> map);
 	public int selectTotalCount();
+	public List<Food> selectByFkNo2(Map<String, Object> map);
+	public List<Food> selectByNameAndFkNo(Map<String, Object> map);
 }
