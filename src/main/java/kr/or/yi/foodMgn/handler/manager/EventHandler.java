@@ -1,5 +1,6 @@
 package kr.or.yi.foodMgn.handler.manager;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,6 +34,13 @@ public class EventHandler implements CommandHandler {
 			map.put("size", 10);
 			
 			List<Event> nlist = dao.selectListPage(map);
+			for(Event e : nlist) {
+				Date date = new Date();
+				if((date.getTime()-e.geteEndDate().getTime()>0)) {
+					e.seteIng(false);
+				}
+				
+			}
 			int totalCount = dao.selectTotalCount();
 			
 			EventPage np = new EventPage(totalCount, page, 10, nlist);

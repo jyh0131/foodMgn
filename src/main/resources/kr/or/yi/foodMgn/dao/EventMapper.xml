@@ -7,7 +7,7 @@
 	</insert>
 	
 	<select id="selectListPage" resultType="Event" parameterType="map">
-		select * from event where e_ing = 1 order by e_no desc limit #{startRow}, #{size}
+		select * from event order by e_no desc limit #{startRow}, #{size}
 	</select>
 	
 	<select id="selectTotalCount" resultType="java.lang.Integer">

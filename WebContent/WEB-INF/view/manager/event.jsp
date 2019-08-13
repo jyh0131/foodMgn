@@ -139,6 +139,29 @@
 	a{
 		color:black;
 	}
+	.ing{
+		display: inline-block;
+		width:90px;
+		height:30px;
+		line-height:30px;
+		text-align:center;
+		background: #c62f24;
+		font-size: 15px;
+		font-weight: bold;
+		margin-bottom:5px;
+	}
+	.end{
+		display: inline-block;
+		width:90px;
+		height:30px;
+		line-height:30px;
+		text-align:center;
+		background: #a5a5a5;
+		font-size:15px;
+		font-weight: bold;
+		margin-bottom:5px;
+		color:white;
+	}                              
 </style>
 
 <script>
@@ -160,6 +183,18 @@
 		$("a").mouseout(function(){
 			$(this).css("text-decoration", "none");
 		})
+		
+		
+		var i = 0;
+		var a = setInterval(function() {
+			i++;
+			if(i%2==0){
+				$(".ing").css("color","black");
+			}else{
+				$(".ing").css("color","white");
+			}
+			
+		}, 500)
 		
 	})
 </script>
