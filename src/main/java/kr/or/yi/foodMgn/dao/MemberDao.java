@@ -29,4 +29,5 @@ public interface MemberDao {
 	
 	public List<Member> selectListPage(Map<String, Integer> map);
 	public int selectTotalCount();
+	public int myPageUpdate(Member member);
 }

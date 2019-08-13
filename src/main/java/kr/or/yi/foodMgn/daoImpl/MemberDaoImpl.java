@@ -159,4 +159,13 @@ public class MemberDaoImpl implements MemberDao {
 		}
 	}
 
+	@Override
+	public int myPageUpdate(Member member) {
+		try(SqlSession sqlSession = MybatisSqlSessionFactory.openSession()) {
+			int res = sqlSession.update(namespace + ".myPageUpdate", member);
+			sqlSession.commit();
+			return res;
+		}
+	}
+
 }
