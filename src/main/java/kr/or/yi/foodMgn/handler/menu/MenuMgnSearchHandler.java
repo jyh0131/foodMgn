@@ -47,7 +47,6 @@ public class MenuMgnSearchHandler implements CommandHandler {
 				System.out.println(list);
 				
 				FoodPage fp = new FoodPage(totalCount, page, 10, list);
-				req.setAttribute("foodPage", fp);
 				
 				res.setContentType("application/json;charset=utf-8");
 				ObjectMapper om = new ObjectMapper();
@@ -74,7 +73,6 @@ public class MenuMgnSearchHandler implements CommandHandler {
 				System.out.println(list);
 				
 				FoodPage fp = new FoodPage(totalCount, page, 10, list);
-				req.setAttribute("foodPage", fp);
 				
 				res.setContentType("application/json;charset=utf-8");
 				ObjectMapper om = new ObjectMapper();
@@ -102,7 +100,6 @@ public class MenuMgnSearchHandler implements CommandHandler {
 				System.out.println(list);
 				
 				FoodPage fp = new FoodPage(totalCount, page, 10, list);
-				req.setAttribute("foodPage", fp);
 				
 				res.setContentType("application/json;charset=utf-8");
 				ObjectMapper om = new ObjectMapper();

@@ -84,6 +84,17 @@
 		float: left;
 		padding: 10px;
 	}
+	#pagediv {
+		text-align: center;
+		padding-top: 20px;
+		padding-bottom: 20px;
+	}
+	.current {
+		font-weight: bold;
+	}
+	.pn {
+		margin: 0 5px;
+	}
 </style>
 <script>
 	$(function() {
@@ -102,7 +113,7 @@
 					console.log(res);
 					
 					$("table").empty();
-					$("table").append("<tr><th id='mNo'>회원번호</th><th id='mName'>회원명</th><th id='mBirth'>생년월일</th><th id='mTel'>전화번호</th><th id='mAddr'>주소</th><th id='mMileage'>마일리지</th><th id='mGrade'>등급</th><th id='mJoin'>가입일</th><th id='mCount'>주문횟수</th></tr>");
+					$("table").append("<tr><th id='mNo'>회원번호</th><th id='mName'>회원명</th><th id='mBirth'>생년월일</th><th id='mTel'>전화번호</th><th id='mAddr'>주소</th><th id='mMileage'>마일리지</th><th id='mGrade'>등급</th><th id='mJoin'>가입일</th><th id='mCount'>주문횟수</th><th>쿠폰</th></tr>");
 					
 					$(res).each(function(i, obj) {
 						var birth = new Date(obj.mbBirth);
@@ -116,10 +127,14 @@
 						var $mbaddress = $("<td>").text(obj.mbAddress);
 						var $mbmileage = $("<td>").text(obj.mbMileage.toLocaleString()+"원");
 						var $mbgrade = $("<td>").text(obj.mbGrade.grade);
-						var $mbjoin = $("<td>").text(join.getFullYear()+"년"+("00" + (join.getMonth() + 1)).slice(-2)+"월"+("00" + birth.getDate()).slice(-2)+"일");
+						var $mbjoin = $("<td>").text(join.getFullYear()+"년"+("00" + (join.getMonth() + 1)).slice(-2)+"월"+("00" + join.getDate()).slice(-2)+"일");
 						var $mbcount = $("<td>").text(obj.mbCount);
+						var $coupon;
+						$(obj.coupon).each(function(i, obj2) {
+							$coupon = $("<td>").text(obj2.cpName);
+						})
 						
-						$tr.append($mbno).append($mbname).append($mbbirth).append($mbtel).append($mbaddress).append($mbmileage).append($mbgrade).append($mbjoin).append($mbcount);
+						$tr.append($mbno).append($mbname).append($mbbirth).append($mbtel).append($mbaddress).append($mbmileage).append($mbgrade).append($mbjoin).append($mbcount).append($coupon);
 						$("table").append($tr);
 					})
 				}
@@ -136,7 +151,7 @@
 					console.log(res);
 					
 					$("table").empty();
-					$("table").append("<tr><th id='mNo'>회원번호</th><th id='mName'>회원명</th><th id='mBirth'>생년월일</th><th id='mTel'>전화번호</th><th id='mAddr'>주소</th><th id='mMileage'>마일리지</th><th id='mGrade'>등급</th><th id='mJoin'>가입일</th><th id='mCount'>주문횟수</th></tr>");
+					$("table").append("<tr><th id='mNo'>회원번호</th><th id='mName'>회원명</th><th id='mBirth'>생년월일</th><th id='mTel'>전화번호</th><th id='mAddr'>주소</th><th id='mMileage'>마일리지</th><th id='mGrade'>등급</th><th id='mJoin'>가입일</th><th id='mCount'>주문횟수</th><th>쿠폰</th></tr>");
 					$("input[name='tel']").val("");
 					
 					$(res.content).each(function(i, obj) {
@@ -151,10 +166,14 @@
 						var $mbaddress = $("<td>").text(obj.mbAddress);
 						var $mbmileage = $("<td>").text(obj.mbMileage.toLocaleString()+"원");
 						var $mbgrade = $("<td>").text(obj.mbGrade.grade);
-						var $mbjoin = $("<td>").text(join.getFullYear()+"년"+("00" + (join.getMonth() + 1)).slice(-2)+"월"+("00" + birth.getDate()).slice(-2)+"일");
+						var $mbjoin = $("<td>").text(join.getFullYear()+"년"+("00" + (join.getMonth() + 1)).slice(-2)+"월"+("00" + join.getDate()).slice(-2)+"일");
 						var $mbcount = $("<td>").text(obj.mbCount);
+						var $coupon;
+						$(obj.coupon).each(function(i, obj2) {
+							$coupon = $("<td>").text(obj2.cpName);
+						})
 						
-						$tr.append($mbno).append($mbname).append($mbbirth).append($mbtel).append($mbaddress).append($mbmileage).append($mbgrade).append($mbjoin).append($mbcount);
+						$tr.append($mbno).append($mbname).append($mbbirth).append($mbtel).append($mbaddress).append($mbmileage).append($mbgrade).append($mbjoin).append($mbcount).append($coupon);
 						$("table").append($tr);
 					})
 				}
@@ -200,7 +219,9 @@
 							<td>${mlist.mbGrade}</td>
 							<td><fmt:formatDate value="${mlist.mbJoin}" pattern="yyyy년MM월dd일"/></td>
 							<td>${mlist.mbCount}</td>
-							<td>${mlist.coupon}</td>
+							<c:forEach var="cp" items="${mlist.coupon}">
+								<td>${cp.cpName}</td>
+							</c:forEach>
 						</tr>
 					</c:if>
 					<c:if test="${mlist.mbWithdrawal != false}">
@@ -214,11 +235,29 @@
 							<td>${mlist.mbGrade}</td>
 							<td><fmt:formatDate value="${mlist.mbJoin}" pattern="yyyy년MM월dd일"/></td>
 							<td>${mlist.mbCount}</td>
-							<td>${mlist.coupon}</td>
+							<c:forEach var="cp" items="${mlist.coupon}">
+								<td>${cp.cpName}</td>
+							</c:forEach>
 						</tr>
 					</c:if>
 				</c:forEach>
 			</table>
+			<div id="pagediv">
+				<c:if test="${memberPage.startPage > 5}">
+					<a href="${pageContext.request.contextPath}/mgn/menuMgnlist.do?page=${memberPage.startPage - 1}" class="pn">&lt;&lt;</a>
+				</c:if>
+				<c:forEach var="pNo" begin="${memberPage.startPage}" end="${memberPage.endPage}">
+					<c:if test="${memberPage.currentPage == pNo}">
+						<a href="${pageContext.request.contextPath}/mgn/menuMgnlist.do?page=${pNo}" class="current">${pNo}</a>
+					</c:if>
+					<c:if test="${memberPage.currentPage != pNo}">
+						<a href="${pageContext.request.contextPath}/mgn/menuMgnlist.do?page=${pNo}">${pNo}</a>
+					</c:if>
+				</c:forEach>
+				<c:if test="${memberPage.endPage < memberPage.totalPages}">
+					<a href="${pageContext.request.contextPath}/mgn/menuMgnlist.do?page=${memberPage.endPage + 1}" class="pn">&gt;&gt;</a>
+				</c:if>
+			</div>
 		</div>
 	</div>
 
