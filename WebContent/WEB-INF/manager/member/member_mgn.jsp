@@ -102,7 +102,7 @@
 					console.log(res);
 					
 					$("table").empty();
-					$("table").append("<tr><th>회원번호</th><th>회원명</th><th>생년월일</th><th>전화번호</th><th>주소</th><th>마일리지</th><th>등급</th><th>가입일</th><th>주문횟수</th></tr>");
+					$("table").append("<tr><th id='mNo'>회원번호</th><th id='mName'>회원명</th><th id='mBirth'>생년월일</th><th id='mTel'>전화번호</th><th id='mAddr'>주소</th><th id='mMileage'>마일리지</th><th id='mGrade'>등급</th><th id='mJoin'>가입일</th><th id='mCount'>주문횟수</th></tr>");
 					
 					$(res).each(function(i, obj) {
 						var birth = new Date(obj.mbBirth);
@@ -111,12 +111,12 @@
 						var $tr = $("<tr>");
 						var $mbno = $("<td>").text(obj.mbNo);
 						var $mbname = $("<td>").text(obj.mbName);
-						var $mbbirth = $("<td>").text(birth.getFullYear()+"년"+(birth.getMonth()+1)+"월"+birth.getDate()+"일");
+						var $mbbirth = $("<td>").text(birth.getFullYear()+"년"+("00" + (birth.getMonth() + 1)).slice(-2)+"월"+birth.getDate()+"일");
 						var $mbtel = $("<td>").text(obj.mbTel);
 						var $mbaddress = $("<td>").text(obj.mbAddress);
 						var $mbmileage = $("<td>").text(obj.mbMileage.toLocaleString()+"원");
 						var $mbgrade = $("<td>").text(obj.mbGrade.grade);
-						var $mbjoin = $("<td>").text(join.getFullYear()+"년"+(join.getMonth()+1)+"월"+join.getDate()+"일");
+						var $mbjoin = $("<td>").text(join.getFullYear()+"년"+("00" + (join.getMonth() + 1)).slice(-2)+"월"+join.getDate()+"일");
 						var $mbcount = $("<td>").text(obj.mbCount);
 						
 						$tr.append($mbno).append($mbname).append($mbbirth).append($mbtel).append($mbaddress).append($mbmileage).append($mbgrade).append($mbjoin).append($mbcount);
@@ -128,7 +128,38 @@
 		})
 		
 		$("#allList").click(function() {
-			location.href = "${pageContext.request.contextPath}/mgn/memberMgnlist.do";
+			$.ajax({
+				url:"${pageContext.request.contextPath}/mgn/memberMgnlist.do",
+				type:"post",
+				dataType:"json",
+				success: function(res) {
+					console.log(res);
+					
+					$("table").empty();
+					$("table").append("<tr><th id='mNo'>회원번호</th><th id='mName'>회원명</th><th id='mBirth'>생년월일</th><th id='mTel'>전화번호</th><th id='mAddr'>주소</th><th id='mMileage'>마일리지</th><th id='mGrade'>등급</th><th id='mJoin'>가입일</th><th id='mCount'>주문횟수</th></tr>");
+					$("input[name='tel']").val("");
+					
+					$(res.content).each(function(i, obj) {
+						var birth = new Date(obj.mbBirth);
+						var join = new Date(obj.mbJoin);
+						
+						var $tr = $("<tr>");
+						var $mbno = $("<td>").text(obj.mbNo);
+						var $mbname = $("<td>").text(obj.mbName);
+						var $mbbirth = $("<td>").text(birth.getFullYear()+"년"+("00" + (birth.getMonth() + 1)).slice(-2)+"월"+birth.getDate()+"일");
+						var $mbtel = $("<td>").text(obj.mbTel);
+						var $mbaddress = $("<td>").text(obj.mbAddress);
+						var $mbmileage = $("<td>").text(obj.mbMileage.toLocaleString()+"원");
+						var $mbgrade = $("<td>").text(obj.mbGrade.grade);
+						var $mbjoin = $("<td>").text(join.getFullYear()+"년"+("00" + (join.getMonth() + 1)).slice(-2)+"월"+join.getDate()+"일");
+						var $mbcount = $("<td>").text(obj.mbCount);
+						
+						$tr.append($mbno).append($mbname).append($mbbirth).append($mbtel).append($mbaddress).append($mbmileage).append($mbgrade).append($mbjoin).append($mbcount);
+						$("table").append($tr);
+					})
+				}
+			})
+			return false;
 		})
 		
 	})
@@ -156,17 +187,17 @@
 					<th id="mJoin">가입일</th>
 					<th id="mCount">주문횟수</th>
 				</tr>
-				<c:forEach var="mlist" items="${mList}">
+				<c:forEach var="mlist" items="${memberPage.content}">
 					<c:if test="${mlist.mbWithdrawal == false}">
 						<tr class="underline">
 							<td>${mlist.mbNo}</td>
 							<td>${mlist.mbName}</td>
-							<td><fmt:formatDate value="${mlist.mbBirth}" pattern="yyyy년M월dd일"/></td>
+							<td><fmt:formatDate value="${mlist.mbBirth}" pattern="yyyy년MM월dd일"/></td>
 							<td>${mlist.mbTel}</td>
 							<td>${mlist.mbAddress}</td>
 							<td><fmt:formatNumber groupingUsed="true" value="${mlist.mbMileage}"/>원</td>
 							<td>${mlist.mbGrade}</td>
-							<td><fmt:formatDate value="${mlist.mbJoin}" pattern="yyyy년M월dd일"/></td>
+							<td><fmt:formatDate value="${mlist.mbJoin}" pattern="yyyy년MM월dd일"/></td>
 							<td>${mlist.mbCount}</td>
 						</tr>
 					</c:if>
@@ -174,12 +205,12 @@
 						<tr>
 							<td>${mlist.mbNo}</td>
 							<td>${mlist.mbName}</td>
-							<td><fmt:formatDate value="${mlist.mbBirth}" pattern="yyyy년M월d일"/></td>
+							<td><fmt:formatDate value="${mlist.mbBirth}" pattern="yyyy년MM월dd일"/></td>
 							<td>${mlist.mbTel}</td>
 							<td>${mlist.mbAddress}</td>
 							<td><fmt:formatNumber groupingUsed="true" value="${mlist.mbMileage}"/>원</td>
 							<td>${mlist.mbGrade}</td>
-							<td><fmt:formatDate value="${mlist.mbJoin}" pattern="yyyy년M월d일"/></td>
+							<td><fmt:formatDate value="${mlist.mbJoin}" pattern="yyyy년MM월dd일"/></td>
 							<td>${mlist.mbCount}</td>
 						</tr>
 					</c:if>

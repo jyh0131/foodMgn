@@ -118,6 +118,16 @@
 	<select id="selectByTelForJoin" resultType="Member">
 		select * from member where mb_tel=#{mbTel}
 	</select>
+	
+	<select id="selectListPage" resultMap="resultMemberBJY" parameterType="map">
+		select m.mb_no, m.mb_name, mb_birth, mb_tel, mb_mileage, mb_grade, mb_address, group_concat(mc.cp_name) coupon, mb_withdrawal, mb_join
+		from member m left join member_coupon mc on m.mb_no = mc.mb_no left join coupon c on mc.cp_name = c.cp_name
+		group by mb_no having not mb_no = 0 limit #{startRow}, #{size}
+	</select>
+	
+	<select id="selectTotalCount" resultType="java.lang.Integer">
+		select count(mb_no) from member
+	</select>
 </mapper>
 
 

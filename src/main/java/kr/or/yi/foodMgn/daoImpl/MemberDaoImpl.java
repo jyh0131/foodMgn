@@ -144,4 +144,19 @@ public class MemberDaoImpl implements MemberDao {
 		}
 	}
 
+	@Override
+	public List<Member> selectListPage(Map<String, Integer> map) {
+		try(SqlSession sqlSession = MybatisSqlSessionFactory.openSession()) {
+			return sqlSession.selectList(namespace + ".selectListPage", map);
+		}
+	}
+
+	@Override
+	public int selectTotalCount() {
+		try(SqlSession sqlSession = MybatisSqlSessionFactory.openSession()) {
+			int res = sqlSession.selectOne(namespace + ".selectTotalCount");
+			return res;
+		}
+	}
+
 }

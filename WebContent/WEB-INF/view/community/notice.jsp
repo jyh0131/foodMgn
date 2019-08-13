@@ -97,6 +97,7 @@
 		border: 1px solid #777;
 		border-radius: 3px;
 		float: left;
+		outline: none;
 	}
 	input[type="text"], select {
 		padding: 3px;
@@ -110,6 +111,18 @@
 	.current {
 		font-weight: bold;
 		text-decoration: underline;
+	}
+	.pn {
+		margin: 0 5px;
+	}
+	#listBtn {
+		margin-top: 10px;
+		padding: 2px 7px;
+		background-color: #777;
+		color: white;
+		border: 1px solid #777;
+		border-radius: 3px;
+		outline: none;
 	}
 </style>
 <script>
@@ -149,11 +162,46 @@
 						$("table").append($tr);
 					})
 					
+					var $lsttr = $("<tr>");
+					var $button = $("<button id='listBtn'>").text("목록");
+					$lsttr.append($button);
+					$("table").append($lsttr);
 				}
 				
 			})
 			
 			return false;
+		})
+		
+		$(document).on("click", "#listBtn", function() {
+			$.ajax({
+				url:"${pageContext.request.contextPath}/notice.do",
+				type:"post",
+				dataType:"json",
+				success: function(res) {
+					console.log(res);
+					
+					$("table").empty();
+					$("table").append("<tr><th>번호</th><th>제 목</th><th>글쓴이</th><th>날짜</th><th>조회</th></tr>");
+					$("input[name='search']").val("");
+					
+					$(res.content).each(function(i, obj) {
+						var date = new Date(obj.noRegdate);
+						
+						var $tr = $("<tr>");
+						var $nno = $("<td>").text(obj.noNo);
+						var $a = $("<a>").attr("href", "${pageContext.request.contextPath}/noticeDetail.do?no="+obj.noNo+"&page=${noticePage.currentPage}").text(obj.noTitle);
+						var $ntitle = $("<td>").append($a);
+						var $nwriter = $("<td>").text(obj.noWriter);
+						var $ndate = $("<td class='small'>").text(date.getFullYear()+"-"+("00" + (date.getMonth() + 1)).slice(-2)+"-"+date.getDate());
+						var $nread = $("<td class='small'>").text(obj.noReadNt);
+						
+						$tr.append($nno).append($ntitle).append($nwriter).append($ndate).append($nread);
+						$("table").append($tr);
+					})
+				}
+				
+			})
 		})
 	})
 </script>
@@ -195,7 +243,7 @@
 				</table>
 				<div id="pagediv">
 					<c:if test="${noticePage.startPage > 5}">
-						<a href="notice.do?page=${noticePage.startPage - 1}" class="pn">[이전]</a>
+						<a href="notice.do?page=${noticePage.startPage - 1}" class="pn">&lt;&lt;</a>
 					</c:if>
 					<c:forEach var="pNo" begin="${noticePage.startPage}" end="${noticePage.endPage}">
 						<c:if test="${noticePage.currentPage == pNo}">
@@ -206,7 +254,7 @@
 						</c:if>
 					</c:forEach>
 					<c:if test="${noticePage.endPage < noticePage.totalPages}">
-						<a href="notice.do?page=${noticePage.endPage + 1}" class="pn">[다음]</a>
+						<a href="notice.do?page=${noticePage.endPage + 1}" class="pn">&gt;&gt;</a>
 					</c:if>
 				</div>
 			</div>

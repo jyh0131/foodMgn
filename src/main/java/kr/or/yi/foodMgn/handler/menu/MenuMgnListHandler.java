@@ -14,26 +14,58 @@ import kr.or.yi.foodMgn.controller.CommandHandler;
 import kr.or.yi.foodMgn.dao.FoodDao;
 import kr.or.yi.foodMgn.daoImpl.FoodDaoImpl;
 import kr.or.yi.foodMgn.dto.Food;
+import kr.or.yi.foodMgn.dto.FoodPage;
 
 public class MenuMgnListHandler implements CommandHandler {
 
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
-		FoodDao fDao = new FoodDaoImpl();
-		List<Food> fList = fDao.selectFoodByAllF();
-
-		String allList = req.getParameter("allList");
-		
-		if(allList == null) {
-			req.setAttribute("fList", fList);
+		if(req.getMethod().equalsIgnoreCase("get")) {
+			String sPage = req.getParameter("page");
+			
+			int page = 1;
+			if(sPage != null) {
+				page = Integer.parseInt(sPage);
+			}
+			
+			FoodDao dao = new FoodDaoImpl();
+			
+//			List<Food> fList = fDao.selectFoodByAllF();
+//			req.setAttribute("fList", fList);
+			
+			Map<String , Integer> map = new HashMap<>();
+			map.put("startRow", (page-1)*10);
+			map.put("size", 10);
+			
+			List<Food> flist = dao.selectListPage(map);
+			int totalCount = dao.selectTotalCount();
+			
+			FoodPage fp = new FoodPage(totalCount, page, 10, flist);
+			req.setAttribute("foodPage", fp);
 			
 			return "/WEB-INF/manager/menu/menu_mgn.jsp";
-		}else if(allList.equals("yes")) {
-			Map<String, Boolean> map = new HashMap<String, Boolean>();
-			map.put("success", true);
+		}else if(req.getMethod().equalsIgnoreCase("post")) {
+			String sPage = req.getParameter("page");
 			
+			int page = 1;
+			if(sPage != null) {
+				page = Integer.parseInt(sPage);
+			}
+			
+			FoodDao dao = new FoodDaoImpl();
+			
+			Map<String , Integer> map = new HashMap<>();
+			map.put("startRow", (page-1)*10);
+			map.put("size", 10);
+			
+			List<Food> flist = dao.selectListPage(map);
+			int totalCount = dao.selectTotalCount();
+			
+			FoodPage fp = new FoodPage(totalCount, page, 10, flist);
+			
+			res.setContentType("application/json;charset=utf-8");
 			ObjectMapper om = new ObjectMapper();
-			String json = om.writeValueAsString(map);
+			String json = om.writeValueAsString(fp);
 			
 			PrintWriter out = res.getWriter();
 			out.print(json);
@@ -41,7 +73,6 @@ public class MenuMgnListHandler implements CommandHandler {
 			
 			return null;
 		}
-		
 		return null;
 	}
 

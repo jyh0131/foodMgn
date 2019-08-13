@@ -15,6 +15,7 @@ import kr.or.yi.foodMgn.dao.FoodDao;
 import kr.or.yi.foodMgn.daoImpl.FoodDaoImpl;
 import kr.or.yi.foodMgn.dto.Food;
 import kr.or.yi.foodMgn.dto.FoodKind;
+import kr.or.yi.foodMgn.dto.FoodPage;
 
 public class MenuMgnSearchHandler implements CommandHandler {
 
@@ -22,29 +23,35 @@ public class MenuMgnSearchHandler implements CommandHandler {
 	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		if(req.getMethod().equalsIgnoreCase("post")) {
 			String fdname = req.getParameter("fdname");
+			String sPage = req.getParameter("page");
+			
+			int page = 1;
+			if(sPage != null) {
+				page = Integer.parseInt(sPage);
+			}
 			
 			FoodDao dao = new FoodDaoImpl();
 			
-			Food food = new Food();
-			food.setFdName(fdname);
-			List<Food> list = dao.selectByName(food);
+			Map<String , Object> map = new HashMap<>();
+			map.put("fdName", fdname);
+			map.put("startRow", (page-1)*10);
+			map.put("size", 10);
 			
+			List<Food> list = dao.selectByName(map);
 			
-//			Map<String, Boolean> map = new HashMap<String, Boolean>();
-
-			if(list != null) {
-//				map.put("islist", list);
-				
-				res.setContentType("application/json;charset=utf-8");
-				
-				ObjectMapper om = new ObjectMapper();
-				String json = om.writeValueAsString(list);
-				PrintWriter out = res.getWriter();
-				out.print(json);
-				out.flush();
-				
-				return null;
-			}
+			int totalCount = dao.selectTotalCount();
+			
+			FoodPage fp = new FoodPage(totalCount, page, 10, list);
+			
+			res.setContentType("application/json;charset=utf-8");
+			
+			ObjectMapper om = new ObjectMapper();
+			String json = om.writeValueAsString(fp);
+			PrintWriter out = res.getWriter();
+			out.print(json);
+			out.flush();
+			
+			return null;
 		}
 		return null;
 	}

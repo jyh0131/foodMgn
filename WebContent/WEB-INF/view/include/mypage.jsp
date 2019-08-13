@@ -47,9 +47,8 @@
 <div id="mainContainer">
 <div id="leftUi">
 	<ul>
-		<li id="updateMember"><a href="#">회원정보수정</a></li>
+		<li id="updateMember"><a href="${pageContext.request.contextPath}/my/mypage.do">회원정보수정</a></li>
 		<li id="searchRsv2"><a href="${pageContext.request.contextPath}/my/searchMyRsv.do">예약내역</a></li>	
 		<li id="searchPay"><a href="${pageContext.request.contextPath}/my/mypageSaleList.do">결제내역</a></li>		
-
 	</ul>
 </div>

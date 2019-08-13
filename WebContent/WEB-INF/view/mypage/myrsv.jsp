@@ -200,7 +200,7 @@ $(function() {
 <div id="rsvContainer">
 	<div id="rsvList">
 			<div id="btns">
-				<input type="text" name="date" id="selectList"> <button id="btnDate">날짜로검색</button>
+				<input type="text" name="date" id="selectList" autocomplete="off"> <button id="btnDate">날짜로검색</button>
 			</div>
 			<table id="rsvTable">
 				<tr>
