@@ -1,104 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="../../../WEB-INF/view/include/header.jsp"%>
-
-<style>
-.s_visu1 {
-	width: 100%;
-	height: 350px;
-}
-
-.s_visu1 img{
-	width: 100%;
-	height: 350px;
-}
-
-.sub .content {
-	padding: 20px 0;
-}
-
-.sub h2 {
-	text-align: center;
-	font-size: 32px;
-	line-height: 32px;
-	color: #55423b;
-	padding-top: 20px;
-	margin-bottom: 30px;
-}
-
-.content {
-	position: relative;
-	width: 1000px;
-	margin: 0 auto;
-	padding-top: 20px;
-	overflow: hidden;
-	clear: both;
-}
-
-.content .depth {
-	position: absolute;
-	top: 20px;
-	right: 0
-}
-
-.content .depth li {
-	float: left;
-	padding: 5px; 
-}
-
-.content .depth .bold {
-	font-weight: bold;
-}
-
-.content .clear {
-	clear: both;
-	margin-top: 40px;
-}
-
-.content div.sub0101 {
-	width: 100%;
-	overflow: hidden;
-	margin-bottom: 60px;
-}
-
-.sub0101 .sub0101_1 {
-	width: 464px;
-	height: 556px;
-	float: left;
-}
-
-.sub0101 .sub0101_2 {
-	width: 464px;
-	height: 556px;
-	float: left;
-}
-
-.brown_fs_01 {
-	font-size: 25px;
-	font-weight: bold;
-	color: #814b34;
-	padding-left: 30px;
-	margin-bottom: 30px;
-}
-
-.brown_fs_02 {
-	font-size: 17px;
-	font-weight: bold;
-	color: #814b34;
-}
-
-.info_font {
-	font-size: 14px;
-	margin-bottom: 20px;
-	padding-left: 30px;
-}
-</style>
-
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/intro.css" type="text/css">
 <div id="wrap">
 	<div class="sub">
 		<div class="s_visu1">
-			<img
-				src="${pageContext.request.contextPath}/images/introduce/sub01_visu.jpg">
+			<img id="i1" src="${pageContext.request.contextPath}/images/introduce/sub01_visu.jpg">
+			<img id="i2" src="${pageContext.request.contextPath}/images/introduce/s_visu1.jpg">
 		</div>
 		<div class="content">
 			<ul class="depth">
@@ -131,8 +39,10 @@
 					<p class="info_font">라라코스트에서 <span class="brown_fs_02">합리적인 가격, 그 이상의 가치</span>를 느껴 보세요.</p>
 				</div>
 			</div>
+			<h3 class="brown fs_03" id="hh">INFO<br><span class="brown fs_02">숫자로보는 라라코스트</span></h3>
 			<div>
-				<img src="${pageContext.request.contextPath}/images/introduce/story_img_intro.jpg">
+				<img id="i3" src="${pageContext.request.contextPath}/images/introduce/story_img_intro.jpg">
+				<img id="i4" src="${pageContext.request.contextPath}/images/introduce/story_img_intro_m.png">
 			</div>
 		</div>
 	</div>

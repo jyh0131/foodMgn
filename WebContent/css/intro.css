@@ -1,0 +1,180 @@
+@charset "UTF-8";
+
+/* 모바일 버전 */
+@media all and (max-width:767px) {
+	#wrap {
+		width: 100%;
+	}
+	.sub {
+		width: 100%;
+	}
+	.s_visu1 {
+		width: 100%;
+	}
+	.s_visu1 img#i1 {
+		display: none;
+	}
+	.s_visu1 img#i2 {
+		width: 100%;
+	}
+	.depth {
+		display: none;
+	}
+	.content {
+		position: relative;
+		width: 100%;
+		padding-top: 20px;
+		overflow: hidden;
+		clear: both;
+		background-color: #e8e2dc;
+	}
+	.clear {
+		text-align: center;
+		color: #55423b;
+		font-size: 30px;
+		font-weight: bold;
+	}
+	.sub0101_1 {
+		display: none;
+	}
+	.sub0101_2 {
+		margin-left: 10px;
+	}
+
+
+.sub0101_2 img {
+	width: 100%;
+}
+
+.brown_fs_01 {
+	font-size: 25px;
+	font-weight: bold;
+	color: #814b34;
+	margin-bottom: 30px;
+}
+
+.brown_fs_02 {
+	font-size: 17px;
+	font-weight: bold;
+	color: #814b34;
+}
+
+.info_font {
+	font-size: 12px;
+	margin-bottom: 20px;
+	color: #787878;
+}
+
+#i3 {
+	display: none;
+}
+
+#i4 {
+	width: 100%;
+}
+
+#hh {
+	text-align: center;
+	font-size: 34px !important;
+	font-weight: bold;
+	color: #814b34;
+}
+
+.fs_02 {
+	font-size: 18px !important;
+	font-weight: bold;
+}
+
+}
+
+/* pc버전 */
+@media screen and (min-width:768px) {
+	/* 헤더부분 */
+	.s_visu1 {
+		width: 100%;
+		height: 350px;
+	}
+	.s_visu1 img#i1 {
+		width: 100%;
+		height: 350px;
+	}
+	.s_visu1 img#i2 {
+		display: none;
+	}
+	.sub .content {
+		padding: 20px 0;
+	}
+	.sub h2 {
+		text-align: center;
+		font-size: 32px;
+		line-height: 32px;
+		color: #55423b;
+		padding-top: 20px;
+		margin-bottom: 30px;
+	}
+	.content {
+		position: relative;
+		width: 1000px;
+		margin: 0 auto;
+		padding-top: 20px;
+		overflow: hidden;
+		clear: both;
+	}
+	.content .depth {
+		position: absolute;
+		top: 20px;
+		right: 0
+	}
+	.content .depth li {
+		float: left;
+		padding: 5px;
+	}
+	.content .depth .bold {
+		font-weight: bold;
+	}
+	.content .clear {
+		clear: both;
+		margin-top: 40px;
+	}
+	.content div.sub0101 {
+		width: 100%;
+		overflow: hidden;
+		margin-bottom: 60px;
+	}
+	.sub0101 .sub0101_1 {
+		width: 464px;
+		height: 556px;
+		float: left;
+	}
+	.sub0101 .sub0101_2 {
+		width: 464px;
+		height: 556px;
+		float: left;
+	}
+	.brown_fs_01 {
+		font-size: 25px;
+		font-weight: bold;
+		color: #814b34;
+		padding-left: 30px;
+		margin-bottom: 30px;
+	}
+	.brown_fs_02 {
+		font-size: 17px;
+		font-weight: bold;
+		color: #814b34;
+	}
+	.info_font {
+		font-size: 14px;
+		margin-bottom: 20px;
+		padding-left: 30px;
+	}
+	#i4 {
+		display: none;
+	}
+	#hh {
+		display: none;
+	}
+	#i2 {
+		display: none;
+	}
+}
