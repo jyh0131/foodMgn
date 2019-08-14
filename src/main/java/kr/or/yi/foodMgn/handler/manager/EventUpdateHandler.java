@@ -25,6 +25,7 @@ public class EventUpdateHandler implements CommandHandler {
 			int no = Integer.parseInt(req.getParameter("no"));
 			String title = req.getParameter("title"); // 게시물 제목
 			String content = req.getParameter("content"); // 게시물 내용
+			String mainImg = req.getParameter("mainImg"); //메인이미지
 			String eName = "관리자"; //관리자
 			String date = req.getParameter("date");
 			String date2 = req.getParameter("date2");
@@ -33,7 +34,7 @@ public class EventUpdateHandler implements CommandHandler {
 			sd.parse(date2);//마감날짜
 			boolean eIng = true;
 			
-			Event event = new Event(no, eName, title, content, sd.parse(date), sd.parse(date2), eIng);
+			Event event = new Event(no, eName, title,mainImg,content, sd.parse(date), sd.parse(date2), eIng);
 			
 			EventDao eDao = new EventDaoImpl();
 			eDao.updateEvent(event);

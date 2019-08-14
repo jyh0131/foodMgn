@@ -18,4 +18,5 @@ public interface NoticeDao {
 	public List<Notice> selectNoticeByTitle(Notice notice);
 	public List<Notice> selectNoticeByContent(Notice notice);
 	public List<Notice> selectNoticeByTitleandContent(Notice notice);
+	public List<Notice> selectFour();
 }

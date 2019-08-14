@@ -3,7 +3,7 @@
 <mapper namespace="kr.or.yi.foodMgn.dao.EventMapper">
 	
 	<insert id="insertEvent" parameterType="Event">
-		insert into event(e_name, e_title, e_text, e_start_date, e_end_date, e_ing) values (#{eName},#{eTitle},#{eText},#{eStartDate},#{eEndDate},#{eIng})
+		insert into event(e_name, e_title, e_text, e_img, e_start_date, e_end_date, e_ing) values (#{eName},#{eTitle},#{eText},#{eImg},#{eStartDate},#{eEndDate},#{eIng})
 	</insert>
 	
 	<select id="selectListPage" resultType="Event" parameterType="map">
@@ -26,6 +26,10 @@
 		select * from event where e_no=#{no}
 	</select>
 	
+	<select id="selectFourListPage" resultType="Event">
+		select * from event where e_ing=1 order by e_no desc limit 0,4
+	</select>
+	
 	<update id="deleteEvent">
 		update event
 		set e_ing = 0
@@ -34,7 +38,7 @@
 	
 	<update id="updateEvent" parameterType="Event">
 		update event
-		set e_title=#{eTitle}, e_text=#{eText}, e_start_date=#{eStartDate}, e_end_date=#{eEndDate}
+		set e_title=#{eTitle}, e_text=#{eText}, e_img=#{eImg} ,e_start_date=#{eStartDate}, e_end_date=#{eEndDate}
 		where e_no=#{eNo}
 	</update>
 </mapper>

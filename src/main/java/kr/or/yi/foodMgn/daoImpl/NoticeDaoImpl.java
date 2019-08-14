@@ -105,6 +105,13 @@ public class NoticeDaoImpl implements NoticeDao {
 		}
 	}
 
+	@Override
+	public List<Notice> selectFour() {
+		try(SqlSession sqlSession = MybatisSqlSessionFactory.openSession()) {
+			return sqlSession.selectList(namespace + ".selectFour");
+		}
+	}
+
 	
 
 }
