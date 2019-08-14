@@ -21,9 +21,9 @@
 }
 
 #sub {
-	width: 80%;
+	width: 1000px;
+	margin:0 auto;
 	height:40px;
-	padding-left: 15px;
 	margin-bottom: 10px;
 	
 }
@@ -70,20 +70,86 @@ table {
 }
 </style>
 
-<script src="https://code.jquery.com/jquery-3.3.1.js">
-	
-</script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<link rel="stylesheet"
-	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<link rel="stylesheet"
-	href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
 
-<script
-	src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js">
-</script>
 <script type="text/javascript">
 	$(function() {
+		$(".selectList").datepicker({
+			dateFormat : 'yy-mm-dd',
+			minDate: null
+		});
+		
+		$("#btnDate").click(function(){
+			if($("input[name='date']").val() == "" || $("input[name='date2']").val() == "") {
+				alert("검색할 날짜를 입력하세요.");
+	            return false;
+	        }
+			
+			var date = new Date($("input[name='date']").val());
+			var date2 = new Date($("input[name='date2']").val());
+			
+			if((date.getTime()-date2.getTime())>0 ){
+				alert("끝나는 날짜는 시작날짜보다 작을 수 없습니다.");
+				$("input[name='date']").val("");
+				$("input[name='date2']").val("");
+	            return false;
+			}
+				
+			
+			
+			 $.ajax({
+					url:"${pageContext.request.contextPath }/mgn/salesList.do",
+					type:"get",
+					data:{"date":$("input[name='date']").val(), "date2":$("input[name='date2']").val(), "kind":"date"},
+					dataType:"json",
+					success:function(json){
+						console.log(json);
+					
+						$("tbody").empty();
+						if(json.list.length==0){
+ 						alert("조회조건에 맞는 내역이 없습니다.");
+ 						return false;
+ 					}
+						var totalCount=0;
+						var totalPrice=0;
+						for(var i=0; i<json.list.length; i++){
+							var list=json.list[i];
+							if(i%2==0){
+								$("tbody").append("<tr  role='row' class='odd'>");
+								$("tbody tr").eq(i).append("<td class='sorting_1'>"+(i+1)+"</td>");
+								$("tbody tr").eq(i).append("<td>"+list.ssName+"</td>");
+								$("tbody tr").eq(i).append("<td>"+list.ssCount+"개</td>");
+								$("tbody tr").eq(i).append("<td>"+list.ssTotalPrice.toLocaleString()+"원</td>");
+								$("tbody tr").eq(i).append("<td>"+list.ssShare+"%</td>");
+								totalCount += list.ssCount;
+								totalPrice += list.ssTotalPrice;
+							}else{
+								$("tbody").append("<tr  role='row' class='even'>");
+								$("tbody tr").eq(i).append("<td class='sorting_1'>"+(i+1)+"</td>");
+								$("tbody tr").eq(i).append("<td>"+list.ssName+"</td>");
+								$("tbody tr").eq(i).append("<td>"+list.ssCount+"개</td>");
+								$("tbody tr").eq(i).append("<td>"+list.ssTotalPrice.toLocaleString()+"원</td>");
+								$("tbody tr").eq(i).append("<td>"+list.ssShare+"%</td>");
+								totalCount += list.ssCount;
+								totalPrice += list.ssTotalPrice;
+							}
+							
+						}
+						
+						$("tbody").append("<tr id='total'>");
+						$("tbody tr").eq(i).append("<td></td>");
+						$("tbody tr").eq(i).append("<td></td>");
+						$("tbody tr").eq(i).append("<td>"+totalCount.toLocaleString()+"개</td>");
+						$("tbody tr").eq(i).append("<td>"+totalPrice.toLocaleString()+"원</td>");
+						$("tbody tr").eq(i).append("<td>100.0%</td>");
+					}
+					
+				})
+			
+			
+			
+		})
+		
+		
 		
 		
 		$("#datepicker").datepicker({
@@ -145,9 +211,8 @@ table {
 		});
 		
 		$("#all").click(function() {
-			$("#fd_year option").eq(0).prop("selected", "true");    
-		    $("#fd_month  option").eq(0).prop("selected", "true");   
-			$("#datepicker").val("");
+			$("input[name='date']").val("");
+			$("input[name='date2']").val(""); 
 			  $.ajax({
 					url:"${pageContext.request.contextPath }/mgn/salesListAll.do",
 					type:"get",
@@ -335,18 +400,15 @@ table {
 		
 		</div>
 	<h2>판매 현황</h2>
+	<div id="sub">
+			<p id="selDate">
+				<input type="text" name="date" class="selectList" autocomplete="off"> ~ <input type="text" name="date2" class="selectList" autocomplete="off"> <button id="btnDate">날짜로검색</button>
+				<button id="all">전체보기</button>
+			</p>  
+		</div>
 	<div id="wrap">
 	
-		<div id="sub">
-			<p id="selDate">
-				<label>날짜 선택: </label><input type="text" id="datepicker">
-				<select id="fd_year" name="fd_year" style="width:130px;"></select>    
-          		 <select id="fd_month" name="fd_month" style="width:130px;"></select> 
-          		 <button id="search">조회</button>   
-				<button id="all">전체보기</button>
-			</p>
-			
-		</div>
+		
 		
 		<table id="saleTable" class="display">
 			<thead>

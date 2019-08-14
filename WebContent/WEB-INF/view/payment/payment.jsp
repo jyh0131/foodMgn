@@ -112,6 +112,8 @@
 		//마일리지 적용 버튼 클릭시
 		$("#btnM").click(function() {
 			var useMileage = $("#mileage_info_get").val();
+			
+			
 			if(useMileage > ${mem.mbMileage} ){
 				alert("사용가능한 마일리지는 ${mem.mbMileage}원 입니다");
 				$("#mileage_info_get").val("");

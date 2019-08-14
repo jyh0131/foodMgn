@@ -29,6 +29,20 @@
 	from sale s left join food f on s.fd_no = f.fd_no where s.sale_cancel = 0 AND s.sale_time like CONCAT( #{date}, '%')
 	)sub2;
 	</select>
+	
+	<select id="selectSalesStatusByDateRange" parameterType="map" resultMap="resultSalesStatus">
+	select sub1.name as ssName, sub1.count as ssCount, sub1.ssTotalPrice
+	ssTotalPrice , round(sub1.ssTotalPrice/sub2.sum1*100,1) as ssShare
+	from(
+	select f.fd_name as name, sum(sale_order_cnt) as count, f.fd_price as price,
+	sum(sale_order_cnt*f.fd_price) as ssTotalPrice
+	from sale s left join food f on s.fd_no = f.fd_no where s.sale_cancel = 0 AND s.sale_time &gt; concat(#{date},'%') and s.sale_time &lt; concat(adddate(#{date2},1),'%')
+	group by s.fd_no
+	order by ssTotalPrice desc) sub1 join (
+	select sum(sale_order_cnt*f.fd_price) as sum1
+	from sale s left join food f on s.fd_no = f.fd_no where s.sale_cancel = 0 AND s.sale_time &gt; concat(#{date},'%') and s.sale_time &lt; concat(adddate(#{date2},1),'%')
+	)sub2;
+	</select>
 </mapper>
 
 

@@ -19,15 +19,20 @@ public class SalesListHandler implements CommandHandler {
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		String date = req.getParameter("date");
+		String date2 = req.getParameter("date2");
 		SalesListService service = SalesListService.getInstance();
 		if(date!=null) {
-			List<SalesStatus> list = service.selectSalesStatusByDate(date);
-			Map<String, List<SalesStatus>> map = new HashMap<>();
-			map.put("list", list);
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("date", date);
+			map.put("date2", date2);
+			
+			List<SalesStatus> list = service.selectSalesStatusByDateRange(map);
+			Map<String, List<SalesStatus>> map2 = new HashMap<>();
+			map2.put("list", list);
 			
 			ObjectMapper om = new ObjectMapper();
-			String json = om.writeValueAsString(map); 
-			res.setContentType("apllication/json;charset=utf-8");
+			String json = om.writeValueAsString(map2); 
+			res.setContentType("application/json;charset=utf-8");
 			PrintWriter out = res.getWriter();
 			out.print(json);
 			out.flush();
