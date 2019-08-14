@@ -12,4 +12,6 @@ public interface EventDao {
 	public Event selectByNo(int no);
 	public int deleteEvent(int no);
 	public int updateEvent(Event event);
+	public List<Event> selectIngListPage(Map<String, Integer> map);
+	public List<Event> selectEndListPage(Map<String, Integer> map);
 }

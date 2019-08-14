@@ -61,4 +61,18 @@ public class EventDaoImpl implements EventDao {
 		}
 	}
 
+	@Override
+	public List<Event> selectIngListPage(Map<String, Integer> map) {
+		try(SqlSession sqlSession = MybatisSqlSessionFactory.openSession()) {
+			return sqlSession.selectList(namespace + ".selectIngListPage", map);
+		}
+	}
+
+	@Override
+	public List<Event> selectEndListPage(Map<String, Integer> map) {
+		try(SqlSession sqlSession = MybatisSqlSessionFactory.openSession()) {
+			return sqlSession.selectList(namespace + ".selectEndListPage", map);
+		}
+	}
+
 }
