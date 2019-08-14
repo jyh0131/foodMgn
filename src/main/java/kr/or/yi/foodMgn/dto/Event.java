@@ -7,6 +7,7 @@ public class Event {
 	private String eName;
 	private String eTitle;
 	private String eText;
+	private String eImg;
 	private Date eStartDate;
 	private Date eEndDate;
 	private boolean eIng;
@@ -18,11 +19,18 @@ public class Event {
 	
 	
 	
-	public Event(String eName, String eTitle, String eText, Date eStartDate, Date eEndDate, boolean eIng) {
+	
+
+
+	
+	public Event(int eNo, String eName, String eTitle, String eText, String eImg, Date eStartDate, Date eEndDate,
+			boolean eIng) {
 		super();
+		this.eNo = eNo;
 		this.eName = eName;
 		this.eTitle = eTitle;
 		this.eText = eText;
+		this.eImg = eImg;
 		this.eStartDate = eStartDate;
 		this.eEndDate = eEndDate;
 		this.eIng = eIng;
@@ -30,15 +38,35 @@ public class Event {
 
 
 
-	public Event(int eNo, String eName, String eTitle, String eText, Date eStartDate, Date eEndDate, boolean eIng) {
+
+
+
+
+	public Event(String eName, String eTitle, String eText, String eImg, Date eStartDate, Date eEndDate, boolean eIng) {
 		super();
-		this.eNo = eNo;
 		this.eName = eName;
 		this.eTitle = eTitle;
 		this.eText = eText;
+		this.eImg = eImg;
 		this.eStartDate = eStartDate;
 		this.eEndDate = eEndDate;
 		this.eIng = eIng;
+	}
+
+
+
+
+
+
+
+	public String geteImg() {
+		return eImg;
+	}
+
+
+
+	public void seteImg(String eImg) {
+		this.eImg = eImg;
 	}
 
 

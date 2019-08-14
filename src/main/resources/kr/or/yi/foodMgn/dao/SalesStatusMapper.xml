@@ -16,6 +16,10 @@
 		select ssName, ssCount, ssTotalPrice, ssShare from stateFood
 	</select>
 	
+		<select id="selectSalesStatusByFive" resultMap="resultSalesStatus">
+		select ssName, ssCount, ssTotalPrice, ssShare from stateFood limit 0, 5
+	</select>
+	
 	<select id="selectSalesStatusByDate" resultMap="resultSalesStatus">
 	select sub1.name as ssName, sub1.count as ssCount, sub1.ssTotalPrice
 	ssTotalPrice , round(sub1.ssTotalPrice/sub2.sum1*100,1) as ssShare

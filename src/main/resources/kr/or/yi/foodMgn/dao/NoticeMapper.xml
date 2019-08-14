@@ -25,6 +25,11 @@
 		select count(no_no) from notice
 	</select>
 	
+	<select id="selectFour" resultType="Notice">
+		select * from notice where no_delete=0 order by no_no desc limit 0,4
+	</select>
+	
+	
 	<update id="updateReadNt" parameterType="Notice">
 		update notice set no_read_nt = #{noReadNt} where no_no = #{noNo}
 	</update>

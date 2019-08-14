@@ -23,6 +23,7 @@
 	#leftUi ul{
 		width:250px;
 		height:600px;
+		background: rgb(0,0,0);
 	}
 	#leftUi ul li{
 		width:250px;
@@ -37,6 +38,7 @@
 		line-height:50px;
 		padding-left:30px;
 		font-weight: bold;
+		color:white;
 	}
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

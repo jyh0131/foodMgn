@@ -4,7 +4,10 @@
 <%@ include file="../include/mypage.jsp" %>
 <style>
 	#searchRsv2{
-		background: red;
+		
+	}
+	#searchRsv2 a{
+		color: yellow !important;
 	}
 	#rsvContainer{
 		width:1100px;
