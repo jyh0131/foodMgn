@@ -1,4 +1,202 @@
 @charset "UTF-8";
+
+@media all and (max-width:767px) {
+	.s_visu1 {
+	width: 100%;
+}
+.s_visu1 img {
+	width: 100%;
+}
+div#wrap{
+	width: 100%;
+	overflow: hidden;	
+	margin-top: 30px;
+	font-size: 12px;
+}
+
+#wrap div#pay_1{
+	width: 90%;
+	margin: 0 auto;
+}
+
+#wrap div#pay_2{
+width: 90%;
+margin: 0 auto;
+}
+
+#pay_title h2{
+	text-align: center;
+}
+
+/* 주문정보 */
+
+#pay_1 div#order_info{
+	width: 90%;
+	min-height: 300px;
+	margin-bottom: 10px;
+	background-color: #F7F7F7;	
+	border-bottom: 2px solid #c7a593;
+	border-top: 2px solid #c7a593;
+	padding:15px;
+} 
+
+table{
+	border-collapse: collapse;
+	border-top: 2px solid #55423b !important;
+	font-size: 12px;
+	width: 100%;
+}
+
+table,th,td{  
+	 border: 1px solid #dedede;
+}
+
+th{
+	 background: #f3f0ed;
+	 height: 40px;
+}
+
+td{
+	
+	text-align: center;
+}
+
+td:last-child{
+	text-align: right;
+}
+
+
+
+
+/* 쿠폰/마일리지 */
+#pay_1 div#sale_info{
+	width: 90%;
+	margin-bottom: 10px;	
+	background-color: #F7F7F7;
+	border-bottom: 2px solid #c7a593;
+	border-top: 2px solid #c7a593;
+	padding:15px;
+}
+
+#sale_detail_1, #sale_detail_2, #sale_detail_3{
+	display: none;
+}
+
+#coupon_p{
+	margin-bottom: 15px;	
+}
+
+ 
+/* 결제정보 */
+#pay_1 div#pay_info{
+	width: 90%;
+	margin-bottom: 10px;	
+	background-color: #F7F7F7;
+	border-bottom: 2px solid #c7a593;
+	border-top: 2px solid #c7a593;
+	padding:15px;
+} 
+
+.brown_1{
+	font-size: 25px;
+    font-weight: bold;
+    color: #814b34;
+    margin-bottom: 20px;
+}
+
+
+/* 주문자 정보 */
+#buyer_info{
+	width: 90%;
+	min-height: 180px;
+	margin-bottom: 10px;	
+	background-color: #F7F7F7;
+	border-bottom: 2px solid #c7a593;
+	border-top: 2px solid #c7a593;
+	padding:15px;
+}
+/* 결제금액 */
+#pay_price{
+	width:90%;
+	min-height: 180px;
+	margin-bottom: 10px;	
+	background-color: #F7F7F7;
+	border-bottom: 2px solid #c7a593;
+	border-top: 2px solid #c7a593;
+	padding:15px;
+}
+
+
+.font_1{
+	font-size: 14px;
+	font-weight: bold;	
+}
+.font_2{
+	font-weight: bold;
+	color:#3f87dc;	
+}
+.font_3{
+	font-weight: bold;
+	color:red;	
+}
+.font_4{
+	font-weight: bold;
+	font-size: 20px;
+	color:#d6673b;	
+}
+.font_5{
+	font-weight: normal;  
+}
+
+/* 걸제버튼 */
+
+#pay_button{
+	width: 100%;
+	height: 80px;
+	background: #dcd2c8;
+	color: #814b34;
+	font-size: 28px;
+	font-weight: bold;
+	border: 0;
+}
+
+.foodImg{
+	width: 30px;
+	height: 30px;
+}
+
+#btnM{
+	background: #dcd2c8;
+	color: #814b34;
+	font-weight: bold;
+	border: 0;
+	height: 30px;
+}
+
+#i1{
+	display: none;
+	
+}
+
+#pay_button_wrap{
+	margin-bottom: 20px;
+}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	@media screen and (min-width:768px) {
 .s_visu1 {
 	width: 100%;
 	height: 350px;
@@ -171,3 +369,10 @@ td:last-child{
 	border: 0;
 	height: 30px;
 }
+
+#i2{
+	display: none;
+	
+}
+
+	}
