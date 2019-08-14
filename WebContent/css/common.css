@@ -3,6 +3,7 @@
 	margin: 0;
 	padding: 0;
 }
+
 body {
 	font-family: Nanum Gothic,'돋움',Dotum,AppleGothic,sans-serif;
 }
@@ -12,6 +13,29 @@ ul li {
 a {
 	text-decoration: none;
 }
+
+@media all and (max-width:767px) {
+.footer{
+	display: none;	
+}
+
+.footer2{
+	background: #262626;
+	color:#bababa;
+	font-weight: bold;
+    text-align: center;
+    padding: 13px 0;
+    font-size: 13px;
+}
+
+
+
+.footer2 span{
+    color: #d6673b !important;	
+}
+
+	}
+@media screen and (min-width:768px) {
 
 header {
 	width: 100%;
@@ -171,4 +195,9 @@ header a {
 	bottom: 60px;
 	right: 5px;
 	
+}
+
+.footer2{
+	display: none;	
+}
 }

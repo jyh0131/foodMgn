@@ -61,6 +61,8 @@ public class MemberMgnListHandler implements CommandHandler {
 			List<Member> mlist = dao.selectListPage(map);
 			int totalCount = dao.selectTotalCount();
 		
+			System.out.println(mlist);
+			
 			MemberPage mp = new MemberPage(totalCount, page, 20, mlist);
 			
 			res.setContentType("application/json;charset=utf-8");
