@@ -75,4 +75,11 @@ public class EventDaoImpl implements EventDao {
 		}
 	}
 
+	@Override
+	public List<Event> selectFourListPage() {
+		try(SqlSession sqlSession = MybatisSqlSessionFactory.openSession()) {
+			return sqlSession.selectList(namespace + ".selectFourListPage");
+		}
+	}
+
 }

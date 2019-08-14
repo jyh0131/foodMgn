@@ -15,6 +15,7 @@
   	<url-pattern>*.do</url-pattern>
   </servlet-mapping>
   
+ 
 <filter>
   	<filter-name>CharacterEncodingFilter</filter-name> <!-- 아무거나와도됨 -->
   	<filter-class>kr.or.yi.foodMgn.jdbc.CharacterEncodingFilter</filter-class> <!-- 패키지명.ㅍ클래스명 -->
@@ -31,7 +32,9 @@
   <filter-mapping>
   	<filter-name>CorsFilter</filter-name>
   	<url-pattern>/*</url-pattern> <!-- 모두 -->
-  </filter-mapping>   
+  </filter-mapping>  
+  
+   
   
    <filter>
   	<filter-name>MgnFilter</filter-name> <!-- 아무거나와도됨 -->

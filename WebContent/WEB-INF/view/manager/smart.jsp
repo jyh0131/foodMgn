@@ -28,7 +28,7 @@
 		margin: 10px auto;
 		padding:20px;
 		border:1px solid #ccc;
-		width:900px;
+		width:920px;
 	}
 	#title{
 		width:770px;
@@ -49,7 +49,7 @@
 	.firstTd{
 		padding-right:10px;
 		font-weight: bold;
-		width: 70px;
+		width: 90px;
 	}
 	#menu_li2 {
 		float: right;
@@ -82,7 +82,7 @@
 					<li><b>이벤트</b></li>
 				</ul>
 			</div>
-		<form id="frm" action="write.do" method="post" >
+		<form id="frm" action="write.do" method="post" enctype="multipart/form-data">
 			<table>
 		        <tr>
 		            <td class="firstTd">제목</td>
@@ -91,6 +91,10 @@
 		        <tr>
 		        	<td class="firstTd">기간</td>
 		        	<td><input type="text" name="date" class="selectList" autocomplete="off"> ~ <input type="text" name="date2" class="selectList" autocomplete="off"></td>
+		        </tr>
+		         <tr>
+		            <td class="firstTd">메인이미지</td>
+		            <td><input type="file" id="mainImg" name="mainImg"/></td>
 		        </tr>
 		        <tr>
 		            <td colspan="2">

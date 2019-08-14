@@ -24,4 +24,11 @@ public class SalesStatusDaoImpl implements SalesStatusDao {
 		}
 	}
 
+	@Override
+	public List<SalesStatus> selectSalesStatusByFive() {
+		try(SqlSession sqlSession = MybatisSqlSessionFactory.openSession()) {
+			return sqlSession.selectList(namespace + "selectSalesStatusByFive");
+		}
+	}
+
 }
