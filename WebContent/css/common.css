@@ -16,23 +16,74 @@ a {
 
 @media all and (max-width:767px) {
 	header {
-		background-color: #1b1916;
-		
+		width: 100%;
+		height: 50px;
+		position: relative;
 	}
-	#header {
+	#head1_1 {
 		height: 50px; 
-		background: url("../images/include/f_logo.gif") no-repeat;
+		background-image: url("../images/include/logo2.png");
+		background-size: 150px 25px;
+		background-position: 50% 40%;
+		background-repeat: no-repeat;
 	}
 	.sns {
 		display: inline-block;
 		float: left;
+		background-color: black;
+		margin-top: 13px;
+		width: 25px;
+		height: 25px;
 	}
-	#head1_2 {
+	.sns img {
+		width: 25px;
+		height: 25px;
+	}
+	.sns:first-child {
+		margin-left: 10px;
+		margin-right: 5px;
+	}
+	.headMenu {
+		height: 50px;
+	}
+	.headMenu img {
+		width: 50px;
+		height: 50px;
+		float: right;
+	}
+	.headUl {
+		width: 180px;
+		height: 100vh;
+		background-color: #3b2c2c;
+		position: absolute;
+		right: -200px;
+		top: 50px;
+		z-index: 100;
+	}
+	.headUl li {
+		height: 40px;
+		line-height: 40px;
+		padding-left: 20px;
+		background-image: url("../images/include/gnb_open.png");
+		background-size: 13px 8px;
+		background-position: 90% 50%;
+		background-repeat: no-repeat;
+		border-bottom: 1px solid black;
+	}
+	.headUl span {
+		color: white;
+		font-size: 0.9em;
+	}
+	#head1_2, #head2 {
 		display: none;
 	}
-	#head2 {
+	.clear {
+		clear: both;
+	}
+	.submenu {
 		display: none;
 	}
+	
 	.footer{
 		display: none;	
 	}
@@ -78,6 +129,12 @@ a {
 		border: 1px solid #EAEAEA;
 		display: inline-block;
 		height: 29px;
+	}
+	.headMenu {
+		display: none;
+	}
+	.headUl {
+		display: none;
 	}
 	#head1_2 {
 		float: right;

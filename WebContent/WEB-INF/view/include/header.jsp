@@ -97,6 +97,20 @@
 		/* #("#li2 .submenu li").click(function() {
 			
 		}) */
+		
+		$(".headMenu").click(function() {
+			if($(".headMenu img").attr("src").indexOf("1") >= 0) {
+				$(".headMenu img").attr("src", "${pageContext.request.contextPath}/images/include/ico2.png");
+				$(".headUl").css("right", 0);
+			}else {
+				$(".headMenu img").attr("src", "${pageContext.request.contextPath}/images/include/ico1.png");
+				$(".headUl").css("right", "-200px");
+			}
+		})
+		
+		$(".headUl > ul > li").click(function() {
+			$(this).find(".submenu").css("display", "block");
+		})
 	})
 </script>
 </head>
@@ -115,6 +129,51 @@
 								<img src="${pageContext.request.contextPath}/images/include/sns_insta.png">
 							</a>
 						</div>
+						<div class="headMenu">
+							<img src="${pageContext.request.contextPath}/images/include/ico1.png">
+						</div>
+					</div>
+					<div class="clear"></div>
+					<div class="headUl">
+						<ul>
+							<li>
+								<span>INTRODUCE</span>
+							</li>
+							<li>
+								<span>MENU</span>
+								<ul class="submenu">
+									<li><a href="${pageContext.request.contextPath}/menu.do?fkno=1">파스타</a></li>
+									<li><a href="${pageContext.request.contextPath}/menu.do?fkno=2">스테이크&커틀렛</a></li>
+									<li><a href="${pageContext.request.contextPath}/menu.do?fkno=3">필라프&리조또</a></li>
+									<li><a href="${pageContext.request.contextPath}/menu.do?fkno=4">샐러드</a></li>
+									<li><a href="${pageContext.request.contextPath}/menu.do?fkno=5">시그니처 피자</a></li>
+									<li><a href="${pageContext.request.contextPath}/menu.do?fkno=6">피자</a></li>
+									<li><a href="${pageContext.request.contextPath}/menu.do?fkno=7">사이드 메뉴</a></li>
+									<li><a href="${pageContext.request.contextPath}/menu.do?fkno=8">음료</a></li>
+									<li><a href="${pageContext.request.contextPath}/menu.do?fkno=9">맥주</a></li>
+								</ul>
+							</li>
+							<li>
+								<span>COMMUNITY</span>
+								<ul class="submenu">
+									<li><a href="${pageContext.request.contextPath}/notice.do">공지사항</a></li>
+									<li><a href="${pageContext.request.contextPath}/event.do">이벤트</a></li>
+								</ul>
+							</li>
+							<li>
+								<span>RESERVATION</span>
+							</li>
+							<li>
+								<span>DELIVERY</span>
+								<ul class="submenu">
+									<li><a href="javascript:void(0);" id="reservation">예약하기</a></li>
+									<li><a href="${pageContext.request.contextPath}/search.do" id="searchRsv">예약조회</a></li>
+								</ul>
+							</li>
+							<li>
+								<span>DERECTION</span>
+							</li>
+						</ul>
 					</div>
 					<div id="head1_2">
 						<ul>
