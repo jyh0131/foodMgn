@@ -1,6 +1,7 @@
 package kr.or.yi.foodMgn.service;
 
 import java.util.List;
+import java.util.Map;
 
 import kr.or.yi.foodMgn.dao.SalesStatusDao;
 import kr.or.yi.foodMgn.daoImpl.SalesStatusDaoImpl;
@@ -24,5 +25,9 @@ public class SalesListService {
 	
 	public List<SalesStatus> selectSalesStatusByDate(String searchDate){
 		return dao.selectSalesStatusByDate(searchDate);
+	}
+	
+	public List<SalesStatus> selectSalesStatusByDateRange(Map<String,Object> map){
+		return dao.selectSalesStatusByDateRange(map);
 	}
 }

@@ -41,4 +41,18 @@ public class PaymentDaoImpl implements PaymentDao {
 		}
 	}
 
+	@Override
+	public List<Payment> selectPaytmentByDateRange(Map<String, Object> map) {
+		try(SqlSession sqlSession = MybatisSqlSessionFactory.openSession()) {
+			return sqlSession.selectList(namespace + "selectPaytmentByDateRange",map);
+		}
+	}
+
+	@Override
+	public List<Payment> selectPaytmentByDateRange2(Map<String, Object> map) {
+		try(SqlSession sqlSession = MybatisSqlSessionFactory.openSession()) {
+			return sqlSession.selectList(namespace + "selectPaytmentByDateRange2",map);
+		}
+	}
+
 }

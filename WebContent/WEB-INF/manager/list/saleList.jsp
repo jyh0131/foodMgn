@@ -21,9 +21,9 @@
 }
 
 #sub {
-	width: 80%;
+	width: 1300px;
+	margin: 0 auto;
 	height: 40px;
-	padding-left: 15px;
 	margin-bottom: 10px;
 }
 
@@ -102,28 +102,167 @@ button {
 }
 </style>
 
-<script src="https://code.jquery.com/jquery-3.3.1.js">
-	
-</script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<link rel="stylesheet"
-	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<link rel="stylesheet"
-	href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
 
-<script
-	src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js">
-	
-</script>
 
 <script type="text/javascript">
 	$(function() {
+		
+		$(".selectList").datepicker({
+			dateFormat : 'yy-mm-dd',
+			minDate: null
+		});
+		
+		$("#btnDate").click(function(){
+			if($("input[name='date']").val() == "" || $("input[name='date2']").val() == "") {
+				alert("검색할 날짜를 입력하세요.");
+	            return false;
+	        }
+			
+			var date = new Date($("input[name='date']").val());
+			var date2 = new Date($("input[name='date2']").val());
+			
+			if((date.getTime()-date2.getTime())>0 ){
+				alert("끝나는 날짜는 시작날짜보다 작을 수 없습니다.");
+				$("input[name='date']").val("");
+				$("input[name='date2']").val("");
+	            return false;
+			}
+				
+			
+			
+			$.ajax({
+				url:"${pageContext.request.contextPath}/mgn/saleListDate.do",
+				type:"post",
+				data:{"date":$("input[name='date']").val(), "date2":$("input[name='date2']").val(), "kind":"date"},
+				dataType:"json",
+				success: function(json){
+					console.log(json);
+					
+					$("tbody").empty();
+					if(json.list.length==0){
+						alert("조회조건에 맞는 내역이 없습니다.");
+						return false;
+					}
+					for(var i=0; i<json.list.length; i++){
+						var list=json.list[i];
+						if(list.payCancel==1){
+							$("tbody").append("<tr class='bb'>");
+							$("tbody tr").eq(i).append("<td><span class='payNo'>"+list.payNo+"</span><span class='payMemberNo'>"+list.payMemberNo+"</span></td>");
+							var formattedDate = new Date(list.payTime);
+							var d = formattedDate.getDate();
+							if( d<10){
+								d= "0"+d;
+							}
+							var m =  formattedDate.getMonth()+1;
+							if( m<10){
+								m= "0"+m;
+							}
+							var y = formattedDate.getFullYear();
+							
+							var h = formattedDate.getHours();
+							if( h<10){
+								h= "0"+h;
+							}
+							var mi = formattedDate.getMinutes();
+							if( mi<10){
+								mi= "0"+mi;
+							}
+							
+							var s = formattedDate.getSeconds();
+							if( s<10){
+								s= "0"+s;
+							}
+							var payDate = y+"/"+m+"/"+d+"<br>"+h+":"+mi+":"+s;
+							
+							$("tbody tr").eq(i).append("<td><span class='payTime'>"+payDate+"</span></td>");
+							$("tbody tr").eq(i).append("<td><span class='payMenu'>"+list.payMenu+"</span></td>");
+							$("tbody tr").eq(i).append("<td><span class='payPrice'>"+list.payPrice.toLocaleString()+"</span>원</td>");
+							$("tbody tr").eq(i).append("<td><span class='payDiscountInfo'>"+list.payDiscountInfo+"</span></td>");
+							$("tbody tr").eq(i).append("<td><span class='payDiscountPrice'>"+list.payDiscountPrice+"</span>원</td>");
+							if(list.payType==1){
+								$("tbody tr").eq(i).append("<td><span class='payType'>현금</span></td>");
+							}else{
+								$("tbody tr").eq(i).append("<td><span class='payType'>카드</span></td>");
+							}
+							
+							$("tbody tr").eq(i).append("<td><span class='payMember'>"+list.payMember+"</span></td>");
+							if(list.payCancel==1){
+								$("tbody tr").eq(i).append("<td><span class='payCancel'>취소</span></td>");
+							}else{
+								$("tbody tr").eq(i).append("<td><span class='payCancel'>결제완료</span></td>");
+							}
+							
+							$("tbody tr").eq(i).append("<td><button class='cancel'>결제취소</button></td>");
+						}else{
+							$("tbody").append("<tr class='aa'>");
+							$("tbody tr").eq(i).append("<td><span class='payNo'>"+list.payNo+"</span><span class='payMemberNo'>"+list.payMemberNo+"</span></td>");
+							var formattedDate = new Date(list.payTime);
+							var d = formattedDate.getDate();
+							if( d<10){
+								d= "0"+d;
+							}
+							var m =  formattedDate.getMonth()+1;
+							if( m<10){
+								m= "0"+m;
+							}
+							var y = formattedDate.getFullYear();
+							
+							var h = formattedDate.getHours();
+							if( h<10){
+								h= "0"+h;
+							}
+							var mi = formattedDate.getMinutes();
+							if( mi<10){
+								mi= "0"+mi;
+							}
+							
+							var s = formattedDate.getSeconds();
+							if( s<10){
+								s= "0"+s;
+							}
+							var payDate = y+"/"+m+"/"+d+"<br>"+h+":"+mi+":"+s;
+							
+							$("tbody tr").eq(i).append("<td><span class='payTime'>"+payDate+"</span></td>");
+							$("tbody tr").eq(i).append("<td><span class='payMenu'>"+list.payMenu+"</span></td>");
+							$("tbody tr").eq(i).append("<td><span class='payPrice'>"+list.payPrice.toLocaleString()+"</span>원</td>");
+							$("tbody tr").eq(i).append("<td><span class='payDiscountInfo'>"+list.payDiscountInfo+"</span></td>");
+							$("tbody tr").eq(i).append("<td><span class='payDiscountPrice'>"+list.payDiscountPrice+"</span>원</td>");
+							if(list.payType==1){
+								$("tbody tr").eq(i).append("<td><span class='payType'>현금</span></td>");
+							}else{
+								$("tbody tr").eq(i).append("<td><span class='payType'>카드</span></td>");
+							}
+							
+							$("tbody tr").eq(i).append("<td><span class='payMember'>"+list.payMember+"</span></td>");
+							if(list.payCancel==1){
+								$("tbody tr").eq(i).append("<td><span class='payCancel'>취소</span></td>");
+							}else{
+								$("tbody tr").eq(i).append("<td><span class='payCancel'>결제완료</span></td>");
+							}
+							
+							$("tbody tr").eq(i).append("<td><button class='cancel'>결제취소</button></td>");
+							
+						}
+						
+						
+					}
+					
+					
+				}
+				
+			})
+			
+			
+			
+			
+		})
+		
+		
 		//전체보기
 		
 		$(document).on("click","#all",function(){
-			$("#datepicker").val("");
-			$("#fd_year option").eq(0).prop("selected", "true");    
-		    $("#fd_month  option").eq(0).prop("selected", "true");   
+			$("input[name='date']").val("");
+			$("input[name='date2']").val(""); 
 			$.ajax({
 				url:"${pageContext.request.contextPath }/mgn/saleListDate.do",
 				type:"get",
@@ -250,132 +389,6 @@ button {
 		
 		
 		
-		//일별 검색
-		$("#datepicker").datepicker({
-			dateFormat : 'yy-mm-dd',
-			  onSelect: function(dateText, inst) {
-		          var date = $(this).val();
-					$("#fd_year option").eq(0).prop("selected", "true");    
-				    $("#fd_month  option").eq(0).prop("selected", "true");   
-			$.ajax({
-				url:"${pageContext.request.contextPath }/mgn/saleListDate.do",
-				type:"get",
-				data : {"date":date},
-				dataType:"json",
-				success:function(json){
-					console.log(json);
-					$("tbody").empty();
-					if(json.list.length==0){
-						alert("조회조건에 맞는 내역이 없습니다.");
-						return false;
-					}
-					for(var i=0; i<json.list.length; i++){
-						var list=json.list[i];
-						if(list.payCancel==1){
-							$("tbody").append("<tr class='bb'>");
-							$("tbody tr").eq(i).append("<td><span class='payNo'>"+list.payNo+"</span><span class='payMemberNo'>"+list.payMemberNo+"</span></td>");
-							var formattedDate = new Date(list.payTime);
-							var d = formattedDate.getDate();
-							if( d<10){
-								d= "0"+d;
-							}
-							var m =  formattedDate.getMonth()+1;
-							if( m<10){
-								m= "0"+m;
-							}
-							var y = formattedDate.getFullYear();
-							
-							var h = formattedDate.getHours();
-							if( h<10){
-								h= "0"+h;
-							}
-							var mi = formattedDate.getMinutes();
-							if( mi<10){
-								mi= "0"+mi;
-							}
-							
-							var s = formattedDate.getSeconds();
-							if( s<10){
-								s= "0"+s;
-							}
-							var payDate = y+"/"+m+"/"+d+"<br>"+h+":"+mi+":"+s;
-							
-							$("tbody tr").eq(i).append("<td><span class='payTime'>"+payDate+"</span></td>");
-							$("tbody tr").eq(i).append("<td><span class='payMenu'>"+list.payMenu+"</span></td>");
-							$("tbody tr").eq(i).append("<td><span class='payPrice'>"+list.payPrice.toLocaleString()+"</span>원</td>");
-							$("tbody tr").eq(i).append("<td><span class='payDiscountInfo'>"+list.payDiscountInfo+"</span></td>");
-							$("tbody tr").eq(i).append("<td><span class='payDiscountPrice'>"+list.payDiscountPrice+"</span>원</td>");
-							if(list.payType==1){
-								$("tbody tr").eq(i).append("<td><span class='payType'>현금</span></td>");
-							}else{
-								$("tbody tr").eq(i).append("<td><span class='payType'>카드</span></td>");
-							}
-							
-							$("tbody tr").eq(i).append("<td><span class='payMember'>"+list.payMember+"</span></td>");
-							if(list.payCancel==1){
-								$("tbody tr").eq(i).append("<td><span class='payCancel'>취소</span></td>");
-							}else{
-								$("tbody tr").eq(i).append("<td><span class='payCancel'>결제완료</span></td>");
-							}
-							
-							$("tbody tr").eq(i).append("<td><button class='cancel'>결제취소</button></td>");
-						}else{
-							$("tbody").append("<tr class='aa'>");
-							$("tbody tr").eq(i).append("<td><span class='payNo'>"+list.payNo+"</span><span class='payMemberNo'>"+list.payMemberNo+"</span></td>");
-							var formattedDate = new Date(list.payTime);
-							var d = formattedDate.getDate();
-							if( d<10){
-								d= "0"+d;
-							}
-							var m =  formattedDate.getMonth()+1;
-							if( m<10){
-								m= "0"+m;
-							}
-							var y = formattedDate.getFullYear();
-							
-							var h = formattedDate.getHours();
-							if( h<10){
-								h= "0"+h;
-							}
-							var mi = formattedDate.getMinutes();
-							if( mi<10){
-								mi= "0"+mi;
-							}
-							
-							var s = formattedDate.getSeconds();
-							if( s<10){
-								s= "0"+s;
-							}
-							var payDate = y+"/"+m+"/"+d+"<br>"+h+":"+mi+":"+s;
-							
-							$("tbody tr").eq(i).append("<td><span class='payTime'>"+payDate+"</span></td>");
-							$("tbody tr").eq(i).append("<td><span class='payMenu'>"+list.payMenu+"</span></td>");
-							$("tbody tr").eq(i).append("<td><span class='payPrice'>"+list.payPrice.toLocaleString()+"</span>원</td>");
-							$("tbody tr").eq(i).append("<td><span class='payDiscountInfo'>"+list.payDiscountInfo+"</span></td>");
-							$("tbody tr").eq(i).append("<td><span class='payDiscountPrice'>"+list.payDiscountPrice+"</span>원</td>");
-							if(list.payType==1){
-								$("tbody tr").eq(i).append("<td><span class='payType'>현금</span></td>");
-							}else{
-								$("tbody tr").eq(i).append("<td><span class='payType'>카드</span></td>");
-							}
-							
-							$("tbody tr").eq(i).append("<td><span class='payMember'>"+list.payMember+"</span></td>");
-							if(list.payCancel==1){
-								$("tbody tr").eq(i).append("<td><span class='payCancel'>취소</span></td>");
-							}else{
-								$("tbody tr").eq(i).append("<td><span class='payCancel'>결제완료</span></td>");
-							}
-							
-							$("tbody tr").eq(i).append("<td><button class='cancel'>결제취소</button></td>");
-							
-						}
-						
-						
-					}
-				}
-			}) 
-			  }
-		});
 		
 		
 		
@@ -512,292 +525,23 @@ button {
 		})
 		
 		
-		 //년도,월별
-		 var now = new Date();
-       var nyear = now.getFullYear();
-       var nmon = (now.getMonth()+1) > 9 ? ''+(now.getMonth()+1) : '0'+(now.getMonth()+1);            
-       
-       //년도 selectbox만들기               
-       $("#fd_year").append("<option value='100'>년도를 선택해주세요</option>");
-       
-       for(var sy = 2002 ; sy <= nyear ; sy++) {
-           $('#fd_year').append('<option value="'+sy+'">' + sy + '년</option>');    
-       }
-
-       // 월별 selectbox 만들기            
-        $("#fd_month").append("<option value='100'>월을 선택해주세요</option>");
-       for(var i=1; i <= 12; i++) {
-           var sm = i > 9 ? i : "0"+i ;            
-           $('#fd_month').append('<option value="'+sm+'">' + sm + '월</option>');    
-        }            
-       
-       $("#fd_year  > option[value='100'").attr("selected", "true");    
-       $("#fd_month  > option[value='100'").attr("selected", "true");   
-		
-       $("#search").click(function() { //조회 버튼 클릭시
-    	   $("#datepicker").val("");
-       		var y =$("#fd_year").val();
-       		var m =$("#fd_month").val();
-       		if(y==100){
-       			alert("년도를 선택해주세요.")
-       		}else if(y!=100 && m==100){ //년도별 검색,월x
-       			$.ajax({
-    				url:"${pageContext.request.contextPath }/mgn/saleListDate.do",
-    				type:"get",
-    				data : {"date":y},
-    				dataType:"json",
-    				success:function(json){
-    					console.log(json);
-    					$("tbody").empty();
-    					if(json.list.length==0){
-    						alert("조회조건에 맞는 내역이 없습니다.");
-    						return false;
-    					}
-    					for(var i=0; i<json.list.length; i++){
-    						var list=json.list[i];
-    						if(list.payCancel==1){
-    							$("tbody").append("<tr class='bb'>");
-    							$("tbody tr").eq(i).append("<td><span class='payNo'>"+list.payNo+"</span><span class='payMemberNo'>"+list.payMemberNo+"</span></td>");
-    							var formattedDate = new Date(list.payTime);
-    							var d = formattedDate.getDate();
-    							if( d<10){
-    								d= "0"+d;
-    							}
-    							var m =  formattedDate.getMonth()+1;
-    							if( m<10){
-    								m= "0"+m;
-    							}
-    							var y = formattedDate.getFullYear();
-    							
-    							var h = formattedDate.getHours();
-    							if( h<10){
-    								h= "0"+h;
-    							}
-    							var mi = formattedDate.getMinutes();
-    							if( mi<10){
-    								mi= "0"+mi;
-    							}
-    							
-    							var s = formattedDate.getSeconds();
-    							if( s<10){
-    								s= "0"+s;
-    							}
-    							var payDate = y+"/"+m+"/"+d+"<br>"+h+":"+mi+":"+s;
-    							
-    							$("tbody tr").eq(i).append("<td><span class='payTime'>"+payDate+"</span></td>");
-    							$("tbody tr").eq(i).append("<td><span class='payMenu'>"+list.payMenu+"</span></td>");
-    							$("tbody tr").eq(i).append("<td><span class='payPrice'>"+list.payPrice.toLocaleString()+"</span>원</td>");
-    							$("tbody tr").eq(i).append("<td><span class='payDiscountInfo'>"+list.payDiscountInfo+"</span></td>");
-    							$("tbody tr").eq(i).append("<td><span class='payDiscountPrice'>"+list.payDiscountPrice+"</span>원</td>");
-    							if(list.payType==1){
-    								$("tbody tr").eq(i).append("<td><span class='payType'>현금</span></td>");
-    							}else{
-    								$("tbody tr").eq(i).append("<td><span class='payType'>카드</span></td>");
-    							}
-    							
-    							$("tbody tr").eq(i).append("<td><span class='payMember'>"+list.payMember+"</span></td>");
-    							if(list.payCancel==1){
-    								$("tbody tr").eq(i).append("<td><span class='payCancel'>취소</span></td>");
-    							}else{
-    								$("tbody tr").eq(i).append("<td><span class='payCancel'>결제완료</span></td>");
-    							}
-    							
-    							$("tbody tr").eq(i).append("<td><button class='cancel'>결제취소</button></td>");
-    						}else{
-    							$("tbody").append("<tr class='aa'>");
-    							$("tbody tr").eq(i).append("<td><span class='payNo'>"+list.payNo+"</span><span class='payMemberNo'>"+list.payMemberNo+"</span></td>");
-    							var formattedDate = new Date(list.payTime);
-    							var d = formattedDate.getDate();
-    							if( d<10){
-    								d= "0"+d;
-    							}
-    							var m =  formattedDate.getMonth()+1;
-    							if( m<10){
-    								m= "0"+m;
-    							}
-    							var y = formattedDate.getFullYear();
-    							
-    							var h = formattedDate.getHours();
-    							if( h<10){
-    								h= "0"+h;
-    							}
-    							var mi = formattedDate.getMinutes();
-    							if( mi<10){
-    								mi= "0"+mi;
-    							}
-    							
-    							var s = formattedDate.getSeconds();
-    							if( s<10){
-    								s= "0"+s;
-    							}
-    							var payDate = y+"/"+m+"/"+d+"<br>"+h+":"+mi+":"+s;
-    							
-    							$("tbody tr").eq(i).append("<td><span class='payTime'>"+payDate+"</span></td>");
-    							$("tbody tr").eq(i).append("<td><span class='payMenu'>"+list.payMenu+"</span></td>");
-    							$("tbody tr").eq(i).append("<td><span class='payPrice'>"+list.payPrice.toLocaleString()+"</span>원</td>");
-    							$("tbody tr").eq(i).append("<td><span class='payDiscountInfo'>"+list.payDiscountInfo+"</span></td>");
-    							$("tbody tr").eq(i).append("<td><span class='payDiscountPrice'>"+list.payDiscountPrice+"</span>원</td>");
-    							if(list.payType==1){
-    								$("tbody tr").eq(i).append("<td><span class='payType'>현금</span></td>");
-    							}else{
-    								$("tbody tr").eq(i).append("<td><span class='payType'>카드</span></td>");
-    							}
-    							
-    							$("tbody tr").eq(i).append("<td><span class='payMember'>"+list.payMember+"</span></td>");
-    							if(list.payCancel==1){
-    								$("tbody tr").eq(i).append("<td><span class='payCancel'>취소</span></td>");
-    							}else{
-    								$("tbody tr").eq(i).append("<td><span class='payCancel'>결제완료</span></td>");
-    							}
-    							
-    							$("tbody tr").eq(i).append("<td><button class='cancel'>결제취소</button></td>");
-    							
-    						}
-    						
-    						
-    					}
-    				}
-    			})       			
-       		}else if(y!=100 && m!=100){ //년도,월 같이
-       			var ym = y+"-"+m;
-       			$.ajax({
-    				url:"${pageContext.request.contextPath }/mgn/saleListDate.do",
-    				type:"get",
-    				data : {"date":ym},
-    				dataType:"json",
-    				success:function(json){
-    					console.log(json);
-    					
-    					$("tbody").empty();
-    					if(json.list.length==0){
-    						alert("조회조건에 맞는 내역이 없습니다.");
-    						return false;
-    					}
-    					for(var i=0; i<json.list.length; i++){
-    						var list=json.list[i];
-    						if(list.payCancel==1){
-    							$("tbody").append("<tr class='bb'>");
-    							$("tbody tr").eq(i).append("<td><span class='payNo'>"+list.payNo+"</span><span class='payMemberNo'>"+list.payMemberNo+"</span></td>");
-    							var formattedDate = new Date(list.payTime);
-    							var d = formattedDate.getDate();
-    							if( d<10){
-    								d= "0"+d;
-    							}
-    							var m =  formattedDate.getMonth()+1;
-    							if( m<10){
-    								m= "0"+m;
-    							}
-    							var y = formattedDate.getFullYear();
-    							
-    							var h = formattedDate.getHours();
-    							if( h<10){
-    								h= "0"+h;
-    							}
-    							var mi = formattedDate.getMinutes();
-    							if( mi<10){
-    								mi= "0"+mi;
-    							}
-    							
-    							var s = formattedDate.getSeconds();
-    							if( s<10){
-    								s= "0"+s;
-    							}
-    							var payDate = y+"/"+m+"/"+d+"<br>"+h+":"+mi+":"+s;
-    							
-    							$("tbody tr").eq(i).append("<td><span class='payTime'>"+payDate+"</span></td>");
-    							$("tbody tr").eq(i).append("<td><span class='payMenu'>"+list.payMenu+"</span></td>");
-    							$("tbody tr").eq(i).append("<td><span class='payPrice'>"+list.payPrice.toLocaleString()+"</span>원</td>");
-    							$("tbody tr").eq(i).append("<td><span class='payDiscountInfo'>"+list.payDiscountInfo+"</span></td>");
-    							$("tbody tr").eq(i).append("<td><span class='payDiscountPrice'>"+list.payDiscountPrice+"</span>원</td>");
-    							if(list.payType==1){
-    								$("tbody tr").eq(i).append("<td><span class='payType'>현금</span></td>");
-    							}else{
-    								$("tbody tr").eq(i).append("<td><span class='payType'>카드</span></td>");
-    							}
-    							
-    							$("tbody tr").eq(i).append("<td><span class='payMember'>"+list.payMember+"</span></td>");
-    							if(list.payCancel==1){
-    								$("tbody tr").eq(i).append("<td><span class='payCancel'>취소</span></td>");
-    							}else{
-    								$("tbody tr").eq(i).append("<td><span class='payCancel'>결제완료</span></td>");
-    							}
-    							
-    							$("tbody tr").eq(i).append("<td><button class='cancel'>결제취소</button></td>");
-    						}else{
-    							$("tbody").append("<tr class='aa'>");
-    							$("tbody tr").eq(i).append("<td><span class='payNo'>"+list.payNo+"</span><span class='payMemberNo'>"+list.payMemberNo+"</span></td>");
-    							var formattedDate = new Date(list.payTime);
-    							var d = formattedDate.getDate();
-    							if( d<10){
-    								d= "0"+d;
-    							}
-    							var m =  formattedDate.getMonth()+1;
-    							if( m<10){
-    								m= "0"+m;
-    							}
-    							var y = formattedDate.getFullYear();
-    							
-    							var h = formattedDate.getHours();
-    							if( h<10){
-    								h= "0"+h;
-    							}
-    							var mi = formattedDate.getMinutes();
-    							if( mi<10){
-    								mi= "0"+mi;
-    							}
-    							
-    							var s = formattedDate.getSeconds();
-    							if( s<10){
-    								s= "0"+s;
-    							}
-    							var payDate = y+"/"+m+"/"+d+"<br>"+h+":"+mi+":"+s;
-    							
-    							$("tbody tr").eq(i).append("<td><span class='payTime'>"+payDate+"</span></td>");
-    							$("tbody tr").eq(i).append("<td><span class='payMenu'>"+list.payMenu+"</span></td>");
-    							$("tbody tr").eq(i).append("<td><span class='payPrice'>"+list.payPrice.toLocaleString()+"</span>원</td>");
-    							$("tbody tr").eq(i).append("<td><span class='payDiscountInfo'>"+list.payDiscountInfo+"</span></td>");
-    							$("tbody tr").eq(i).append("<td><span class='payDiscountPrice'>"+list.payDiscountPrice+"</span>원</td>");
-    							if(list.payType==1){
-    								$("tbody tr").eq(i).append("<td><span class='payType'>현금</span></td>");
-    							}else{
-    								$("tbody tr").eq(i).append("<td><span class='payType'>카드</span></td>");
-    							}
-    							
-    							$("tbody tr").eq(i).append("<td><span class='payMember'>"+list.payMember+"</span></td>");
-    							if(list.payCancel==1){
-    								$("tbody tr").eq(i).append("<td><span class='payCancel'>취소</span></td>");
-    							}else{
-    								$("tbody tr").eq(i).append("<td><span class='payCancel'>결제완료</span></td>");
-    							}
-    							
-    							$("tbody tr").eq(i).append("<td><button class='cancel'>결제취소</button></td>");
-    							
-    						}
-    						
-    						
-    					}
-    				}
-    			})
-       		}
-       })
+	
 		
 	})
 </script>
 <div class="s_visu1"></div>
 
 <h2>결제 현황</h2>
-<div id="wrap">
-
-	<div id="sub">
+<div id="sub">
 		<p id="selDate">
-			<label>날짜 선택: </label><input type="text" id="datepicker">
-			<select id="fd_year" name="fd_year" style="width:130px;"></select>    
-          	 <select id="fd_month" name="fd_month" style="width:130px;"></select> 
-          	 <button id="search">조회</button>   
+		<input type="text" name="date" class="selectList" autocomplete="off"> ~ <input type="text" name="date2" class="selectList" autocomplete="off"> <button id="btnDate">날짜로검색</button>
 			<button id="all">전체보기</button>
-		</p>
+		</p>  
 
 	</div>
+<div id="wrap">
+
+	
 
 	<table id="saleList" class="display">
 		<thead>

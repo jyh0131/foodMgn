@@ -1,6 +1,7 @@
 package kr.or.yi.foodMgn.daoImpl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -25,9 +26,16 @@ public class SalesStatusDaoImpl implements SalesStatusDao {
 	}
 
 	@Override
+	public List<SalesStatus> selectSalesStatusByDateRange(Map<String, Object> map) {
+		try(SqlSession sqlSession = MybatisSqlSessionFactory.openSession()) {
+			return sqlSession.selectList(namespace + "selectSalesStatusByDateRange",map);
+		}
+	}
+			@Override
 	public List<SalesStatus> selectSalesStatusByFive() {
 		try(SqlSession sqlSession = MybatisSqlSessionFactory.openSession()) {
 			return sqlSession.selectList(namespace + "selectSalesStatusByFive");
+
 		}
 	}
 

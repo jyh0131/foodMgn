@@ -16,13 +16,23 @@ a {
 
 @media all and (max-width:767px) {
 	header {
-		background-color: white;
+		background-color: #1b1916;
+		
+	}
+	#header {
+		height: 50px; 
+		background: url("../images/include/f_logo.gif") no-repeat;
+	}
+	.sns {
+		display: inline-block;
+		float: left;
+	}
+	#head1_2 {
+		display: none;
 	}
 	#head2 {
 		display: none;
 	}
-
-	
 	.footer{
 		display: none;	
 	}

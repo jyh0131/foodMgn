@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1"> 
 <title>음식점 관리 프로그램</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/common_mgn.css" type="text/css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/jquery-ui.css">

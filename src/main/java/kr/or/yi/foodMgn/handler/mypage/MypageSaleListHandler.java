@@ -28,12 +28,14 @@ public class MypageSaleListHandler implements CommandHandler {
 			return "/WEB-INF/view/mypage/mypay.jsp";
 		}else if(req.getMethod().equalsIgnoreCase("post")) {
 			String date = req.getParameter("date");
+			String date2 = req.getParameter("date2");
 			
 			if(date!=null) {
 				Map<String, Object> map2 = new HashMap<>();
 				map2.put("no", no);
 				map2.put("date", date);
-				List<Payment> list = dao.selectPaymentByDate2(map2);
+				map2.put("date2", date2);
+				List<Payment> list = dao.selectPaytmentByDateRange2(map2);
 				Map<String, List<Payment>> map = new HashMap<>();
 				map.put("list", list);
 				

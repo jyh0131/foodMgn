@@ -40,6 +40,9 @@ public class SaleListService {
 	public List<Payment> selectPaymentByDate(String date){
 		return dao.selectPaymentByDate(date);
 	}
+	public List<Payment> selectPaytmentByDateRange(Map<String,Object> map){
+		return dao.selectPaytmentByDateRange(map);
+	}
 	
 	public int updateSaleByCancel(Map<String,Integer> map) {
 		return dao2.updateSaleByCancel(map);
@@ -52,6 +55,8 @@ public class SaleListService {
 	public int updateGrade(Member mem) {
 		return dao3.updateGrade(mem);
 	}
+	
+
 	
 	public void updateCancelUpdateMileageCoupon(Map<String,Integer> map,Member member,Map<String, Object> map2) {
 		int resUpdateMileage= 0;
