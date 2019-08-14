@@ -268,6 +268,13 @@
 					$("table").empty();
 					$("table").append("<tr><th id='foodKind'>음식종류</th><th>사진</th><th id='foodNo'>음식번호</th><th id='foodName'>음식명</th><th id='foodPrice'>가격</th><th id='update'></th></tr>");
 					
+					if($(res.content).length == 0) {
+						alert("조회된 결과가 없습니다");
+						$("input[name='fdname']").val("");
+						$("select[name='fk2']").val("음식종류선택");
+						return false;
+					}
+					
 					$(res.content).each(function(i, obj) {
 						var $tr = $("<tr>");
 						var $img = $("<img>").attr("src", "${pageContext.request.contextPath}/images/food/"+obj.fdName+".png");
@@ -290,6 +297,48 @@
 			/* $("input[name='fdname']").val("");
 			$("select[name='fk2']").val("음식종류선택"); */
 			return false;
+		})
+		
+		
+		$("select[name='fk2']").change(function() {
+			var selVar = $(this).val();
+			
+			$.ajax({
+				url:"${pageContext.request.contextPath}/mgn/menuMgnsearch.do",
+				type:"post",
+				data:{"fdname":$("input[name='fdname']").val(), "fkname":$("select[name='fk2']").val()},
+				dataType:"json",
+				success: function(res) {
+					console.log(res);
+					
+					$("table").empty();
+					$("table").append("<tr><th id='foodKind'>음식종류</th><th>사진</th><th id='foodNo'>음식번호</th><th id='foodName'>음식명</th><th id='foodPrice'>가격</th><th id='update'></th></tr>");
+					
+					if($(res.content).length == 0) {
+						alert("조회된 결과가 없습니다");
+						$("input[name='fdname']").val("");
+						$("select[name='fk2']").val("음식종류선택");
+						return false;
+					}
+					
+					$(res.content).each(function(i, obj) {
+						var $tr = $("<tr>");
+						var $img = $("<img>").attr("src", "${pageContext.request.contextPath}/images/food/"+obj.fdName+".png");
+						var $fdImg = $("<td>").append($img);
+						var $fkname = $("<td>").text(obj.fkNo.fkName);
+						var $fdno = $("<td>").text(obj.fdNo);
+						var $fdname = $("<td>").text(obj.fdName);
+						var $fdprice = $("<td>").text(obj.fdPrice.toLocaleString()+"원");
+						var $lasttd = $("<td>");
+						var $button = $("<button class='update' data-no='"+obj.fdNo+"'>수정</button> <button class='delete' data-no='"+obj.fdNo+"'>삭제</button>");
+						
+						$lasttd.append($button);
+						$tr.append($fkname).append($fdImg).append($fdno).append($fdname).append($fdprice).append($lasttd);
+						$("table").append($tr);
+					})
+					
+				}
+			})
 		})
 		
 		$(document).on("click", ".delete", function() {

@@ -90,7 +90,37 @@
 		overflow: hidden;
 	}
 </style>
+<script>
+	$(function() {
+		$("#pre_btn").click(function() {
+			var no = $("#pre_btn").attr("data-no");
+			
+			$.ajax({
+	            url:"${pageContext.request.contextPath}/noticeDetail.do?no="+no,
+	            type:"post",
+	            data:{"nNo":no},
+	            dataType:"json",
+	            success: function(res) {
+	               console.log(res);
+	               
+	               $("#div1").empty();
+	               $("#div2").empty();
+	               $("#div3 .right").empty();
+	               $("#div4").empty();
+	               
+	               
+	               var rDate = new Date(res.noRegdate);
+	               var $span = $("<span>").text("작성일 : " + res.noRegdate);
 
+	               $("#div1").append($span);
+	               $("#div2").text(res.noTitle);
+	               $("#div3 .right").text(res.noReadNt);
+	               $("#div4").text(res.noContent);
+	            }
+	         })
+		})
+	})
+</script>
 	<div class="sub">
 		<div class="s_visu1">
 			<img src="${pageContext.request.contextPath}/images/community/sub05_visu.jpg">
@@ -120,12 +150,11 @@
 				</div>
 				<div id="div4">
 					${fn:replace(notice.noContent,cn,br)}
-					
 				</div>
 				<div id="div5">
 					<div class="left">
-						<a href=""><button>이전글</button></a>
-						<a href=""><button>다음글</button></a>
+						<button id="pre_btn" data-no="${(notice.noNo-1)}">이전글</button>
+						<button id="next_btn" data-no="${(notice.noNo+1)}">다음글</button>
 					</div>
 					<div class="right">
 						<a href="${pageContext.request.contextPath}/notice.do"><button>목록</button></a>

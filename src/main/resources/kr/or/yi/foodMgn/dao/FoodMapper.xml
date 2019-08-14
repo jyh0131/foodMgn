@@ -64,7 +64,7 @@
 	</select>
 	
 	<select id="selectByFkNo2" resultMap="resultFoodBJY" parameterType="map">
-		select f.fd_no, f.fd_name, f.fd_price, f.fk_no, fk.fk_name, f.fd_withdrawal, f.fd_img from food f join foodkind fk on f.fk_no = fk.fk_no where f.fk_no= #{fkNo} limit #{startRow}, #{size}
+		select f.fd_no, f.fd_name, f.fd_price, f.fk_no, fk.fk_name, f.fd_withdrawal, f.fd_img from food f join foodkind fk on f.fk_no = fk.fk_no where f.fk_no= #{no} limit #{startRow}, #{size}
 	</select>
 	
 	<select id="selectByNameAndFkNo" resultMap="resultFoodBJY" parameterType="map">

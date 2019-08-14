@@ -63,11 +63,16 @@ public class MenuMgnSearchHandler implements CommandHandler {
 				FoodKind fk = new FoodKind(fkname);
 				int fkNo = fkdao.selectByName(fk).getFkNo();
 				
-				map.put("fkNo", fkNo);
+				System.out.println(fkNo);
+				
+				map.put("no", fkNo);
 				map.put("startRow", (page-1)*10);
 				map.put("size", 10);
 				
 				List<Food> list = dao.selectByFkNo2(map);
+				
+				System.out.println(map);
+				
 				int totalCount = dao.selectTotalCount();
 				
 				System.out.println(list);
@@ -89,7 +94,7 @@ public class MenuMgnSearchHandler implements CommandHandler {
 				FoodKind fk = new FoodKind(fkname);
 				int fkNo = fkdao.selectByName(fk).getFkNo();
 				
-				map.put("fkNo", fkNo);
+				map.put("no", fkNo);
 				map.put("fdName", fdname);
 				map.put("startRow", (page-1)*10);
 				map.put("size", 10);
