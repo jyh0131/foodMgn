@@ -32,6 +32,7 @@
 		position: relative;
 		cursor: pointer;
 		float: left;
+		margin-bottom:40px;
 	}
 	#menu_li2 {
 		float: right;                 
@@ -55,6 +56,7 @@
 		position: absolute;
 		top: 46px;
 		left: -1px;
+		z-index: 3;
 	}
 	#menulist li {
 		border: 1px solid #887c75;
@@ -78,7 +80,6 @@
 		color:#55423b;
 		clear: both;
 		text-align: center;
-		padding-top:20px;
 		padding-bottom:40px;
 		border-bottom:2px solid #55423b;
 		position: relative;                   
@@ -177,10 +178,10 @@
 				return;
 			}
 		})
-		$("a").mouseover(function(){
+		$(".underLine").mouseover(function(){
 			$(this).css("text-decoration", "underline");
 		})
-		$("a").mouseout(function(){
+		$(".underLine").mouseout(function(){
 			$(this).css("text-decoration", "none");
 		})
 		
@@ -196,6 +197,85 @@
 			
 		}, 500)
 		
+		$("#ingEvent").click(function(){
+			
+			$.ajax({
+				url : "${pageContext.request.contextPath }/event.do",
+				type : "post",
+				data : {"current" : "ing"},
+				dataType: "json",
+				success : function(json){
+					console.log(json);
+					
+					$(".listTr").remove();
+					$(json.content).each(function(i, obj){
+						var $tr = $("<tr class='listTr'>");
+						var $td = $("<td class='eNo'>");
+						var $td2 = $("<td class='eTitle'>");
+						var $a = $('<a href="#" class="underLine">');
+						var $td3 = $('<td class="eName">');
+						var $td4 = $('<td class="eDate">');
+						var $td5 = $('<td class="eCun">');
+						$td.html(obj.eNo);
+						$a.attr("href", "eventDetail.do?no="+obj.eNo+"");
+						$a.html(obj.eTitle);
+						$td2.html($a);
+						$td3.html(obj.eName);
+						
+						var date = new Date(obj.eStartDate);
+						var date2 = new Date(obj.eEndDate);
+						
+						$td4.html(date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()+" ~ "+date2.getFullYear()+"-"+(date2.getMonth()+1)+"-"+date2.getDate());
+						$td5.html("<span class='ing'>진행중</span>");
+						
+						$tr.append($td).append($td2).append($td3).append($td4).append($td5);
+						$("table").append($tr);
+						
+					})
+					
+				}
+				
+			})
+		})
+		
+		$("#endEvent").click(function(){
+			
+			$.ajax({
+				url : "${pageContext.request.contextPath }/event.do",
+				type : "post",
+				data : {"current" : "end"},
+				dataType: "json",
+				success : function(json){
+					console.log(json);
+					
+					$(".listTr").remove();
+					$(json.content).each(function(i, obj){
+						var $tr = $("<tr class='listTr'>");
+						var $td = $("<td class='eNo'>");
+						var $td2 = $("<td class='eTitle'>");
+						var $a = $('<a href="#" class="underLine">');
+						var $td3 = $('<td class="eName">');
+						var $td4 = $('<td class="eDate">');
+						var $td5 = $('<td class="eCun">');
+						$td.html(obj.eNo);
+						$a.attr("href", "eventDetail.do?no="+obj.eNo+"");
+						$a.html(obj.eTitle);
+						$td2.html($a);
+						$td3.html(obj.eName);
+						
+						var date = new Date(obj.eStartDate);
+						var date2 = new Date(obj.eEndDate);
+						
+						$td4.html(date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()+" ~ "+date2.getFullYear()+"-"+(date2.getMonth()+1)+"-"+date2.getDate());
+						$td5.html("<span class='end'>마감</span>");
+						
+						$tr.append($td).append($td2).append($td3).append($td4).append($td5);
+						$("table").append($tr);
+					})
+				}
+				
+			})
+		})
 	})
 </script>
 	<div class="s_visu1">
@@ -206,8 +286,8 @@
 				<span class="li_name">진행중인 이벤트</span>
 				<span class="li_img"></span>
 				<ul id="menulist">
-					<li>진행중인 이벤트</li>
-					<li>지난 이벤트</li>
+					<li id="ingEvent">진행중인 이벤트</li>
+					<li id="endEvent">지난 이벤트</li>
 				</ul>
 			</div>
 			<div id="menu_li2">
@@ -229,9 +309,9 @@
 					<th>진행상태</th>
 				</tr>
 			<c:forEach var="event" items="${eventPage.content }">
-				<tr>
+				<tr class="listTr">
 					<td class="eNo">${event.eNo }</td>
-					<td class="eTitle"><a href="eventDetail.do?no=${event.eNo }">${event.eTitle }</a></td>
+					<td class="eTitle"><a href="eventDetail.do?no=${event.eNo }" class="underLine">${event.eTitle }</a></td>
 					<td class="eName">${event.eName }</td>
 					<td class="eDate">
 					<fmt:formatDate value="${event.eStartDate}" pattern="yyyy-MM-dd"/> ~ <fmt:formatDate value="${event.eEndDate}" pattern="yyyy-MM-dd"/>
@@ -247,16 +327,16 @@
 				</tr>
 			</c:forEach>
 			</table>
-			<div id="pagediv">
+				<div id="pagediv">
 					<c:if test="${eventPage.startPage > 10}">
 						<a href="event.do?page=${eventPage.startPage - 1}" class="pn">&lt;&lt;</a>
 					</c:if>
 					<c:forEach var="pNo" begin="${eventPage.startPage}" end="${eventPage.endPage}">
 						<c:if test="${eventPage.currentPage == pNo}">
-							<a href="event.do?page=${pNo}" class="current">${pNo}</a>
+							<a href="event.do?page=${pNo}" class="current underLine">${pNo}</a>
 						</c:if>
 						<c:if test="${eventPage.currentPage != pNo}">
-							<a href="event.do?page=${pNo}">${pNo}</a>
+							<a href="event.do?page=${pNo}"  class="underLine">${pNo}</a>
 						</c:if>
 					</c:forEach>
 					<c:if test="${eventPage.endPage < eventPage.totalPages}">

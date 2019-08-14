@@ -10,6 +10,14 @@
 		select * from event order by e_no desc limit #{startRow}, #{size}
 	</select>
 	
+	<select id="selectIngListPage" resultType="Event" parameterType="map">
+		select * from event where e_ing = 1 order by e_no desc limit #{startRow}, #{size}
+	</select>
+	
+	<select id="selectEndListPage" resultType="Event" parameterType="map">
+		select * from event where e_ing = 0 order by e_no desc limit #{startRow}, #{size}
+	</select>
+	
 	<select id="selectTotalCount" resultType="java.lang.Integer">
 		select count(e_no) from event
 	</select>
