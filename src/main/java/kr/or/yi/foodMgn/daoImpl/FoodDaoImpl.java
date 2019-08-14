@@ -108,7 +108,7 @@ public class FoodDaoImpl implements FoodDao {
 	@Override
 	public List<Food> selectByFkNo2(Map<String, Object> map) {
 		try(SqlSession sqlSession = MybatisSqlSessionFactory.openSession()) {
-			return sqlSession.selectList(namespace + ".selectByFkNo", map);
+			return sqlSession.selectList(namespace + ".selectByFkNo2", map);
 		}
 	}
 
