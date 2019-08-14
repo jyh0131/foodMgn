@@ -218,10 +218,41 @@
 	        	alert("가격을 잘못 입력하셨습니다.");
 	        	return false;
 	        }
+	        
+	        $.ajax({
+	            url:"${pageContext.request.contextPath}/mgn/menuMgninsert.do",
+	            type:"post",
+	            data:{"name":$("input[name='name']").val(), "fkname":$("select[name='fk']").val(), "price":$("input[name='price']").val()},
+	            dataType:"json",
+	            success: function(res) {
+	               console.log(res);
+	               
+	               $("table").empty();
+				   $("table").append("<tr><th id='foodKind'>음식종류</th><th>사진</th><th id='foodNo'>음식번호</th><th id='foodName'>음식명</th><th id='foodPrice'>가격</th><th id='update'></th></tr>");
+				   
+	               $(res.content).each(function(i, obj) {
+	            	   var $tr = $("<tr>");
+						var $img = $("<img>").attr("src", "${pageContext.request.contextPath}/images/food/"+obj.fdName+".png");
+						var $fdImg = $("<td>").append($img);
+						var $fkname = $("<td>").text(obj.fkNo.fkName);
+						var $fdno = $("<td>").text(obj.fdNo);
+						var $fdname = $("<td>").text(obj.fdName);
+						var $fdprice = $("<td>").text(obj.fdPrice.toLocaleString()+"원");
+						var $lasttd = $("<td>");
+						var $button = $("<button class='update' data-no='"+obj.fdNo+"'>수정</button> <button class='delete' data-no='"+obj.fdNo+"'>삭제</button>");
+						
+						$lasttd.append($button);
+						$tr.append($fkname).append($fdImg).append($fdno).append($fdname).append($fdprice).append($lasttd);
+						$("table").append($tr);
+	               })
+	            }
+	         })
+	         
+	         return false;
 		})
 		
 		$("#f2").submit(function() {
-			if($("input[name='fdname']").val() == "") {
+			if($("input[name='fdname']").val() == "" && $("select[name='fk2']").val() == "음식종류선택") {
 				alert("검색할 음식명을 입력하세요.");
 	            return false;
 	        }
@@ -229,7 +260,7 @@
 			$.ajax({
 				url:"${pageContext.request.contextPath}/mgn/menuMgnsearch.do",
 				type:"post",
-				data:{"fdname":$("input[name='fdname']").val()},
+				data:{"fdname":$("input[name='fdname']").val(), "fkname":$("select[name='fk2']").val()},
 				dataType:"json",
 				success: function(res) {
 					console.log(res);
@@ -255,6 +286,8 @@
 				}
 			})
 			
+			/* $("input[name='fdname']").val("");
+			$("select[name='fk2']").val("음식종류선택"); */
 			return false;
 		})
 		
@@ -338,6 +371,9 @@
 		});
 		
 		$("#allList").click(function() {
+			$("input[name='fdname']").val("");
+			$("select[name='fk2']").val("음식종류선택");
+			
 			$.ajax({
 	            url:"${pageContext.request.contextPath}/mgn/menuMgnlist.do",
 	            type:"post",
@@ -397,6 +433,18 @@
 			<form action="${pageContext.request.contextPath}/mgn/menuMgnsearch.do" method="post" id="f2">
 				<input type="text" name="fdname" size="20" placeholder="검색할 음식명">
 				<input type="submit" value="검색">
+				<select name="fk2">
+					<option>음식종류선택</option>
+					<option>파스타</option>
+					<option>스테이크&커틀렛</option>
+					<option>필라프&리조또</option>
+					<option>샐러드</option>
+					<option>시그니처 피자</option>
+					<option>피자</option>
+					<option>사이드 메뉴</option>
+					<option>음료</option>
+					<option>맥주</option>
+				</select>
 			</form>
 			<table id="foodtable">
 				<tr>

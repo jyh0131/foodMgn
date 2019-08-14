@@ -59,5 +59,6 @@
 		<mapper resource="kr/or/yi/foodMgn/dao/ReservationMapper.xml"/>
 		<mapper resource="kr/or/yi/foodMgn/dao/MemberCouponMapper.xml"/>
 		<mapper resource="kr/or/yi/foodMgn/dao/NoticeMapper.xml"/>
+		<mapper resource="kr/or/yi/foodMgn/dao/EventMapper.xml"/>
 	</mappers>
 </configuration>

@@ -45,7 +45,8 @@
 	
 	<select id="selectMemberByTel" resultMap="resultMemberBJY" parameterType="Member">
 		<!-- select * from member where right(mb_tel,8) like concat('%',#{mbTel},'%') -->
-		select * from member where mb_tel like concat('%',#{mbTel},'%')
+		select m.mb_no, m.mb_name, mb_birth, mb_tel, mb_mileage, mb_grade, mb_address, group_concat(mc.cp_name) coupon, mb_withdrawal, mb_join, mb_count 
+		from member m left join member_coupon mc on m.mb_no = mc.mb_no left join coupon c on mc.cp_name = c.cp_name where mb_tel like concat('%',#{mbTel},'%')
 	</select>
 	
 	<update id="updateMember" parameterType="Member">
@@ -107,6 +108,7 @@
 		from member m left join member_coupon mc on m.mb_no = mc.mb_no left join coupon c on mc.cp_name = c.cp_name left join grade g on m.mb_grade = g.grade
 		where right(mb_tel,8) = #{mbTel} and mc.cp_use = 0 ;
 	</select>
+	
 	<select id="selectByMbNo" parameterType="Member" resultMap="resultMemberBJY">
 		select * from member where mb_no=#{mbNo}
 	</select>
@@ -120,7 +122,7 @@
 	</select>
 	
 	<select id="selectListPage" resultMap="resultMemberBJY" parameterType="map">
-		select m.mb_no, m.mb_name, mb_birth, mb_tel, mb_mileage, mb_grade, mb_address, group_concat(mc.cp_name) coupon, mb_withdrawal, mb_join
+		select m.mb_no, m.mb_name, mb_birth, mb_tel, mb_mileage, mb_grade, mb_address, group_concat(mc.cp_name) coupon, mb_withdrawal, mb_join, mb_count
 		from member m left join member_coupon mc on m.mb_no = mc.mb_no left join coupon c on mc.cp_name = c.cp_name
 		group by mb_no having not mb_no = 0 limit #{startRow}, #{size}
 	</select>
@@ -128,6 +130,10 @@
 	<select id="selectTotalCount" resultType="java.lang.Integer">
 		select count(mb_no) from member
 	</select>
+	
+	<update id="myPageUpdate" parameterType="Member">
+		update member set mb_name = #{mbName}, mb_tel = #{mbTel}, mb_address = #{mbAddress} where mb_no = #{mbNo};
+	</update>
 </mapper>
 
 

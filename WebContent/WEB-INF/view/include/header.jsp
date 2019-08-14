@@ -153,6 +153,7 @@
 								<a href="${pageContext.request.contextPath}/notice.do">COMMUNITY</a>
 								<ul class="submenu">
 									<li><a href="${pageContext.request.contextPath}/notice.do">공지사항</a></li>
+									<li><a href="${pageContext.request.contextPath}/event.do">이벤트</a></li>
 								</ul>
 							</li>
 						</ul>

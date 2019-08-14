@@ -21,11 +21,12 @@ public class MenuMgnUpdateHandler implements CommandHandler {
 		int fNo = Integer.parseInt(req.getParameter("fNo"));
 		String str_price = req.getParameter("uprice");
 		
-		Food food = new Food(fNo);
+		Food f = new Food(fNo);
 		FoodDao dao = new FoodDaoImpl();
+		Food food = dao.selectByFdNo(f);
 		int price = food.getFdPrice();;
 		
-		if(str_price != "") {
+		if(!(str_price.equals(""))) {
 			price = Integer.parseInt(str_price);
 		}
 		

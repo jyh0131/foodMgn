@@ -36,7 +36,13 @@ public class JoinFormHandler implements CommandHandler {
 			String name = req.getParameter("name");
 			String tel = req.getParameter("tel");
 			String birth = req.getParameter("birth");
-			String addr = req.getParameter("addr");
+			String addr1 = req.getParameter("addr");
+			String addr2 = req.getParameter("addr2");
+			String addr3 = req.getParameter("addr3");
+			String addr4 = req.getParameter("addr4");
+			String addr = addr1 + " " + addr3 + addr4 + " (" + addr2 + " " + addr3 + ")";
+			
+			System.out.println(addr);
 			
 			SimpleDateFormat sdfm = new SimpleDateFormat("yyyy-MM-dd");
 			Date birthDate = sdfm.parse(birth);
