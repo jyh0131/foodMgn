@@ -20,11 +20,13 @@ a {
 		height: 50px;
 		position: relative;
 	}
-	#head1_1 {
+	#head1_1 > a{
+		display: inline-block;
+		width: 70%;
 		height: 50px; 
 		background-image: url("../images/include/logo2.png");
 		background-size: 150px 25px;
-		background-position: 50% 40%;
+		background-position: 52% 40%;
 		background-repeat: no-repeat;
 	}
 	.sns {
@@ -45,25 +47,26 @@ a {
 	}
 	.headMenu {
 		height: 50px;
+		display: inline-block;
+		float: right;
 	}
 	.headMenu img {
 		width: 50px;
 		height: 50px;
-		float: right;
 	}
 	.headUl {
 		width: 180px;
-		height: 100vh;
+		height: 1000px;
 		background-color: #3b2c2c;
 		position: absolute;
-		right: -200px;
+		right: 0;
 		top: 50px;
-		z-index: 100;
+		z-index: 10;
+		display: none;
 	}
-	.headUl li {
+	.headUl > ul > li {
 		height: 40px;
 		line-height: 40px;
-		padding-left: 20px;
 		background-image: url("../images/include/gnb_open.png");
 		background-size: 13px 8px;
 		background-position: 90% 50%;
@@ -73,6 +76,7 @@ a {
 	.headUl span {
 		color: white;
 		font-size: 0.9em;
+		margin-left: 20px;
 	}
 	#head1_2, #head2 {
 		display: none;
@@ -81,7 +85,19 @@ a {
 		clear: both;
 	}
 	.submenu {
+		width: 100%;
 		display: none;
+		background-color: #444;
+		position: absolute;
+	}
+	.submenu a {
+		display: block;
+		height: 35px;
+		line-height: 35px;
+		color: white;
+		font-size: 0.8em;
+		padding-left: 20px;
+		border-bottom: 1px solid #333;
 	}
 	
 	.footer{
@@ -121,9 +137,13 @@ a {
 	}
 	#head1 {
 		overflow: hidden;
+		position: relative;
 	}
 	#head1_1 {
 		float: left;
+	}
+	#head1_1 > a {
+		display: none;
 	}
 	.sns {
 		border: 1px solid #EAEAEA;
@@ -137,8 +157,9 @@ a {
 		display: none;
 	}
 	#head1_2 {
-		float: right;
-		margin-bottom: 35px;
+		position: absolute;
+		right: 0;
+		top: 10px;
 	}
 	#head1_2 li {
 		margin-right: 15px;
@@ -149,6 +170,9 @@ a {
 	}
 	#head1_2 a {
 		font-size: 0.8em;
+	}
+	#head2 {
+		margin-top: 35px;
 	}
 	#head2_1 {
 		float: left;
@@ -192,7 +216,7 @@ a {
 	}
 	.submenu {
 		display: none;
-		margin-top: 36px;
+		margin-top: 23px;
 		background-color: rgba(0,0,0,0.7);
 		width: 140%;
 		margin-left: -20px;

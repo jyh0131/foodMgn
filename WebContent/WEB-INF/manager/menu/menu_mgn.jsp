@@ -105,6 +105,7 @@
 	}
 	#f1 {
 		float: left;
+		padding: 10px;
 	}
 	#f2 {
 		float: right;
@@ -138,6 +139,11 @@
 	}
 	.pn {
 		margin: 0 5px;
+	}
+	
+	
+	fieldset {
+		display: none;
 	}
 </style>
 <script>
@@ -194,7 +200,7 @@
 			alert("수정할 수 없습니다.");
 		})
 		
-		$("#f1").submit(function() {
+		/* $("#f1").submit(function() {
 			if($("select[name='fk']").val() == "음식종류선택") {
 				alert("음식 종류를 선택하세요.");       
 				return false;
@@ -249,7 +255,11 @@
 	         })
 	         
 	         return false;
-		})
+		}) */
+		
+		/* $("#btnAdd").click(function() {
+			$("fieldset").css("display", "block");
+		}) */
 		
 		$("#f2").submit(function() {
 			if($("input[name='fdname']").val() == "" && $("select[name='fk2']").val() == "음식종류선택") {
@@ -458,7 +468,7 @@
 
 	<div id="wrap">
 		<div id="div"></div>
-		<%-- <fieldset>
+		<fieldset>
 			<legend> 음식추가 </legend>
 			<form action="${pageContext.request.contextPath}/mgn/menuMgninsert.do" method="post" id="f1">
 			<select name="fk">
@@ -477,8 +487,11 @@
 			<input type="text" name="price" size="5" placeholder="가격">
 			<input type="submit" value="추가">
 		</form>
-		</fieldset> --%>
+		</fieldset>
 		<div id="menuList">
+			<div id="f1">
+				<button id="btnAdd">음식추가</button>
+			</div>
 			<button id="allList">전체보기</button>
 			<form action="${pageContext.request.contextPath}/mgn/menuMgnsearch.do" method="post" id="f2">
 				<input type="text" name="fdname" size="20" placeholder="검색할 음식명">

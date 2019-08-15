@@ -98,19 +98,42 @@
 			
 		}) */
 		
-		$(".headMenu").click(function() {
+		$(".headMenu img").click(function() {
 			if($(".headMenu img").attr("src").indexOf("1") >= 0) {
 				$(".headMenu img").attr("src", "${pageContext.request.contextPath}/images/include/ico2.png");
-				$(".headUl").css("right", 0);
+				$(".headUl").css("display", "block");
 			}else {
 				$(".headMenu img").attr("src", "${pageContext.request.contextPath}/images/include/ico1.png");
-				$(".headUl").css("right", "-200px");
+				$(".headUl").css("display", "none");
 			}
 		})
 		
 		$(".headUl > ul > li").click(function() {
-			$(this).find(".submenu").css("display", "block");
+			$(".headUl > ul > li").not(this).find(".submenu").css("display", "none");
+			$(".headUl > ul > li").not(this).css("background-color", "#3b2c2c");
+			$(".headUl > ul > li").not(this).css("background-image", "url('${pageContext.request.contextPath}/images/include/gnb_open.png')");
+			
+			if($(this).css("background-image").indexOf("open") >= 0) {
+				$(this).find(".submenu").css("display", "block");
+				$(this).css("background-color", "#333");
+				$(this).css("background-image", "url('${pageContext.request.contextPath}/images/include/gnb_close.png')");
+			}else {
+				$(this).find(".submenu").css("display", "none");
+				$(this).css("background-color", "#3b2c2c");
+				$(this).css("background-image", "url('${pageContext.request.contextPath}/images/include/gnb_open.png')");
+			}
 		})
+		
+		/* $(".headUl > ul > li").hover(function() {
+			$(this).find(".submenu").css("display", "block");
+			$(this).css("background-color", "#444");
+			$(this).css("background-image", "url('${pageContext.request.contextPath}/images/include/gnb_close.png')");
+		}, function() {
+			$(this).find(".submenu").css("display", "none");
+			$(this).css("background-color", "#3b2c2c");
+			$(this).css("background-image", "url('${pageContext.request.contextPath}/images/include/gnb_open.png')");
+		}) */
+		
 	})
 </script>
 </head>
@@ -129,6 +152,7 @@
 								<img src="${pageContext.request.contextPath}/images/include/sns_insta.png">
 							</a>
 						</div>
+						<a href="${pageContext.request.contextPath}"></a>
 						<div class="headMenu">
 							<img src="${pageContext.request.contextPath}/images/include/ico1.png">
 						</div>

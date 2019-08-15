@@ -131,9 +131,10 @@
 						var $mbcount = $("<td>").text(obj.mbCount);
 						var $coupon;
 						$(obj.coupon).each(function(i, obj2) {
-							$coupon = $("<td>").text(obj2.cpName);
+							var cpName = obj2.cpName.replace(","," ").trim();
+							$coupon = $("<td>").text(cpName);
 						})
-						
+
 						$tr.append($mbno).append($mbname).append($mbbirth).append($mbtel).append($mbaddress).append($mbmileage).append($mbgrade).append($mbjoin).append($mbcount).append($coupon);
 						$("table").append($tr);
 					})
@@ -170,7 +171,8 @@
 						var $mbcount = $("<td>").text(obj.mbCount);
 						var $coupon;
 						$(obj.coupon).each(function(i, obj2) {
-							$coupon = $("<td>").text(obj2.cpName);
+							var cpName = obj2.cpName.replace(","," ").trim();
+							$coupon = $("<td>").text(cpName);
 						})
 						
 						$tr.append($mbno).append($mbname).append($mbbirth).append($mbtel).append($mbaddress).append($mbmileage).append($mbgrade).append($mbjoin).append($mbcount).append($coupon);
@@ -220,7 +222,7 @@
 							<td><fmt:formatDate value="${mlist.mbJoin}" pattern="yyyy년MM월dd일"/></td>
 							<td>${mlist.mbCount}</td>
 							<c:forEach var="cp" items="${mlist.coupon}">
-								<td>${cp.cpName}</td>
+								<td>${cp.cpName.replace(","," ").trim()}</td>
 							</c:forEach>
 						</tr>
 					</c:if>
@@ -236,7 +238,7 @@
 							<td><fmt:formatDate value="${mlist.mbJoin}" pattern="yyyy년MM월dd일"/></td>
 							<td>${mlist.mbCount}</td>
 							<c:forEach var="cp" items="${mlist.coupon}">
-								<td>${cp.cpName}</td>
+								<td>${cp.cpName.replace(","," ").trim()}</td>
 							</c:forEach>
 						</tr>
 					</c:if>

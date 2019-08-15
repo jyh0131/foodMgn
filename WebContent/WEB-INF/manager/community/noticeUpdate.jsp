@@ -2,6 +2,10 @@
     pageEncoding="UTF-8"%>
 
 <%@ include file="../../view/include/header_mgn.jsp" %>
+
+<script type="text/javascript" src="${pageContext.request.contextPath}/se2/js/HuskyEZCreator.js" charset="utf-8"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/se2/photo_uploader/plugin/hp_SE2M_AttachQuickPhoto.js" charset="utf-8"></script>
+
 <style>
 	#wrap {
 		min-height: 700px;
@@ -22,26 +26,52 @@
 	<div id="wrap">
 		<div id="div"></div>
 		<div id="noticeForm">
-			<form action="${pageContext.request.contextPath}/mgn/noticeMgnupdate.do" method="post" enctype="multipart/form-data">
-				${notice.noNo}
-				<input type="hidden" name="no" value="${notice.noNo}">
+			<form id="frm" action="${pageContext.request.contextPath}/mgn/noticeMgnupdate.do" method="post" enctype="multipart/form-data">
 				<p>
 					<label>제목</label>
 					<input type="text" name="title" value="${notice.noTitle}">
 				</p>
 				<p>
 					<label>내용</label>
-					<textarea rows="10" cols="100" name="content">${notice.noContent}</textarea>
+					<textarea rows="10" cols="100" name="content" id="ir1">${notice.noContent}</textarea>
 				</p>
 				<p>
-					<label>파일</label>
-					<input type="file" name="file">
-				</p>
-				<p>
-					<input type="submit" value="수정">
+					<input type="button" id="save" value="등록">
 				</p>
 			</form>
 		</div>
 	</div>
+
+<script>
+	var oEditors = [];
+	nhn.husky.EZCreator.createInIFrame({
+			oAppRef: oEditors,
+			elPlaceHolder: "ir1",    
+			sSkinURI: "${pageContext.request.contextPath}/se2/SmartEditor2Skin.html",	 
+			 fOnAppLoad : function(){
+	          //기존 저장된 내용의 text 내용을 에디터상에 뿌려주고자 할때 사용
+	         // oEditors.getById["ir1"].exec("PASTE_HTML", ["기존 DB에 저장된 내용을 에디터에 적용할 문구"]);
+	      },
+			fCreator: "createSEditor2"
+	});
+		
+	
+	// textArea에 이미지 첨부
+	 function pasteHTML(filepath){
+	     var sHTML = '<img src="${pageContext.request.contextPath}/se2/upload/'+filepath+'">';
+	     oEditors.getById["ir1"].exec("PASTE_HTML", [sHTML]);
+	 }
+	 
+	 $("#save").click(function(){
+			var a = confirm("등록하시겠습니까?");
+			if(a==true){
+				 oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []); // 에디터의 내용이 textarea에 적용.
+			     $("#frm").submit();
+			}else{
+				return false;
+			}
+		
+	 }); 
+</script>
 
 <%@ include file="../../view/include/footer.jsp" %>
