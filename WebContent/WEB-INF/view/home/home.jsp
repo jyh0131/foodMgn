@@ -4,6 +4,7 @@
 <%@ include file="../include/header.jsp" %>
 
 <style>
+@media screen and (min-width:768px){
 	#wrap {
 		width: 100%;
 		z-index: -100;
@@ -115,6 +116,9 @@
 		height:270px;
 		margin-right:10px;
 		background: url(images/main/s_b7_bg.gif) no-repeat;
+	}
+	#middleTopCenterMo{
+		display: none;
 	}
 	#middleTopCenter .bx-wrapper{
 		box-shadow: none;
@@ -347,6 +351,148 @@
 		height:117px;
 		padding:5px;
 	}
+	
+}
+
+
+
+
+@media all and (max-width:767px){
+	#wrap {
+		width: 95%;
+		z-index: -100;
+		position:relative;
+		padding:10px;
+		height:280px;
+	}
+	#wrap img{
+		height:250px;
+	}
+	#wrap div.bx-wrapper{
+		width:100%;
+		height:250px;
+		box-shadow: none;                                           
+	}
+	#wrap .bxslider{
+		width: 100%;
+	}
+	
+	#wrap .bxslider, .bx-wrapper {
+		border: none;
+	}
+	#wrap .bx-wrapper .bx-pager {
+    position: absolute;
+    bottom: 10px;
+    left:0;                          
+    }
+    #wrap .bx-wrapper .bx-pager.bx-default-pager a:hover,
+	#wrap .bx-wrapper .bx-pager.bx-default-pager a.active,
+	#wrap .bx-wrapper .bx-pager.bx-default-pager a:focus {
+ 	 	background: #4a83da;
+	}
+    #wrap .bx-wrapper .bx-controls-auto{
+   	display: none;
+  	  
+    }           
+    .main_img{
+    	width:100% !important;
+    }
+    
+ /*---------------------------------------------middle---------------------------------------------------------------*/
+ 
+ 	#middleContainer{
+		width:95%;
+		margin:0 auto;
+		overflow: hidden; 
+	 }
+	 #middleTop{
+	 	overflow: hidden; 
+	 	height:320px;
+	 }
+	 #middleTopLeft{
+	 	display: none;
+	 }
+	
+	#middleTopCenter{
+		display: none;
+	}
+	#middleTopCenterMo{
+		display:inline;
+		width: 100%;		
+		padding:0 10px;
+		position: relative;
+	}
+	
+	#middleTopCenterMo .bx-wrapper{
+		box-shadow: none;
+		background: none;
+	}
+	#middleTopCenterMo .bx-wrapper .bx-pager {
+    position: absolute;
+    bottom: 25px;
+    left:0;                          
+    }
+	
+	
+	
+	#middleTopRight{
+		display: none;
+	}
+	
+	
+	
+	#middleTop #openSchedule{
+		display: none;
+		
+	}
+	
+	
+   	 #middleSlider{
+   	 	position: relative;
+   	 	
+   	 }
+   	 #middleSlider div.bx-wrapper{
+   	 	margin-bottom:30px;
+   	 }
+   	 #content{
+   	 	display: none;
+   	 }
+   	 .backImg{
+   	 	width:100%;
+   	 	height:340px;
+   	 }
+   	 #back{
+   	 	background: url(images/main/f_visu1.jpg) center 0px no-repeat rgb(198, 216, 214);
+   	 }
+   	  #back2{
+   	 	background: url(images/main/f_visu2.jpg) center 0px no-repeat rgb(198, 216, 214);
+   	 }   
+   	  #back3{
+   	 	background: url(images/main/f_visu4.jpg) center 0px no-repeat rgb(198, 216, 214);
+   	 }   
+   	  #back4{
+   	 	background: url(images/main/f_visu5.jpg) center 0px no-repeat rgb(198, 216, 214);
+   	 }   
+   	  #back5{
+   	 	background: url(images/main/f_visu6.jpg) center 0px no-repeat rgb(198, 216, 214);
+   	 }   
+   	  #back6{
+   	 	background: url(images/main/f_visu7.jpg) center 0px no-repeat rgb(198, 216, 214);
+   	 }   
+   	  
+   	 
+   	 
+   	 
+   	 
+   	 #bottomContainer{
+		display: none;
+	 }
+	 
+	#middleBottom{
+		display: none;
+	}
+
+}
 </style>
 
 <script>
@@ -360,6 +506,14 @@
 						    /* page: true */
 		  });
 		 $('#salad').bxSlider({
+				auto: true,
+			    pause: 2000,
+			    pager: true,               
+			    controls: false
+			   
+		}); 
+		 
+		 $('#saladMo').bxSlider({
 				auto: true,
 			    pause: 2000,
 			    pager: true,               
@@ -447,6 +601,32 @@
 							<img src="${pageContext.request.contextPath}/images/food/${saleList.ssName }.png">
 						</div>	
 					</c:forEach>
+				</div>
+			</div>
+			
+			<div id="middleTopCenterMo" class="middleTop1">
+				<div id="saladMo">
+					<div>
+						<img src="${pageContext.request.contextPath}/images/main/mo_visual1.jpg">
+					</div>	
+					<div>
+						<img src="${pageContext.request.contextPath}/images/main/mo_visual2.jpg">
+					</div>
+					<div>
+						<img src="${pageContext.request.contextPath}/images/main/mo_visual3.jpg">
+					</div>
+					<div>
+						<img src="${pageContext.request.contextPath}/images/main/mo_visual4.jpg">
+					</div>
+					<div>
+						<img src="${pageContext.request.contextPath}/images/main/mo_visual5.jpg">
+					</div>
+					<div>
+						<img src="${pageContext.request.contextPath}/images/main/mo_visual6.jpg">
+					</div>
+					<div>
+						<img src="${pageContext.request.contextPath}/images/main/mo_visual7.jpg">
+					</div>
 				</div>
 			</div>
 			

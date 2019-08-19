@@ -190,7 +190,7 @@
 							<li>
 								<span>DELIVERY</span>
 								<ul class="submenu">
-									<li><a href="javascript:void(0);" id="reservation">예약하기</a></li>
+									<li><a href="#" id="reservation">예약하기</a></li>
 									<li><a href="${pageContext.request.contextPath}/search.do" id="searchRsv">예약조회</a></li>
 								</ul>
 							</li>
