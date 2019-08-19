@@ -2,129 +2,8 @@
     pageEncoding="UTF-8"%>
 
 <%@ include file="../include/header.jsp" %>
-<style>
-	.s_visu1 {
-		width: 100%;
-		height: 350px;
-	}
-	
-	.s_visu1 img{
-		width: 100%;
-		height: 350px;
-	}
-	.content {
-		position: relative;
-		width: 1000px;
-		margin: 0 auto;
-		padding: 20px 0;
-		overflow: hidden;
-		clear: both;
-	}
-	#menu_li2 {
-		float: right;                 
-	}
-	#menu_li2 li {
-		list-style: none;
-		float: left;
-		padding: 5px; 
-	}
-	
-	#notice_content > p {
-		padding-top: 20px;
-		text-align: center;
-		font-size: 32px;
-		color: #55423b;
-		line-height: 32px;
-		font-weight: bolder;
-		letter-spacing: -0.1em;
-	}
-	table {
-		width: 100%;
-		margin-top: 50px;
-		border-collapse: collapse;
-	}
-	th {
-		border-top: 2px solid #55423B;
-		border-bottom: 2px solid #DDDDDD;
-		background-color: #F7F7F7;
-		padding: 10px;
-		font-size: 12px;
-	}
-	td {
-		padding: 6px 0;
-		border-bottom: 1px solid #eaeaea;
-	}
-	a {
-		color: black;
-	}
-	th:nth-child(1), th:nth-child(5)  {
-		width: 50px;
-	}
-	th:nth-child(2) {
-		width: 680px;
-	}
-	th:nth-child(3) {
-		width: 110px;
-	}
-	th:nth-child(4) {
-		width: 80px;	
-	}
-	.small {
-		font-size: 12px;
-		color: #999999;
-	}
-	td:nth-child(1), td:nth-child(3), td:nth-child(4), td:nth-child(5) {
-		text-align: center;
-	}
-	td:nth-child(1), td:nth-child(3) {
-		color: #333333;
-		font-size: 15px;
-	}
-	#searchdiv {
-		border-bottom: 1px solid #c7a593;
-		margin-bottom: 70px;
-		margin-top: 30px;
-		padding: 5px;
-	}
-	form {
-		overflow: hidden;
-		margin-left: 330px;
-	}
-	input[type="submit"] {
-		padding: 2px 7px;
-		background-color: #777;
-		color: white;
-		border: 1px solid #777;
-		border-radius: 3px;
-		float: left;
-		outline: none;
-	}
-	input[type="text"], select {
-		padding: 3px;
-		float: left;
-		margin-right: 5px;
-	}
-	#pagediv {
-		text-align: center;
-		padding-top: 20px;
-	}
-	.current {
-		font-weight: bold;
-		text-decoration: underline;
-	}
-	.pn {
-		margin: 0 5px;
-	}
-	#listBtn {
-		margin-top: 10px;
-		padding: 2px 7px;
-		background-color: #777;
-		color: white;
-		border: 1px solid #777;
-		border-radius: 3px;
-		outline: none;
-	}
-</style>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/notice.css" type="text/css">
+
 <script>
 	$(function() {
 		$("#searchForm").submit(function() {
@@ -149,13 +28,18 @@
 					
 					$(res.content).each(function(i, obj) {
 						var date = new Date(obj.noRegdate);
+						var date2 = new Date(obj.noModdate);
 						
 						var $tr = $("<tr>");
 						var $nno = $("<td>").text(obj.noNo);
 						var $a = $("<a>").attr("href", "${pageContext.request.contextPath}/noticeDetail.do?no="+obj.noNo+"&page=${noticePage.currentPage}").text(obj.noTitle);
 						var $ntitle = $("<td>").append($a);
 						var $nwriter = $("<td>").text(obj.noWriter);
-						var $ndate = $("<td class='small'>").text(date.getFullYear()+"-"+("00" + (date.getMonth() + 1)).slice(-2)+"-"+date.getDate());
+						if(obj.noModdate == null) {
+							var $ndate = $("<td class='small'>").text(date.getFullYear()+"-"+("00" + (date.getMonth() + 1)).slice(-2)+"-"+date.getDate());
+						}else {
+							var $ndate = $("<td class='small'>").text(date2.getFullYear()+"-"+("00" + (date2.getMonth() + 1)).slice(-2)+"-"+date2.getDate());
+						}
 						var $nread = $("<td class='small'>").text(obj.noReadNt);
 						
 						$tr.append($nno).append($ntitle).append($nwriter).append($ndate).append($nread);
@@ -168,6 +52,55 @@
 					$("table").append($lsttr);
 				}
 				
+			})
+			
+			return false;
+		})
+		
+		$("#searchForm2").submit(function() {
+			if($("input[name='search2']").val() == "") {
+				alert("검색어를 입력하세요.");
+				return false;
+			}
+			
+			$("#notice_content > p").css("padding-bottom", "15px");
+			
+			$.ajax({
+				url:"${pageContext.request.contextPath}/noticeSearch.do",
+				type:"post",
+				data:{"search2":$("input[name='search2']").val()},
+				dataType:"json",
+				success: function(res) {
+					console.log(res);
+					
+					$("#content2").empty();
+					
+					var $lstdiv = $("<div id='listBtnWrap'>");
+					var $span = $("<span id='listBtn2'>").text("[목록]");
+					$lstdiv.append($span);
+					$("#content2").append($lstdiv);
+					
+					$(res.content).each(function(i, obj) {
+						var date = new Date(obj.noRegdate);
+						var date2 = new Date(obj.noModdate);
+						
+						var $ul = $("<ul>");
+						var $a = $("<a>").attr("href", "${pageContext.request.contextPath}/noticeDetail.do?no="+obj.noNo+"&page=${noticePage.currentPage}").text(obj.noTitle);
+						var $ntitle = $("<li>").append($a);
+						if(obj.noModdate == null) {
+							var $ndate = $("<li class='small'>").text("작성일: "+date.getFullYear()+"-"+("00" + (date.getMonth() + 1)).slice(-2)+"-"+date.getDate());
+						}else {
+							var $ndate = $("<li class='small'>").text("작성일: "+date2.getFullYear()+"-"+("00" + (date2.getMonth() + 1)).slice(-2)+"-"+date2.getDate());
+						}
+						var $nread = $("<li class='small'>").text("조회수: "+obj.noReadNt);
+						
+						$ul.append($ntitle).append($ndate).append($nread);
+						$("#content2").append($ul);
+					})
+					
+					//$("input[name='search2']").val("");
+					//$("#pagediv").hide();
+				}
 			})
 			
 			return false;
@@ -193,7 +126,11 @@
 						var $a = $("<a>").attr("href", "${pageContext.request.contextPath}/noticeDetail.do?no="+obj.noNo+"&page=${noticePage.currentPage}").text(obj.noTitle);
 						var $ntitle = $("<td>").append($a);
 						var $nwriter = $("<td>").text(obj.noWriter);
-						var $ndate = $("<td class='small'>").text(date.getFullYear()+"-"+("00" + (date.getMonth() + 1)).slice(-2)+"-"+date.getDate());
+						if(obj.noModdate == null) {
+							var $ndate = $("<td class='small'>").text(date.getFullYear()+"-"+("00" + (date.getMonth() + 1)).slice(-2)+"-"+date.getDate());
+						}else {
+							var $ndate = $("<td class='small'>").text(date2.getFullYear()+"-"+("00" + (date2.getMonth() + 1)).slice(-2)+"-"+date2.getDate());
+						}
 						var $nread = $("<td class='small'>").text(obj.noReadNt);
 						
 						$tr.append($nno).append($ntitle).append($nwriter).append($ndate).append($nread);
@@ -203,11 +140,46 @@
 				
 			})
 		})
+		
+		$(document).on("click", "#listBtn2", function() {
+			$.ajax({
+				url:"${pageContext.request.contextPath}/notice.do",
+				type:"post",
+				dataType:"json",
+				success: function(res) {
+					console.log(res);
+					
+					$("#content2").empty();
+					$("input[name='search2']").val("");
+					$("#notice_content > p").css("padding-bottom", "30px");
+					
+					$(res.content).each(function(i, obj) {
+						var date = new Date(obj.noRegdate);
+						var date2 = new Date(obj.noModdate);
+						
+						var $ul = $("<ul>");
+						var $a = $("<a>").attr("href", "${pageContext.request.contextPath}/noticeDetail.do?no="+obj.noNo+"&page=${noticePage.currentPage}").text(obj.noTitle);
+						var $ntitle = $("<li>").append($a);
+						if(obj.noModdate == null) {
+							var $ndate = $("<li class='small'>").text("작성일: "+date.getFullYear()+"-"+("00" + (date.getMonth() + 1)).slice(-2)+"-"+date.getDate());
+						}else {
+							var $ndate = $("<li class='small'>").text("작성일: "+date2.getFullYear()+"-"+("00" + (date2.getMonth() + 1)).slice(-2)+"-"+date2.getDate());
+						}
+						var $nread = $("<li class='small'>").text("조회수: "+obj.noReadNt);
+						
+						$ul.append($ntitle).append($ndate).append($nread);
+						$("#content2").append($ul);
+					})
+				}
+				
+			})
+		})
 	})
 </script>
 	<div class="sub">
 		<div class="s_visu1">
-			<img src="${pageContext.request.contextPath}/images/community/sub05_visu.jpg">
+			<img id="s_visu1_1" src="${pageContext.request.contextPath}/images/community/sub05_visu.jpg">
+			<img id="s_visu1_2" src="${pageContext.request.contextPath}/images/community/f_visu7.jpg">
 		</div>
 		<div class="content">
 			<div id="menu_li2">
@@ -222,7 +194,7 @@
 			<div class="clear"></div>
 			<div id="notice_content">
 				<p>공지사항</p>
-				<table>
+				<table id="content1">
 					<tr>
 						<th>번호</th>
 						<th>제 목</th>
@@ -236,11 +208,35 @@
 							<td>${n.noNo}</td>
 							<td><a href="${pageContext.request.contextPath}/noticeDetail.do?no=${n.noNo}&page=${noticePage.currentPage}">${n.noTitle}</a></td>
 							<td>${n.noWriter}</td>
-							<td class="small"><fmt:formatDate value="${n.noRegdate}" pattern="yyyy-MM-dd"/></td>
+							<c:choose>
+								<c:when test="${n.noModdate == null}">
+									<td class="small"><fmt:formatDate value="${n.noRegdate}" pattern="yyyy-MM-dd"/></td>
+								</c:when>
+								<c:when test="${n.noModdate != null}">
+									<td class="small"><fmt:formatDate value="${n.noModdate}" pattern="yyyy-MM-dd"/></td>
+								</c:when>
+							</c:choose>
 							<td class="small">${n.noReadNt}</td>
 						</tr>
 					</c:forEach>
 				</table>
+				<div id="content2">
+					<%-- <c:forEach var="nlist" items="${nList}"> --%>
+					<c:forEach var="n" items="${noticePage.content}">
+						<ul>
+							<li><a href="${pageContext.request.contextPath}/noticeDetail.do?no=${n.noNo}&page=${noticePage.currentPage}">${n.noTitle}</a></li>
+							<c:choose>
+								<c:when test="${n.noModdate == null}">
+									<li class="small">작성일: <fmt:formatDate value="${n.noRegdate}" pattern="yyyy-MM-dd"/></li>
+								</c:when>
+								<c:when test="${n.noModdate != null}">
+									<li class="small">작성일: <fmt:formatDate value="${n.noModdate}" pattern="yyyy-MM-dd"/></li>
+								</c:when>
+							</c:choose>
+							<li class="small">조회수: ${n.noReadNt}</li>
+						</ul>
+					</c:forEach>
+				</div>
 				<div id="pagediv">
 					<c:if test="${noticePage.startPage > 5}">
 						<a href="notice.do?page=${noticePage.startPage - 1}" class="pn">&lt;&lt;</a>
@@ -250,7 +246,7 @@
 							<a href="notice.do?page=${pNo}" class="current">${pNo}</a>
 						</c:if>
 						<c:if test="${noticePage.currentPage != pNo}">
-							<a href="notice.do?page=${pNo}">${pNo}</a>
+							<a href="notice.do?page=${pNo}" class="current2">${pNo}</a>
 						</c:if>
 					</c:forEach>
 					<c:if test="${noticePage.endPage < noticePage.totalPages}">
@@ -268,6 +264,13 @@
 					<input type="text" name="search">
 					<input type="submit" value="검색">
 				</form>
+				<form id="searchForm2">
+					<input type="text" name="search2" size="40">
+					<input type="submit" value="">
+				</form>
+			</div>
+			<div id="topImg">
+				<a href="#"><img src="${pageContext.request.contextPath}/images/up-arrow-icon.png"></a>
 			</div>
 		</div>
 	</div>

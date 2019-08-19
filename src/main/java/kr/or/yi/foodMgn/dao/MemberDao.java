@@ -30,4 +30,7 @@ public interface MemberDao {
 	public List<Member> selectListPage(Map<String, Integer> map);
 	public int selectTotalCount();
 	public int myPageUpdate(Member member);
+	public int insertCoupon(Map<String, Object> map);
+	public List<Member> selectCpname(Map<String, Object> map);
+	public int updateMileage(Member member);
 }

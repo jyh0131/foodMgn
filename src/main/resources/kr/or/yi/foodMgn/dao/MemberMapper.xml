@@ -124,7 +124,7 @@
 	<select id="selectListPage" resultMap="resultMemberBJY" parameterType="map">
 		select m.mb_no, m.mb_name, mb_birth, mb_tel, mb_mileage, mb_grade, mb_address, group_concat(if(cp_use=1,'',mc.cp_name)) coupon, mb_withdrawal, mb_join, mb_count
 		from member m left join member_coupon mc on m.mb_no = mc.mb_no left join coupon c on mc.cp_name = c.cp_name
-		group by mb_no having not mb_no = 0 limit #{startRow}, #{size}
+		group by mb_no having not mb_no = 0 order by mb_no desc limit #{startRow}, #{size}
 	</select>
 	
 	<select id="selectTotalCount" resultType="java.lang.Integer">
@@ -133,6 +133,18 @@
 	
 	<update id="myPageUpdate" parameterType="Member">
 		update member set mb_name = #{mbName}, mb_tel = #{mbTel}, mb_address = #{mbAddress} where mb_no = #{mbNo};
+	</update>
+	
+	<insert id="insertCoupon" parameterType="map">
+		insert into member_coupon(mb_no, cp_name) values (#{mbNo},#{coupon})
+	</insert>
+	
+	<select id="selectCpname" resultMap="resultMemberBJY" parameterType="map">
+		select member.mb_no, cp_name from member join member_coupon on member.mb_no = member_coupon.mb_no where cp_name = #{coupon} and member.mb_no = #{mbNo}
+	</select>
+	
+	<update id="updateMileage" parameterType="Member">
+		update member set mb_mileage = #{mbMileage} where mb_no = #{mbNo}
 	</update>
 </mapper>
 

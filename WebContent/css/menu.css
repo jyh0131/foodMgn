@@ -1,0 +1,241 @@
+@charset "UTF-8";
+
+@media all and (max-width:767px) {
+	body {
+		background-color: #e8e2dc;
+	}
+	header {
+		background-color: white;
+	}
+	.s_visu1, #s_visu1_2 {
+		width: 100%;
+		background-color: #e8e2dc;
+	}
+	#s_visu1_1 {
+		display: none;
+	}
+	#s_visu1_2 img{
+		width: 100%;
+	}
+	#menu_li, #menu_li2, #title_img {
+		display: none;
+	}
+	.content {
+		background-color: #e8e2dc;
+	}
+	#menu_name h1 {
+		text-align: center;
+		color: #55423b;
+		padding-top: 30px;
+		font-family: Nanum Gothic,Dotum,AppleGothic,sans-serif;
+	}
+	#menu_name h3 {
+		color: #766f6c;
+		font-size: 15px;
+		text-align: center;
+		padding-top: 5px;
+	}
+	#title_img {
+		display: none;
+	}
+	#title_img2 {
+		width: 100%;
+		text-align: center;
+		margin-top: 30px;
+		margin-bottom: 20px;
+	}
+	#title_img2 img {
+		width: 90%;
+	}
+	#ul1 {
+		display: none;
+	}
+	.foodNameEng {
+		color: #c58561;
+		font-size: 30px;
+		padding: 10px 0;
+		font-family: Nanum Gothic,Dotum,AppleGothic,sans-serif;
+		font-weight: bold;
+	}
+	.foodName {
+		color: #814b34;
+		font-size: 18px;
+		padding: 5px 0;
+		font-weight: bold;
+	}
+	.foodExplain {
+		color: #787878;
+		font-size: 14px;
+		padding-bottom: 15px;
+		width: 90%;
+		margin: 0 auto;
+	}
+	.mobileImg {
+		width: 90%;
+		margin: 0 auto;
+		text-align: center;
+		padding: 10px;
+	}
+	.mobileImg:nth-child(2n+1) {
+		background-color: #f2efec;
+	}
+	.mobileImg:nth-child(2n) {
+		background-color: #dcd2c8;
+	}
+	.mobileImg:last-child {
+		margin-bottom: 20px;
+	}
+	.mobileImg li:first-child {
+		margin-bottom: 5px;
+	}
+	#topImg {
+		position: fixed;
+		top: 555px;
+		right: 15px;
+	}
+	#topImg img {
+		width: 38px;
+		height: 38px;
+		background-color: rgba(0,0,0,0.4);
+		border-radius: 50%;
+	}
+}
+
+@media screen and (min-width:768px) {
+	.s_visu1, #s_visu1_1 {
+		width: 100%;
+		height: 350px;
+	}
+	#s_visu1_1 img{
+		width: 100%;
+		height: 350px;
+	}
+	#s_visu1_2 {
+		display: none;
+	}
+	.content {
+		position: relative;
+		width: 1000px;
+		margin: 0 auto;
+		padding: 20px 0;
+		overflow: hidden;
+		clear: both;
+	}
+	#menu_li {
+		border: 1px solid #887c75;
+		width: 200px;
+		height: 25px;
+		line-height: 25px;
+		padding: 10px 0;
+		background-color: #f2efec;
+		font-size: 15px;
+		text-indent: 16px;
+		position: relative;
+		cursor: pointer;
+		float: left;
+	}
+	#menu_li2 {
+		float: right;                 
+	}
+	#menu_li2 li {
+		list-style: none;
+		float: left;
+		padding: 5px; 
+	}
+	.li_img {
+		background: url("../images/menu/s_menu_bg.gif") no-repeat;
+		position: absolute;
+		top: 20px;
+		right: 10px;
+		width: 20px;
+		height: 10px;
+	}
+	#menulist {
+		display: none;
+		width: 200px;
+		position: absolute;
+		top: 46px;
+		left: -1px;
+	}
+	#menulist li {
+		border: 1px solid #887c75;
+		border-bottom: 1px dotted #887c75;
+		border-top: none;
+		width: 200px;
+		height: 20px;
+		line-height: 20px;
+		padding: 10px 0;
+		background-color: #f2efec;
+		color: black;
+	}
+	#menulist li:hover {
+		background-color: #887c75;
+		color: white;
+	}
+	#menulist li:last-child {
+		border-bottom: 1px solid #887c75;
+	}
+	#menu_content {
+		margin: 50px 0;
+	}
+	#title_img {
+		padding: 30px 0;
+	}
+	#title_img2 {
+		display: none;
+	}
+	#menu_name {
+		padding: 20px 0;
+		text-align: center;
+	}
+	#menu_name h1 {
+		color: #814b34;
+		font-weight: bold;
+		font-size: 34px;
+	}
+	#menu_name h3 {
+		color: #766f6c;
+		font-size: 15px;
+		text-align: center;
+		padding-top: 8px;
+		margin-bottom: 20px; 
+	}
+	#menu_name p {
+		color: #766f6c;
+		font-size: 15px;
+		padding: 10px;
+	}
+	#ul2 {
+		display: none;
+	}
+	#menu_name li {
+		list-style: none;
+		width: 100%;
+		
+	}
+	.bevImg img {
+		float: left;
+		width: 250px;
+		height: 620px;
+		border-bottom: 1px dotted #555;
+	}
+	.bevImg:last-child img {
+		margin-bottom: 70px;
+	}
+	.beerImg img {
+		float: left;
+		width: 250px;
+		height: 415px;
+		border-bottom: 1px dotted #555;
+	}
+	.beerImg:nth-child(1) img, .beerImg:nth-child(2) img {
+		width: 500px;
+		height: 400px;
+	}
+	.beerImg:last-child img {
+		margin-bottom: 70px;
+	}
+	#topImg {
+		display: none;
+	}
+}

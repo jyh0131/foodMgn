@@ -9,6 +9,8 @@
 		<result column="fd_name" property="fdName"/>
 		<result column="fd_withdrawal" property="fdWithdrawal"/>
 		<result column="fd_img" property="fdImg"/>
+		<result column="fd_name_eng" property="fdNameEng"/>
+		<result column="fd_explain" property="fdExplain"/>
 	</resultMap>
 	
 	<resultMap type="Food" id="resultFoodBJY" extends="resultFood">
@@ -32,11 +34,11 @@
 	</select>
 	
 	<insert id="insertFood" parameterType="Food" useGeneratedKeys="true" keyProperty="fd_no">
-		insert into food(fd_no, fd_price, fd_name, fk_no) values (#{fdNo},#{fdPrice},#{fdName},#{fkNo.fkNo})
+		insert into food(fd_no, fd_price, fd_name, fk_no, fd_img) values (#{fdNo},#{fdPrice},#{fdName},#{fkNo.fkNo},#{fdImg})
 	</insert>
 	
 	<select id="selectByNo" resultType="Food" resultMap="resultFoodBJY">
-		select f.fd_no, f.fd_price, f.fd_name, f.fk_no, fk.fk_name, fk.menu_no, f.fd_img from food f left join foodkind fk on f.fk_no = fk.fk_no where f.fk_no = #{fkNo.fkNo}
+		select f.fd_no, f.fd_price, f.fd_name, f.fk_no, fk.fk_name, fk.menu_no, f.fd_img, f.fd_name_eng, f.fd_explain from food f left join foodkind fk on f.fk_no = fk.fk_no where f.fk_no = #{fkNo.fkNo}
 	</select>
 	
 	<select id="selectByFdNo" parameterType="Food" resultMap="resultFoodBJY">
@@ -68,7 +70,7 @@
 	</select>
 	
 	<select id="selectByNameAndFkNo" resultMap="resultFoodBJY" parameterType="map">
-		select f.fd_no, f.fd_name, f.fd_price, f.fk_no, fk.fk_name, f.fd_withdrawal, f.fd_img from food f join foodkind fk on f.fk_no = fk.fk_no where fd_name like concat('%',#{fdName},'%') and f.fk_no= #{fkNo} limit #{startRow}, #{size}
+		select f.fd_no, f.fd_name, f.fd_price, f.fk_no, fk.fk_name, f.fd_withdrawal, f.fd_img from food f join foodkind fk on f.fk_no = fk.fk_no where fd_name like concat('%',#{fdName},'%') and f.fk_no= #{no} limit #{startRow}, #{size}
 	</select>
 </mapper>
 

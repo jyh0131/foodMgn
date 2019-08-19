@@ -16,35 +16,91 @@
 		height: 140px;
 	}
 	#noticeForm {
-		height: 600px;
+		min-height: 650px;
 		width: 100%;
-		border: 1px solid #555;
 		margin: 30px 0;
 	}
+	#noticeForm h1 {
+		text-align: center;
+		margin-bottom: 10px;
+	}
+	#frm {
+		width: 100%;
+		margin-top: 10px;
+		overflow: hidden;
+	}
+	#frm p {
+		margin: 10px 0;
+	}
+	#frm p:last-child {
+		text-align: center;
+		margin-top: 10px;
+		overflow: hidden;
+		padding-left: 42%;
+	}
+	label {
+		font-weight: bold;
+		font-size: 1.1em;
+	}
+	input[type="text"] {
+		padding: 3px 0;
+	}
 	input[type="button"] {
-		padding: 3px 5px;
+		padding: 5px 15px;
 		background-color: #c7a593;
 		border: 1px solid #c7a593;
 		color: white;
 		border-radius: 3px;
 		outline: none;
+		float: left;
+		font-size: 16px;
+	}
+	#noticeForm span {
+		padding: 5px 15px;
+		background-color: #c7a593;
+		border: 1px solid #c7a593;
+		border-radius: 3px;
+		outline: none;
+		display: inline-block;
+		height: 21px;
+		line-height: 21px;
+		float: left;
+		margin-left: 5px;
+	}
+	#noticeForm a {
+		color: white;
 	}
 </style>
-
+<script>
+	$(function() {
+		$("#frm").submit(function() {
+			if($("input[name='title']").val() == "") {
+				alert("제목을 입력하세요");
+				return false;
+			}
+			if($("textarea[name='content']").val() == "<br>") {
+				alert("내용을 입력하세요");
+				return false;
+			}
+		})
+	})
+</script>
 	<div id="wrap">
 		<div id="div"></div>
 		<div id="noticeForm">
+			<h1>공지사항 등록</h1>
 			<form id="frm" action="${pageContext.request.contextPath}/mgn/noticeMgninsert.do" method="post" enctype="multipart/form-data">
 				<p>
-					<label>제목</label>
-					<input type="text" name="title">
+					<label>제목</label><br>
+					<input type="text" name="title" size="130">
 				</p>
 				<p>
 					<label>내용</label>
-					<textarea rows="10" cols="100" name="content" id="ir1"></textarea>
+					<textarea rows="30" cols="139" name="content" id="ir1"></textarea>
 				</p>
 				<p>
 					<input type="button" id="save" value="등록">
+					<span><a href="${pageContext.request.contextPath}/mgn/noticeMgnlist.do">돌아가기</a></span>
 				</p>
 			</form>
 		</div>
