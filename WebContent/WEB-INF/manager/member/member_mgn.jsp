@@ -109,14 +109,21 @@
 		float: left;
 		margin-right: 5px;
 	}
-	#addCoupon {
+	#addCoupon, #deleteCoupon {
 		float: right;
-		margin: 10px 10px 10px 0 ;
+		margin: 10px 5px 10px 5px;
 	}
-	#couponForm {
+	#deleteCoupon {
+		margin-right: 10px;
+		margin-left: 0;
+	}
+	#couponForm, #couponForm2 {
 		float: right;
 		display: none;
 		padding-right: 5px;
+	}
+	#couponForm {
+		padding-right: 0;
 	}
 	#pagediv {
 		text-align: center;
@@ -147,6 +154,14 @@
 				data:{"tel":$("input[name='tel']").val()},
 				dataType:"json",
 				success: function(res) {
+					for(var j=0; j<res.length; j++) {
+						if(res[j] == null) {
+							alert("회원이 없습니다");
+							$("input[name='tel']").val("");
+							return;
+						}
+					}
+					
 					console.log(res);
 					
 					$("table").empty();
@@ -172,8 +187,13 @@
 							$coupon = $("<td>").text("");
 						}else if(obj.coupon.length != 0) {
 							$(obj.coupon).each(function(i, obj2) {
-								var cpName = obj2.cpName.replace(","," ").trim();
-								$coupon = $("<td>").text(cpName);
+								var cpName = obj2.cpName.replace(",","<br>").trim();
+								if(cpName.indexOf(",") >= 0) {
+									var cpName2 = cpName.replace(",","<br>").trim();
+									$coupon = $("<td>").html(cpName2);
+								}else if(cpName.indexOf(",") < 0) {
+									$coupon = $("<td>").html(cpName);
+								}
 							})
 						}
 						var $input = $("<input type='checkbox' class='check hidden'>");
@@ -218,8 +238,13 @@
 							$coupon = $("<td>").text("");
 						}else if(obj.coupon.length != 0) {
 							$(obj.coupon).each(function(i, obj2) {
-								var cpName = obj2.cpName.replace(","," ").trim();
-								$coupon = $("<td>").text(cpName);
+								var cpName = obj2.cpName.replace(",","<br>").trim();
+								if(cpName.indexOf(",") >= 0) {
+									var cpName2 = cpName.replace(",","<br>").trim();
+									$coupon = $("<td>").html(cpName2);
+								}else if(cpName.indexOf(",") < 0) {
+									$coupon = $("<td>").html(cpName);
+								}
 							})
 						}
 						var $input = $("<input type='checkbox' class='check hidden'>");
@@ -236,11 +261,27 @@
 		$(document).on("click","#addCoupon",function(){
 			if($("#addCoupon").text() != "취소") {
 				$("#couponForm").css("display", "inline-block");
+				$("#deleteCoupon").css("display", "none");
 				$("#addCoupon").text("취소");
 				$("input[type='checkbox']").removeClass("hidden");
 			}else {
 				$("#couponForm").css("display", "none");
+				$("#deleteCoupon").css("display", "inline-block");
 				$("#addCoupon").text("쿠폰추가");
+				$("input[type='checkbox']").addClass("hidden");
+			}
+		})
+		
+		$(document).on("click","#deleteCoupon",function(){
+			if($("#deleteCoupon").text() != "취소") {
+				$("#couponForm2").css("display", "inline-block");
+				$("#addCoupon").css("display", "none");
+				$("#deleteCoupon").text("취소");
+				$("input[type='checkbox']").removeClass("hidden");
+			}else {
+				$("#couponForm2").css("display", "none");
+				$("#addCoupon").css("display", "inline-block");
+				$("#deleteCoupon").text("쿠폰삭제");
 				$("input[type='checkbox']").addClass("hidden");
 			}
 		})
@@ -297,11 +338,16 @@
 							$coupon = $("<td>").text("");
 						}else if(obj.coupon.length != 0) {
 							$(obj.coupon).each(function(i, obj2) {
-								var cpName = obj2.cpName.replace(","," ").replace(","," ").trim();
-								$coupon = $("<td>").text(cpName);
+								var cpName = obj2.cpName.replace(",","<br>").trim();
+								if(cpName.indexOf(",") >= 0) {
+									var cpName2 = cpName.replace(",","<br>").trim();
+									$coupon = $("<td>").html(cpName2);
+								}else if(cpName.indexOf(",") < 0) {
+									$coupon = $("<td>").html(cpName);
+								}
 							})
 						}
-						var $input = $("<input type='checkbox' class='check hidden'>");
+						var $input = $("<input type='checkbox' class='check hidden' data-no='"+obj.mbNo+"'>");
 						var $lasttd = $("<td>").append($input);
 
 						$tr.append($mbno).append($mbname).append($mbbirth).append($mbtel).append($mbaddress).append($mbmileage).append($mbgrade).append($mbjoin).append($mbcount).append($coupon).append($lasttd);
@@ -309,6 +355,74 @@
 					})
 					$("#couponForm").css("display", "none");
 					$("#addCoupon").text("쿠폰추가");
+					$("#deleteCoupon").css("display", "inline-block");
+				}
+			})	
+			return false;	
+		})
+		
+		$("#couponForm2").submit(function() {
+			var noArray = new Array();
+			for(var i=0; i<$(".check").length; i++) {
+				if($(".check").eq(i).prop("checked") == true)	{
+					noArray.push($(".check").eq(i).attr("data-no"));
+				}
+			}
+			
+			if(noArray.length == 0) {
+				alert("쿠폰을 삭제할  회원을 선택해주세요.");
+				return false;
+			}
+			
+			jQuery.ajaxSettings.traditional = true;
+			$.ajax({
+				url:"${pageContext.request.contextPath}/mgn/memberMgnDeleteCoupon.do",
+				type:"post",
+				data:{"coupon":$("select[name='cp2']").val(), "noArray":noArray},
+				dataType:"json",
+				success: function(res) {
+					console.log(res);
+					
+					$("table").empty();
+					$("table").append("<tr><th id='mNo'>회원번호</th><th id='mName'>회원명</th><th id='mBirth'>생년월일</th><th id='mTel'>전화번호</th><th id='mAddr'>주소</th><th id='mMileage'>마일리지</th><th id='mGrade'>등급</th><th id='mJoin'>가입일</th><th id='mCount'>주문횟수</th><th>쿠폰</th><th><input type='checkbox' id='allcheck' class='hidden'></th></tr>");
+					
+					$(res.content).each(function(i, obj) {
+						var birth = new Date(obj.mbBirth);
+						var join = new Date(obj.mbJoin);
+						
+						var $tr = $("<tr>");
+						var $mbno = $("<td>").text(obj.mbNo);
+						var $mbname = $("<td>").text(obj.mbName);
+						var $mbbirth = $("<td>").text(birth.getFullYear()+"년"+("00" + (birth.getMonth() + 1)).slice(-2)+"월"+("00" + birth.getDate()).slice(-2)+"일");
+						var $mbtel = $("<td>").text(obj.mbTel.substring(0, 3)+"-"+obj.mbTel.substring(3, 7)+"-"+obj.mbTel.substring(7, 11));
+						var $mbaddress = $("<td>").text(obj.mbAddress);
+						var $mbmileage = $("<td>").text(obj.mbMileage.toLocaleString()+"원");
+						var $mbgrade = $("<td>").text(obj.mbGrade.grade);
+						var $mbjoin = $("<td>").text(join.getFullYear()+"년"+("00" + (join.getMonth() + 1)).slice(-2)+"월"+("00" + join.getDate()).slice(-2)+"일");
+						var $mbcount = $("<td>").text(obj.mbCount);
+						var $coupon;
+						if(obj.coupon.length == 0) {
+							$coupon = $("<td>").text("");
+						}else if(obj.coupon.length != 0) {
+							$(obj.coupon).each(function(i, obj2) {
+								var cpName = obj2.cpName.replace(",","<br>").trim();
+								if(cpName.indexOf(",") >= 0) {
+									var cpName2 = cpName.replace(",","<br>").trim();
+									$coupon = $("<td>").html(cpName2);
+								}else if(cpName.indexOf(",") < 0) {
+									$coupon = $("<td>").html(cpName);
+								}
+							})
+						}
+						var $input = $("<input type='checkbox' class='check hidden' data-no='"+obj.mbNo+"'>");
+						var $lasttd = $("<td>").append($input);
+
+						$tr.append($mbno).append($mbname).append($mbbirth).append($mbtel).append($mbaddress).append($mbmileage).append($mbgrade).append($mbjoin).append($mbcount).append($coupon).append($lasttd);
+						$("table").append($tr);
+					})
+					$("#couponForm2").css("display", "none");
+					$("#deleteCoupon").text("쿠폰삭제");
+					$("#addCoupon").css("display", "inline-block");
 				}
 			})	
 			return false;	
@@ -324,13 +438,23 @@
 				<input type="submit" value="검색">
 			</form>
 			<button id="allList">전체보기</button>
+			<button id="deleteCoupon">쿠폰삭제</button>
 			<button id="addCoupon">쿠폰추가</button>
 			<form id="couponForm">
 				<select name="cp">
 					<option>생일쿠폰</option>
+					<option>회원가입쿠폰</option>
 					<option>서비스쿠폰</option>
 				</select>
 				<input type="submit" value="추가하기">
+			</form>
+			<form id="couponForm2">
+				<select name="cp2">
+					<option>생일쿠폰</option>
+					<option>회원가입쿠폰</option>
+					<option>서비스쿠폰</option>
+				</select>
+				<input type="submit" value="삭제하기">
 			</form>
 			<table>
 				<tr>
@@ -364,7 +488,7 @@
 								</c:when>
 								<c:when test="${mlist.coupon != null}">
 									<c:forEach var="cp" items="${mlist.coupon}">
-										<td>${cp.cpName.replace(","," ").replace(","," ").trim()}</td>
+										<td>${cp.cpName.replace(",","<br>").trim()}</td>
 									</c:forEach>
 								</c:when>
 							</c:choose>
@@ -388,7 +512,7 @@
 								</c:when>
 								<c:when test="${mlist.coupon != null}">
 									<c:forEach var="cp" items="${mlist.coupon}">
-										<td>${cp.cpName.replace(","," ").replace(","," ").trim()}</td>
+										<td>${cp.cpName.replace(",","<br>").trim()}</td>
 									</c:forEach>
 								</c:when>
 							</c:choose>

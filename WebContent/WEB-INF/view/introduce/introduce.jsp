@@ -45,6 +45,9 @@
 				<img id="i4" src="${pageContext.request.contextPath}/images/introduce/story_img_intro_m.png">
 			</div>
 		</div>
+		<div id="topImg">
+			<a href="#"><img src="${pageContext.request.contextPath}/images/up-arrow-icon.png"></a>
+		</div>
 	</div>
 </div>
 

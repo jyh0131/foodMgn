@@ -1,7 +1,6 @@
 package kr.or.yi.foodMgn.handler.member;
 
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,11 +13,10 @@ import org.codehaus.jackson.map.ObjectMapper;
 import kr.or.yi.foodMgn.controller.CommandHandler;
 import kr.or.yi.foodMgn.dao.MemberDao;
 import kr.or.yi.foodMgn.daoImpl.MemberDaoImpl;
-import kr.or.yi.foodMgn.dto.Coupon;
 import kr.or.yi.foodMgn.dto.Member;
 import kr.or.yi.foodMgn.dto.MemberPage;
 
-public class MemberMgnAddCouponHandler implements CommandHandler {
+public class MemberMgnDeleteCouponHandler implements CommandHandler {
 
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
@@ -41,17 +39,7 @@ public class MemberMgnAddCouponHandler implements CommandHandler {
 		for(String i: noArray) {
 			member.setMbNo(Integer.parseInt(i));
 			map.put("mbNo", i);
-			
-			List<Member> clist = dao.selectCpname(map);
-			
-			if(clist.size() != 0) {
-				Member m = dao.selectByMbNo(member);
-				int mileage = m.getMbMileage() + 100;
-				member.setMbMileage(mileage);
-				dao.updateMileage(member);
-			}else {
-				dao.insertCoupon(map);
-			}
+			dao.deleteCoupon(map);
 		}
 
 		Map<String , Integer> map2 = new HashMap<>();

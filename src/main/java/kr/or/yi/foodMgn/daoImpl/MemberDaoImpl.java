@@ -193,4 +193,13 @@ public class MemberDaoImpl implements MemberDao {
 		}
 	}
 
+	@Override
+	public int deleteCoupon(Map<String, Object> map) {
+		try(SqlSession sqlSession = MybatisSqlSessionFactory.openSession()) {
+			int res = sqlSession.delete(namespace + ".deleteCoupon", map);
+			sqlSession.commit();
+			return res;
+		}
+	}
+
 }

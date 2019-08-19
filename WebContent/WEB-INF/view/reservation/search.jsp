@@ -172,9 +172,9 @@
 	#search{
 		display: block;
 		width:110px;
-		height:25px;
-		margin:0 auto;
-		background-color: #555555;
+		height:30px;
+		margin:5px auto;
+		background-color: #3b2c2c;
 		color: white;
 		border: 1px solid #555555;
 	}

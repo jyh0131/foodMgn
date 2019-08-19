@@ -46,11 +46,14 @@ header a {
 }
 #head2_1 {
 	padding-top: 60px;
-	margin-left: 320px;
+	margin-left: 300px;
 }
 #head2_1 > ul > li {
 	width: 120px;
 	float: left;
+}
+#head2_1 > ul > li:nth-child(2) {
+	width: 150px !important;
 }
 #head2_1 a {
 	font-weight: bold;     

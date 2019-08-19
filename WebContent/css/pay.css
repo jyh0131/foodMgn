@@ -1,6 +1,12 @@
 @charset "UTF-8";
 
 @media all and (max-width:767px) {
+	body {
+		background-color: #e8e2dc !important;
+	}
+	header {
+		background-color: white;
+	}
 	.s_visu1 {
 	width: 100%;
 }
@@ -32,6 +38,7 @@ margin: 0 auto;
 
 #pay_1 div#order_info{
 	width: 90%;
+	margin: 0 auto;
 	min-height: 300px;
 	margin-bottom: 10px;
 	background-color: #F7F7F7;	
@@ -71,6 +78,7 @@ td:last-child{
 /* 쿠폰/마일리지 */
 #pay_1 div#sale_info{
 	width: 90%;
+	margin: 0 auto;
 	margin-bottom: 10px;	
 	background-color: #F7F7F7;
 	border-bottom: 2px solid #c7a593;
@@ -90,6 +98,7 @@ td:last-child{
 /* 결제정보 */
 #pay_1 div#pay_info{
 	width: 90%;
+	margin: 0 auto;
 	margin-bottom: 10px;	
 	background-color: #F7F7F7;
 	border-bottom: 2px solid #c7a593;
@@ -108,6 +117,7 @@ td:last-child{
 /* 주문자 정보 */
 #buyer_info{
 	width: 90%;
+	margin: 0 auto;
 	min-height: 180px;
 	margin-bottom: 10px;	
 	background-color: #F7F7F7;
@@ -118,6 +128,7 @@ td:last-child{
 /* 결제금액 */
 #pay_price{
 	width:90%;
+	margin: 0 auto;
 	min-height: 180px;
 	margin-bottom: 10px;	
 	background-color: #F7F7F7;
@@ -180,6 +191,17 @@ td:last-child{
 
 #pay_button_wrap{
 	margin-bottom: 20px;
+}
+#topImg {
+	position: fixed;
+	top: 630px;
+	right: 15px;
+}
+#topImg img {
+	width: 38px;
+	height: 38px;
+	background-color: rgba(0,0,0,0.4);
+	border-radius: 50%;
 }
 	}
 	
@@ -373,6 +395,9 @@ td:last-child{
 #i2{
 	display: none;
 	
+}
+#topImg {
+	display: none;
 }
 
 	}

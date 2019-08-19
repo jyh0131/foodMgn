@@ -240,6 +240,10 @@
 	</div>
 	<form id="payForm" action="paymentResult.do" method="post">
 	</form>
+	
+	<div id="topImg">
+		<a href="#"><img src="${pageContext.request.contextPath}/images/up-arrow-icon.png"></a>
+	</div>
 </div>
 
 <%@ include file="../include/footer.jsp"%>

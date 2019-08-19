@@ -42,7 +42,6 @@
 					<div id="head2_1">
 						<ul>
 							<li>
-
 								<a href="${pageContext.request.contextPath}/mgn/saleList.do">결제관리</a>
 								<ul class="submenu">
 									<li><a href="${pageContext.request.contextPath}/mgn/saleList.do">결제현황</a></li>
@@ -50,12 +49,12 @@
 								</ul>
 
 							</li>
-						   <li><a href="${pageContext.request.contextPath}/mgn/salesList.do">음식판매관리</a>
+						    <li><a href="${pageContext.request.contextPath}/mgn/salesList.do">음식판매관리</a>
 						   		<ul class="submenu">
-									<li><a href="${pageContext.request.contextPath}/mgn/salesList.do">움삭판매현황</a></li>
+									<li><a href="${pageContext.request.contextPath}/mgn/salesList.do">음식판매현황</a></li>
 									<li><a href="${pageContext.request.contextPath}/mgn/salesListChart.do">음식판매차트</a></li>
 								</ul>
-						   </li>
+						    </li>
 							<li><a href="${pageContext.request.contextPath}/mgn/menuMgnlist.do">음식관리</a></li>
 							<li><a href="${pageContext.request.contextPath}/mgn/memberMgnlist.do">회원관리</a></li>
 							<li><a href="${pageContext.request.contextPath}/mgn/reservationMgn.do">예약관리</a></li>
