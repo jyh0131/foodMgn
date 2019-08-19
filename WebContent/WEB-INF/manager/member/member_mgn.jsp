@@ -51,12 +51,33 @@
 	#mAddr {
 		width: 240px;
 	}
+	th:nth-child(10) {
+		width: 100px;
+	}
 	td:nth-child(1), td:nth-child(2), td:nth-child(3), td:nth-child(4), td:nth-child(7), td:nth-child(8), td:nth-child(9) {
 		text-align: center;
 	}
 	td:nth-child(6) {
 		text-align: right;
 	}
+	td:nth-child(10), th:nth-child(10) {
+		border-right: none;
+	}
+	td:last-child {
+		padding-left: 10px;
+	}
+	/* .couponCheck {
+		display: none;
+		padding-top: 40%;
+	}
+	.couponCheck2 {
+		display: none;
+		padding: 5px 5px;
+		padding-top: 30%;
+	}
+	input[type="checkbox"] {
+		float: left;
+	} */
 	button, input[type="submit"] {
 		padding: 3px 5px;
 		background-color: #c7a593;
@@ -73,16 +94,29 @@
 	form {
 		padding: 10px;
 	}
-	input[type="text"] {
+	input[type="text"], select {
 		padding: 3px;
 	}
 	#f2 {
-		float: right;
+		float: left;
 		padding-right: 5px;
 	}
-	#btns {
+	#allList {
 		float: left;
-		padding: 10px;
+		margin-top: 10px;
+	}
+	select[name="cp"] {
+		float: left;
+		margin-right: 5px;
+	}
+	#addCoupon {
+		float: right;
+		margin: 10px 10px 10px 0 ;
+	}
+	#couponForm {
+		float: right;
+		display: none;
+		padding-right: 5px;
 	}
 	#pagediv {
 		text-align: center;
@@ -94,6 +128,9 @@
 	}
 	.pn {
 		margin: 0 5px;
+	}
+	.hidden {
+		display: none;
 	}
 </style>
 <script>
@@ -113,7 +150,8 @@
 					console.log(res);
 					
 					$("table").empty();
-					$("table").append("<tr><th id='mNo'>회원번호</th><th id='mName'>회원명</th><th id='mBirth'>생년월일</th><th id='mTel'>전화번호</th><th id='mAddr'>주소</th><th id='mMileage'>마일리지</th><th id='mGrade'>등급</th><th id='mJoin'>가입일</th><th id='mCount'>주문횟수</th><th>쿠폰</th></tr>");
+					$("table").append("<tr><th id='mNo'>회원번호</th><th id='mName'>회원명</th><th id='mBirth'>생년월일</th><th id='mTel'>전화번호</th><th id='mAddr'>주소</th><th id='mMileage'>마일리지</th><th id='mGrade'>등급</th><th id='mJoin'>가입일</th><th id='mCount'>주문횟수</th><th>쿠폰</th><th><input type='checkbox' id='allcheck' class='hidden'></th></tr>");
+					$("input[name='tel']").val("");
 					
 					$(res).each(function(i, obj) {
 						var birth = new Date(obj.mbBirth);
@@ -123,19 +161,25 @@
 						var $mbno = $("<td>").text(obj.mbNo);
 						var $mbname = $("<td>").text(obj.mbName);
 						var $mbbirth = $("<td>").text(birth.getFullYear()+"년"+("00" + (birth.getMonth() + 1)).slice(-2)+"월"+("00" + birth.getDate()).slice(-2)+"일");
-						var $mbtel = $("<td>").text(obj.mbTel);
+						var $mbtel = $("<td>").text(obj.mbTel.substring(0, 3)+"-"+obj.mbTel.substring(3, 7)+"-"+obj.mbTel.substring(7, 11));
 						var $mbaddress = $("<td>").text(obj.mbAddress);
 						var $mbmileage = $("<td>").text(obj.mbMileage.toLocaleString()+"원");
 						var $mbgrade = $("<td>").text(obj.mbGrade.grade);
 						var $mbjoin = $("<td>").text(join.getFullYear()+"년"+("00" + (join.getMonth() + 1)).slice(-2)+"월"+("00" + join.getDate()).slice(-2)+"일");
 						var $mbcount = $("<td>").text(obj.mbCount);
 						var $coupon;
-						$(obj.coupon).each(function(i, obj2) {
-							var cpName = obj2.cpName.replace(","," ").trim();
-							$coupon = $("<td>").text(cpName);
-						})
-
-						$tr.append($mbno).append($mbname).append($mbbirth).append($mbtel).append($mbaddress).append($mbmileage).append($mbgrade).append($mbjoin).append($mbcount).append($coupon);
+						if(obj.coupon.length == 0) {
+							$coupon = $("<td>").text("");
+						}else if(obj.coupon.length != 0) {
+							$(obj.coupon).each(function(i, obj2) {
+								var cpName = obj2.cpName.replace(","," ").trim();
+								$coupon = $("<td>").text(cpName);
+							})
+						}
+						var $input = $("<input type='checkbox' class='check hidden'>");
+						var $lasttd = $("<td>").append($input);
+						
+						$tr.append($mbno).append($mbname).append($mbbirth).append($mbtel).append($mbaddress).append($mbmileage).append($mbgrade).append($mbjoin).append($mbcount).append($coupon).append($lasttd);
 						$("table").append($tr);
 					})
 				}
@@ -152,7 +196,7 @@
 					console.log(res);
 					
 					$("table").empty();
-					$("table").append("<tr><th id='mNo'>회원번호</th><th id='mName'>회원명</th><th id='mBirth'>생년월일</th><th id='mTel'>전화번호</th><th id='mAddr'>주소</th><th id='mMileage'>마일리지</th><th id='mGrade'>등급</th><th id='mJoin'>가입일</th><th id='mCount'>주문횟수</th><th>쿠폰</th></tr>");
+					$("table").append("<tr><th id='mNo'>회원번호</th><th id='mName'>회원명</th><th id='mBirth'>생년월일</th><th id='mTel'>전화번호</th><th id='mAddr'>주소</th><th id='mMileage'>마일리지</th><th id='mGrade'>등급</th><th id='mJoin'>가입일</th><th id='mCount'>주문횟수</th><th>쿠폰</th><th><input type='checkbox' id='allcheck' class='hidden'></th></tr>");
 					$("input[name='tel']").val("");
 					
 					$(res.content).each(function(i, obj) {
@@ -163,19 +207,25 @@
 						var $mbno = $("<td>").text(obj.mbNo);
 						var $mbname = $("<td>").text(obj.mbName);
 						var $mbbirth = $("<td>").text(birth.getFullYear()+"년"+("00" + (birth.getMonth() + 1)).slice(-2)+"월"+("00" + birth.getDate()).slice(-2)+"일");
-						var $mbtel = $("<td>").text(obj.mbTel);
+						var $mbtel = $("<td>").text(obj.mbTel.substring(0, 3)+"-"+obj.mbTel.substring(3, 7)+"-"+obj.mbTel.substring(7, 11));
 						var $mbaddress = $("<td>").text(obj.mbAddress);
 						var $mbmileage = $("<td>").text(obj.mbMileage.toLocaleString()+"원");
 						var $mbgrade = $("<td>").text(obj.mbGrade.grade);
 						var $mbjoin = $("<td>").text(join.getFullYear()+"년"+("00" + (join.getMonth() + 1)).slice(-2)+"월"+("00" + join.getDate()).slice(-2)+"일");
 						var $mbcount = $("<td>").text(obj.mbCount);
 						var $coupon;
-						$(obj.coupon).each(function(i, obj2) {
-							var cpName = obj2.cpName.replace(","," ").trim();
-							$coupon = $("<td>").text(cpName);
-						})
+						if(obj.coupon.length == 0) {
+							$coupon = $("<td>").text("");
+						}else if(obj.coupon.length != 0) {
+							$(obj.coupon).each(function(i, obj2) {
+								var cpName = obj2.cpName.replace(","," ").trim();
+								$coupon = $("<td>").text(cpName);
+							})
+						}
+						var $input = $("<input type='checkbox' class='check hidden'>");
+						var $lasttd = $("<td>").append($input);
 						
-						$tr.append($mbno).append($mbname).append($mbbirth).append($mbtel).append($mbaddress).append($mbmileage).append($mbgrade).append($mbjoin).append($mbcount).append($coupon);
+						$tr.append($mbno).append($mbname).append($mbbirth).append($mbtel).append($mbaddress).append($mbmileage).append($mbgrade).append($mbjoin).append($mbcount).append($coupon).append($lasttd);
 						$("table").append($tr);
 					})
 				}
@@ -183,18 +233,104 @@
 			return false;
 		})
 		
+		$(document).on("click","#addCoupon",function(){
+			if($("#addCoupon").text() != "취소") {
+				$("#couponForm").css("display", "inline-block");
+				$("#addCoupon").text("취소");
+				$("input[type='checkbox']").removeClass("hidden");
+			}else {
+				$("#couponForm").css("display", "none");
+				$("#addCoupon").text("쿠폰추가");
+				$("input[type='checkbox']").addClass("hidden");
+			}
+		})
+		
+		$(document).on("click","#allcheck",function(){
+			if( $("#allcheck").prop("checked") == true){
+				$(".check").prop("checked", true);	
+			}else{
+				$(".check").prop("checked", false);	
+			}
+		})
+		
+		$("#couponForm").submit(function() {
+			var noArray = new Array();
+			for(var i=0; i<$(".check").length; i++) {
+				if($(".check").eq(i).prop("checked") == true)	{
+					noArray.push($(".check").eq(i).attr("data-no"));
+				}
+			}
+			
+			if(noArray.length == 0) {
+				alert("쿠폰을 추가할 회원을 선택해주세요.");
+				return false;
+			}
+			
+			jQuery.ajaxSettings.traditional = true;
+			$.ajax({
+				url:"${pageContext.request.contextPath}/mgn/memberMgnAddCoupon.do",
+				type:"post",
+				data:{"coupon":$("select[name='cp']").val(), "noArray":noArray},
+				dataType:"json",
+				success: function(res) {
+					console.log(res);
+					
+					$("table").empty();
+					$("table").append("<tr><th id='mNo'>회원번호</th><th id='mName'>회원명</th><th id='mBirth'>생년월일</th><th id='mTel'>전화번호</th><th id='mAddr'>주소</th><th id='mMileage'>마일리지</th><th id='mGrade'>등급</th><th id='mJoin'>가입일</th><th id='mCount'>주문횟수</th><th>쿠폰</th><th><input type='checkbox' id='allcheck' class='hidden'></th></tr>");
+					
+					$(res.content).each(function(i, obj) {
+						var birth = new Date(obj.mbBirth);
+						var join = new Date(obj.mbJoin);
+						
+						var $tr = $("<tr>");
+						var $mbno = $("<td>").text(obj.mbNo);
+						var $mbname = $("<td>").text(obj.mbName);
+						var $mbbirth = $("<td>").text(birth.getFullYear()+"년"+("00" + (birth.getMonth() + 1)).slice(-2)+"월"+("00" + birth.getDate()).slice(-2)+"일");
+						var $mbtel = $("<td>").text(obj.mbTel.substring(0, 3)+"-"+obj.mbTel.substring(3, 7)+"-"+obj.mbTel.substring(7, 11));
+						var $mbaddress = $("<td>").text(obj.mbAddress);
+						var $mbmileage = $("<td>").text(obj.mbMileage.toLocaleString()+"원");
+						var $mbgrade = $("<td>").text(obj.mbGrade.grade);
+						var $mbjoin = $("<td>").text(join.getFullYear()+"년"+("00" + (join.getMonth() + 1)).slice(-2)+"월"+("00" + join.getDate()).slice(-2)+"일");
+						var $mbcount = $("<td>").text(obj.mbCount);
+						var $coupon;
+						if(obj.coupon.length == 0) {
+							$coupon = $("<td>").text("");
+						}else if(obj.coupon.length != 0) {
+							$(obj.coupon).each(function(i, obj2) {
+								var cpName = obj2.cpName.replace(","," ").replace(","," ").trim();
+								$coupon = $("<td>").text(cpName);
+							})
+						}
+						var $input = $("<input type='checkbox' class='check hidden'>");
+						var $lasttd = $("<td>").append($input);
+
+						$tr.append($mbno).append($mbname).append($mbbirth).append($mbtel).append($mbaddress).append($mbmileage).append($mbgrade).append($mbjoin).append($mbcount).append($coupon).append($lasttd);
+						$("table").append($tr);
+					})
+					$("#couponForm").css("display", "none");
+					$("#addCoupon").text("쿠폰추가");
+				}
+			})	
+			return false;	
+		})
 	})
 </script>
 
 	<div id="wrap">
 		<div id="div"></div>
 		<div id="memberList">
-			<div id="btns">
-				<button id="allList">전체보기</button>
-			</div>
 			<form action="${pageContext.request.contextPath}/mgn/memberMgnsearch.do" method="post" id="f2">
 				<input type="text" name="tel" size="30" placeholder="검색할 전화번호">
 				<input type="submit" value="검색">
+			</form>
+			<button id="allList">전체보기</button>
+			<button id="addCoupon">쿠폰추가</button>
+			<form id="couponForm">
+				<select name="cp">
+					<option>생일쿠폰</option>
+					<option>서비스쿠폰</option>
+				</select>
+				<input type="submit" value="추가하기">
 			</form>
 			<table>
 				<tr>
@@ -208,6 +344,7 @@
 					<th id="mJoin">가입일</th>
 					<th id="mCount">주문횟수</th>
 					<th>쿠폰</th>
+					<th><input type="checkbox" id="allcheck" class="hidden"></th>
 				</tr>
 				<c:forEach var="mlist" items="${memberPage.content}">
 					<c:if test="${mlist.mbWithdrawal == false}">
@@ -215,15 +352,23 @@
 							<td>${mlist.mbNo}</td>
 							<td>${mlist.mbName}</td>
 							<td><fmt:formatDate value="${mlist.mbBirth}" pattern="yyyy년MM월dd일"/></td>
-							<td>${mlist.mbTel}</td>
+							<td>${fn:substring(mlist.mbTel,0,3)}-${fn:substring(mlist.mbTel,3,7)}-${fn:substring(mlist.mbTel,7,11)}</td>
 							<td>${mlist.mbAddress}</td>
 							<td><fmt:formatNumber groupingUsed="true" value="${mlist.mbMileage}"/>원</td>
 							<td>${mlist.mbGrade}</td>
 							<td><fmt:formatDate value="${mlist.mbJoin}" pattern="yyyy년MM월dd일"/></td>
 							<td>${mlist.mbCount}</td>
-							<c:forEach var="cp" items="${mlist.coupon}">
-								<td>${cp.cpName.replace(","," ").trim()}</td>
-							</c:forEach>
+							<c:choose>
+								<c:when test="${empty mlist.coupon}">
+									<td></td>
+								</c:when>
+								<c:when test="${mlist.coupon != null}">
+									<c:forEach var="cp" items="${mlist.coupon}">
+										<td>${cp.cpName.replace(","," ").replace(","," ").trim()}</td>
+									</c:forEach>
+								</c:when>
+							</c:choose>
+							<td><input type="checkbox" class="check hidden" data-no="${mlist.mbNo}"></td>
 						</tr>
 					</c:if>
 					<c:if test="${mlist.mbWithdrawal != false}">
@@ -231,15 +376,23 @@
 							<td>${mlist.mbNo}</td>
 							<td>${mlist.mbName}</td>
 							<td><fmt:formatDate value="${mlist.mbBirth}" pattern="yyyy년MM월dd일"/></td>
-							<td>${mlist.mbTel}</td>
+							<td>${fn:substring(mlist.mbTel,0,3)}-${fn:substring(mlist.mbTel,3,7)}-${fn:substring(mlist.mbTel,7,11)}</td>
 							<td>${mlist.mbAddress}</td>
 							<td><fmt:formatNumber groupingUsed="true" value="${mlist.mbMileage}"/>원</td>
 							<td>${mlist.mbGrade}</td>
 							<td><fmt:formatDate value="${mlist.mbJoin}" pattern="yyyy년MM월dd일"/></td>
 							<td>${mlist.mbCount}</td>
-							<c:forEach var="cp" items="${mlist.coupon}">
-								<td>${cp.cpName.replace(","," ").trim()}</td>
-							</c:forEach>
+							<c:choose>
+								<c:when test="${empty mlist.coupon}">
+									<td></td>
+								</c:when>
+								<c:when test="${mlist.coupon != null}">
+									<c:forEach var="cp" items="${mlist.coupon}">
+										<td>${cp.cpName.replace(","," ").replace(","," ").trim()}</td>
+									</c:forEach>
+								</c:when>
+							</c:choose>
+							<td><input type="checkbox" class="check hidden" data-no="${mlist.mbNo}"></td>
 						</tr>
 					</c:if>
 				</c:forEach>

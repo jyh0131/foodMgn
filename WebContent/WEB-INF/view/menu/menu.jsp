@@ -2,130 +2,7 @@
     pageEncoding="UTF-8"%>
 
 <%@ include file="../include/header.jsp" %>
-
-<style>
-	.s_visu1 {
-		width: 100%;
-		height: 350px;
-	}
-	.s_visu1 img{
-		width: 100%;
-		height: 350px;
-	}
-	.content {
-		position: relative;
-		width: 1000px;
-		margin: 0 auto;
-		padding: 20px 0;
-		overflow: hidden;
-		clear: both;
-	}
-	#menu_li {
-		border: 1px solid #887c75;
-		width: 200px;
-		height: 25px;
-		line-height: 25px;
-		padding: 10px 0;
-		background-color: #f2efec;
-		font-size: 15px;
-		text-indent: 16px;
-		position: relative;
-		cursor: pointer;
-		float: left;
-	}
-	#menu_li2 {
-		float: right;                 
-	}
-	#menu_li2 li {
-		list-style: none;
-		float: left;
-		padding: 5px; 
-	}
-	.li_img {
-		background: url("${pageContext.request.contextPath}/images/menu/s_menu_bg.gif") no-repeat;
-		position: absolute;
-		top: 20px;
-		right: 10px;
-		width: 20px;
-		height: 10px;
-	}
-	#menulist {
-		display: none;
-		width: 200px;
-		position: absolute;
-		top: 46px;
-		left: -1px;
-	}
-	#menulist li {
-		border: 1px solid #887c75;
-		border-bottom: 1px dotted #887c75;
-		border-top: none;
-		width: 200px;
-		height: 20px;
-		line-height: 20px;
-		padding: 10px 0;
-		background-color: #f2efec;
-		color: black;
-	}
-	#menulist li:hover {
-		background-color: #887c75;
-		color: white;
-	}
-	#menulist li:last-child {
-		border-bottom: 1px solid #887c75;
-	}
-	
-	
-	
-	#menu_content {
-		margin: 50px 0;
-	}
-	#title_img {
-		padding: 30px 0;
-	}
-	#menu_name {
-		padding: 20px 0;
-		text-align: center;
-	}
-	#menu_name h1 {
-		color: #814b34;
-		font-weight: bold;
-		font-size: 34px;
-		margin-bottom: 10px; 
-	}
-	#menu_name p {
-		color: #766f6c;
-		font-size: 15px;
-		padding: 10px;
-	}
-	#menu_name li {
-		list-style: none;
-		width: 100%;
-		
-	}
-	.bevImg img {
-		float: left;
-		width: 250px;
-		height: 620px;
-		border-bottom: 1px dotted #555;
-	}
-	.bevImg:last-child img {
-		margin-bottom: 70px;
-	}
-	.beerImg img {
-		float: left;
-		width: 250px;
-		height: 415px;
-		border-bottom: 1px dotted #555;
-	}
-	.beerImg:nth-child(1) img, .beerImg:nth-child(2) img {
-		width: 500px;
-		height: 400px;
-	}
-	.beerImg:last-child img {
-		margin-bottom: 70px;
-	}
-</style>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/menu.css" type="text/css">
 
 <script>
 	$(function() {
@@ -153,6 +30,7 @@
 			var $li = $(this);
 			var fNo = $(this).attr("data-no");
 			var fkName = ["파스타","스테이크&커틀렛","필라프&리조또","샐러드","시그니처 피자","피자","사이드 메뉴","음료","맥주"];
+			var fkNameE = ["PASTA","STEAK&CUTLET","PILAF&RISOTTO","SALAD","SIGNATURE PIZZA","PIZZA","SIDE MENU","BEVERAGE","BEER"];
 			
 			$.ajax({
 				url:"${pageContext.request.contextPath}/menu.do",
@@ -167,17 +45,21 @@
 					$("#fkN").empty();
 					$(".li_name").empty();
 					$("#menu_name h1").empty();
+					$("#menu_name h3").empty();
 					
 					var $t_img = $("<img>").attr("src", "${pageContext.request.contextPath}/images/menu/"+fkName[fNo-1]+".jpg");
 					$("#title_img").append($t_img);		
 					
-					var $b = $("<b>").text(fkName[fNo-1]);
+					var $b = $("<b>").text(fkNameE[fNo-1]);
 					$("#fkN").append($b);
 					
-					$(".li_name").text(fkName[fNo-1]);
+					$(".li_name").text(fkNameE[fNo-1]);
 					
-					var $h1 = $("<h1>").text(fkName[fNo-1]);
+					var $h1 = $("<span>").text(fkNameE[fNo-1]);
 					$("#menu_name h1").append($h1);
+					
+					var $h3 = $("<span>").text("["+fkName[fNo-1]+"]");
+					$("#menu_name h3").append($h3);
 					
 					$(res).each(function(i, obj) {
 						if(fNo == 8) {
@@ -204,11 +86,12 @@
 </script>
 	<div class="sub">
 		<div class="s_visu1">
-			<img src="${pageContext.request.contextPath}/images/menu/sub02_visu.jpg">
+			<img id="s_visu1_1" src="${pageContext.request.contextPath}/images/menu/sub02_visu.jpg">
+			<img id="s_visu1_2" src="${pageContext.request.contextPath}/images/menu/s_visu2.jpg">
 		</div>
 		<div class="content">
 			<div id="menu_li">
-				<span class="li_name">${fkName}</span>
+				<span class="li_name">${fkNameEng}</span>
 				<span class="li_img"></span>
 				<ul id="menulist">
 					<c:forEach var="fklist" items="${fkList}">
@@ -223,7 +106,7 @@
 					<li>></li>
 					<li>메뉴소개</li>
 					<li>></li>
-					<li id="fkN"><b>${fkName}</b></li>
+					<li id="fkN"><b>${fkNameEng}</b></li>
 				</ul>
 			</div>
 			<div class="clear"></div>
@@ -232,8 +115,12 @@
 					<img src="${pageContext.request.contextPath}/images/menu/${fkName}.jpg">
 				</div>
 				<div id="menu_name">
-					<h1>${fkName}</h1>
-					<ul>
+					<h1>${fkNameEng}</h1>
+					<h3>[${fkName}]</h3>
+					<div id="title_img2">
+						<img src="${pageContext.request.contextPath}/images/menu/${fkName}.jpg">
+					</div>
+					<ul id="ul1">
 						<c:forEach var="flist" items="${fList}">
 							<c:if test="${flist.fkNo.fkNo == 8}">
 								<li class="bevImg"><img src="${pageContext.request.contextPath}/food/${flist.fdImg}"></li>
@@ -246,6 +133,31 @@
 							</c:if>
 						</c:forEach>
 					</ul>
+					<ul id="ul2">
+						<c:forEach var="flist" items="${fList}">
+							<div class="mobileImg">
+								<c:if test="${flist.fkNo.fkNo == 8}">
+									<li class="bevImg"><img src="${pageContext.request.contextPath}/images/food/${flist.fdName}.png"></li>
+									<li class="foodNameEng">${flist.fdNameEng}</li>
+									<li class="foodName">${flist.fdName}</li>
+								</c:if>
+								<c:if test="${flist.fkNo.fkNo == 9}">
+									<li class="beerImg"><img src="${pageContext.request.contextPath}/images/food/${flist.fdName}.png"></li>
+									<li class="foodNameEng">${flist.fdNameEng}</li>
+									<li class="foodName">${flist.fdName}</li>
+								</c:if>
+								<c:if test="${flist.fkNo.fkNo != 8 and flist.fkNo.fkNo != 9}">
+									<li><img src="${pageContext.request.contextPath}/images/food/${flist.fdName}.png"></li>
+									<li class="foodNameEng">${flist.fdNameEng}</li>
+									<li class="foodName">${flist.fdName}</li>
+									<li class="foodExplain">${flist.fdExplain}</li>
+								</c:if>
+							</div>
+						</c:forEach>
+					</ul>
+				</div>
+				<div id="topImg">
+					<a href="#"><img src="${pageContext.request.contextPath}/images/up-arrow-icon.png"></a>
 				</div>
 			</div>
 		</div>

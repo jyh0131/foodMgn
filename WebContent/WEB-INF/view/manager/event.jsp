@@ -2,7 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp" %>
 <style>
-	.s_visu1 {
+@media screen and (min-width:768px){
+.s_visu1 {
 		width: 100%;
 		height: 350px;
 	}
@@ -106,9 +107,7 @@
 	table{
 		width:100%;
 		border-bottom:2px solid #55423b;
-		overflow: hidden;
-		white-space: nowrap;
-		text-overflow: ellipsis;
+		
 	}
 	td{
 		text-align: center;
@@ -117,10 +116,16 @@
 		widtn:350px;
 		text-align: left !important;
 		padding-left:10px;
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
 	}
 	
 	th, td{
 		padding:5px 0;
+	}
+	th{
+		text-align: center  !important;
 	}
 	tr:first-child{
 		background: #f9f9f9;
@@ -162,7 +167,182 @@
 		font-weight: bold;
 		margin-bottom:5px;
 		color:white;
-	}                              
+	}  
+	#MoImg{
+		display: none;
+	}               
+}
+@media all and (max-width:767px){
+	#PcImg{
+		display: none;
+	}   
+	
+	
+	.s_visu1 {
+		width: 100%;
+		height: 250px;
+	}
+	
+	.s_visu1 img{
+		width: 100%;
+		height: 250px;
+	}
+	
+	.content {
+		position: relative;
+		width: 100%;
+		margin: 0 auto;
+		padding: 20px 0;
+		overflow: hidden;
+		clear: both;
+	}
+	#menu_li {
+		border: 1px solid #887c75;
+		width: 200px;
+		height: 25px;
+		line-height: 25px;
+		padding: 10px 0;
+		background-color: #f2efec;
+		font-size: 15px;
+		text-indent: 16px;
+		position: relative;
+		cursor: pointer;
+		float: left;
+		margin-bottom:40px;
+	}
+	#menu_li2 {
+		display: none;                
+	}
+	
+	.li_img {
+		background: url("${pageContext.request.contextPath}/images/menu/s_menu_bg.gif") no-repeat;
+		position: absolute;
+		top: 20px;
+		right: 10px;
+		width: 20px;
+		height: 10px;
+	}
+	#menulist {
+		display: none;
+		width: 200px;
+		position: absolute;
+		top: 46px;
+		left: -1px;
+		z-index: 3;
+	}
+	#menulist li {
+		border: 1px solid #887c75;
+		border-bottom: 1px dotted #887c75;
+		border-top: none;
+		width: 200px;
+		height: 20px;
+		line-height: 20px;
+		padding: 10px 0;
+		background-color: #f2efec;
+		color: black;
+	}
+	#menulist li:hover {
+		background-color: #887c75;
+		color: white;
+	}
+	#menulist li:last-child {
+		border-bottom: 1px solid #887c75;
+	}
+	h1{
+		color:#55423b;
+		clear: both;
+		text-align: center;
+		padding-bottom:40px;
+		border-bottom:2px solid #55423b;
+		position: relative;                   
+	}
+	#write{
+		position: absolute;
+		width:70px;
+		height:30px;
+		font-size:15px;
+		right:0;
+		bottom:5px;
+	}
+	#pagediv {
+		text-align: center;
+		padding-top: 20px;
+	}
+	.current {
+		font-weight: bold;
+		text-decoration: underline;
+	}
+	.pn {
+		margin: 0 5px;
+	}
+	table{
+		width:100%;
+		border-bottom:2px solid #55423b;
+		
+	}
+	td{
+		text-align: center;
+	}
+	.eTitle{
+		text-align: left !important;
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		padding-left:10px;
+		width:80%;
+		max-width:240px;
+	}
+	
+	th, td{
+		padding:5px 0;
+	}
+	th{
+		text-align: center !important;
+	}
+	tr:first-child{
+		background: #f9f9f9;
+	}
+	.eNo{
+		display: none;
+	}
+	.eName{
+		display: none;
+	}
+	.eDate{
+		display: none;
+	}
+	.eCun{
+		width:20%;
+		min-width:70px;
+	}
+	a{
+		color:black;
+	}
+	.ing{
+		display: inline-block;
+		width:100%;
+		height:30px;
+		line-height:30px;
+		text-align:center;
+		background: #c62f24;
+		font-size: 15px;
+		font-weight: bold;
+		margin-bottom:5px;
+	}
+	.end{
+		display: inline-block;
+		width:100%;
+		height:30px;
+		line-height:30px;
+		text-align:center;
+		background: #a5a5a5;
+		font-size:15px;
+		font-weight: bold;
+		margin-bottom:5px;
+		color:white;
+	}  
+}
+	             
 </style>
 
 <script>
@@ -278,8 +458,11 @@
 		})
 	})
 </script>
-	<div class="s_visu1">
+	<div class="s_visu1" id="PcImg">
 		<img src="${pageContext.request.contextPath}/images/main/event.jpg">
+	</div>
+	<div class="s_visu1"  id="MoImg">
+		<img src="${pageContext.request.contextPath}/images/event/s_visu5.jpg">
 	</div>
 	<div class="content">
 			<div id="menu_li">
@@ -302,11 +485,11 @@
 			<h1>진행중인 이벤트 <button id="write">글쓰기</button></h1>
 			<table>
 				<tr>
-					<th>게시물 번호</th>
+					<th class="eNo">게시물 번호</th>
 					<th>제목</th>
-					<th>작성자</th>
-					<th>이벤트 기간</th>
-					<th>진행상태</th>
+					<th class="eName">작성자</th>
+					<th class="eDate">이벤트 기간</th>
+					<th class="eCun">진행상태</th>
 				</tr>
 			<c:forEach var="event" items="${eventPage.content }">
 				<tr class="listTr">

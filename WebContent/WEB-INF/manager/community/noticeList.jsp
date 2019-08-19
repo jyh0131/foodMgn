@@ -89,6 +89,18 @@
 	.underline a {
 		color: red;
 	}
+	
+	#pagediv {
+		text-align: center;
+		padding-top: 20px;
+		padding-bottom: 20px;
+	}
+	.current {
+		font-weight: bold;
+	}
+	.pn {
+		margin: 0 5px;
+	}
 </style>
 <script>
 	$(function() {
@@ -167,7 +179,7 @@
 					<th id="noticeUpdate">수정일</th>
 					<th id="update"></th>
 				</tr>
-				<c:forEach var="nlist" items="${nList}">
+				<c:forEach var="nlist" items="${noticePage.content}">
 					<c:if test="${nlist.noDelete != true}">
 						<tr>
 							<td>${nlist.noNo}</td>
@@ -196,6 +208,22 @@
 					</c:if>
 				</c:forEach>
 			</table>
+			<div id="pagediv">
+				<c:if test="${noticePage.startPage > 5}">
+					<a href="${pageContext.request.contextPath}/mgn/noticeMgnlist.do?page=${noticePage.startPage - 1}" class="pn">&lt;&lt;</a>
+				</c:if>
+				<c:forEach var="pNo" begin="${noticePage.startPage}" end="${noticePage.endPage}">
+					<c:if test="${noticePage.currentPage == pNo}">
+						<a href="${pageContext.request.contextPath}/mgn/noticeMgnlist.do?page=${pNo}" class="current">${pNo}</a>
+					</c:if>
+					<c:if test="${noticePage.currentPage != pNo}">
+						<a href="${pageContext.request.contextPath}/mgn/noticeMgnlist.do?page=${pNo}">${pNo}</a>
+					</c:if>
+				</c:forEach>
+				<c:if test="${noticePage.endPage < noticePage.totalPages}">
+					<a href="${pageContext.request.contextPath}/mgn/noticeMgnlist.do?page=${noticePage.endPage + 1}" class="pn">&gt;&gt;</a>
+				</c:if>
+			</div>
 		</div>
 	</div>
 	

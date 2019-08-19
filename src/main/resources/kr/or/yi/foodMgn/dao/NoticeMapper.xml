@@ -29,7 +29,6 @@
 		select * from notice where no_delete=0 order by no_no desc limit 0,4
 	</select>
 	
-	
 	<update id="updateReadNt" parameterType="Notice">
 		update notice set no_read_nt = #{noReadNt} where no_no = #{noNo}
 	</update>
@@ -43,14 +42,18 @@
 	</update>
 	
 	<select id="selectNoticeByTitle" resultType="Notice" parameterType="Notice">
-		select * from notice where no_title like concat('%',#{noTitle},'%') order by no_no desc
+		select * from notice where no_delete=0 and no_title like concat('%',#{noTitle},'%') order by no_no desc
 	</select>
 	
 	<select id="selectNoticeByContent" resultType="Notice" parameterType="Notice">
-		select * from notice where no_content like concat('%',#{noContent},'%') order by no_no desc
+		select * from notice where no_delete=0 and no_content like concat('%',#{noContent},'%') order by no_no desc
 	</select>
 	
 	<select id="selectNoticeByTitleandContent" resultType="Notice" parameterType="Notice">
-		select * from notice where no_content like concat('%',#{noContent},'%') or no_title like concat('%',#{noTitle},'%')  order by no_no desc
+		select * from notice where no_delete=0 and no_content like concat('%',#{noContent},'%') or no_title like concat('%',#{noTitle},'%')  order by no_no desc
+	</select>
+	
+	<select id="selectListPage2" resultType="Notice" parameterType="map">
+		select * from notice order by no_no desc limit #{startRow}, #{size}
 	</select>
 </mapper>

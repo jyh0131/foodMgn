@@ -6,6 +6,7 @@
 	<resultMap type="FoodKind" id="resultFoodKind">
 		<id column="fk_no" property="fkNo"/>
 		<result column="fk_name" property="fkName"/>
+		<result column="fk_name_eng" property="fkNameEng"/>
 	</resultMap>
 	
 	<resultMap type="FoodKind" id="resultFoodKindKCM" extends="resultFoodKind">
@@ -17,7 +18,7 @@
 	</select>
 	
 	<select id="selectFoodKindByAll" resultMap="resultFoodKind">
-		select fk_name, fk_no from foodkind
+		select fk_name, fk_no, fk_name_eng from foodkind
 	</select>
 	
 	<select id="selectByFkNo" resultType="FoodKind" parameterType="FoodKind">

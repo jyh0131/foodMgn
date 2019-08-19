@@ -25,6 +25,7 @@ public class NoticeSearchHandler implements CommandHandler {
 		}else if(req.getMethod().equalsIgnoreCase("post")) {
 			String opt = req.getParameter("opt");
 			String search = req.getParameter("search");
+			String search2 = req.getParameter("search2");
 			
 			String sPage = req.getParameter("page");
 			int page = 1;
@@ -37,65 +38,90 @@ public class NoticeSearchHandler implements CommandHandler {
 			NoticeDao dao = new NoticeDaoImpl();
 			
 			Map<String , Object> map = new HashMap<>();
-
-			if(opt.equals("제목")) {
+			
+			if(search2 == null && search != null) {
+				if(opt.equals("제목")) {
+					Notice notice = new Notice();
+					notice.setNoTitle(search);
+					List<Notice> list = dao.selectNoticeByTitle(notice);
+					
+					map.put("list", list);
+					map.put("startRow", (page-1)*10);
+					map.put("size", 10);
+					
+					int totalCount = dao.selectTotalCount();
+					
+					NoticePage np = new NoticePage(totalCount, page, 10, list);
+//					req.setAttribute("noticePage", np);
+					
+					res.setContentType("application/json;charset=utf-8");
+					ObjectMapper om = new ObjectMapper();
+					String json = om.writeValueAsString(np);
+					
+					PrintWriter out = res.getWriter();
+					out.print(json);
+					out.flush();
+					
+					return null;
+				}else if(opt.equals("내용")) {
+					Notice notice = new Notice();
+					notice.setNoContent(search);
+					List<Notice> list = dao.selectNoticeByContent(notice);
+					
+					map.put("list", list);
+					map.put("startRow", (page-1)*10);
+					map.put("size", 10);
+					
+					int totalCount = dao.selectTotalCount();
+					
+					NoticePage np = new NoticePage(totalCount, page, 10, list);
+					
+					res.setContentType("application/json;charset=utf-8");
+					ObjectMapper om = new ObjectMapper();
+					String json = om.writeValueAsString(np);
+					
+					PrintWriter out = res.getWriter();
+					out.print(json);
+					out.flush();
+					
+					return null;
+				}else {
+					Notice notice = new Notice();
+					notice.setNoContent(search);
+					notice.setNoTitle(search);
+					List<Notice> list = dao.selectNoticeByTitleandContent(notice);
+					
+					map.put("list", list);
+					map.put("startRow", (page-1)*10);
+					map.put("size", 10);
+					
+					int totalCount = dao.selectTotalCount();
+					
+					NoticePage np = new NoticePage(totalCount, page, 10, list);
+					
+					res.setContentType("application/json;charset=utf-8");
+					ObjectMapper om = new ObjectMapper();
+					String json = om.writeValueAsString(np);
+					
+					PrintWriter out = res.getWriter();
+					out.print(json);
+					out.flush();
+					
+					return null;
+				}
+			}else if(search2 != null && search == null) {
 				Notice notice = new Notice();
-				notice.setNoTitle(search);
-				List<Notice> list = dao.selectNoticeByTitle(notice);
-				
-				map.put("list", list);
-				map.put("startRow", (page-1)*20);
-				map.put("size", 20);
-				
-				int totalCount = dao.selectTotalCount();
-				
-				NoticePage np = new NoticePage(totalCount, page, 20, list);
-//				req.setAttribute("noticePage", np);
-				
-				res.setContentType("application/json;charset=utf-8");
-				ObjectMapper om = new ObjectMapper();
-				String json = om.writeValueAsString(np);
-				
-				PrintWriter out = res.getWriter();
-				out.print(json);
-				out.flush();
-				
-				return null;
-			}else if(opt.equals("내용")) {
-				Notice notice = new Notice();
-				notice.setNoContent(search);
-				List<Notice> list = dao.selectNoticeByContent(notice);
-				
-				map.put("list", list);
-				map.put("startRow", (page-1)*20);
-				map.put("size", 20);
-				
-				int totalCount = dao.selectTotalCount();
-				
-				NoticePage np = new NoticePage(totalCount, page, 20, list);
-				
-				res.setContentType("application/json;charset=utf-8");
-				ObjectMapper om = new ObjectMapper();
-				String json = om.writeValueAsString(np);
-				
-				PrintWriter out = res.getWriter();
-				out.print(json);
-				out.flush();
-				
-				return null;
-			}else if(opt.equals("제목+내용")) {
-				Notice notice = new Notice();
-				notice.setNoContent(search);
-				notice.setNoTitle(search);
+				notice.setNoContent(search2);
+				notice.setNoTitle(search2);
 				List<Notice> list = dao.selectNoticeByTitleandContent(notice);
 				
 				map.put("list", list);
-				map.put("startRow", (page-1)*20);
-				map.put("size", 20);
+				map.put("startRow", (page-1)*10);
+				map.put("size", 10);
 				
 				int totalCount = dao.selectTotalCount();
 				
-				NoticePage np = new NoticePage(totalCount, page, 20, list);
+				NoticePage np = new NoticePage(totalCount, page, 10, list);
 				
 				res.setContentType("application/json;charset=utf-8");
 				ObjectMapper om = new ObjectMapper();

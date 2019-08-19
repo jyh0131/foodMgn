@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp" %>
 <style>
+@media screen and (min-width:768px){
 	.s_visu1 {
 		width: 100%;
 		height: 350px;
@@ -138,6 +139,160 @@
 		margin-top:20px;
 		text-align: right;
 	}
+	#MoImg{
+		display: none;
+	}   
+}
+
+@media all and (max-width:767px){
+	#PcImg{
+		display: none;
+	}   
+	.s_visu1 {
+		width: 100%;
+		height: 250px;
+	}
+	
+	.s_visu1 img{
+		width: 100%;
+		height: 250px;
+	}
+	
+	.content {
+		position: relative;
+		width: 100%;
+		margin: 0 auto;
+		padding: 20px 0;
+		overflow: hidden;
+		clear: both;
+	}
+	#menu_li {
+		border: 1px solid #887c75;
+		width: 200px;
+		height: 25px;
+		line-height: 25px;
+		padding: 10px 0;
+		background-color: #f2efec;
+		font-size: 15px;
+		text-indent: 16px;
+		position: relative;
+		cursor: pointer;
+		float: left;
+		margin-bottom:40px;
+	}
+	#menu_li2 {
+		display: none;                
+	}
+	
+	.li_img {
+		background: url("${pageContext.request.contextPath}/images/menu/s_menu_bg.gif") no-repeat;
+		position: absolute;
+		top: 20px;
+		right: 10px;
+		width: 20px;
+		height: 10px;
+	}
+	#menulist {
+		display: none;
+		width: 200px;
+		position: absolute;
+		top: 46px;
+		left: -1px;
+		z-index: 3;
+	}
+	#menulist li {
+		border: 1px solid #887c75;
+		border-bottom: 1px dotted #887c75;
+		border-top: none;
+		width: 200px;
+		height: 20px;
+		line-height: 20px;
+		padding: 10px 0;
+		background-color: #f2efec;
+		color: black;
+	}
+	#menulist li:hover {
+		background-color: #887c75;
+		color: white;
+	}
+	#menulist li:last-child {
+		border-bottom: 1px solid #887c75;
+	}
+	h1{
+		color:#55423b;
+		clear: both;
+		text-align: center;
+		padding-top:20px;
+		padding-bottom:40px;
+		border-bottom:2px solid #55423b;
+		position: relative;                   
+	}
+	#list{
+		position: absolute;
+		right:0;
+		bottom:5px;
+	}
+	
+	
+	
+	
+	
+	button{
+		width:70px;
+		height:30px;
+		font-size:15px;
+	}
+	
+	#eventTerm{
+		color:pink;
+		font-weight: bold;
+	}
+	
+	.ing{
+		display: inline-block;
+		width:40px;
+		height:15px;
+		line-height:15px;
+		text-align:center;
+		background: #c62f24;
+		font-size: 10px;
+		font-weight: bold;
+		margin-bottom:5px;
+	}
+	.end{
+		display: inline-block;
+		width:40px;
+		height:15px;
+		line-height:15px;
+		text-align:center;
+		background: #a5a5a5;
+		font-size: 10px;
+		font-weight: bold;
+		margin-bottom:5px;
+		color:white;
+	}
+	#title{
+		border-bottom: 1px double black;
+		padding:10px 10px;
+	}
+	#event{
+		border-bottom: 2px dotted brown;
+		padding:10px 10px;
+	}
+	#text{
+		border-bottom: 2px solid #55423b;
+		padding:40px 0;
+	}
+	#btnBox{
+		margin-top:20px;
+		text-align: right;
+	}
+	#text img{
+		width:100%;
+	}
+	
+}
+	
 </style>
 
 <script>
@@ -175,8 +330,11 @@
 		})
 	})
 </script> 
-	<div class="s_visu1">
-	<img src="${pageContext.request.contextPath}/images/main/event.jpg">
+	<div class="s_visu1" id="PcImg">
+		<img src="${pageContext.request.contextPath}/images/main/event.jpg">
+	</div>
+	<div class="s_visu1"  id="MoImg">
+		<img src="${pageContext.request.contextPath}/images/event/s_visu5.jpg">
 	</div>
 	<div class="content">
 			<div id="menu_li">
