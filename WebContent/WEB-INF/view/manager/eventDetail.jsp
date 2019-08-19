@@ -134,6 +134,7 @@
 	#text{
 		border-bottom: 2px solid #55423b;
 		padding:40px 0;
+		text-align: center;
 	}
 	#btnBox{
 		margin-top:20px;
@@ -141,28 +142,35 @@
 	}
 	#MoImg{
 		display: none;
-	}   
+	}  
+	#topImg {
+		display: none;
+	}
 }
 
 @media all and (max-width:767px){
+	body {
+		background-color: #e8e2dc;
+	}
+	header {
+		background-color: white;
+	}
 	#PcImg{
 		display: none;
 	}   
 	.s_visu1 {
 		width: 100%;
-		height: 250px;
 	}
 	
 	.s_visu1 img{
 		width: 100%;
-		height: 250px;
 	}
 	
 	.content {
 		position: relative;
 		width: 100%;
 		margin: 0 auto;
-		padding: 20px 0;
+		padding: 20px 0 40px 0;
 		overflow: hidden;
 		clear: both;
 	}
@@ -178,7 +186,8 @@
 		position: relative;
 		cursor: pointer;
 		float: left;
-		margin-bottom:40px;
+		margin-bottom: 20px;
+		margin-left: 20px;
 	}
 	#menu_li2 {
 		display: none;                
@@ -225,7 +234,9 @@
 		padding-top:20px;
 		padding-bottom:40px;
 		border-bottom:2px solid #55423b;
-		position: relative;                   
+		position: relative;
+		width: 90%;
+		margin: 0 auto;                
 	}
 	#list{
 		position: absolute;
@@ -238,14 +249,18 @@
 	
 	
 	button{
-		width:70px;
-		height:30px;
 		font-size:15px;
+		background-color: #e8e2dc;
+		border: none;
+		color: #814b34;
+		font-weight: bold;
 	}
 	
 	#eventTerm{
-		color:pink;
+		color: #666600 !important;
 		font-weight: bold;
+		font-size: 0.9em;
+		padding-left: 5px;
 	}
 	
 	.ing{
@@ -272,25 +287,44 @@
 		color:white;
 	}
 	#title{
-		border-bottom: 1px double black;
-		padding:10px 10px;
+		width: 90%;
+		margin: 0 auto;
+		padding: 10px 0;
+		font-weight: bold;
+		padding-left: 5px;
 	}
 	#event{
+		border-top: 1px solid #aaa;
 		border-bottom: 2px dotted brown;
-		padding:10px 10px;
+		width: 90%;
+		margin: 0 auto;
+		padding: 5px 0 0 0;
+		color: #8C8C8C;
+		font-size: 0.9em;
 	}
 	#text{
 		border-bottom: 2px solid #55423b;
 		padding:40px 0;
+		width: 90%;
+		margin: 0 auto;
 	}
 	#btnBox{
-		margin-top:20px;
-		text-align: right;
+		display: none;
 	}
 	#text img{
 		width:100%;
 	}
-	
+	#topImg {
+		position: fixed;
+		top: 630px;
+		right: 15px;
+	}
+	#topImg img {
+		width: 38px;
+		height: 38px;
+		background-color: rgba(0,0,0,0.4);
+		border-radius: 50%;
+	}
 }
 	
 </style>
@@ -357,7 +391,7 @@
 			<h1>진행중인 이벤트 <button class="list" id="list">목록</button></h1>
 			<div id="title">${event.eTitle }</div>
 			<div id="event">
-			<span id="eventTerm">이벤트기간</span> :<fmt:formatDate value="${event.eStartDate}" pattern="yyyy-MM-dd"/> ~ <fmt:formatDate value="${event.eEndDate}" pattern="yyyy-MM-dd"/>
+			<span id="eventTerm">이벤트기간</span> : <fmt:formatDate value="${event.eStartDate}" pattern="yyyy-MM-dd"/> ~ <fmt:formatDate value="${event.eEndDate}" pattern="yyyy-MM-dd"/>
 			<c:if test="${event.eIng==true }">
 				<span class="ing">진행중</span>
 			</c:if>
@@ -373,6 +407,10 @@
 					<button id="update">수정</button> <button id="delete">마감</button>
 				</c:if>
 				 <button class="list">목록</button>
+			</div>
+			
+			<div id="topImg">
+				<a href="#"><img src="${pageContext.request.contextPath}/images/up-arrow-icon.png"></a>
 			</div>
 	</div>
 <%@ include file="../include/footer.jsp" %>

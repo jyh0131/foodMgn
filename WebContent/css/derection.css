@@ -7,10 +7,10 @@
 	#wrap {
 		width: 100%;
 		background-color: #e8e2dc;
-		margin-bottom: 20px;
 	}
 	.sub {
 		width: 100%;
+		padding-bottom: 20px;
 	}
 	.content {
 		position: relative;

@@ -81,7 +81,7 @@
 		color:#55423b;
 		clear: both;
 		text-align: center;
-		padding-bottom:40px;
+		padding-bottom:30px;
 		border-bottom:2px solid #55423b;
 		position: relative;                   
 	}
@@ -199,6 +199,7 @@
 		padding: 20px 0;
 		overflow: hidden;
 		clear: both;
+		min-height: 390px;
 	}
 	#menu_li {
 		border: 1px solid #887c75;
@@ -264,12 +265,7 @@
 		margin: 0 auto;        
 	}
 	#write{
-		position: absolute;
-		width:70px;
-		height:30px;
-		font-size:15px;
-		right:0;
-		bottom:5px;
+		display: none;
 	}
 	#pagediv {
 		text-align: center;
@@ -348,7 +344,7 @@
 		font-weight: bold;
 		margin-bottom:5px;
 		color:white;
-	}  
+	} 
 }
 	             
 </style>
