@@ -3,6 +3,7 @@
 <%@ include file="../include/header.jsp" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
 <style>
+@media screen and (min-width:768px){
 	body{
 		background: #f7f7f7;
 	}
@@ -83,6 +84,114 @@
 	#confirm{
 		text-align: center;
 	}
+	
+}
+	
+	
+@media all and (max-width:767px){
+	body{
+		background: #f7f7f7;
+	}
+	#rsvContainer{
+		width:100%;
+		margin: 0 auto;
+		
+	}
+	.s_visu1 {
+		width: 100%;
+		height: 250px;
+	}
+	
+	.s_visu1 img{
+		width: 100%;
+		height: 250px;
+	}
+	h1{
+		margin-bottom:20px;
+		margin-top:20px;
+		text-align: center;
+	}
+	#rsvInnerContainer{
+		padding:20px;
+		background: white;
+	}
+	#rsvGuide{
+		background: #f7f7f7;
+		font-size: 13px;
+		font-family: "나눔고딕",NanumGothic,ng,"맑은 고딕","Malgun Gothic",sans-serif;
+		font-weight: 600;
+		padding:15px;
+		margin-bottom:20px;
+	}
+	#rsvGuide p{
+		margin:10px 10px;
+		line-height: 20px;
+	}
+	.navy{
+		color:#120267;
+	}
+	#rsvTable{
+		border-collapse: collapse;
+		width:100%;
+		height:200px;
+		margin-bottom:20px;
+		border-top:2px solid #606060;
+	}
+	#rsvTable tr, #rsvTable td{
+		border:1px solid #dedede;
+	}
+	#rsvTable td{
+		height:65px;
+	}
+	h3{
+		margin-bottom:20px;
+	}
+	.gray{
+		width:35%;
+		background:#f7f7f7;
+		font-weight: bold;
+		text-align: center;
+	}
+	input{
+		margin:0 10px;
+		padding-left:3px;
+		height:30px;
+		background: #f9f9f9;
+	}
+	select{
+		margin:0 10px;
+		height:30px;
+		width:80px;
+	}
+	select[name='tableNo']{
+		width:150px;
+	}
+	select[name='hour']{
+		width:50px;
+	}
+	select[name='minutes']{
+		width:50px;
+	}
+	input[type="submit"],input[type="reset"]{
+		width: 100px;
+		height:50px;
+	}
+	#confirm{
+		text-align: center;
+	}
+	
+	.tel{
+		width:40px;
+		margin:0 5px !important;
+	}
+	input[name="first"]{
+		margin-left:10px !important;
+	}
+	input[name="number"]{
+		width:150px;
+		text-align: right;
+	}
+}
 </style>
 <link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
 <script src="js/jquery-ui.js"></script>
@@ -90,6 +199,8 @@
 <script>
 	$(function(){
 		$(".datepicker").datepicker();
+		
+		
 		
 		$("form").submit(function(){
 			if( Number($("input[name='number']").val())>9 ){
@@ -129,7 +240,9 @@
 			<table id="rsvTable">
 				<tr>
 					<td class="gray">이름</td>
-					<td><input type="text" name="name" id="name" value=${member.mbName }></td>
+					<td><input type="text" name="name"value=${member.mbName }></td>
+				</tr>
+				<tr>
 					<td class="gray">테이블 번호</td>
 					<td>
 						<select name="tableNo">
@@ -146,7 +259,7 @@
 				<tr>
 					<td class="gray">연락처</td>
 					<td colspan="3">
-						<input type="text" name="first" class="tel" value=${fn:substring(member.mbTel,0,3) }> - <input type="text" name="second" class="tel" value=${fn:substring(member.mbTel,3,7) }> - <input type="text" name="third" class="tel" value=${fn:substring(member.mbTel,7,11) }>
+						<input type="text" name="first" class="tel" value=${fn:substring(member.mbTel,0,3) }>-<input type="text" name="second" class="tel" value=${fn:substring(member.mbTel,3,7) }>-<input type="text" name="third" class="tel" value=${fn:substring(member.mbTel,7,11) }>
 					</td>
 				</tr>
 				<tr>

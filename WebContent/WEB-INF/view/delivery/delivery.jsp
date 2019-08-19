@@ -2,13 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp" %>
 <style>
+@media screen and (min-width:768px){
 	body{
 		background: #f7f7f7;
-	}
-	#deliveryContainer{
-		width:1400px;
-		margin: 40px auto;
-		
 	}
 	.s_visu1 {
 		width: 100%;
@@ -19,6 +15,13 @@
 		width: 100%;
 		height: 350px;
 	}
+	
+	#deliveryContainer{
+		width:1400px;
+		margin: 40px auto;
+		
+	}
+	
 	#deliveryInnerContainer{
 		padding:30px;
 		background: white;
@@ -130,6 +133,140 @@
 	 .minus{
 	 	margin-right:10px;
 	 }
+}
+@media all and (max-width:767px){
+	body{
+		background: #f7f7f7;
+	}
+	.s_visu1 {
+		width: 100%;
+		height: 250px;
+	}
+	
+	.s_visu1 img{
+		width: 100%;
+		height: 250px;
+	}
+	
+	
+	#deliveryContainer{
+		width:100%;
+		margin: 40px auto;
+		
+	}
+	
+	#deliveryInnerContainer{
+		padding:30px;
+		background: white;
+		overflow: hidden;
+	}
+	h1{
+		margin-bottom:20px;
+		margin-top:20px;
+	}
+	h3{
+		margin-bottom:20px;
+	}
+	#select, #result{
+		float:left;
+		margin:10px 20px;
+	}
+
+	#select{
+		width:350px;
+	}
+	 #result{
+		 width:910px;
+	 }
+	 #selectFK, #selectF{
+		margin:20px 0;
+	}
+	#foodkind, #food{
+		width: 300px;
+		height:50px;
+		text-align: center;
+	}
+	 #saleList{
+	 	width:900px;
+	 	border-collapse: collapse;
+	 	font-size: 20px;
+	 	font-family: Arial;
+	 	margin-bottom:20px;
+	 }
+	 #saleList tr{
+	 	background: #f5f5f5;
+	 	border:1px solid #bbb;
+	 	height:70px;
+	 }
+	 #totalPrice{
+	 	text-align: right;
+	 }
+	 #red{
+	 	color:red;
+	 }
+	 .foodNo{
+	 	display: none;
+	 }
+	 .foodName{
+	 	width:400px;
+	 	text-align: center;
+	 }
+	 .count{
+	 	width:150px;
+	 	text-align: center;
+	 }
+	 .foodPrice{
+	 	width:130px;
+	 	text-align: center;
+	 }
+	 .delete{
+	 	width:100px;
+	 	text-align: center;
+	 }
+	 .delete button{
+	 	width:60px;
+	 	height:30px;
+	 	font-size: 18px;
+	 	
+	 }
+	  .fImg{
+	 	overflow: hidden;
+	 	width:115px;
+	  }
+	  .foodImg{ /*이미지*/
+	 	display: block;
+	 	float: left;
+	 	width:90px;
+	 	height:70px;
+	 	margin-left:25px;
+	 }
+	
+	 #btn{
+	 	width:200px;
+	 	height:80px;
+	 	font-size: 25px;
+	 	line-height: 80px;
+	 	font-weight: bold;
+	 	color:white;
+	 	background: #c10a28;
+	 	margin-left:350px;
+	 }
+	 #totalPrice{
+	 	font-weight: bold;
+	 	margin:10px;
+	 	font-size: 20px;
+	 }
+	 .plus, .minus{
+	 	width:25px;
+	 	height:25px;
+	 }
+	 .plus{
+	 	margin-left:10px;
+	 }
+	 .minus{
+	 	margin-right:10px;
+	 }
+}
 </style>
 <script>
 	$(function(){
