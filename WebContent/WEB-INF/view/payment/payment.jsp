@@ -81,8 +81,8 @@
 				var mileageReg = /^[0-9]{0,20}$/;
 				var useMileage = Number($("#mileage_info_get").val());
 				if( mileageReg.test(useMileage)==true ){
-					if(useMileage > ${mem.mbMileage} ){
-						alert("사용가능한 마일리지는 ${mem.mbMileage}원 입니다");
+					if(useMileage > ${mem.mbMileage} || ${totalPrice} < useMileage ){
+						alert("사용가능 한 마일리지를 확인해주세요");
 						$("#mileage_info_get").val("");
 					}else{
 						$("#sale_info_get").text("마일리지:"+useMileage.toLocaleString()+"원");
@@ -123,7 +123,7 @@
 			var useMileage = $("#mileage_info_get").val();
 			
 			if( mileageReg.test(useMileage)==true ){
-				if(useMileage > ${mem.mbMileage} ){
+				if(useMileage > ${mem.mbMileage} || ${totalPrice} < useMileage ){
 					alert("사용가능한 마일리지는 ${mem.mbMileage}원 입니다");
 					$("#mileage_info_get").val("");
 				}else{

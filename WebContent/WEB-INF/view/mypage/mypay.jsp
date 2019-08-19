@@ -91,7 +91,7 @@
 }
 
 #sub {
-	width: 90%;
+	width: 100%;
 	height: 40px;
 	padding-left: 15px;
 	margin-bottom: 10px;
