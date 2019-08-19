@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp" %>
 <style>
+@media screen and (min-width:768px){
 	body{
 		background: #f7f7f7;
 	}
@@ -77,7 +78,7 @@
 		width:100px;
 		font-weight: bold;
 		background:#f7f7f7;
-		padding: 5px 30px;
+		padding: 5px 28px;
 	}
 	.date{
 		width:300px;
@@ -91,6 +92,111 @@
 		width:50px;
 		text-align: center;
 	}
+}
+
+@media all and (max-width:767px){
+	body{
+		background: #f7f7f7;
+	}
+	#searchContainer{
+		width:100%;
+		margin: 0 auto;
+		
+	}
+	.s_visu1 {
+		width: 100%;
+		height: 250px;
+	}
+	
+	.s_visu1 img{
+		width: 100%;
+		height: 250px;
+	}
+	h1{
+		margin-bottom:20px;
+		margin-top:20px;
+		text-align: center;
+	}
+	#searchInnerContainer{
+		padding:20px;
+		background: white;
+	}
+	
+	
+	table{
+		font-size: 12px;
+		text-align: center;
+	}
+	
+	
+	h3{
+		margin-bottom:20px;
+	}
+	#rsvTable{
+		border-collapse: collapse;
+		width:100%;
+		height:100px;
+		margin-bottom:20px;
+		border-top:2px solid #606060;
+	}
+	#rsvTable tr, #rsvTable td{
+		border:1px solid #dedede;
+	}
+	#rsvTable td{
+		height:35px;
+	}
+	.gray{
+		width:50px;
+		background:#f7f7f7;
+		font-weight: bold;
+		text-align: center;
+	}
+	.tel, #name{
+		width:80px;
+		height:25px;
+		margin:5px 10px;
+		text-align: center;
+	}
+	#search{
+		display: block;
+		width:110px;
+		height:25px;
+		margin:0 auto;
+	}
+	#result{
+		border-collapse: collapse;
+		width:100%;
+		margin-bottom:20px;
+		border-top:2px solid #606060;
+	}
+	#result tr, #result td{
+		border:1px solid #dedede;
+	}
+	#result td{
+	 	height:35px;
+	 	line-height: 35px;
+	 }
+	.rsvTime, .tableNo, .number{
+		width:70px;
+		font-weight: bold;
+		background:#f7f7f7;
+		
+	}
+	.date{
+		width:200px;
+		text-align: center;
+	}
+	.no{
+		width:120px;
+		text-align: center;
+	}
+	.rsvNumber{
+		width:50px;
+		text-align: center;
+	}
+
+}
+	
 	
 </style>
 <script>
@@ -113,7 +219,7 @@
 						$("#searchInnerContainer").append("<table id='result'>");
 						for(var i=0; i<json.length; i++){
 							var date = new Date(json[i].rsvTime);
-							var dateFormat = date.getFullYear()+"년"+(date.getMonth()+1)+"월"+date.getDate()+"일"+date.getHours()+"시"+date.getMinutes()+"분";
+							var dateFormat = date.getFullYear()+"년 "+(date.getMonth()+1)+"월 "+date.getDate()+"일 <br>"+date.getHours()+"시 "+date.getMinutes()+"분";
 							var table = "";
 							if(json[i].rsvTableNo=="no.1"){
 								table="1번 테이블";

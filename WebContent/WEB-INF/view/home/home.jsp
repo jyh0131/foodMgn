@@ -363,7 +363,7 @@
 		z-index: -100;
 		position:relative;
 		padding:10px;
-		height:280px;
+		height:250px;
 	}
 	#wrap img{
 		height:250px;
