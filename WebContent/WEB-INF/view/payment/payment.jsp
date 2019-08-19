@@ -38,7 +38,8 @@
 				$("#sale_detail_3").css("display","block");
 				$("#sale_price_get").text("");
 				$("#sale_info_get").text("");
-				$("#total_mileage").text(${mem.mbMileage}) //사용가능한 마일리지
+				var tMileage = ${mem.mbMileage};
+				$("#total_mileage").text(tMileage.toLocaleString()); //사용가능한 마일리지
 				 $("#mileage_info_get").val("");
 			}else if($(this).val()=="사용안함"){
 				$("#sale_detail_1").css("display","none");
@@ -77,15 +78,22 @@
 		//마일리지 엔터시
 		$("#mileage_info_get").keydown(function(key) {
 			if (key.keyCode == 13) {
+				var mileageReg = /^[0-9]{0,20}$/;
 				var useMileage = Number($("#mileage_info_get").val());
-				if(useMileage > ${mem.mbMileage} ){
-					alert("사용가능한 마일리지는 ${mem.mbMileage}원 입니다");
-					$("#mileage_info_get").val("");
+				if( mileageReg.test(useMileage)==true ){
+					if(useMileage > ${mem.mbMileage} ){
+						alert("사용가능한 마일리지는 ${mem.mbMileage}원 입니다");
+						$("#mileage_info_get").val("");
+					}else{
+						$("#sale_info_get").text("마일리지:"+useMileage.toLocaleString()+"원");
+						$("#sale_price_get").text(useMileage.toLocaleString());
+						var totalP3= ${ totalPrice }-useMileage;
+						$("#pay_price_get").text( totalP3.toLocaleString()  );
+						$("#mileage_info_get").val("");
+					}
 				}else{
-					$("#sale_info_get").text("마일리지:"+useMileage.toLocaleString()+"원");
-					$("#sale_price_get").text( useMileage.toLocaleString() );
-					var totalP3= ${ totalPrice }-useMileage;
-					$("#pay_price_get").text( totalP3.toLocaleString()  );
+					alert("숫자만 입력해주세요.");
+					$("#mileage_info_get").val("");
 				}
 				
 			}
@@ -111,18 +119,25 @@
 		
 		//마일리지 적용 버튼 클릭시
 		$("#btnM").click(function() {
+			var mileageReg = /^[0-9]{0,20}$/;
 			var useMileage = $("#mileage_info_get").val();
 			
-			
-			if(useMileage > ${mem.mbMileage} ){
-				alert("사용가능한 마일리지는 ${mem.mbMileage}원 입니다");
-				$("#mileage_info_get").val("");
+			if( mileageReg.test(useMileage)==true ){
+				if(useMileage > ${mem.mbMileage} ){
+					alert("사용가능한 마일리지는 ${mem.mbMileage}원 입니다");
+					$("#mileage_info_get").val("");
+				}else{
+					$("#sale_info_get").text("마일리지:"+useMileage.toLocaleString()+"원");
+					$("#sale_price_get").text(useMileage.toLocaleString());
+					var totalP3= ${ totalPrice }-useMileage;
+					$("#pay_price_get").text( totalP3.toLocaleString()  );
+					$("#mileage_info_get").val("");
+				}
 			}else{
-				$("#sale_info_get").text("마일리지:"+useMileage.toLocaleString()+"원");
-				$("#sale_price_get").text(useMileage.toLocaleString());
-				var totalP3= ${ totalPrice }-useMileage;
-				$("#pay_price_get").text( totalP3.toLocaleString()  );
+				alert("숫자만 입력해주세요.");
+				$("#mileage_info_get").val("");
 			}
+			
 		})
 		
 		

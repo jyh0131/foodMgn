@@ -107,6 +107,8 @@ table {
 						$("tbody").empty();
 						if(json.list.length==0){
  						alert("조회조건에 맞는 내역이 없습니다.");
+ 						$("#total1").text( 0);
+					     $("#total2").text( 0);
  						return false;
  					}
 						var totalCount=0;
@@ -135,12 +137,8 @@ table {
 							
 						}
 						
-						$("tbody").append("<tr id='total'>");
-						$("tbody tr").eq(i).append("<td></td>");
-						$("tbody tr").eq(i).append("<td></td>");
-						$("tbody tr").eq(i).append("<td>"+totalCount.toLocaleString()+"개</td>");
-						$("tbody tr").eq(i).append("<td>"+totalPrice.toLocaleString()+"원</td>");
-						$("tbody tr").eq(i).append("<td>100.0%</td>");
+						$("#total1").text( totalCount.toLocaleString());
+					     $("#total2").text( totalPrice.toLocaleString());
 					}
 					
 				})
@@ -148,6 +146,68 @@ table {
 			
 			
 		})
+		
+		$(document).on("click","#btnToday",function(){
+			$("input[name='date']").val("");
+			$("input[name='date2']").val(""); 
+			var dt = new Date();
+			var recentYear = dt.getFullYear();
+		    var recentMonth = dt.getMonth() + 1;
+		    var recentDay = dt.getDate();
+		 
+		    if(recentMonth < 10) recentMonth = "0" + recentMonth;
+		    if(recentDay < 10) recentDay = "0" + recentDay;
+		    
+		    var today = recentYear + "-" + recentMonth + "-" + recentDay;
+		    
+		    $.ajax({
+				url:"${pageContext.request.contextPath }/mgn/salesList.do",
+				type:"get",
+				data:{"date":today, "date2":today, "kind":"date"},
+				dataType:"json",
+				success:function(json){
+					console.log(json);
+				
+					$("tbody").empty();
+					if(json.list.length==0){
+						alert("조회조건에 맞는 내역이 없습니다.");
+						$("#total1").text( 0);
+					     $("#total2").text( 0);
+						return false;
+					}
+					var totalCount=0;
+					var totalPrice=0;
+					for(var i=0; i<json.list.length; i++){
+						var list=json.list[i];
+						if(i%2==0){
+							$("tbody").append("<tr  role='row' class='odd'>");
+							$("tbody tr").eq(i).append("<td class='sorting_1'>"+(i+1)+"</td>");
+							$("tbody tr").eq(i).append("<td>"+list.ssName+"</td>");
+							$("tbody tr").eq(i).append("<td>"+list.ssCount+"개</td>");
+							$("tbody tr").eq(i).append("<td>"+list.ssTotalPrice.toLocaleString()+"원</td>");
+							$("tbody tr").eq(i).append("<td>"+list.ssShare+"%</td>");
+							totalCount += list.ssCount;
+							totalPrice += list.ssTotalPrice;
+						}else{
+							$("tbody").append("<tr  role='row' class='even'>");
+							$("tbody tr").eq(i).append("<td class='sorting_1'>"+(i+1)+"</td>");
+							$("tbody tr").eq(i).append("<td>"+list.ssName+"</td>");
+							$("tbody tr").eq(i).append("<td>"+list.ssCount+"개</td>");
+							$("tbody tr").eq(i).append("<td>"+list.ssTotalPrice.toLocaleString()+"원</td>");
+							$("tbody tr").eq(i).append("<td>"+list.ssShare+"%</td>");
+							totalCount += list.ssCount;
+							totalPrice += list.ssTotalPrice;
+						}
+						
+					}
+					
+					$("#total1").text( totalCount.toLocaleString());
+				     $("#total2").text( totalPrice.toLocaleString());
+				}
+				
+			})
+		})
+		
 		
 		
 		
@@ -169,6 +229,8 @@ table {
 							$("tbody").empty();
 							if(json.list.length==0){
 	    						alert("조회조건에 맞는 내역이 없습니다.");
+	    						$("#total1").text( 0);
+	   					     $("#total2").text( 0);
 	    						return false;
 	    					}
 							var totalCount=0;
@@ -197,12 +259,8 @@ table {
 								
 							}
 							
-							$("tbody").append("<tr id='total'>");
-							$("tbody tr").eq(i).append("<td></td>");
-							$("tbody tr").eq(i).append("<td></td>");
-							$("tbody tr").eq(i).append("<td>"+totalCount.toLocaleString()+"개</td>");
-							$("tbody tr").eq(i).append("<td>"+totalPrice.toLocaleString()+"원</td>");
-							$("tbody tr").eq(i).append("<td>100.0%</td>");
+							$("#total1").text( totalCount.toLocaleString());
+						     $("#total2").text( totalPrice.toLocaleString());
 						}
 						
 					})
@@ -223,6 +281,8 @@ table {
 						$("tbody").empty();
 						if(json.list.length==0){
     						alert("조회조건에 맞는 내역이 없습니다.");
+    						$("#total1").text( 0);
+   					     $("#total2").text( 0);
     						return false;
     					}
 						var totalCount=0;
@@ -251,12 +311,8 @@ table {
 							}
 							
 						}
-						$("tbody").append("<tr id='total'>");
-						$("tbody tr").eq(i).append("<td></td>");
-						$("tbody tr").eq(i).append("<td></td>");
-						$("tbody tr").eq(i).append("<td>"+totalCount.toLocaleString()+"개</td>");
-						$("tbody tr").eq(i).append("<td>"+totalPrice.toLocaleString()+"원</td>");
-						$("tbody tr").eq(i).append("<td>100.0%</td>");
+						$("#total1").text( totalCount.toLocaleString());
+					     $("#total2").text( totalPrice.toLocaleString());
 					}
 					
 				})
@@ -305,6 +361,8 @@ table {
 							$("tbody").empty();
 							if(json.list.length==0){
 	    						alert("조회조건에 맞는 내역이 없습니다.");
+	    						$("#total1").text( 0);
+	   					     $("#total2").text( 0);
 	    						return false;
 	    					}
 							var totalCount=0;
@@ -333,12 +391,8 @@ table {
 								}
 								
 							}
-							$("tbody").append("<tr id='total'>");
-							$("tbody tr").eq(i).append("<td></td>");
-							$("tbody tr").eq(i).append("<td></td>");
-							$("tbody tr").eq(i).append("<td>"+totalCount.toLocaleString()+"개</td>");
-							$("tbody tr").eq(i).append("<td>"+totalPrice.toLocaleString()+"원</td>");
-							$("tbody tr").eq(i).append("<td>100.0%</td>");
+							$("#total1").text( totalCount.toLocaleString());
+						     $("#total2").text( totalPrice.toLocaleString());
 						}
 						
 					})      			
@@ -355,6 +409,8 @@ table {
 							$("tbody").empty();
 							if(json.list.length==0){
 	    						alert("조회조건에 맞는 내역이 없습니다.");
+	    						$("#total1").text( 0);
+	   					     $("#total2").text( 0);
 	    						return false;
 	    					}
 							var totalCount=0;
@@ -383,28 +439,34 @@ table {
 								}
 								
 							}
-							$("tbody").append("<tr id='total'>");
-							$("tbody tr").eq(i).append("<td></td>");
-							$("tbody tr").eq(i).append("<td></td>");
-							$("tbody tr").eq(i).append("<td>"+totalCount.toLocaleString()+"개</td>");
-							$("tbody tr").eq(i).append("<td>"+totalPrice.toLocaleString()+"원</td>");
-							$("tbody tr").eq(i).append("<td>100.0%</td>");
+							$("#total1").text( totalCount.toLocaleString());
+						     $("#total2").text( totalPrice.toLocaleString());
+							
+							
 						}
 						
 					})
 	       		}
 	       })
+	       
+	     $("#total1").text( $("#totals").val());
+	     $("#total2").text( Number($("#totalp").val()).toLocaleString());
 	})
 </script>
 <div class="s_visu1">
-		
+	<c:set var="sum1"></c:set>
+	<c:set var="sum2"></c:set>
+	<c:set var="num" value="0"></c:set>	
 		</div>
-	<h2>판매 현황</h2>
+	<h2>음식 판매 현황</h2>
 	<div id="sub">
 			<p id="selDate">
 				<input type="text" name="date" class="selectList" autocomplete="off"> ~ <input type="text" name="date2" class="selectList" autocomplete="off"> <button id="btnDate">날짜로검색</button>
 				<button id="all">전체보기</button>
+				<button id="btnToday">오늘날짜 보기</button>
+				 판매수량 : <span id="total1"></span>개     판매금액 : <span id="total2"></span>원
 			</p>  
+			
 		</div>
 	<div id="wrap">
 	
@@ -421,9 +483,7 @@ table {
 				</tr>
 			</thead>
 			<tbody id="tbody">
-				<c:set var="sum1"></c:set>
-				<c:set var="sum2"></c:set>
-				<c:set var="num" value="0"></c:set>
+				
 				<c:forEach var="item" items="${list}">
 					<c:set var="num" value="${num+1 }"></c:set>
 					
@@ -437,15 +497,11 @@ table {
 						<c:set var="sum2" value="${sum2+item.ssTotalPrice }"></c:set>
 					</tr>
 				</c:forEach>
-				<tr>
-					<td></td>
-					<td></td>
-					<td>${sum1 }개</td>
-					<td><fmt:formatNumber value="${sum2 }" />원</td>
-					<td>100.0%</td>
-				</tr>
+				<input type="hidden" value="${sum1 }" id="totals">
+				<input type="hidden" value="${sum2 }" id="totalp">
+				
+				
 			</tbody> 
 		</table>
-		
 	</div>
 <%@ include file="../../view/include/footer.jsp" %>
