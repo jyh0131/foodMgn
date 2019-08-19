@@ -362,13 +362,13 @@
 		width: 95%;
 		z-index: -100;
 		position:relative;
-		padding:10px;
 		height:250px;
+		padding: 0 10px 10px 10px;
 	}
 	#wrap img{
 		height:250px;
 	}
-	#wrap div.bx-wrapper{
+	#wrap div.bx-wrapper {
 		width:100%;
 		height:250px;
 		box-shadow: none;                                           
@@ -429,7 +429,7 @@
 	}
 	#middleTopCenterMo .bx-wrapper .bx-pager {
     position: absolute;
-    bottom: 25px;
+    bottom: 35px;
     left:0;                          
     }
 	
@@ -449,7 +449,7 @@
 	
    	 #middleSlider{
    	 	position: relative;
-   	 	
+   	 	margin-top: 30px;
    	 }
    	 #middleSlider div.bx-wrapper{
    	 	margin-bottom:30px;

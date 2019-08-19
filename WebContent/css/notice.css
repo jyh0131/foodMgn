@@ -71,7 +71,7 @@
 		display: none;
 	}
 	#searchForm2 {
-		width: 345px;
+		width: 90%;
 		margin: 20px auto;
 		overflow: hidden;
 	}
@@ -107,7 +107,7 @@
 	
 	#topImg {
 		position: fixed;
-		top: 580px;
+		top: 630px;
 		right: 15px;
 	}
 	#topImg img {

@@ -173,6 +173,12 @@
 	}               
 }
 @media all and (max-width:767px){
+	body {
+		background-color: #e8e2dc;
+	}
+	header {
+		background-color: white;
+	}
 	#PcImg{
 		display: none;
 	}   
@@ -180,12 +186,10 @@
 	
 	.s_visu1 {
 		width: 100%;
-		height: 250px;
 	}
 	
 	.s_visu1 img{
 		width: 100%;
-		height: 250px;
 	}
 	
 	.content {
@@ -208,7 +212,8 @@
 		position: relative;
 		cursor: pointer;
 		float: left;
-		margin-bottom:40px;
+		margin-bottom: 20px;
+		margin-left: 20px;
 	}
 	#menu_li2 {
 		display: none;                
@@ -254,7 +259,9 @@
 		text-align: center;
 		padding-bottom:40px;
 		border-bottom:2px solid #55423b;
-		position: relative;                   
+		position: relative;
+		width: 90%;
+		margin: 0 auto;        
 	}
 	#write{
 		position: absolute;
@@ -276,7 +283,8 @@
 		margin: 0 5px;
 	}
 	table{
-		width:100%;
+		width:90%;
+		margin: 0 auto;
 		border-bottom:2px solid #55423b;
 		
 	}

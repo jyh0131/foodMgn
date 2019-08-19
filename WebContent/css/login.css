@@ -20,7 +20,7 @@
 	#login_content > p {
 		text-align: center;
 		color: #55423b;
-		padding-top: 80px;
+		padding-top: 70px;
 		font-size: 32px;
 		font-weight: bold;
 	}
@@ -33,19 +33,27 @@
 	.txt {
 		display: none;
 	}
-	#loginBox, #loginBox2 {
+	#loginBox2 {
 		display: none;
 	}
-	#loginBoxMobile {
+	#loginBox {
 		margin: 20px auto;
 		width: 90%;
 	}
-	#loginBoxMobile  div {
+	#loginBox table {
+		position: relative;
+		margin: 0 auto;
+	}
+	
+	.loginimg, .under {
+		display: none;
+	}
+	#loginBox  div {
 		width: 100%;
 		text-align: center;
 	}
 	input[type="text"], input[type="password"] {
-		padding: 7px 5px;
+		padding: 7px 30px 7px 10px;
 		margin-bottom: 5px;
 	}
 	input[type="submit"] {
@@ -56,6 +64,9 @@
 		font-weight: bold;
 		cursor: pointer;
 		margin-top: 5px;
+		position: absolute;
+		bottom: -50px;
+		left: 33%;
 	}
 	.reg2 {
       color: red;
@@ -69,6 +80,8 @@
 	#loginBox2Mobile {
 		width: 100%;
 		margin: 40px 0;
+		padding-top: 40px;
+		padding-bottom: 15px;
 	}
 	#loginBox2Mobile ul {
 		overflow: hidden;

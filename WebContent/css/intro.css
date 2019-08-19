@@ -2,6 +2,12 @@
 
 /* 모바일 버전 */
 @media all and (max-width:767px) {
+	body {
+		background-color: #e8e2dc;
+	}
+	header {
+		background-color: white;
+	}
 	#wrap {
 		width: 100%;
 	}
@@ -70,8 +76,11 @@
 	display: none;
 }
 
+.content > div {
+	text-align: center;	
+}
 #i4 {
-	width: 100%;
+	width: 90%;
 }
 
 #hh {

@@ -116,7 +116,7 @@
 								<td rowspan="2" class="loginimg"><img src="${pageContext.request.contextPath}/images/login/ico_lock.png"></td>
 								<td class="under">이  름</td>
 								<td class="under2">
-									<input type="text" size="30" name="name" placeholder="">
+									<input type="text" size="30" name="name" placeholder="이름을 입력하세요">
 									<span class="reg">※ 이름을 입력하세요</span>
 								</td>
 								<td rowspan="2"><input type="submit" value="로그인"></td>
@@ -124,28 +124,28 @@
 							<tr>
 								<td class="under">전화번호</td>
 								<td class="under2">
-									<input type="password" size="30" name="tel">
+									<input type="password" size="30" name="tel" placeholder="전화번호를 입력하세요">
 									<span class="reg">※ 전화번호를 입력하세요</span>
 								</td>
 							</tr>
 						</table>
 					</form>
 				</div>
-				<div id="loginBoxMobile">
+				<%-- <div id="loginBoxMobile">
 					<form action="${pageContext.request.contextPath}/login.do" method="post" id="f2">
 						<div>
-							<input type="text" size="40" name="name" placeholder="이름을 입력하세요">
+							<input type="text" size="40" name="name2" placeholder="이름을 입력하세요">
 							<span class="reg2">※ 이름을 입력하세요</span>
 						</div>
 						<div>
-							<input type="password" size="40" name="tel" placeholder="전화번호를 입력하세요">
+							<input type="password" size="40" name="tel2" placeholder="전화번호를 입력하세요">
 							<span class="reg2">※ 전화번호를 입력하세요</span>
 						</div>
 						<div>
 							<input type="submit" value="로그인">
 						</div>
 					</form>
-				</div>
+				</div> --%>
 				<div id="loginBox2">
 					<ul>
 						<li>
