@@ -3,129 +3,8 @@
         
 <%@ include file="../include/header.jsp" %>
 
-<style>
-	.s_visu1 {
-		width: 100%;
-		height: 350px;
-	}
-	
-	.s_visu1 img{
-		width: 100%;
-		height: 350px;
-	}
-	.content {
-		position: relative;
-		width: 1000px;
-		margin: 0 auto;
-		padding: 20px 0;
-		overflow: hidden;
-		clear: both;
-	}
-	#menu_li {
-		border: 1px solid #887c75;
-		width: 200px;
-		height: 25px;
-		line-height: 25px;
-		padding: 10px 0;
-		background-color: #f2efec;
-		font-size: 15px;
-		text-indent: 16px;
-		position: relative;
-		cursor: pointer;
-		float: left;
-	}
-	#menu_li2 {
-		float: right;                 
-	}
-	#menu_li2 li {
-		list-style: none;
-		float: left;
-		padding: 5px; 
-	}
-	.li_img {
-		background: url("${pageContext.request.contextPath}/images/menu/s_menu_bg.gif") no-repeat;
-		position: absolute;
-		top: 20px;
-		right: 10px;
-		width: 20px;
-		height: 10px;
-	}
-	#menulist {
-		display: none;
-		width: 200px;
-		position: absolute;
-		top: 46px;
-		left: -1px;
-	}
-	#menulist li {
-		border: 1px solid #887c75;
-		border-bottom: 1px dotted #887c75;
-		border-top: none;
-		width: 200px;
-		height: 20px;
-		line-height: 20px;
-		padding: 10px 0;
-		background-color: #f2efec;
-	}
-	#menulist li:hover {
-		background-color: #887c75;
-	}
-	#menulist li:hover a {
-		color: white;
-	}
-	#menulist li a {
-		color: black;
-		padding: 10px;
-	}
-	#menulist li:last-child {
-		border-bottom: 1px solid #887c75;
-	}
-	
-	
-	#join_content > p {
-		padding: 20px 0 10px;
-		text-align: center;
-		font-size: 32px;
-		line-height: 32px;
-		color: #55423b;
-		font-weight: bolder;
-		letter-spacing: -0.1em;
-		font-family: "굴림";
-	}
-	.join {
-		margin: 80px 0 40px;
-	}
-	.textarea1, .textarea2 {
-		padding: 10px 10px 0;
-		border: 1px solid #ccc;
-		width: 978px;
-		height: 170px;
-		letter-spacing: -0.1em;
-	}
-	.join h3 {
-		margin-bottom: 15px;
-		text-align: center;
-		font-weight: bold;
-	}
-	.agree1, .agree2 {
-		background-color: #F7F7F7;
-		padding: 10px 0 10px 30px;
-		font-size: 0.9em;
-	}
-	.submit {
-		text-align: center;
-		margin-bottom: 70px;
-	}
-	.submit input[type="submit"] {
-		background-color: #3f87dc;
-		border: 1px solid #3f87dc;
-		color: white;
-		padding: 10px 50px;
-		border-radius: 5px;
-		cursor: pointer;
-		font-size: 17px;
-	}
-</style>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/join.css" type="text/css">
+
 <script>
 	$(function() {
 		$("#menu_li").click(function() {
@@ -147,7 +26,8 @@
 
 	<div class="sub">
 		<div class="s_visu1">
-			<img src="${pageContext.request.contextPath}/images/login/sub03_visu.jpg">
+			<img id="s_visu1_1" src="${pageContext.request.contextPath}/images/login/sub03_visu.jpg">
+			<img id="s_visu1_2" src="${pageContext.request.contextPath}/images/login/s_visu3.jpg">
 		</div>
 		<div class="content">
 			<div id="menu_li">

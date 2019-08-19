@@ -138,13 +138,15 @@
 							<div class="mobileImg">
 								<c:if test="${flist.fkNo.fkNo == 8}">
 									<li class="bevImg"><img src="${pageContext.request.contextPath}/images/food/${flist.fdName}.png"></li>
-									<li class="foodNameEng">${flist.fdNameEng}</li>
-									<li class="foodName">${flist.fdName}</li>
+									<li class="foodNameEngb">${flist.fdNameEng}</li>
+									<li class="foodNameb">${flist.fdName}</li>
+									<li class="foodPrice"><fmt:formatNumber value="${flist.fdPrice}" pattern="#,###"/></li>
 								</c:if>
 								<c:if test="${flist.fkNo.fkNo == 9}">
 									<li class="beerImg"><img src="${pageContext.request.contextPath}/images/food/${flist.fdName}.png"></li>
-									<li class="foodNameEng">${flist.fdNameEng}</li>
-									<li class="foodName">${flist.fdName}</li>
+									<li class="foodNameEngb">${flist.fdNameEng}</li>
+									<li class="foodNameb">${flist.fdName}</li>
+									<li class="foodPrice"><fmt:formatNumber value="${flist.fdPrice}" pattern="#,###"/></li>
 								</c:if>
 								<c:if test="${flist.fkNo.fkNo != 8 and flist.fkNo.fkNo != 9}">
 									<li><img src="${pageContext.request.contextPath}/images/food/${flist.fdName}.png"></li>

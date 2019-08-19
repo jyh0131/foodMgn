@@ -115,27 +115,21 @@
 			$(".headUl > ul > li").not(this).css("background-color", "#3b2c2c");
 			$(".headUl > ul > li").not(this).css("background-image", "url('${pageContext.request.contextPath}/images/include/gnb_open.png')");
 			
-			if($(this).css("background-image").indexOf("open") >= 0) {
-				$(this).find(".submenu").css("display", "block");
-				$(this).css("background-color", "#333");
-				$(this).css("background-image", "url('${pageContext.request.contextPath}/images/include/gnb_close.png')");
+			if($(this).find(".submenu").text() != "") {
+				if($(this).find(".submenu").css("display") == "none") {
+					$(this).find(".submenu").css("display", "block");
+					$(this).css("background-color", "#333");
+					$(this).css("background-image", "url('${pageContext.request.contextPath}/images/include/gnb_close.png')");
+				}else {
+					$(this).find(".submenu").css("display", "none");
+					$(this).css("background-color", "#3b2c2c");
+					$(this).css("background-image", "url('${pageContext.request.contextPath}/images/include/gnb_open.png')");
+				}
 			}else {
-				$(this).find(".submenu").css("display", "none");
-				$(this).css("background-color", "#3b2c2c");
-				$(this).css("background-image", "url('${pageContext.request.contextPath}/images/include/gnb_open.png')");
+				$(this).css("background-color", "#333");
+				$(this).css("background-image", "none");
 			}
 		})
-		
-		/* $(".headUl > ul > li").hover(function() {
-			$(this).find(".submenu").css("display", "block");
-			$(this).css("background-color", "#444");
-			$(this).css("background-image", "url('${pageContext.request.contextPath}/images/include/gnb_close.png')");
-		}, function() {
-			$(this).find(".submenu").css("display", "none");
-			$(this).css("background-color", "#3b2c2c");
-			$(this).css("background-image", "url('${pageContext.request.contextPath}/images/include/gnb_open.png')");
-		}) */
-		
 	})
 </script>
 </head>
