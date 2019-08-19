@@ -14,6 +14,7 @@ public class Payment {
 	private int payDiscountPrice;
 	private int payCancel;
 	private int payMemberNo;
+	private int payOrderKind;
 
 	public Payment() {
 		super();
@@ -49,6 +50,24 @@ public class Payment {
 		this.payDiscountInfo = payDiscountInfo;
 		this.payDiscountPrice = payDiscountPrice;
 		this.payCancel = payCancel;
+	}
+	
+	
+
+	public Payment(int payNo, Date payTime, String payMenu, int payPrice, int payType, String payMember,
+			String payDiscountInfo, int payDiscountPrice, int payCancel, int payMemberNo, int payOrderKind) {
+		super();
+		this.payNo = payNo;
+		this.payTime = payTime;
+		this.payMenu = payMenu;
+		this.payPrice = payPrice;
+		this.payType = payType;
+		this.payMember = payMember;
+		this.payDiscountInfo = payDiscountInfo;
+		this.payDiscountPrice = payDiscountPrice;
+		this.payCancel = payCancel;
+		this.payMemberNo = payMemberNo;
+		this.payOrderKind = payOrderKind;
 	}
 
 	public int getPayNo() {
@@ -149,6 +168,14 @@ public class Payment {
 		SimpleDateFormat sDate = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 		return new Object[] { payNo, sDate.format(payTime), payMenu,String.format("%,d원", payPrice) , payDiscountInfo, String.format("%,d원", payDiscountPrice),
 				payType == 1 ? "현금" : "카드", payMember ,payCancel==0?"결제완료":"취소"};
+	}
+
+	public int getPayOrderKind() {
+		return payOrderKind;
+	}
+
+	public void setPayOrderKind(int payOrderKind) {
+		this.payOrderKind = payOrderKind;
 	}
 
 }

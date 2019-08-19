@@ -93,7 +93,7 @@ button {
 									.arrayToDataTable(dataChart);
 							// 그래프 옵션
 							var options = {
-								title : '판매현황', // 제목
+								title : '음식 판매 현황', // 제목
 								width : 600, // 가로 px
 								height : 400, // 세로 px
 								bar : {
@@ -194,7 +194,7 @@ button {
 								.arrayToDataTable(dataChart);
 						// 그래프 옵션
 						var options = {
-							title : '판매현황', // 제목
+							title : '음식 판매 현황', // 제목
 							width : 600, // 가로 px
 							height : 400, // 세로 px
 							bar : {
@@ -251,7 +251,7 @@ button {
 								.arrayToDataTable(dataChart);
 						var view = new google.visualization.DataView(data);
 						var options = {
-							title : '판매 현황',
+							title : '음식 판매 현황',
 							is3D : true,
 						};
 
@@ -273,7 +273,7 @@ button {
 								.arrayToDataTable(dataChart);
 						// 그래프 옵션
 						var options = {
-							title : '판매현황', // 제목
+							title : '음식 판매 현황', // 제목
 							width : 600, // 가로 px
 							height : 400, // 세로 px
 							bar : {
@@ -325,7 +325,7 @@ button {
 										.arrayToDataTable(dataChart);
 								var view = new google.visualization.DataView(data);
 								var options = {
-									title : '판매 현황',
+									title : '음식 판매 현황',
 									is3D : true,
 								};
 
@@ -347,7 +347,7 @@ button {
 										.arrayToDataTable(dataChart);
 								// 그래프 옵션
 								var options = {
-									title : '판매현황', // 제목
+									title : '음식 판매 현황', // 제목
 									width : 600, // 가로 px
 									height : 400, // 세로 px
 									bar : {
@@ -390,16 +390,25 @@ button {
 							google.charts.setOnLoadCallback(drawChar2t);
 							function drawChart() {
 								var dataChart = [ [ 'name', '판매수' ] ];
-
-								for (var i = 0; i < 5; i++) {
-									var list = json.list[i];
-									dataChart.push([ list.ssName, list.ssCount ]);
+								
+								if(json.list.length < 5){
+									for (var i = 0; i < json.list.length; i++) {
+										var list = json.list[i];
+										dataChart.push([ list.ssName, list.ssCount ]);
+									}
+								}else{
+									for (var i = 0; i < 5; i++) {
+										var list = json.list[i];
+										dataChart.push([ list.ssName, list.ssCount ]);
+									}
 								}
+					
+								
 								var data = google.visualization
 										.arrayToDataTable(dataChart);
 								var view = new google.visualization.DataView(data);
 								var options = {
-									title : '판매 현황',
+									title : '음식 판매 현황',
 									is3D : true,
 								};
 
@@ -412,16 +421,26 @@ button {
 
 								// 차트 데이터 설정
 								var dataChart = [ [ 'name', '판매수'] ];
-
-								for (var i = 0; i < 5; i++) {
-									var list = json.list[i];
-									dataChart.push([ list.ssName, list.ssCount ]);
+								
+								if(json.list.length < 5){
+									for (var i = 0; i < json.list.length; i++) {
+										var list = json.list[i];
+										dataChart.push([ list.ssName, list.ssCount ]);
+									}
+								}else{
+									for (var i = 0; i < 5; i++) {
+										var list = json.list[i];
+										dataChart.push([ list.ssName, list.ssCount ]);
+									}
 								}
+								
+								
+								
 								var data = google.visualization
 										.arrayToDataTable(dataChart);
 								// 그래프 옵션
 								var options = {
-									title : '판매현황', // 제목
+									title : '음식 판매 현황', // 제목
 									width : 600, // 가로 px
 									height : 400, // 세로 px
 									bar : {

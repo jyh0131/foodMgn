@@ -55,4 +55,21 @@ public class PaymentDaoImpl implements PaymentDao {
 		}
 	}
 
+	@Override
+	public List<Payment> selectPaymentByAllMmember() {
+		try(SqlSession sqlSession = MybatisSqlSessionFactory.openSession()) {
+			return sqlSession.selectList(namespace + "selectPaymentByAllMmember");
+		}
+	}
+
+	@Override
+	public List<Payment> selectPaytmentByDateRangeMember(Map<String, Object> map) {
+		try(SqlSession sqlSession = MybatisSqlSessionFactory.openSession()) {
+			return sqlSession.selectList(namespace + "selectPaytmentByDateRangeMember",map);
+		}
+		
+	}
+
+	
+
 }

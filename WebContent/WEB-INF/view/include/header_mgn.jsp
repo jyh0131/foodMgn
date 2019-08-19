@@ -50,10 +50,10 @@
 								</ul>
 
 							</li>
-						   <li><a href="${pageContext.request.contextPath}/mgn/salesList.do">판매관리</a>
+						   <li><a href="${pageContext.request.contextPath}/mgn/salesList.do">음식판매관리</a>
 						   		<ul class="submenu">
-									<li><a href="${pageContext.request.contextPath}/mgn/salesList.do">판매현황</a></li>
-									<li><a href="${pageContext.request.contextPath}/mgn/salesListChart.do">판매차트</a></li>
+									<li><a href="${pageContext.request.contextPath}/mgn/salesList.do">움삭판매현황</a></li>
+									<li><a href="${pageContext.request.contextPath}/mgn/salesListChart.do">음식판매차트</a></li>
 								</ul>
 						   </li>
 							<li><a href="${pageContext.request.contextPath}/mgn/menuMgnlist.do">음식관리</a></li>

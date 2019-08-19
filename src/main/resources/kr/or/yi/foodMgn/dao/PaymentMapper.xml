@@ -12,30 +12,38 @@
 		<result property="payDiscountPrice" column="payDiscountPrice"/>
 		<result property="payCancel" column="payCancel"/>
 		<result property="payMemberNo" column="payMemberNo"/>
+		<result property="payOrderKind" column="payOrderKind"/>
 	</resultMap>
 	
 	<select id="selectPaymentByAll" resultMap="resultPayment">
-		select payNo,payTime,payMenu,payPrice,payDiscountInfo,payDiscountPrice,payType,payMemeber,payCancel,payMemberNo from payment
+		select payNo,payTime,payMenu,payPrice,payDiscountInfo,payDiscountPrice,payType,payMemeber,payCancel,payMemberNo,payOrderKind from payment
+	</select>
+	<select id="selectPaymentByAllMmember" resultMap="resultPayment">
+		select payNo,payOrderKind,payTime,payMenu,payType,payDiscountInfo,payDiscountPrice,payMemeber,payCancel,payMemberNo,sum(payPrice) as payPrice from payment where payCancel=0 group by payMemberNo
 	</select>
 	
 	<select id="selectPaymentByDate" resultMap="resultPayment">
-		select payNo,payTime,payMenu,payPrice,payDiscountInfo,payDiscountPrice,payType,payMemeber,payCancel,payMemberNo from payment where payTime like CONCAT( #{date}, '%')
+		select payNo,payTime,payMenu,payPrice,payDiscountInfo,payDiscountPrice,payType,payMemeber,payCancel,payMemberNo,payOrderKind from payment where payTime like CONCAT( #{date}, '%')
 	</select>
 	
 	
 	<select id="selectPaymentByAll2" resultMap="resultPayment">
-		select payNo,payTime,payMenu,payPrice,payDiscountInfo,payDiscountPrice,payType,payMemeber,payCancel,payMemberNo from payment where payMemberNo=#{no}
+		select payNo,payTime,payMenu,payPrice,payDiscountInfo,payDiscountPrice,payType,payMemeber,payCancel,payMemberNo,payOrderKind from payment where payMemberNo=#{no}
 	</select>
 	
 	<select id="selectPaymentByDate2" parameterType="map" resultMap="resultPayment">
-		select payNo,payTime,payMenu,payPrice,payDiscountInfo,payDiscountPrice,payType,payMemeber,payCancel,payMemberNo from payment where payMemberNo=#{no} and payTime like CONCAT( #{date}, '%')
+		select payNo,payTime,payMenu,payPrice,payDiscountInfo,payDiscountPrice,payType,payMemeber,payCancel,payMemberNo,payOrderKind from payment where payMemberNo=#{no} and payTime like CONCAT( #{date}, '%')
 	</select>
 	
 	<select id="selectPaytmentByDateRange"  parameterType="map" resultMap="resultPayment" >
-		select payNo,payTime,payMenu,payPrice,payDiscountInfo,payDiscountPrice,payType,payMemeber,payCancel,payMemberNo from payment where payTime &gt; concat(#{date},'%') and payTime &lt; concat(adddate(#{date2},1),'%') order by payTime;
+		select payNo,payTime,payMenu,payPrice,payDiscountInfo,payDiscountPrice,payType,payMemeber,payCancel,payMemberNo,payOrderKind from payment where payTime &gt; concat(#{date},'%') and payTime &lt; concat(adddate(#{date2},1),'%') order by payTime;
 	</select>	
 	<select id="selectPaytmentByDateRange2"  parameterType="map" resultMap="resultPayment" >
-		select payNo,payTime,payMenu,payPrice,payDiscountInfo,payDiscountPrice,payType,payMemeber,payCancel,payMemberNo from payment where payMemberNo=#{no} and payTime &gt; concat(#{date},'%') and payTime &lt; concat(adddate(#{date2},1),'%') order by payTime;
+		select payNo,payTime,payMenu,payPrice,payDiscountInfo,payDiscountPrice,payType,payMemeber,payCancel,payMemberNo,payOrderKind from payment where payMemberNo=#{no} and payTime &gt; concat(#{date},'%') and payTime &lt; concat(adddate(#{date2},1),'%') order by payTime;
+	</select>
+	
+	<select id="selectPaytmentByDateRangeMember"  parameterType="map" resultMap="resultPayment" >
+		select payNo,payTime,payMenu,sum(payPrice) as payPrice,payDiscountInfo,payDiscountPrice,payType,payMemeber,payCancel,payMemberNo,payOrderKind from payment where payTime &gt; concat(#{date},'%') and payTime &lt; concat(adddate(#{date2},1),'%') and payCancel=0 group by payMemberNo order by payTime;
 	</select>	
 	
 </mapper>
