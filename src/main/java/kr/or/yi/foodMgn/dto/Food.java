@@ -11,6 +11,8 @@ public class Food {
 	private FoodKind fkNo;
 	private boolean fdWithdrawal;
 	private String fdImg;
+	private String fdNameEng;
+	private String fdExplain;
 	
 	private int count = 1;
 	
@@ -104,6 +106,22 @@ public class Food {
 
 	public void setFdImg(String fdImg) {
 		this.fdImg = fdImg;
+	}
+	
+	public String getFdNameEng() {
+		return fdNameEng;
+	}
+
+	public void setFdNameEng(String fdNameEng) {
+		this.fdNameEng = fdNameEng;
+	}
+
+	public String getFdExplain() {
+		return fdExplain;
+	}
+
+	public void setFdExplain(String fdExplain) {
+		this.fdExplain = fdExplain;
 	}
 
 	@Override

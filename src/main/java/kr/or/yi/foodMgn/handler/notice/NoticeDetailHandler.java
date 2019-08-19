@@ -31,7 +31,7 @@ public class NoticeDetailHandler implements CommandHandler {
 			
 			req.setAttribute("notice", notice);
 			
-			//req.setAttribute("page", req.getParameter("page"));
+			req.setAttribute("page", req.getParameter("page"));
 			
 			return "/WEB-INF/view/community/notice_detail.jsp";
 		}else if(req.getMethod().equalsIgnoreCase("post")) {

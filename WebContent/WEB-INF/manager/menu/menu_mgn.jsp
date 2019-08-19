@@ -200,7 +200,23 @@
 			alert("수정할 수 없습니다.");
 		})
 		
-		/* $("#f1").submit(function() {
+		
+		$("#btnAdd").click(function() {
+			if($("fieldset").css("display") == "none") {
+				$("fieldset").css("display", "block");
+				$("#btnAdd").text("추가취소");
+			}else {
+				$("fieldset").css("display", "none");
+				$("#btnAdd").text("음식추가");
+			}
+			
+		})
+		
+		$("#form1").submit(function() {
+			var index = $("input[name='fImg']").val().indexOf("\\", 3);
+			var file = $("input[name='fImg']").val().substring(index+1, $("input[name='fImg']").val().length);
+			//alert(file);
+			
 			if($("select[name='fk']").val() == "음식종류선택") {
 				alert("음식 종류를 선택하세요.");       
 				return false;
@@ -228,7 +244,8 @@
 	        $.ajax({
 	            url:"${pageContext.request.contextPath}/mgn/menuMgninsert.do",
 	            type:"post",
-	            data:{"name":$("input[name='name']").val(), "fkname":$("select[name='fk']").val(), "price":$("input[name='price']").val()},
+	            data:{"name":$("input[name='name']").val(), "fkname":$("select[name='fk']").val(),
+	            	  "price":$("input[name='price']").val(), "fImg":file},
 	            dataType:"json",
 	            success: function(res) {
 	               console.log(res);
@@ -251,15 +268,16 @@
 						$tr.append($fkname).append($fdImg).append($fdno).append($fdname).append($fdprice).append($lasttd);
 						$("table").append($tr);
 	               })
+	               
+	               $("select[name='fk']").val("음식종류선택");
+	               $("input[name='name']").val("");
+	               $("input[name='price']").val("");
+	               $("input[name='fImg']").val("");
 	            }
 	         })
 	         
 	         return false;
-		}) */
-		
-		/* $("#btnAdd").click(function() {
-			$("fieldset").css("display", "block");
-		}) */
+		})
 		
 		$("#f2").submit(function() {
 			if($("input[name='fdname']").val() == "" && $("select[name='fk2']").val() == "음식종류선택") {
@@ -301,11 +319,12 @@
 						$("table").append($tr);
 					})
 					
+					$("#pagediv").hide();
 				}
 			})
 			
-			/* $("input[name='fdname']").val("");
-			$("select[name='fk2']").val("음식종류선택"); */
+			$("input[name='fdname']").val("");
+			$("select[name='fk2']").val("음식종류선택");
 			return false;
 		})
 		
@@ -347,6 +366,7 @@
 						$("table").append($tr);
 					})
 					
+					$("#pagediv").hide();
 				}
 			})
 		})
@@ -396,7 +416,7 @@
 			}
 				
 			return false;
-		});
+		})
 		
 		$(document).on("click", ".update", function() {
 			var fNo = $(this).attr("data-no");
@@ -460,6 +480,8 @@
 						$tr.append($fkname).append($fdImg).append($fdno).append($fdname).append($fdprice).append($lasttd);
 						$("table").append($tr);
 	               })
+	               
+	               $("#pagediv").show();
 	            }
 	         })
 		})
@@ -470,26 +492,28 @@
 		<div id="div"></div>
 		<fieldset>
 			<legend> 음식추가 </legend>
-			<form action="${pageContext.request.contextPath}/mgn/menuMgninsert.do" method="post" id="f1">
-			<select name="fk">
-				<option>음식종류선택</option>
-				<option>파스타</option>
-				<option>스테이크&커틀렛</option>
-				<option>필라프&리조또</option>
-				<option>샐러드</option>
-				<option>시그니처 피자</option>
-				<option>피자</option>
-				<option>사이드 메뉴</option>
-				<option>음료</option>
-				<option>맥주</option>
-			</select>
-			<input type="text" name="name" size="20" placeholder="음식명">
-			<input type="text" name="price" size="5" placeholder="가격">
-			<input type="submit" value="추가">
-		</form>
+			<form action="${pageContext.request.contextPath}/mgn/menuMgninsert.do" method="post" id="form1">
+				<select name="fk">
+					<option>음식종류선택</option>
+					<option>파스타</option>
+					<option>스테이크&커틀렛</option>
+					<option>필라프&리조또</option>
+					<option>샐러드</option>
+					<option>시그니처 피자</option>
+					<option>피자</option>
+					<option>사이드 메뉴</option>
+					<option>음료</option>
+					<option>맥주</option>
+				</select>
+				<input type="text" name="name" size="20" placeholder="음식명">
+				<input type="text" name="price" size="5" placeholder="가격">
+				<input type="file" name="fImg">
+				<input type="submit" value="추가">
+			</form>
 		</fieldset>
 		<div id="menuList">
 			<div id="f1">
+				<%-- <a href="${pageContext.request.contextPath}/mgn/menuMgninsert.do"><button id="btnAdd">음식추가</button></a> --%>
 				<button id="btnAdd">음식추가</button>
 			</div>
 			<button id="allList">전체보기</button>

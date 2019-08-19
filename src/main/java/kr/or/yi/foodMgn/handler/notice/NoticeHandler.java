@@ -33,13 +33,13 @@ public class NoticeHandler implements CommandHandler {
 //			req.setAttribute("nList", nlist);
 			
 			Map<String , Integer> map = new HashMap<>();
-			map.put("startRow", (page-1)*20);
-			map.put("size", 20);
+			map.put("startRow", (page-1)*10);
+			map.put("size", 10);
 			
 			List<Notice> nlist = dao.selectListPage(map);
 			int totalCount = dao.selectTotalCount();
 			
-			NoticePage np = new NoticePage(totalCount, page, 20, nlist);
+			NoticePage np = new NoticePage(totalCount, page, 10, nlist);
 			req.setAttribute("noticePage", np);
 			
 			return "/WEB-INF/view/community/notice.jsp";
@@ -54,13 +54,13 @@ public class NoticeHandler implements CommandHandler {
 			NoticeDao dao = new NoticeDaoImpl();
 			
 			Map<String , Integer> map = new HashMap<>();
-			map.put("startRow", (page-1)*20);
-			map.put("size", 20);
+			map.put("startRow", (page-1)*10);
+			map.put("size", 10);
 			
 			List<Notice> nlist = dao.selectListPage(map);
 			int totalCount = dao.selectTotalCount();
 			
-			NoticePage np = new NoticePage(totalCount, page, 20, nlist);
+			NoticePage np = new NoticePage(totalCount, page, 10, nlist);
 			
 			res.setContentType("application/json;charset=utf-8");
 			ObjectMapper om = new ObjectMapper();

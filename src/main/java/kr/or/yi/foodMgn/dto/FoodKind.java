@@ -4,6 +4,7 @@ public class FoodKind {
 	private int fkNo;
 	private String fkName;
 	private FoodMenu foodMenuNo;
+	private String fkNameEng;
 	
 	public FoodKind() {
 	}
@@ -49,7 +50,14 @@ public class FoodKind {
 	public void setMenuNo(FoodMenu menuNo) {
 		this.foodMenuNo = menuNo;
 	}
-	
+
+	public String getFkNameEng() {
+		return fkNameEng;
+	}
+
+	public void setFkNameEng(String fkNameEng) {
+		this.fkNameEng = fkNameEng;
+	}
 	
 //	@Override
 //	public int hashCode() {
@@ -76,9 +84,7 @@ public class FoodKind {
 //		return true;
 //	}
 
-	
 
-	
 	public String toString2() {
 		return String.format("FoodKind [fkNo=%s, fkName=%s, foodMenuNo=%s]", fkNo, fkName, foodMenuNo);
 	}
@@ -110,7 +116,7 @@ public class FoodKind {
 
 	@Override
 	public String toString() {
-		return String.format("%s", fkName);
+		return String.format("%s", fkNameEng);
 	}
 	
 	

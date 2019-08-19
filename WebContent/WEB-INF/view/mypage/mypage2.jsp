@@ -1,90 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<%@ include file="../include/header.jsp" %>
+<%@ include file="../include/mypage.jsp" %>
 
 <style>
-	.s_visu1 {
-		width: 100%;
-		height: 350px;
-	}
-	.s_visu1 img{
-		width: 100%;
-		height: 350px;
-	}
-	#menu_li {
-		border: 1px solid #887c75;
-		width: 200px;
-		height: 25px;
-		line-height: 25px;
-		padding: 10px 0;
-		background-color: #f2efec;
-		font-size: 15px;
-		text-indent: 16px;
-		position: relative;
-		cursor: pointer;
-		float: left;
-	}
-	#menu_li2 {
-		float: right;                 
-	}
-	#menu_li2 li {
-		list-style: none;
-		float: left;
-		padding: 5px; 
-	}
-	.li_img {
-		background: url("${pageContext.request.contextPath}/images/menu/s_menu_bg.gif") no-repeat;
-		position: absolute;
-		top: 20px;
-		right: 10px;
-		width: 20px;
-		height: 10px;
-	}
-	#menulist {
-		display: none;
-		width: 200px;
-		position: absolute;
-		top: 46px;
-		left: -1px;
-	}
-	#menulist li {
-		border: 1px solid #887c75;
-		border-bottom: 1px dotted #887c75;
-		border-top: none;
-		width: 200px;
-		height: 20px;
-		line-height: 20px;
-		padding: 10px 0;
-		background-color: #f2efec;
-	}
-	#menulist li:hover {
-		background-color: #887c75;
-	}
-	#menulist li:hover a {
-		color: white;
-	}
-	#menulist li a {
-		color: black;
-		padding: 10px;
-	}
-	#menulist li:last-child {
-		border-bottom: 1px solid #887c75;
-	}
-	#menulist a {
-		color: black;
-	}
-	
-	
 	#mypage_content {
+		float: left;
+		margin-top: 80px;
+		margin-left: 100px;
 		width: 1000px;
-		margin: 0 auto;
-		padding: 20px 0;
-		margin-bottom: 30px;
 	}
 	#f1 {
 		width: 1000px;
-		margin-top: 30px;
 	}
 	#mypage_content p {
 		border-bottom: 1px solid #c7a593;
@@ -276,7 +203,7 @@
 		            	   
 		            	   $(".name").text(res.name);
 		            	   $(".birth").text(birth.getFullYear()+"년 "+("00" + (birth.getMonth() + 1)).slice(-2)+"월 "+birth.getDate()+"일");
-		            	   $(".tel").text(res.tel.substring(0, 3)+"-"+res.tel.substring(3, 7)+"-"+res.tel.substring(7, 11));
+		            	   $(".tel").text(res.tel);
 		            	   $(".addr").css("line-height", "80px");
 		            	   $(".addr").text(res.addr);
 		               }
@@ -294,40 +221,11 @@
 			changeMonth: true,
 			yearRange: "-100:+0"
 		});
-		
-		$("#menu_li").click(function() {
-			$("#menulist").toggle();
-		})
 	})
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/jquery-ui.css">
-<script src="${pageContext.request.contextPath}/js/jquery-ui.js"></script>
-	<div class="s_visu1">
-		<img src="${pageContext.request.contextPath}/images/main/f_visu4.jpg">
-	</div>
 	<div id="mypage_content">
-		<div id="menu_li">
-			회원정보수정
-			<span class="li_img"></span>
-			<ul id="menulist">
-				<a href="${pageContext.request.contextPath}/my/mypage.do"><li id="updateMember">회원정보수정</li></a>
-				<a href="${pageContext.request.contextPath}/my/searchMyRsv.do"><li id="searchRsv2">예약내역</li></a>
-				<a href="${pageContext.request.contextPath}/my/mypageSaleList.do"><li id="searchPay">결제내역</li></a>
-			</ul>
-		</div>
-		<div id="menu_li2">
-			<ul>
-				<li>HOME</li>
-				<li>></li>
-				<li>마이페이지</li>
-				<li>></li>
-				<li><b>회원정보수정</b></li>
-			</ul>
-		</div>
-		<div class="clear"></div>
 		<form action="${pageContext.request.contextPath}/my/mypage.do" method="post" id="f1">
-			<p><b>&nbsp;개인 정보 수정</b></p>
+			<p><b>개인 정보 수정</b></p>
 			<p>
 				<span class="span1">이름</span>
 				<span class="name">${member.mbName}</span>
@@ -339,7 +237,7 @@
 			</p>
 			<p>
 				<span class="span1">전화번호</span>
-				<span class="tel">${fn:substring(member.mbTel,0,3)}-${fn:substring(member.mbTel,3,7)}-${fn:substring(member.mbTel,7,11)}</span>
+				<span class="tel">${member.mbTel}</span>
 				<span class="reg">※ 숫자만 입력하세요</span>
 			</p>
 			<p>

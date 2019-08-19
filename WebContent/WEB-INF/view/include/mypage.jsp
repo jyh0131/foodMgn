@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <%@ include file="header.jsp" %>
+
 <style>
 	.s_visu1 {
 		width: 100%;
@@ -23,22 +25,22 @@
 	#leftUi ul{
 		width:250px;
 		height:600px;
-		background: rgb(0,0,0);
+		background: rgba(0,0,0,0.7);
 	}
 	#leftUi ul li{
 		width:250px;
-		height:50px;
-		line-height:50px;
-		border-bottom:1px solid black;
+		height:60px;
+		line-height:60px;
 	}
 	#leftUi ul li a{
 		display: block;
 		width:220px;
-		height:50px;
-		line-height:50px;
+		height:60px;
+		line-height:60px;
 		padding-left:30px;
 		font-weight: bold;
 		color:white;
+		font-size: 1.2em;
 	}
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

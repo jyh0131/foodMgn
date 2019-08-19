@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -161,20 +163,20 @@
 					<div class="headUl">
 						<ul>
 							<li>
-								<span>INTRODUCE</span>
+								<a href="${pageContext.request.contextPath}/introduce.do"><span>INTRODUCE</span></a>
 							</li>
 							<li>
 								<span>MENU</span>
 								<ul class="submenu">
-									<li><a href="${pageContext.request.contextPath}/menu.do?fkno=1">파스타</a></li>
-									<li><a href="${pageContext.request.contextPath}/menu.do?fkno=2">스테이크&커틀렛</a></li>
-									<li><a href="${pageContext.request.contextPath}/menu.do?fkno=3">필라프&리조또</a></li>
-									<li><a href="${pageContext.request.contextPath}/menu.do?fkno=4">샐러드</a></li>
-									<li><a href="${pageContext.request.contextPath}/menu.do?fkno=5">시그니처 피자</a></li>
-									<li><a href="${pageContext.request.contextPath}/menu.do?fkno=6">피자</a></li>
-									<li><a href="${pageContext.request.contextPath}/menu.do?fkno=7">사이드 메뉴</a></li>
-									<li><a href="${pageContext.request.contextPath}/menu.do?fkno=8">음료</a></li>
-									<li><a href="${pageContext.request.contextPath}/menu.do?fkno=9">맥주</a></li>
+									<li><a href="${pageContext.request.contextPath}/menu.do?fkno=1">PASTA</a></li>
+									<li><a href="${pageContext.request.contextPath}/menu.do?fkno=2">STEAK&CUTLET</a></li>
+									<li><a href="${pageContext.request.contextPath}/menu.do?fkno=3">PILAF&RISOTTO</a></li>
+									<li><a href="${pageContext.request.contextPath}/menu.do?fkno=4">SALAD</a></li>
+									<li><a href="${pageContext.request.contextPath}/menu.do?fkno=5">SIGNATURE PIZZA</a></li>
+									<li><a href="${pageContext.request.contextPath}/menu.do?fkno=6">PIZZA</a></li>
+									<li><a href="${pageContext.request.contextPath}/menu.do?fkno=7">SIDE MENU</a></li>
+									<li><a href="${pageContext.request.contextPath}/menu.do?fkno=8">BEVERAGE</a></li>
+									<li><a href="${pageContext.request.contextPath}/menu.do?fkno=9">BEER</a></li>
 								</ul>
 							</li>
 							<li>
@@ -186,16 +188,16 @@
 							</li>
 							<li>
 								<span>RESERVATION</span>
-							</li>
-							<li>
-								<span>DELIVERY</span>
 								<ul class="submenu">
 									<li><a href="javascript:void(0);" id="reservation">예약하기</a></li>
 									<li><a href="${pageContext.request.contextPath}/search.do" id="searchRsv">예약조회</a></li>
 								</ul>
 							</li>
 							<li>
-								<span>DERECTION</span>
+								<a href="${pageContext.request.contextPath}/delivery.do"><span>DELIVERY</span></a>
+							</li>
+							<li>
+								<a href="${pageContext.request.contextPath}/derection.do"><span>DERECTION</span></a>
 							</li>
 						</ul>
 					</div>
@@ -221,15 +223,15 @@
 							<li class="center" id="li2">
 								<a href="${pageContext.request.contextPath}/menu.do?fkno=1">MENU</a>
 								<ul class="submenu">
-									<li><a href="${pageContext.request.contextPath}/menu.do?fkno=1">파스타</a></li>
-									<li><a href="${pageContext.request.contextPath}/menu.do?fkno=2">스테이크&커틀렛</a></li>
-									<li><a href="${pageContext.request.contextPath}/menu.do?fkno=3">필라프&리조또</a></li>
-									<li><a href="${pageContext.request.contextPath}/menu.do?fkno=4">샐러드</a></li>
-									<li><a href="${pageContext.request.contextPath}/menu.do?fkno=5">시그니처 피자</a></li>
-									<li><a href="${pageContext.request.contextPath}/menu.do?fkno=6">피자</a></li>
-									<li><a href="${pageContext.request.contextPath}/menu.do?fkno=7">사이드 메뉴</a></li>
-									<li><a href="${pageContext.request.contextPath}/menu.do?fkno=8">음료</a></li>
-									<li><a href="${pageContext.request.contextPath}/menu.do?fkno=9">맥주</a></li>
+									<li><a href="${pageContext.request.contextPath}/menu.do?fkno=1">PASTA</a></li>
+									<li><a href="${pageContext.request.contextPath}/menu.do?fkno=2">STEAK&CUTLET</a></li>
+									<li><a href="${pageContext.request.contextPath}/menu.do?fkno=3">PILAF&RISOTTO</a></li>
+									<li><a href="${pageContext.request.contextPath}/menu.do?fkno=4">SALAD</a></li>
+									<li><a href="${pageContext.request.contextPath}/menu.do?fkno=5">SIGNATURE PIZZA</a></li>
+									<li><a href="${pageContext.request.contextPath}/menu.do?fkno=6">PIZZA</a></li>
+									<li><a href="${pageContext.request.contextPath}/menu.do?fkno=7">SIDE MENU</a></li>
+									<li><a href="${pageContext.request.contextPath}/menu.do?fkno=8">BEVERAGE</a></li>
+									<li><a href="${pageContext.request.contextPath}/menu.do?fkno=9">BEER</a></li>
 								</ul>
 							</li>
 							<li class="right" id="li3">
