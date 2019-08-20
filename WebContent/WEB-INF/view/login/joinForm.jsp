@@ -7,8 +7,8 @@
 
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/jquery-ui.css">
+<script src="${pageContext.request.contextPath}/js/jquery-ui.js"></script>
 <script>
     //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
     function sample4_execDaumPostcode() {
@@ -130,10 +130,8 @@
          return false;
       })
       	$(".date").datepicker({
-      		dateFormat: 'yy-mm-dd',
-			changeYear: true,
-			changeMonth: true,
-			yearRange: "-100:+0"
+			yearRange: "-100:+0",
+			minDate: null
 		});
    })
 </script>

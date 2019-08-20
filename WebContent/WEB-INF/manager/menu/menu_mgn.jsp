@@ -419,8 +419,10 @@
 		})
 		
 		$(document).on("click", ".update", function() {
-			var fNo = $(this).attr("data-no");
+			 var fNo = $(this).attr("data-no");
 	         var $btn = $(this);
+	         var money = $(this).parent().prev().text();
+	         
 	         var $input = $("<input type='text' name='uprice' size=5>");
 	         
 	         if($btn.text()=="수정") {
@@ -432,7 +434,17 @@
 	         } else {
 	        	 $btn.text("수정");
 	        	 $btn.removeClass("upSuc");
-	        	 
+	 	        
+	        	 if(Number($("input[name='uprice']").val()) < 0) {
+	 	        	 alert("가격을 잘못 입력하셨습니다.");
+	 	        	 return;
+	 	         }
+	 	        
+	 	         if(Number($("input[name='uprice']").val()) != $("input[name='uprice']").val()) {
+	 	        	 alert("가격을 잘못 입력하셨습니다.");
+	 	         	 return;
+	 	         }
+	 	        
 		         $.ajax({
 		            url:"${pageContext.request.contextPath}/mgn/menuMgnupdate.do",
 		            type:"get",

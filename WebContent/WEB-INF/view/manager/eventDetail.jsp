@@ -134,7 +134,6 @@
 	#text{
 		border-bottom: 2px solid #55423b;
 		padding:40px 0;
-		text-align: center;
 	}
 	#btnBox{
 		margin-top:20px;

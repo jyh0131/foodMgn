@@ -94,6 +94,10 @@
 		width:50px;
 		text-align: center;
 	}
+	.cancel{
+		text-decoration: line-through;
+		color:red;
+	}
 }
 
 @media all and (max-width:767px){
@@ -206,7 +210,11 @@
 		width:50px;
 		text-align: center;
 	}
-
+	.cancel{
+		text-decoration: line-through;
+		color:red;
+	}
+	
 }
 	
 	
@@ -231,6 +239,7 @@
 						$("#searchInnerContainer").append("<table id='result'>");
 						for(var i=0; i<json.length; i++){
 							var date = new Date(json[i].rsvTime);
+							var $tr = $("<tr>");
 							var dateFormat = date.getFullYear()+"년 "+(date.getMonth()+1)+"월 "+date.getDate()+"일 <br>"+date.getHours()+"시 "+date.getMinutes()+"분";
 							var table = "";
 							if(json[i].rsvTableNo=="no.1"){
@@ -254,8 +263,13 @@
 							if(json[i].rsvTableNo=="no.7"){
 								table="7번 테이블";
 							}
-							$("#result").append("<tr><td class='rsvTime'>예약 시간</td><td class='date'>"+dateFormat+"</td><td class='tableNo'>테이블 번호</td><td class='no'>"+table+"</td><td class='number'>인원</td><td class='rsvNumber'>"+json[i].rsvNumber+"명</td></tr>");
+							$tr.append("<td class='rsvTime'>예약 시간</td><td class='date'>"+dateFormat+"</td><td class='tableNo'>테이블 번호</td><td class='no'>"+table+"</td><td class='number'>인원</td><td class='rsvNumber'>"+json[i].rsvNumber+"명</td>")
+							$("#result").append($tr);
+							if(json[i].rsvCancel==true){
+								$tr.addClass("cancel");
+							}
 						}
+						
 					}
 					
 				}
@@ -288,23 +302,3 @@
 		</div>
 	</div>
 <%@ include file="../include/footer.jsp" %>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

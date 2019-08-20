@@ -168,6 +168,14 @@
 					</div>
 					<div class="clear"></div>
 					<div class="headUl">
+						<div id="mobilelogin">
+							<c:if test="${Auth != null}">
+								<a href="${pageContext.request.contextPath}/logout.do">로그아웃</a>
+							</c:if>
+							<c:if test="${Auth == null}">
+								<a href="${pageContext.request.contextPath}/login.do">로그인</a>
+							</c:if>
+						</div>
 						<ul>
 							<li>
 								<a href="${pageContext.request.contextPath}/introduce.do"><span>INTRODUCE</span></a>

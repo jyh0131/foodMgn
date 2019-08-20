@@ -187,13 +187,14 @@
 							$coupon = $("<td>").text("");
 						}else if(obj.coupon.length != 0) {
 							$(obj.coupon).each(function(i, obj2) {
-								var cpName = obj2.cpName.replace(",","<br>").trim();
+								/* var cpName = obj2.cpName.replace(",","<br>").trim();
 								if(cpName.indexOf(",") >= 0) {
 									var cpName2 = cpName.replace(",","<br>").trim();
 									$coupon = $("<td>").html(cpName2);
 								}else if(cpName.indexOf(",") < 0) {
 									$coupon = $("<td>").html(cpName);
-								}
+								} */
+								$coupon = $("<td>").html(obj2.cpName);
 							})
 						}
 						var $input = $("<input type='checkbox' class='check hidden'>");
@@ -238,13 +239,14 @@
 							$coupon = $("<td>").text("");
 						}else if(obj.coupon.length != 0) {
 							$(obj.coupon).each(function(i, obj2) {
-								var cpName = obj2.cpName.replace(",","<br>").trim();
+								/* var cpName = obj2.cpName.replace(",","<br>").trim();
 								if(cpName.indexOf(",") >= 0) {
 									var cpName2 = cpName.replace(",","<br>").trim();
 									$coupon = $("<td>").html(cpName2);
 								}else if(cpName.indexOf(",") < 0) {
 									$coupon = $("<td>").html(cpName);
-								}
+								} */
+								$coupon = $("<td>").html(obj2.cpName);
 							})
 						}
 						var $input = $("<input type='checkbox' class='check hidden'>");
@@ -338,13 +340,14 @@
 							$coupon = $("<td>").text("");
 						}else if(obj.coupon.length != 0) {
 							$(obj.coupon).each(function(i, obj2) {
-								var cpName = obj2.cpName.replace(",","<br>").trim();
+								/* var cpName = obj2.cpName.replace(",","<br>").trim();
 								if(cpName.indexOf(",") >= 0) {
 									var cpName2 = cpName.replace(",","<br>").trim();
 									$coupon = $("<td>").html(cpName2);
 								}else if(cpName.indexOf(",") < 0) {
 									$coupon = $("<td>").html(cpName);
-								}
+								} */
+								$coupon = $("<td>").html(obj2.cpName);
 							})
 						}
 						var $input = $("<input type='checkbox' class='check hidden' data-no='"+obj.mbNo+"'>");
@@ -405,13 +408,14 @@
 							$coupon = $("<td>").text("");
 						}else if(obj.coupon.length != 0) {
 							$(obj.coupon).each(function(i, obj2) {
-								var cpName = obj2.cpName.replace(",","<br>").trim();
+								/* var cpName = obj2.cpName.replace(",","<br>").trim();
 								if(cpName.indexOf(",") >= 0) {
 									var cpName2 = cpName.replace(",","<br>").trim();
 									$coupon = $("<td>").html(cpName2);
 								}else if(cpName.indexOf(",") < 0) {
 									$coupon = $("<td>").html(cpName);
-								}
+								} */
+								$coupon = $("<td>").html(obj2.cpName);
 							})
 						}
 						var $input = $("<input type='checkbox' class='check hidden' data-no='"+obj.mbNo+"'>");
@@ -488,7 +492,8 @@
 								</c:when>
 								<c:when test="${mlist.coupon != null}">
 									<c:forEach var="cp" items="${mlist.coupon}">
-										<td>${cp.cpName.replace(",","<br>").trim()}</td>
+										<%-- <td>${cp.cpName.replace(",","<br>").trim()}</td> --%>
+										<td>${cp.cpName}</td>
 									</c:forEach>
 								</c:when>
 							</c:choose>
@@ -512,7 +517,8 @@
 								</c:when>
 								<c:when test="${mlist.coupon != null}">
 									<c:forEach var="cp" items="${mlist.coupon}">
-										<td>${cp.cpName.replace(",","<br>").trim()}</td>
+										<%-- <td>${cp.cpName.replace(",","<br>").trim()}</td> --%>
+										<td>${cp.cpName}</td>
 									</c:forEach>
 								</c:when>
 							</c:choose>

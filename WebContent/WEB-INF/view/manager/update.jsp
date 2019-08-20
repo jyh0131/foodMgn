@@ -82,7 +82,7 @@
 					<li><b>이벤트</b></li>
 				</ul>
 			</div>
-		<form id="frm" action="eventUpdate.do" method="post" >
+		<form id="frm" action="eventUpdate.do" method="post" enctype="multipart/form-data">
 			<table>
 		        <tr>
 		            <td class="firstTd">제목</td>
@@ -104,13 +104,22 @@
 			</table>
 			<div id="btnBox">
 				 <input type="button" id="update" value="수정"/>
-		         <input type="button" value="취소"/>
+		         <input type="button" id="reset" value="취소"/>
 			</div>
 		</form>
 	</div>
 <script>
 
 $(".selectList").datepicker();
+
+$("#reset").click(function(){
+	var a = confirm("취소하시겠습니까?");
+	if(a==true){
+		location.href= "${pageContext.request.contextPath}/event.do";
+	}else{
+		return;
+	}
+})
 
 var oEditors = [];
 nhn.husky.EZCreator.createInIFrame({

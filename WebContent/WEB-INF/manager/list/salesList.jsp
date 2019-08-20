@@ -67,6 +67,19 @@ table {
 		border-radius: 3px;
 		outline: none;
 	}
+#total1{
+   font-size: 18px;
+   font-weight: bold;
+   color:blue;
+}
+
+#total2{
+   font-size: 18px;
+   font-weight: bold;
+   color:red;
+}
+td:nth-child(3), td:nth-child(4), td:nth-child(5) {
+      text-align: right;
 }
 </style>
 

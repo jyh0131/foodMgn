@@ -37,6 +37,8 @@ public class SaleCancelHandler implements CommandHandler {
 		pay.setPayDiscountPrice(Integer.parseInt(payDiscountPrice));
 		pay.setPayMember(payMember);
 		pay.setPayMemberNo(Integer.parseInt(payMemberNo));
+		System.out.println(Integer.parseInt(payMemberNo));
+		System.out.println(pay.getPayMemberNo());
 		if (payCancel.equals("결제완료")) {
 			pay.setPayCancel(0);
 		} else {
@@ -79,21 +81,25 @@ public class SaleCancelHandler implements CommandHandler {
 				
 
 				// 등급 변경
-				int total = service.totalPrice(pay.getPayMemberNo());
-				Member mem2 = new Member(pay.getPayMemberNo());
+				try {
+	                  int total = service.totalPrice(pay.getPayMemberNo());
+	                  Member mem2 = new Member(pay.getPayMemberNo());
 
-				if (total > 0 && total <= 299999) { // 등급 변경
-					mem2.setMbGrade(new Grade("bronze"));
-					service.updateGrade(mem2);
-				} else if (total > 300000 && total <= 499999) {
-					mem2.setMbGrade(new Grade("silver"));
-					service.updateGrade(mem2);
-				} else if (total > 500000 && total <= 999999) {
-					mem2.setMbGrade(new Grade("gold"));
-				} else if (total > 1000000) {
-					mem2.setMbGrade(new Grade("vip"));
-				}
-				service.updateGrade(mem2);
+	                  if (total > 0 && total <= 299999) { // 등급 변경
+	                     mem2.setMbGrade(new Grade("bronze"));
+	                     service.updateGrade(mem2);
+	                  } else if (total > 300000 && total <= 499999) {
+	                     mem2.setMbGrade(new Grade("silver"));
+	                     service.updateGrade(mem2);
+	                  } else if (total > 500000 && total <= 999999) {
+	                     mem2.setMbGrade(new Grade("gold"));
+	                  } else if (total > 1000000) {
+	                     mem2.setMbGrade(new Grade("vip"));
+	                  }
+	                  service.updateGrade(mem2);
+	               } catch (NullPointerException e2) {
+	                  
+	               }
 			}
 
 		}

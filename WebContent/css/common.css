@@ -83,6 +83,17 @@ a {
 	.clear {
 		clear: both;
 	}
+	#mobilelogin {
+		padding-bottom: 20px;
+		border-bottom: 1px solid black;
+		overflow: hidden;
+	}
+	#mobilelogin a {
+		color: white;
+		float: right;
+		margin: 10px 10px 0 0;
+		font-weight: bold;
+	}
 	.submenu {
 		width: 100%;
 		display: none;

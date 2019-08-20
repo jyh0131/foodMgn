@@ -104,13 +104,23 @@
 			</table>
 			<div id="btnBox">
 				 <input type="button" id="save" value="등록"/>
-		         <input type="button" value="취소"/>
+		         <input type="button" id="reset" value="취소"/>
 			</div>
 		</form>
 	</div>
 <script>
 
 $(".selectList").datepicker();
+
+$("#reset").click(function(){
+	var a = confirm("취소하시겠습니까?");
+	if(a==true){
+		location.href= "${pageContext.request.contextPath}/event.do";
+	}else{
+		return;
+	}
+})
+
 
 var oEditors = [];
 nhn.husky.EZCreator.createInIFrame({

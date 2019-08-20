@@ -141,6 +141,9 @@
 		color:red;
 	}
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/jquery-ui.css">
+<script src="${pageContext.request.contextPath}/js/jquery-ui.js"></script>
 <script>
 $(function() {
 	$("#menu_li").click(function() {
