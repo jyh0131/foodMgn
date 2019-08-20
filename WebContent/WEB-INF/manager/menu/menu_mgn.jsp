@@ -347,7 +347,7 @@
 						alert("조회된 결과가 없습니다");
 						$("input[name='fdname']").val("");
 						$("select[name='fk2']").val("음식종류선택");
-						return false;
+						return;
 					}
 					
 					$(res.content).each(function(i, obj) {
@@ -545,7 +545,7 @@
 				<c:forEach var="flist" items="${foodPage.content}">
 					<c:if test="${flist.fdWithdrawal == true}">
 						<tr class="underline">
-							<td>${flist.fkNo}</td>
+							<td>${flist.fkNo.fkName}</td>
 							<td><img src="${pageContext.request.contextPath}/images/food/${flist.fdName}.png"></td>
 							<td>${flist.fdNo}</td>
 							<td>${flist.fdName}</td>
@@ -558,7 +558,7 @@
 					</c:if>
 					<c:if test="${flist.fdWithdrawal != true}">
 						<tr>
-							<td>${flist.fkNo}</td>
+							<td>${flist.fkNo.fkName}</td>
 							<td><img src="${pageContext.request.contextPath}/images/food/${flist.fdName}.png"></td>
 							<td>${flist.fdNo}</td>
 							<td>${flist.fdName}</td>

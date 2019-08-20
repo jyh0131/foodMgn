@@ -27,9 +27,11 @@
 	h1{
 		margin-bottom:20px;
 		margin-top:20px;
+		color: #55423b;
 	}
 	h3{
-		margin-bottom:20px;
+		margin-bottom:10px;
+		color: #55423b;
 	}
 	#rsvTable{
 		border-collapse: collapse;
@@ -95,8 +97,11 @@
 }
 
 @media all and (max-width:767px){
-	body{
-		background: #f7f7f7;
+	body {
+		background-color: #e8e2dc;
+	}
+	header {
+		background-color: white;
 	}
 	#searchContainer{
 		width:100%;
@@ -105,32 +110,34 @@
 	}
 	.s_visu1 {
 		width: 100%;
-		height: 250px;
 	}
 	
 	.s_visu1 img{
 		width: 100%;
-		height: 250px;
 	}
 	h1{
 		margin-bottom:20px;
 		margin-top:20px;
 		text-align: center;
-	}
-	#searchInnerContainer{
-		padding:20px;
-		background: white;
+		color: #55423b;
 	}
 	
-	
+	#searchInnerContainer {
+		width: 90%;
+		margin: 0 auto;
+		min-height: 360px;
+	}
 	table{
 		font-size: 12px;
 		text-align: center;
 	}
-	
-	
+	table td {
+		background-color: #FCFCFC;
+	}
 	h3{
-		margin-bottom:20px;
+		margin-bottom:10px;
+		color: #55423b;
+		font-size: 17px;
 	}
 	#rsvTable{
 		border-collapse: collapse;
@@ -140,14 +147,16 @@
 		border-top:2px solid #606060;
 	}
 	#rsvTable tr, #rsvTable td{
-		border:1px solid #dedede;
+		border-right: 1px solid #dedede;
+	}
+	table td:last-child {
+		border-top: 1px solid #dedede;
 	}
 	#rsvTable td{
 		height:35px;
 	}
 	.gray{
 		width:50px;
-		background:#f7f7f7;
 		font-weight: bold;
 		text-align: center;
 	}
@@ -157,16 +166,21 @@
 		margin:5px 10px;
 		text-align: center;
 	}
+	.tel:last-child {
+		margin-right: 20px;
+	}
 	#search{
 		display: block;
 		width:110px;
-		height:25px;
-		margin:0 auto;
+		height:30px;
+		margin:5px auto;
+		background-color: #555555;
+		color: white;
+		border: 1px solid #555555;
 	}
 	#result{
 		border-collapse: collapse;
 		width:100%;
-		margin-bottom:20px;
 		border-top:2px solid #606060;
 	}
 	#result tr, #result td{
@@ -179,8 +193,6 @@
 	.rsvTime, .tableNo, .number{
 		width:70px;
 		font-weight: bold;
-		background:#f7f7f7;
-		
 	}
 	.date{
 		width:200px;
@@ -242,7 +254,7 @@
 							if(json[i].rsvTableNo=="no.7"){
 								table="7번 테이블";
 							}
-							$("#result").append("<tr><td class='rsvTime'>예약시간</td><td class='date'>"+dateFormat+"</td><td class='tableNo'>테이블 번호</td><td class='no'>"+table+"</td><td class='number'>인원</td><td class='rsvNumber'>"+json[i].rsvNumber+"명</td></tr>");
+							$("#result").append("<tr><td class='rsvTime'>예약 시간</td><td class='date'>"+dateFormat+"</td><td class='tableNo'>테이블 번호</td><td class='no'>"+table+"</td><td class='number'>인원</td><td class='rsvNumber'>"+json[i].rsvNumber+"명</td></tr>");
 						}
 					}
 					

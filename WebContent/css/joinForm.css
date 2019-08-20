@@ -1,0 +1,250 @@
+@charset "UTF-8";
+
+@media all and (max-width:767px) {
+	body {
+		background-color: #e8e2dc;
+	}
+	header {
+		background-color: white;
+	}
+	.s_visu1, #s_visu1_2 {
+		width: 100%;
+		background-color: #e8e2dc;
+	}
+	#s_visu1_1, #menu_li, #menu_li2 {
+		display: none;
+	}
+	#s_visu1_2 img{
+		width: 100%;
+	}
+	#joinForm_content {
+		width: 90%;
+		margin: 0 auto;
+	}
+	#joinForm_content > p {
+		text-align: center;
+		color: #55423b;
+		padding-top: 40px;
+		font-size: 32px;
+		font-weight: bold;
+		padding-bottom: 20px;
+	}
+	#joinForm_content form div {
+		margin-bottom: 5px;
+		overflow: hidden;
+	}
+	input[type="text"] {
+		padding: 5px;
+	}
+	.jf_div1 {
+		display: none;
+	}
+	.span1, .span1a {
+		width: 90px;
+		float: left;
+	}
+	.daum_addr {
+		float: left;
+		width: 270px;
+	}
+	.daum_addr > input[type="text"] {
+		margin-bottom: 3px;
+	}
+	#sample4_postcode {
+		float: left;
+	}
+	input[type="button"] {
+		background-color: #555555;
+		border: 1px solid #555555;
+		color: white;
+		font-size: 10px;
+		float: left;
+		padding: 6px 10px;
+		margin-left: 2px;
+		margin-top: 2px;
+	}
+	#sample4_roadAddress {
+		clear: both;
+	}
+	.joincheck {
+		font-size: 0.9em;
+	}
+	.jf_div3 {
+		text-align: center;
+	}
+	.reg, .reg2 {
+	   color: red;
+	   font-size: 0.8em;
+	   display: none;
+	}
+	input[type="submit"] {
+		background-color: #3f87dc;
+		border: 1px solid #3f87dc;
+		color: white;
+		padding: 10px 30px;
+		font-weight: bold;
+		cursor: pointer;
+		margin: 20px 0 30px 0;
+	}
+}
+
+@media screen and (min-width:768px) {
+	.s_visu1 {
+	   width: 100%;
+	   height: 350px;
+	}
+		
+	.s_visu1 img{
+	   width: 100%;
+	   height: 350px;
+	}
+	#s_visu1_2 {
+		display: none;
+	}
+	.content {
+	   position: relative;
+	   width: 1000px;
+	   margin: 0 auto;
+	   padding: 20px 0;
+	   overflow: hidden;
+	   clear: both;
+	}
+	#menu_li {
+	   border: 1px solid #887c75;
+	   width: 200px;
+	   height: 25px;
+	   line-height: 25px;
+	   padding: 10px 0;
+	   background-color: #f2efec;
+	   font-size: 15px;
+	   text-indent: 16px;
+	   position: relative;
+	   cursor: pointer;
+	   float: left;
+	}
+	#menu_li2 {
+	   float: right;                 
+	}
+	#menu_li2 li {
+	   list-style: none;
+	   float: left;
+	   padding: 5px; 
+	}
+	.li_img {
+	   background: url("../images/menu/s_menu_bg.gif") no-repeat;
+	   position: absolute;
+	   top: 20px;
+	   right: 10px;
+	   width: 20px;
+	   height: 10px;
+	}
+	#menulist {
+	   display: none;
+	   width: 200px;
+	   position: absolute;
+	   top: 46px;
+	   left: -1px;
+	}
+	#menulist li {
+	   border: 1px solid #887c75;
+	   border-bottom: 1px dotted #887c75;
+	   border-top: none;
+	   width: 200px;
+	   height: 20px;
+	   line-height: 20px;
+	   padding: 10px 0;
+	   background-color: #f2efec;
+	}
+	#menulist li:hover {
+	   background-color: #887c75;
+	}
+	#menulist li:hover a {
+	   color: white;
+	}
+	#menulist li a {
+	   color: black;
+	   padding: 10px;
+	}
+	#menulist li:last-child {
+	   border-bottom: 1px solid #887c75;
+	}
+		
+		
+	#joinForm_content > p {
+	   padding: 20px 0 30px;
+	   text-align: center;
+	   font-size: 32px;
+	   line-height: 32px;
+	   color: #55423b;
+	   font-weight: bolder;
+	   letter-spacing: -0.1em;
+	   font-family: "굴림";
+	}
+	.jf_div1 {
+	   padding: 10px 0;
+	   border-bottom: 3px solid #555555;
+	   margin-top: 20px;
+	}
+	.jf_div2 {
+	   border-bottom: 2px solid #c7a593;
+	   overflow: hidden;
+	}
+	.jf_div3 {
+	   text-align: center;
+	   padding: 20px 0 60px;
+	   border-top: 2px solid #555555;
+	}
+	.span1 {
+	   background-color: #F7F7F7;
+	   display: inline-block;
+	   padding: 10px 15px;
+	   width: 145px;
+	   margin-right: 10px;
+	}
+	.span1a {
+	   background-color: #F7F7F7;
+	   display: inline-block;
+	   padding: 0 15px;
+	   height: 80px;
+	   width: 145px;
+	   margin-right: 10px;
+	   float: left;
+	   line-height: 80px;
+	}
+	.daum_addr {
+		display: inline-block;
+		height: 60px;
+		float: left;
+		margin: 10px 0 10px 5px;
+	}
+	input[type="submit"] {
+	   background-color: #3f87dc;
+	   border: 1px solid #3f87dc;
+	   color: white;
+	   padding: 10px 50px;
+	   border-radius: 5px;
+	   cursor: pointer;
+	   font-size: 17px;
+	}
+	input[type="button"] {
+		margin-bottom: 5px;
+		padding: 2px 10px;
+		background-color: #555555;
+		border: 1px solid #555555;
+		color: white;
+		border-radius: 3px;
+	 	margin-top: 3px;
+	}
+	input[type="text"], input[type="password"] {
+	   padding: 3px;
+	}
+	input[name="addr"] {
+		margin-top: 5px;
+	}
+	.reg, .reg2 {
+	   color: red;
+	   font-size: 0.8em;
+	   display: none;
+	}
+	
+}

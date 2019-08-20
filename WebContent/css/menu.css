@@ -50,12 +50,26 @@
 	#ul1 {
 		display: none;
 	}
+	#ul2 {
+		width: 90%;
+		margin: 0 auto;
+	}
 	.foodNameEng {
 		color: #c58561;
 		font-size: 30px;
 		padding: 10px 0;
 		font-family: Nanum Gothic,Dotum,AppleGothic,sans-serif;
 		font-weight: bold;
+		width: 90%;
+		margin: 0 auto;
+	}
+	.foodNameEngb {
+		color: #814b34;
+		font-size: 20px;
+		font-family: Nanum Gothic,Dotum,AppleGothic,sans-serif;
+		font-weight: bold;
+		width: 90%;
+		margin: 0 auto;
 	}
 	.foodName {
 		color: #814b34;
@@ -63,18 +77,26 @@
 		padding: 5px 0;
 		font-weight: bold;
 	}
+	.foodNameb {
+		color: #787878;
+		font-size: 15px;
+	}
 	.foodExplain {
 		color: #787878;
 		font-size: 14px;
-		padding-bottom: 15px;
+		padding-bottom: 20px;
 		width: 90%;
 		margin: 0 auto;
 	}
+	.foodPrice {
+		color: #814b34;
+		font-size: 30px;
+		padding: 10px 0 15px;
+	}
 	.mobileImg {
-		width: 90%;
+		width: 100%;
 		margin: 0 auto;
 		text-align: center;
-		padding: 10px;
 	}
 	.mobileImg:nth-child(2n+1) {
 		background-color: #f2efec;
@@ -90,7 +112,7 @@
 	}
 	#topImg {
 		position: fixed;
-		top: 555px;
+		top: 630px;
 		right: 15px;
 	}
 	#topImg img {

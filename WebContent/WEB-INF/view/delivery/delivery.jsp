@@ -134,69 +134,75 @@
 	 	margin-right:10px;
 	 }
 }
+
+
+
 @media all and (max-width:767px){
-	body{
-		background: #f7f7f7;
+	body {
+		background-color: #e8e2dc;
+	}
+	header {
+		background-color: white;
 	}
 	.s_visu1 {
 		width: 100%;
-		height: 250px;
 	}
 	
 	.s_visu1 img{
 		width: 100%;
-		height: 250px;
 	}
 	
-	
-	#deliveryContainer{
+	#deliveryContainer {
 		width:100%;
-		margin: 40px auto;
-		
+		margin: 0 auto;
+		margin-bottom: 40px;
+		min-height: 400px;
 	}
-	
+	#deliveryContainer h1 {
+		color: #55423b;
+		padding: 30px 0;
+		text-align: center;
+	}
+	#deliveryContainer h3 {
+		color: #55423b;
+	}
 	#deliveryInnerContainer{
-		padding:30px;
 		background: white;
 		overflow: hidden;
-	}
-	h1{
-		margin-bottom:20px;
-		margin-top:20px;
-	}
-	h3{
-		margin-bottom:20px;
+		background-color: #e8e2dc;
+		width: 90%;
+		margin: 0 auto;
 	}
 	#select, #result{
 		float:left;
-		margin:10px 20px;
 	}
-
-	#select{
+	#select, #selectFK {
 		width:350px;
+		margin: 5px 0;
 	}
-	 #result{
-		 width:910px;
-	 }
-	 #selectFK, #selectF{
-		margin:20px 0;
-	}
-	#foodkind, #food{
-		width: 300px;
-		height:50px;
+	#foodkind, #food {
+		width: 360px;
+		height:40px;
 		text-align: center;
 	}
-	 #saleList{
-	 	width:900px;
+	#saleList {
+	 	width:100%;
 	 	border-collapse: collapse;
-	 	font-size: 20px;
-	 	font-family: Arial;
-	 	margin-bottom:20px;
+	 	margin: 10px 0 20px 0;
+	 }
+	 #saleList td:first-child, th:first-child {
+	 	display: none;
+	 }
+	 #saleList td {
+	 	font-size: 0.9em;
+	 	height: 40px;
+	 	text-align: center;
 	 }
 	 #saleList tr{
 	 	background: #f5f5f5;
-	 	border:1px solid #bbb;
-	 	height:70px;
+	 	border-top: 1px solid #bbb;
+	 	border-bottom: 1px solid #bbb;
+	 	height: 30px;
 	 }
 	 #totalPrice{
 	 	text-align: right;
@@ -207,58 +213,37 @@
 	 .foodNo{
 	 	display: none;
 	 }
-	 .foodName{
-	 	width:400px;
-	 	text-align: center;
-	 }
-	 .count{
-	 	width:150px;
-	 	text-align: center;
-	 }
-	 .foodPrice{
-	 	width:130px;
-	 	text-align: center;
-	 }
-	 .delete{
-	 	width:100px;
-	 	text-align: center;
-	 }
 	 .delete button{
-	 	width:60px;
-	 	height:30px;
-	 	font-size: 18px;
-	 	
+	 	width: 35px;
+	 	height: 22px;
 	 }
-	  .fImg{
-	 	overflow: hidden;
-	 	width:115px;
-	  }
-	  .foodImg{ /*이미지*/
-	 	display: block;
-	 	float: left;
-	 	width:90px;
-	 	height:70px;
-	 	margin-left:25px;
+	 #result div {
+	 	text-align: center;
 	 }
-	
 	 #btn{
-	 	width:200px;
-	 	height:80px;
-	 	font-size: 25px;
-	 	line-height: 80px;
 	 	font-weight: bold;
 	 	color:white;
 	 	background: #c10a28;
-	 	margin-left:350px;
+	 	border: 1px solid #c10a28;
+	 	padding: 10px 30px;
 	 }
 	 #totalPrice{
 	 	font-weight: bold;
 	 	margin:10px;
-	 	font-size: 20px;
+	 	font-size: 17px;
+	 }
+	 .count {
+	 	overflow: hidden;
+	 	padding-left: 10px;
+	 }
+	 .count > span {
+	 	float: left;
 	 }
 	 .plus, .minus{
-	 	width:25px;
-	 	height:25px;
+	 	width:15px;
+	 	height:15px;
+	 	float: left;
+	 	line-height: 11px;
 	 }
 	 .plus{
 	 	margin-left:10px;
@@ -276,7 +261,7 @@
 			dataType: "json",
 			success : function(json){
 				console.log(json);
-				$("#foodkind").append("<option>===주메뉴선택===</option>")
+				$("#foodkind").append("<option>=== 메뉴선택 ===</option>")
 				for(var i=0; i<json.length; i++){
 					var $option = $("<option>");
 					$($option).html(json[i].fkName);
@@ -287,9 +272,9 @@
 		})
 		$("#foodkind").change(function(){
 			var foodkind = $("#selectFK :selected").val();
-			if(foodkind=="===주메뉴선택==="){
+			if(foodkind=="=== 메뉴선택 ==="){
 				$("#selectF").empty();
-				alert("주메뉴를 선택하세요.");
+				alert("메뉴를 선택하세요.");
 				return;
 			}
 			$.ajax({
@@ -451,16 +436,13 @@
 	<div id="deliveryContainer">
 		<h1>온라인 배달 주문</h1>
 		<div id="deliveryInnerContainer">
-		
 			<h3>배달주문하기</h3>
 			<div id="select">
 				<p id="selectFK">
 					<select id="foodkind">
-			
 					</select>
 				</p>
 				<p id="selectF">
-			
 				</p>
 			</div>
 			<div id="result">
@@ -473,8 +455,8 @@
 						<th width="100px">&nbsp;</th>
 					</tr>
 				</table>
-			<p id="totalPrice">총가격 : <span id="red">0</span>원</p>	
-			<button id="btn">결제</button>
+				<p id="totalPrice">총가격 : <span id="red">0</span>원</p>	
+				<div><button id="btn">결제</button></div>
 			</div>
 		</div>
 	</div>

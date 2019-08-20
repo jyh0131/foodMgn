@@ -81,7 +81,7 @@
 		color:#55423b;
 		clear: both;
 		text-align: center;
-		padding-bottom:40px;
+		padding-bottom:30px;
 		border-bottom:2px solid #55423b;
 		position: relative;                   
 	}
@@ -173,6 +173,12 @@
 	}               
 }
 @media all and (max-width:767px){
+	body {
+		background-color: #e8e2dc;
+	}
+	header {
+		background-color: white;
+	}
 	#PcImg{
 		display: none;
 	}   
@@ -180,12 +186,10 @@
 	
 	.s_visu1 {
 		width: 100%;
-		height: 250px;
 	}
 	
 	.s_visu1 img{
 		width: 100%;
-		height: 250px;
 	}
 	
 	.content {
@@ -195,6 +199,7 @@
 		padding: 20px 0;
 		overflow: hidden;
 		clear: both;
+		min-height: 390px;
 	}
 	#menu_li {
 		border: 1px solid #887c75;
@@ -208,7 +213,8 @@
 		position: relative;
 		cursor: pointer;
 		float: left;
-		margin-bottom:40px;
+		margin-bottom: 20px;
+		margin-left: 20px;
 	}
 	#menu_li2 {
 		display: none;                
@@ -254,15 +260,12 @@
 		text-align: center;
 		padding-bottom:40px;
 		border-bottom:2px solid #55423b;
-		position: relative;                   
+		position: relative;
+		width: 90%;
+		margin: 0 auto;        
 	}
 	#write{
-		position: absolute;
-		width:70px;
-		height:30px;
-		font-size:15px;
-		right:0;
-		bottom:5px;
+		display: none;
 	}
 	#pagediv {
 		text-align: center;
@@ -276,7 +279,8 @@
 		margin: 0 5px;
 	}
 	table{
-		width:100%;
+		width:90%;
+		margin: 0 auto;
 		border-bottom:2px solid #55423b;
 		
 	}
@@ -340,7 +344,7 @@
 		font-weight: bold;
 		margin-bottom:5px;
 		color:white;
-	}  
+	} 
 }
 	             
 </style>

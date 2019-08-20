@@ -81,7 +81,7 @@
 	}
 	#topImg {
 		position: fixed;
-		top: 555px;
+		top: 630px;
 		right: 15px;
 	}
 	#topImg img {
@@ -177,5 +177,8 @@
 		border-bottom: 1px solid #c7a593;
 		margin: 30px 0 60px 0;
 		overflow: hidden;
+	}
+	#topImg {
+		display: none;
 	}
 }

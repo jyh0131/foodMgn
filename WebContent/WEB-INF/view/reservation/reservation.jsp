@@ -84,13 +84,18 @@
 	#confirm{
 		text-align: center;
 	}
-	
+	#topImg {
+		display: none;
+	}
 }
 	
 	
 @media all and (max-width:767px){
-	body{
-		background: #f7f7f7;
+	body {
+		background-color: #e8e2dc;
+	}
+	header {
+		background-color: white;
 	}
 	#rsvContainer{
 		width:100%;
@@ -99,21 +104,23 @@
 	}
 	.s_visu1 {
 		width: 100%;
-		height: 250px;
 	}
 	
 	.s_visu1 img{
 		width: 100%;
-		height: 250px;
 	}
 	h1{
 		margin-bottom:20px;
 		margin-top:20px;
 		text-align: center;
+		color: #55423b;
+	}
+	h3 {
+		color: #55423b;
 	}
 	#rsvInnerContainer{
 		padding:20px;
-		background: white;
+		background: #e8e2dc;
 	}
 	#rsvGuide{
 		background: #f7f7f7;
@@ -152,6 +159,9 @@
 		font-weight: bold;
 		text-align: center;
 	}
+	td {
+		background: #FCFCFC;
+	}
 	input{
 		margin:0 10px;
 		padding-left:3px;
@@ -175,6 +185,9 @@
 	input[type="submit"],input[type="reset"]{
 		width: 100px;
 		height:50px;
+		background-color: #3b2c2c;
+		border: 1px solid #3b2c2c;
+		color: white;
 	}
 	#confirm{
 		text-align: center;
@@ -190,6 +203,17 @@
 	input[name="number"]{
 		width:150px;
 		text-align: right;
+	}
+	#topImg {
+		position: fixed;
+		top: 630px;
+		right: 15px;
+	}
+	#topImg img {
+		width: 38px;
+		height: 38px;
+		background-color: rgba(0,0,0,0.4);
+		border-radius: 50%;
 	}
 }
 </style>
@@ -297,6 +321,9 @@
 			</div>
 			<input type="hidden" name="isLogin" value=${isLogin }>
 		</form>
+		<div id="topImg">
+			<a href="#"><img src="${pageContext.request.contextPath}/images/up-arrow-icon.png"></a>
+		</div>
 	</div>
 </div>
 

@@ -33,4 +33,5 @@ public interface MemberDao {
 	public int insertCoupon(Map<String, Object> map);
 	public List<Member> selectCpname(Map<String, Object> map);
 	public int updateMileage(Member member);
+	public int deleteCoupon(Map<String, Object> map);
 }
