@@ -92,6 +92,7 @@
 		font-size:15px;
 		right:0;
 		bottom:5px;
+		display: none;
 	}
 	#pagediv {
 		text-align: center;

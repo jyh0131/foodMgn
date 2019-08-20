@@ -81,10 +81,10 @@
 						${fn:replace(notice.noContent,cn,br)}
 					</div>
 					<div id="div5">
-						<div class="left">
+						<%-- <div class="left">
 							<button id="pre_btn" data-no="${(notice.noNo-1)}">이전글</button>
 							<button id="next_btn" data-no="${(notice.noNo+1)}">다음글</button>
-						</div>
+						</div> --%>
 						<div class="right">
 							<a href="${pageContext.request.contextPath}/notice.do?page=${page}"><button>목록</button></a>
 						</div>
