@@ -120,7 +120,7 @@
 					$(".rsvTr").remove();
 					for(var i=0; i<res.length; i++){
 						var date = new Date(res[i].rsvTime);
-						var dateFormat = date.getFullYear()+"년"+("00"+(date.getMonth()+1)).slice(-2)+"월"+("00"+date.getDate()).slice(-2)+"일"+("00"+date.getHours()).slice(-2)+"시:"+("00"+date.getMinutes()).slice(-2)+"분";
+						var dateFormat = date.getFullYear()+"년"+("00"+(date.getMonth()+1)).slice(-2)+"월"+("00"+date.getDate()).slice(-2)+"일 "+("00"+date.getHours()).slice(-2)+"시:"+("00"+date.getMinutes()).slice(-2)+"분";
 						
 						var $tr = $("<tr class='rsvTr'>");
 						var $td1 = $("<td>");
@@ -173,7 +173,7 @@
 					$(".rsvTr").remove();
 					for(var i=0; i<res.length; i++){
 						var date = new Date(res[i].rsvTime);
-						var dateFormat = date.getFullYear()+"년"+("00"+(date.getMonth()+1)).slice(-2)+"월"+("00"+date.getDate()).slice(-2)+"일"+("00"+date.getHours()).slice(-2)+"시:"+("00"+date.getMinutes()).slice(-2)+"분";
+						var dateFormat = date.getFullYear()+"년"+("00"+(date.getMonth()+1)).slice(-2)+"월"+("00"+date.getDate()).slice(-2)+"일 "+("00"+date.getHours()).slice(-2)+"시:"+("00"+date.getMinutes()).slice(-2)+"분";
 						
 						var $tr = $("<tr class='rsvTr'>");
 						var $td1 = $("<td>");
@@ -220,7 +220,7 @@
 					$(".rsvTr").remove();
 					for(var i=0; i<res.length; i++){
 						var date = new Date(res[i].rsvTime);
-						var dateFormat = date.getFullYear()+"년"+("00"+(date.getMonth()+1)).slice(-2)+"월"+("00"+date.getDate()).slice(-2)+"일"+("00"+date.getHours()).slice(-2)+"시:"+("00"+date.getMinutes()).slice(-2)+"분";
+						var dateFormat = date.getFullYear()+"년"+("00"+(date.getMonth()+1)).slice(-2)+"월"+("00"+date.getDate()).slice(-2)+"일 "+("00"+date.getHours()).slice(-2)+"시:"+("00"+date.getMinutes()).slice(-2)+"분";
 						
 						var $tr = $("<tr class='rsvTr'>");
 						var $td1 = $("<td>");
@@ -266,7 +266,7 @@
 					$(".rsvTr").remove();
 					for(var i=0; i<res.length; i++){
 						var date = new Date(res[i].rsvTime);
-						var dateFormat = date.getFullYear()+"년"+("00"+(date.getMonth()+1)).slice(-2)+"월"+("00"+date.getDate()).slice(-2)+"일"+("00"+date.getHours()).slice(-2)+"시:"+("00"+date.getMinutes()).slice(-2)+"분";
+						var dateFormat = date.getFullYear()+"년"+("00"+(date.getMonth()+1)).slice(-2)+"월"+("00"+date.getDate()).slice(-2)+"일 "+("00"+date.getHours()).slice(-2)+"시:"+("00"+date.getMinutes()).slice(-2)+"분";
 						
 						var $tr = $("<tr class='rsvTr'>");
 						var $td1 = $("<td>");
@@ -334,7 +334,7 @@
 						$(".rsvTr").remove();
 						for(var i=0; i<res.length; i++){
 							var date = new Date(res[i].rsvTime);
-							var dateFormat = date.getFullYear()+"년"+("00"+(date.getMonth()+1)).slice(-2)+"월"+("00"+date.getDate()).slice(-2)+"일"+("00"+date.getHours()).slice(-2)+"시:"+("00"+date.getMinutes()).slice(-2)+"분";
+							var dateFormat = date.getFullYear()+"년"+("00"+(date.getMonth()+1)).slice(-2)+"월"+("00"+date.getDate()).slice(-2)+"일 "+("00"+date.getHours()).slice(-2)+"시:"+("00"+date.getMinutes()).slice(-2)+"분";
 							
 							var $tr = $("<tr class='rsvTr'>");
 							var $td1 = $("<td>");
@@ -385,7 +385,7 @@
 			}
 			
 			var date = $(this).parent().parent().find(".date").html();
-			var cDate = date.substring(0, 4)+"-"+date.substring(5, 7)+"-"+date.substring(8, 10)+" "+date.substring(11, 13)+":"+date.substring(15, 17);
+			var cDate = date.substring(0, 4)+"-"+date.substring(5, 7)+"-"+date.substring(8, 10)+" "+date.substring(12, 14)+":"+date.substring(16, 18);
 			var preNumber = $(this).parent().parent().find(".number").html().substring(0, 1);
 			var preTable = $(this).parent().parent().find(".tableNo").html().substring(0, 1);
 			var rsvDate = new Date(cDate); 
@@ -396,7 +396,7 @@
 			}else{
 				var a = confirm("예약을 수정하시겠습니까?");
 				if(a==true){
-					$(this).parent().parent().find(".date").html("<input type='text' class='year' value='"+ date.substring(0, 4)+"'>년<input type='text' class='month' value='"+ date.substring(5, 7)+"'>월<input type='text' class='day' value='"+ date.substring(8, 10)+"'>일<input type='text' class='hour' value='"+ date.substring(11, 13)+"'>시<input type='text' class='minute' value='"+ date.substring(15, 17)+"'>분");
+					$(this).parent().parent().find(".date").html("<input type='text' class='year' value='"+ date.substring(0, 4)+"'>년<input type='text' class='month' value='"+ date.substring(5, 7)+"'>월<input type='text' class='day' value='"+ date.substring(8, 10)+"'>일<input type='text' class='hour' value='"+ date.substring(12, 14)+"'>시<input type='text' class='minute' value='"+ date.substring(16, 18)+"'>분");
 					$(this).parent().parent().find(".number").html("<input type='text' class='preN' value='"+preNumber+"'>명");
 					$(this).parent().parent().find(".tableNo").html("<input type='text' class='preT' value='"+preTable+"'>번 테이블");
 					$(this).html("수정하기");
@@ -442,7 +442,7 @@
 								$(".rsvTr").remove();
 								for(var i=0; i<res.length; i++){
 									var date = new Date(res[i].rsvTime);
-									var dateFormat = date.getFullYear()+"년"+("00"+(date.getMonth()+1)).slice(-2)+"월"+("00"+date.getDate()).slice(-2)+"일"+("00"+date.getHours()).slice(-2)+"시:"+("00"+date.getMinutes()).slice(-2)+"분";
+									var dateFormat = date.getFullYear()+"년"+("00"+(date.getMonth()+1)).slice(-2)+"월"+("00"+date.getDate()).slice(-2)+"일 "+("00"+date.getHours()).slice(-2)+"시:"+("00"+date.getMinutes()).slice(-2)+"분";
 									
 									var $tr = $("<tr class='rsvTr'>");
 									var $td1 = $("<td>");
